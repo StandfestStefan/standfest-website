@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Datenschutzerklärung – Standfest Digital</title>
+  <meta name="description" content="Datenschutzerklärung von Standfest Digital gemäß DSGVO. Informationen zu Hosting, Kontaktformular, Google Fonts und Ihren Rechten.">
+  <link rel="canonical" href="https://standfestdigital.at/datenschutz.html">
+  <meta property="og:title" content="Datenschutzerklärung – Standfest Digital">
+  <meta property="og:description" content="Datenschutzerklärung von Standfest Digital gemäß DSGVO. Informationen zu Hosting, Kontaktformular, Google Fonts und Ihren Rechten.">
+  <meta property="og:url" content="https://standfestdigital.at/datenschutz.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_AT">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    /* ── Datenschutz Page Styles ── */
+
+    .page-header {
+      padding-top: 120px;
+      padding-bottom: 2rem;
+    }
+
+    .page-header h1 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-header .subline {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    /* Legal Content */
+    .legal-content {
+      max-width: 750px;
+      margin: 0 auto;
+      padding: 0 0 5rem;
+    }
+
+    .legal-content h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      background: var(--accent-subtle);
+      color: var(--accent);
+      border-radius: 8px;
+      font-size: 0.8125rem;
+      font-weight: 700;
+    }
+
+    .legal-content h3 {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .legal-content p,
+    .legal-content li {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .legal-content ul {
+      padding-left: 1.25rem;
+      margin-bottom: 1rem;
+      list-style: disc;
+    }
+
+    .legal-content ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .legal-content a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(74, 124, 89, 0.3);
+      text-underline-offset: 2px;
+      transition: text-decoration-color 0.2s ease;
+    }
+
+    .legal-content a:hover {
+      text-decoration-color: var(--accent);
+    }
+
+    .legal-content strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Table of Contents */
+    .legal-toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .legal-toc-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .legal-toc ol {
+      padding-left: 1.25rem;
+      columns: 2;
+      column-gap: 2rem;
+      list-style: decimal;
+    }
+
+    .legal-toc li {
+      font-size: 0.875rem;
+      margin-bottom: 0.375rem;
+      color: var(--text-muted);
+    }
+
+    .legal-toc a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .legal-toc a:hover { color: var(--accent); }
+
+    /* Placeholder box */
+    .legal-placeholder {
+      padding: 1rem 1.25rem;
+      background: rgba(196, 150, 58, 0.08);
+      border: 1px solid rgba(196, 150, 58, 0.2);
+      border-radius: 10px;
+      color: var(--warning);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 1rem 0;
+    }
+
+    .legal-placeholder strong { color: var(--warning); }
+
+    /* Notice box */
+    .legal-notice {
+      padding: 1rem 1.25rem;
+      background: var(--accent-subtle);
+      border: 1px solid rgba(74, 124, 89, 0.2);
+      border-radius: 10px;
+      color: var(--accent);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 2rem 0;
+    }
+
+    .legal-notice strong { color: var(--accent); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .legal-toc ol { columns: 1; }
+    }
+
+    @media (max-width: 480px) {
+      .page-header { padding-top: 100px; }
+      .legal-content h2 { font-size: 1.125rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/leistungen.html">Leistungen</a></li>
+        <li><a href="/pakete.html">Pakete</a></li>
+        <li><a href="/kontakt.html">Kontakt</a></li>
+        <li><a href="/audit-buchen.html" class="nav-cta">Audit buchen</a></li>
+      </ul>
+      <button class="nav-login" id="loginBtn" aria-label="Anmelden">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Anmelden</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menü" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="container">
+        <div class="legal-content" style="padding-bottom:0;">
+          <h1>Datenschutzerklärung</h1>
+          <p class="subline">Informationen zum Schutz Ihrer personenbezogenen Daten gemäß DSGVO.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legal Content -->
+    <div class="container">
+      <div class="legal-content">
+
+        <div class="legal-notice">
+          <strong>Hinweis:</strong> Diese Datenschutzerklärung ist eine Vorlage und stellt keine Rechtsberatung dar. Der endgültige Text wird vor dem offiziellen Website-Launch von einem Rechtsanwalt oder DSGVO-Berater geprüft.
+        </div>
+
+        <!-- Table of Contents -->
+        <nav class="legal-toc" aria-label="Inhaltsverzeichnis">
+          <p class="legal-toc-label">Inhalt</p>
+          <ol>
+            <li><a href="#verantwortlicher">Verantwortlicher</a></li>
+            <li><a href="#datenverarbeitungen">Überblick der Datenverarbeitungen</a></li>
+            <li><a href="#hosting">Hosting</a></li>
+            <li><a href="#ssl">SSL-Verschlüsselung</a></li>
+            <li><a href="#kontaktformular">Kontaktformular</a></li>
+            <li><a href="#email">E-Mail-Kontakt</a></li>
+            <li><a href="#google-fonts">Google Fonts</a></li>
+            <li><a href="#google-analytics">Google Analytics</a></li>
+            <li><a href="#cookies">Cookies</a></li>
+            <li><a href="#ihre-rechte">Ihre Rechte</a></li>
+            <li><a href="#datenschutzbehoerde">Datenschutzbehörde</a></li>
+            <li><a href="#aenderungen">Aktualität und Änderungen</a></li>
+          </ol>
+        </nav>
+
+        <!-- 1. Verantwortlicher -->
+        <h2 id="verantwortlicher"><span class="section-number">1</span> Verantwortlicher</h2>
+        <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer nationaler Datenschutzgesetze sowie sonstiger datenschutzrechtlicher Bestimmungen ist:</p>
+        <p>
+          <strong>Standfest Digital</strong><br>
+          Inhaber: Stefan Maurer<br>
+        </p>
+        <div class="legal-placeholder">
+          <strong>Hinweis:</strong> Die vollständige Geschäftsadresse wird vor dem offiziellen Website-Launch hier ergänzt.
+        </div>
+        <p>
+          E-Mail: <a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a><br>
+          Telefon: +43 660 1234567<br>
+          Website: <a href="https://standfestdigital.at">standfestdigital.at</a>
+        </p>
+
+        <!-- 2. Überblick der Datenverarbeitungen -->
+        <h2 id="datenverarbeitungen"><span class="section-number">2</span> Überblick der Datenverarbeitungen</h2>
+        <p>Im Rahmen des Betriebs unserer Website und der Bearbeitung von Kundenanfragen verarbeiten wir verschiedene personenbezogene Daten. Im Folgenden geben wir Ihnen einen Überblick über die Art der verarbeiteten Daten, die Zwecke der Verarbeitung und die anwendbaren Rechtsgrundlagen.</p>
+
+        <h3>Arten der verarbeiteten Daten</h3>
+        <ul>
+          <li>Bestandsdaten (z.&nbsp;B. Name, Firma)</li>
+          <li>Kontaktdaten (z.&nbsp;B. E-Mail-Adresse, Telefonnummer)</li>
+          <li>Inhaltsdaten (z.&nbsp;B. Texteingaben im Kontaktformular)</li>
+          <li>Nutzungsdaten (z.&nbsp;B. aufgerufene Seiten, Zugriffszeit)</li>
+          <li>Meta- und Kommunikationsdaten (z.&nbsp;B. IP-Adresse, Browsertyp)</li>
+        </ul>
+
+        <h3>Zwecke der Verarbeitung</h3>
+        <ul>
+          <li>Bereitstellung und technischer Betrieb der Website</li>
+          <li>Bearbeitung von Kontaktanfragen und Kommunikation</li>
+          <li>Sicherheitsmaßnahmen und Missbrauchsschutz</li>
+          <li>Analyse des Nutzungsverhaltens zur Verbesserung des Angebots (geplant)</li>
+        </ul>
+
+        <h3>Rechtsgrundlagen</h3>
+        <p>Wir verarbeiten personenbezogene Daten auf Basis folgender Rechtsgrundlagen der DSGVO:</p>
+        <ul>
+          <li><strong>Einwilligung (Art. 6 Abs. 1 lit. a DSGVO):</strong> Sie haben Ihre Einwilligung für die Verarbeitung zu einem bestimmten Zweck erteilt – z.&nbsp;B. bei der Nutzung von Analyse-Cookies.</li>
+          <li><strong>Vertragserfüllung und vorvertragliche Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO):</strong> Die Verarbeitung ist zur Erfüllung eines Vertrags oder zur Durchführung vorvertraglicher Maßnahmen erforderlich – z.&nbsp;B. bei Kontaktanfragen über das Formular.</li>
+          <li><strong>Berechtigte Interessen (Art. 6 Abs. 1 lit. f DSGVO):</strong> Die Verarbeitung dient unseren berechtigten Interessen, sofern Ihre Grundrechte und Grundfreiheiten nicht überwiegen – z.&nbsp;B. für den technischen Betrieb und die Sicherheit der Website.</li>
+        </ul>
+
+        <!-- 3. Hosting -->
+        <h2 id="hosting"><span class="section-number">3</span> Hosting</h2>
+        <p>Unsere Website wird bei folgendem Anbieter gehostet:</p>
+        <p>
+          <strong>Hetzner Online GmbH</strong><br>
+          Industriestr. 25, 91710 Gunzenhausen, Deutschland
+        </p>
+        <p>Die Server befinden sich in Deutschland innerhalb der Europäischen Union. Beim Aufruf unserer Website werden durch den Hosting-Anbieter automatisch Informationen in sogenannten Server-Log-Files erfasst, die Ihr Browser automatisch übermittelt. Dazu gehören:</p>
+        <ul>
+          <li>IP-Adresse des anfragenden Rechners</li>
+          <li>Datum und Uhrzeit des Zugriffs</li>
+          <li>Name und URL der abgerufenen Datei</li>
+          <li>Übertragene Datenmenge</li>
+          <li>Meldung, ob der Abruf erfolgreich war</li>
+          <li>Verwendeter Browsertyp und Browserversion</li>
+          <li>Betriebssystem des Nutzers</li>
+          <li>Referrer-URL (die zuvor besuchte Seite)</li>
+        </ul>
+        <p>Diese Daten werden ausschließlich zur Sicherstellung eines störungsfreien Betriebs der Website sowie zur Verbesserung unseres Angebots ausgewertet. Eine Zusammenführung dieser Daten mit anderen Datenquellen findet nicht statt. Die Daten werden gelöscht, sobald sie für den Zweck der Erhebung nicht mehr benötigt sind – in der Regel nach 7 Tagen.</p>
+        <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und stabilen Betrieb der Website).</p>
+        <p>Mit Hetzner Online GmbH besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO, der den datenschutzkonformen Umgang mit Ihren Daten sicherstellt.</p>
+
+        <!-- 4. SSL-Verschlüsselung -->
+        <h2 id="ssl"><span class="section-number">4</span> SSL-Verschlüsselung</h2>
+        <p>Diese Website nutzt aus Sicherheitsgründen eine SSL- bzw. TLS-Verschlüsselung (Let's Encrypt). Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile Ihres Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.</p>
+        <p>Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden. Dies betrifft insbesondere Daten, die Sie über das Kontaktformular eingeben.</p>
+
+        <!-- 5. Kontaktformular -->
+        <h2 id="kontaktformular"><span class="section-number">5</span> Kontaktformular</h2>
+        <p>Wenn Sie uns über das Kontaktformular auf unserer Website eine Nachricht senden, werden die von Ihnen eingegebenen Daten an uns übermittelt und gespeichert. Folgende Daten werden erhoben:</p>
+        <ul>
+          <li>Name (Pflichtfeld)</li>
+          <li>E-Mail-Adresse (Pflichtfeld)</li>
+          <li>Telefonnummer (optional)</li>
+          <li>Firmenname (optional)</li>
+          <li>Ihre Nachricht (Pflichtfeld)</li>
+        </ul>
+        <p><strong>Zweck:</strong> Die Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet. Wir nutzen Ihre Kontaktdaten, um auf Ihr Anliegen zu antworten und gegebenenfalls ein Angebot zu erstellen.</p>
+        <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (Durchführung vorvertraglicher Maßnahmen auf Anfrage der betroffenen Person).</p>
+        <p><strong>Speicherdauer:</strong> Die über das Kontaktformular übermittelten Daten werden gespeichert, bis die Anfrage abschließend bearbeitet ist. Anschließend werden die Daten spätestens nach 6 Monaten gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.</p>
+        <p><strong>Weitergabe:</strong> Ihre Daten werden nicht an Dritte weitergegeben.</p>
+
+        <!-- 6. E-Mail-Kontakt -->
+        <h2 id="email"><span class="section-number">6</span> E-Mail-Kontakt</h2>
+        <p>Wenn Sie uns per E-Mail kontaktieren, werden Ihre Angaben einschließlich der von Ihnen angegebenen Kontaktdaten zur Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.</p>
+        <p>Für den E-Mail-Verkehr nutzen wir <strong>Google Workspace</strong> (ehemals G Suite) der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Die Verarbeitung erfolgt innerhalb der EU. Mit Google besteht ein Auftragsverarbeitungsvertrag, der die datenschutzkonforme Verarbeitung Ihrer Daten sicherstellt.</p>
+        <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bearbeitung von Anfragen).</p>
+        <p><strong>Speicherdauer:</strong> Ihre Daten werden gelöscht, sobald sie für die Bearbeitung Ihres Anliegens nicht mehr erforderlich sind, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+
+        <!-- 7. Google Fonts -->
+        <h2 id="google-fonts"><span class="section-number">7</span> Google Fonts</h2>
+        <p>Diese Website nutzt die Schriftart „DM Sans" von Google Fonts. Die Einbindung erfolgt über eine externe Verbindung zu Servern von Google (fonts.googleapis.com und fonts.gstatic.com). Beim Aufruf unserer Website wird eine Verbindung zu den Servern von Google hergestellt, wodurch Google Kenntnis darüber erlangt, dass unsere Website über Ihre IP-Adresse aufgerufen wurde.</p>
+        <p><strong>Anbieter:</strong> Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Für den europäischen Wirtschaftsraum und die Schweiz ist Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Irland) als datenschutzrechtlich Verantwortlicher zuständig.</p>
+        <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer einheitlichen und ansprechenden Darstellung unserer Website).</p>
+        <p><strong>Hinweis:</strong> Eine lokale Einbindung der Schriftart ohne Verbindung zu Google-Servern ist als Alternative möglich und wird geprüft.</p>
+        <p>Weitere Informationen zum Datenschutz bei Google finden Sie unter: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a></p>
+
+        <!-- 8. Google Analytics -->
+        <h2 id="google-analytics"><span class="section-number">8</span> Google Analytics (geplant)</h2>
+        <p>Wir planen den Einsatz von <strong>Google Analytics 4</strong> zur Analyse des Nutzungsverhaltens auf unserer Website. Zum aktuellen Zeitpunkt ist Google Analytics <strong>noch nicht aktiv</strong>.</p>
+        <p>Sobald Google Analytics aktiviert wird, gilt Folgendes:</p>
+        <p>Google Analytics verwendet sogenannte Cookies – Textdateien, die auf Ihrem Endgerät gespeichert werden und die eine Analyse der Nutzung unserer Website ermöglichen. Die durch das Cookie erzeugten Informationen über Ihre Nutzung dieser Website werden in der Regel an einen Server von Google übertragen und dort gespeichert. Google Analytics 4 verwendet standardmäßig die IP-Anonymisierung, sodass Ihre IP-Adresse innerhalb der Europäischen Union gekürzt wird.</p>
+        <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Die Aktivierung von Google Analytics erfolgt nur nach Ihrer ausdrücklichen Einwilligung über einen Cookie-Banner.</p>
+        <p><strong>Opt-Out:</strong> Sie können die Erfassung durch Google Analytics verhindern, indem Sie Ihre Einwilligung im Cookie-Banner verweigern oder nachträglich widerrufen. Zusätzlich können Sie das Browser-Add-on zur Deaktivierung von Google Analytics installieren: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">tools.google.com/dlpage/gaoptout</a></p>
+        <p><strong>Anbieter:</strong> Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
+
+        <!-- 9. Cookies -->
+        <h2 id="cookies"><span class="section-number">9</span> Cookies</h2>
+        <p>Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden und die Ihr Browser beim nächsten Besuch wieder an die Website sendet. Sie dienen dazu, bestimmte Funktionen zu ermöglichen und die Nutzungserfahrung zu verbessern.</p>
+
+        <h3>Aktuelle Situation</h3>
+        <p>Unsere Website setzt derzeit <strong>keine eigenen Cookies</strong>. Bei der Nutzung von Google Fonts kann es vorkommen, dass Google eigene Cookies setzt – darauf haben wir keinen Einfluss.</p>
+
+        <h3>Geplante Änderungen</h3>
+        <p>Sobald Google Analytics aktiviert wird, werden Analyse-Cookies gesetzt. In diesem Fall wird ein Cookie-Banner eingerichtet, der Sie vor dem Setzen dieser Cookies um Ihre Einwilligung bittet. Sie können Ihre Einwilligung jederzeit widerrufen.</p>
+
+        <h3>Arten von Cookies</h3>
+        <ul>
+          <li><strong>Technisch notwendige Cookies:</strong> Diese Cookies sind für den Betrieb der Website erforderlich und können nicht deaktiviert werden. Sie speichern keine personenbezogenen Daten. Aktuell verwenden wir keine technisch notwendigen Cookies.</li>
+          <li><strong>Analyse-Cookies:</strong> Diese Cookies ermöglichen es uns, die Nutzung der Website statistisch auszuwerten. Sie werden nur mit Ihrer ausdrücklichen Einwilligung gesetzt (geplant, noch nicht aktiv).</li>
+        </ul>
+        <p>Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben. Bei der Deaktivierung von Cookies kann die Funktionalität unserer Website eingeschränkt sein.</p>
+
+        <!-- 10. Ihre Rechte -->
+        <h2 id="ihre-rechte"><span class="section-number">10</span> Ihre Rechte gemäß DSGVO</h2>
+        <p>Sie haben gegenüber uns folgende Rechte hinsichtlich Ihrer personenbezogenen Daten:</p>
+        <ul>
+          <li><strong>Recht auf Auskunft (Art. 15 DSGVO):</strong> Sie können Auskunft darüber verlangen, ob und welche personenbezogenen Daten wir über Sie gespeichert haben.</li>
+          <li><strong>Recht auf Berichtigung (Art. 16 DSGVO):</strong> Sie können die Berichtigung unrichtiger oder die Vervollständigung unvollständiger Daten verlangen.</li>
+          <li><strong>Recht auf Löschung (Art. 17 DSGVO):</strong> Sie können die Löschung Ihrer personenbezogenen Daten verlangen, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</li>
+          <li><strong>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO):</strong> Sie können unter bestimmten Voraussetzungen die Einschränkung der Verarbeitung Ihrer Daten verlangen.</li>
+          <li><strong>Recht auf Datenübertragbarkeit (Art. 20 DSGVO):</strong> Sie können verlangen, dass wir Ihnen die von Ihnen bereitgestellten Daten in einem strukturierten, gängigen und maschinenlesbaren Format übermitteln.</li>
+          <li><strong>Widerspruchsrecht (Art. 21 DSGVO):</strong> Sie können aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung Ihrer Daten Widerspruch einlegen, soweit die Verarbeitung auf berechtigten Interessen basiert.</li>
+          <li><strong>Recht auf Widerruf der Einwilligung (Art. 7 Abs. 3 DSGVO):</strong> Soweit die Verarbeitung auf Ihrer Einwilligung beruht, können Sie diese jederzeit mit Wirkung für die Zukunft widerrufen. Die Rechtmäßigkeit der aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung bleibt davon unberührt.</li>
+          <li><strong>Beschwerderecht bei einer Aufsichtsbehörde:</strong> Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten zu beschweren (siehe Abschnitt 11).</li>
+        </ul>
+        <p>Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: <a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></p>
+
+        <!-- 11. Datenschutzbehörde -->
+        <h2 id="datenschutzbehoerde"><span class="section-number">11</span> Datenschutzbehörde</h2>
+        <p>Wenn Sie der Ansicht sind, dass die Verarbeitung Ihrer personenbezogenen Daten gegen die DSGVO verstößt, haben Sie das Recht, eine Beschwerde bei der zuständigen Aufsichtsbehörde einzureichen:</p>
+        <p>
+          <strong>Österreichische Datenschutzbehörde</strong><br>
+          Barichgasse 40–42<br>
+          1030 Wien<br>
+          Telefon: +43 1 52 152-0<br>
+          E-Mail: <a href="mailto:dsb@dsb.gv.at">dsb@dsb.gv.at</a><br>
+          Website: <a href="https://www.dsb.gv.at" target="_blank" rel="noopener noreferrer">www.dsb.gv.at</a>
+        </p>
+
+        <!-- 12. Aktualität und Änderungen -->
+        <h2 id="aenderungen"><span class="section-number">12</span> Aktualität und Änderungen</h2>
+        <p>Diese Datenschutzerklärung hat den Stand <strong>März 2026</strong>.</p>
+        <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie an geänderte Rechtslagen oder bei Änderungen unseres Angebots oder der Datenverarbeitung anzupassen. Die jeweils aktuelle Fassung ist stets auf dieser Seite abrufbar. Wir empfehlen Ihnen, diese Datenschutzerklärung regelmäßig zu lesen, um über den Schutz Ihrer Daten informiert zu bleiben.</p>
+
+        <div class="legal-notice" style="margin-top: 3rem;">
+          <strong>Wichtiger Hinweis:</strong> Diese Datenschutzerklärung wurde nach bestem Wissen erstellt, ersetzt jedoch keine individuelle Rechtsberatung. Bitte lassen Sie den Text vor der Veröffentlichung von einem Rechtsanwalt oder zertifizierten Datenschutzberater prüfen.
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
+          <p>Webdesign, Social-Media-Setup &amp; Kontaktwege für KMU in Wien und Niederösterreich.</p>
+        </div>
+        <div>
+          <h4>Seiten</h4>
+          <ul class="footer-links">
+            <li><a href="/leistungen.html">Leistungen</a></li>
+            <li><a href="/pakete.html">Pakete &amp; Preise</a></li>
+            <li><a href="/audit-buchen.html">48h Audit</a></li>
+            <li><a href="/kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Rechtliches</h4>
+          <ul class="footer-links">
+            <li><a href="/impressum.html">Impressum</a></li>
+            <li><a href="/datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kontakt</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></li>
+            <li><a href="tel:+436601234567">+43 660 1234567</a></li>
+            <li>Wien &amp; Niederösterreich</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
+        <div>
+          <a href="/impressum.html" style="margin-right:1.5rem;">Impressum</a>
+          <a href="/datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js" defer></script>
+</body>
+</html>

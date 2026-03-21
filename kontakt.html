@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kontakt – Standfest Digital</title>
+  <meta name="description" content="Kontaktieren Sie Standfest Digital. Füllen Sie das Formular aus oder schreiben Sie uns direkt. Antwort innerhalb 24–48 Stunden.">
+  <link rel="canonical" href="https://standfestdigital.at/kontakt.html">
+  <meta property="og:title" content="Kontakt – Standfest Digital">
+  <meta property="og:description" content="Kontaktieren Sie Standfest Digital. Antwort innerhalb 24–48 Stunden.">
+  <meta property="og:image" content="https://standfestdigital.at/img/og-image.jpg">
+  <meta property="og:url" content="https://standfestdigital.at/kontakt.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_AT">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    /* ── Kontakt Page Styles ── */
+
+    /* @property for animated border */
+    @property --border-angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 140px 0 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(ellipse 60% 70% at 50% 40%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 40%, black 20%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .page-header .container {
+      position: relative;
+      z-index: 1;
+      max-width: 620px;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.1s forwards;
+    }
+
+    .page-header .subheading {
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.2s forwards;
+    }
+
+    /* Contact Section */
+    .contact-section { padding: 0 0 5rem; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: start;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Moving Border Card */
+    .form-card {
+      position: relative;
+      padding: 2px;
+      border-radius: 18px;
+      background: var(--border-strong);
+      transition: all 0.5s ease;
+    }
+
+    .form-card:focus-within {
+      background: conic-gradient(
+        from var(--border-angle, 0deg),
+        transparent 0%, transparent 5%,
+        var(--accent) 12%, var(--accent-hover) 16%,
+        transparent 24%, transparent 100%
+      );
+      animation: rotateBorder 3.5s linear infinite;
+    }
+
+    @keyframes rotateBorder {
+      to { --border-angle: 360deg; }
+    }
+
+    .form-card-inner {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-card-inner h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* Form overrides */
+    .form-group { margin-bottom: 1.25rem; }
+
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      transition: color 0.25s ease;
+    }
+
+    .form-group:focus-within .form-label { color: var(--accent); }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-strong);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      outline: none;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: var(--text-muted); opacity: 0.6; }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.15);
+    }
+
+    .form-textarea { min-height: 130px; resize: vertical; }
+
+    /* Submit Button */
+    .btn-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.9375rem 1.75rem;
+      background: var(--accent);
+      color: var(--text-on-accent);
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.3s ease;
+      margin-top: 0.5rem;
+    }
+    .btn-submit:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(74, 124, 89, 0.25);
+    }
+    .btn-submit:active { transform: translateY(0); }
+
+    .btn-submit svg {
+      width: 18px; height: 18px;
+      stroke: currentColor; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* Success/Error */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2.5rem 2rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      margin-top: 1.5rem;
+    }
+    .form-success h3 { color: var(--accent); font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .form-success p { color: var(--text-muted); font-size: 0.9375rem; }
+
+    .form-error {
+      display: none;
+      color: var(--error);
+      font-size: 0.875rem;
+      margin-top: 0.75rem;
+      padding: 0.5rem 0;
+    }
+
+    /* Contact Info */
+    .contact-info h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .contact-info > p {
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .info-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .info-block.visible { opacity: 1; transform: translateY(0); }
+    .info-block:last-child { border-bottom: none; }
+
+    .info-icon {
+      flex-shrink: 0;
+      width: 42px; height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-subtle);
+      border-radius: 10px;
+    }
+    .info-icon svg {
+      width: 20px; height: 20px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    .info-content { flex: 1; }
+    .info-label { font-size: 0.8125rem; color: var(--text-muted); font-weight: 500; margin-bottom: 0.25rem; }
+    .info-value { font-size: 0.9375rem; font-weight: 500; color: var(--text-primary); }
+    .info-value a { color: var(--text-primary); text-decoration: none; transition: color 0.2s; }
+    .info-value a:hover { color: var(--accent); }
+    .info-detail { font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.125rem; }
+
+    /* Audit CTA */
+    .audit-cta {
+      max-width: 640px;
+      margin: 0 auto 5rem;
+      padding: 2.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .audit-cta.visible { opacity: 1; transform: translateY(0); }
+
+    .audit-cta::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(74,124,89,0.08) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .audit-cta h3 { font-size: 1.375rem; font-weight: 700; margin-bottom: 0.625rem; position: relative; letter-spacing: -0.01em; }
+    .audit-cta p { color: var(--text-muted); font-size: 0.9375rem; margin-bottom: 1.5rem; position: relative; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .page-header { padding: 120px 0 36px; }
+      .form-card-inner { padding: 1.5rem; }
+      .audit-cta { margin-left: 1.5rem; margin-right: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .page-header h1 { font-size: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/leistungen.html">Leistungen</a></li>
+        <li><a href="/pakete.html">Pakete</a></li>
+        <li><a href="/kontakt.html" class="active">Kontakt</a></li>
+        <li><a href="/audit-buchen.html" class="nav-cta">Audit buchen</a></li>
+      </ul>
+      <button class="nav-login" id="loginBtn" aria-label="Anmelden">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Anmelden</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menü" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <div class="eyebrow">Kontakt aufnehmen</div>
+        <h1>Sprechen Sie uns an</h1>
+        <p class="subheading">Füllen Sie das Formular aus oder kontaktieren Sie uns direkt. Wir melden uns innerhalb von 24–48 Stunden (werktags).</p>
+      </div>
+    </section>
+
+    <!-- Contact Grid -->
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+
+          <!-- Left: Form -->
+          <div class="form-card">
+            <div class="form-card-inner">
+              <h3>Kontaktformular</h3>
+              <form id="contactForm" novalidate>
+                <div class="form-group">
+                  <label class="form-label" for="name">Name *</label>
+                  <input class="form-input" type="text" id="name" name="name" placeholder="Ihr vollständiger Name" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="email">E-Mail *</label>
+                  <input class="form-input" type="email" id="email" name="email" placeholder="ihre@email.at" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="phone">Telefon</label>
+                  <input class="form-input" type="tel" id="phone" name="phone" placeholder="+43 …" autocomplete="tel">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="company">Firma</label>
+                  <input class="form-input" type="text" id="company" name="company" placeholder="Firmenname" autocomplete="organization">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="message">Nachricht *</label>
+                  <textarea class="form-textarea" id="message" name="message" placeholder="Erzählen Sie uns kurz von Ihrem Vorhaben…" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">
+                  <span>Nachricht senden</span>
+                  <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+                </button>
+              </form>
+              <div class="form-success" id="formSuccess">
+                <h3>Vielen Dank!</h3>
+                <p>Wir melden uns schnellstmöglich bei Ihnen.</p>
+              </div>
+              <div class="form-error" id="formError">Bitte füllen Sie alle Pflichtfelder korrekt aus.</div>
+            </div>
+          </div>
+
+          <!-- Right: Contact Info -->
+          <div class="contact-info">
+            <h3>Oder direkt kontaktieren</h3>
+            <p>Sie erreichen uns per E-Mail oder Telefon. Wir sind werktags für Sie da.</p>
+
+            <div class="info-block">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13L2 4"/></svg>
+              </div>
+              <div class="info-content">
+                <div class="info-label">E-Mail</div>
+                <div class="info-value"><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></div>
+              </div>
+            </div>
+
+            <div class="info-block">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              </div>
+              <div class="info-content">
+                <div class="info-label">Telefon</div>
+                <div class="info-value">+43 660 1234567</div>
+                <div class="info-detail">Mo–Fr, 8–17 Uhr</div>
+              </div>
+            </div>
+
+            <div class="info-block">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div class="info-content">
+                <div class="info-label">Antwortzeit</div>
+                <div class="info-value">Werktags innerhalb 24–48h</div>
+              </div>
+            </div>
+
+            <div class="info-block">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="info-content">
+                <div class="info-label">Region</div>
+                <div class="info-value">Wien &amp; Niederösterreich</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Audit CTA -->
+    <section class="contact-section" style="padding-top: 0;">
+      <div class="container">
+        <div class="audit-cta" id="auditCta">
+          <h3>Lieber direkt loslegen?</h3>
+          <p>Buchen Sie unser 48h Online-Audit – konkret, ehrlich, 199 €.</p>
+          <a href="/audit-buchen.html" class="btn btn-primary">Audit buchen</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
+          <p>Webdesign, Social-Media-Setup &amp; Kontaktwege für KMU in Wien und Niederösterreich.</p>
+        </div>
+        <div>
+          <h4>Seiten</h4>
+          <ul class="footer-links">
+            <li><a href="/leistungen.html">Leistungen</a></li>
+            <li><a href="/pakete.html">Pakete &amp; Preise</a></li>
+            <li><a href="/audit-buchen.html">48h Audit</a></li>
+            <li><a href="/kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Rechtliches</h4>
+          <ul class="footer-links">
+            <li><a href="/impressum.html">Impressum</a></li>
+            <li><a href="/datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kontakt</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></li>
+            <li><a href="tel:+436601234567">+43 660 1234567</a></li>
+            <li>Wien &amp; Niederösterreich</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
+        <div>
+          <a href="/impressum.html" style="margin-right:1.5rem;">Impressum</a>
+          <a href="/datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js" defer></script>
+  <script defer>
+    /* Rotating Placeholders */
+    const placeholders = [
+      'Erzählen Sie uns kurz von Ihrem Vorhaben\u2026',
+      'Welche Leistung interessiert Sie?',
+      'Haben Sie schon eine Website?',
+      'Wie können wir Ihnen helfen?'
+    ];
+    const textarea = document.getElementById('message');
+    let phIdx = 0;
+    setInterval(() => {
+      if (textarea && textarea.value === '' && document.activeElement !== textarea) {
+        textarea.style.opacity = '0.5';
+        setTimeout(() => {
+          phIdx = (phIdx + 1) % placeholders.length;
+          textarea.placeholder = placeholders[phIdx];
+          textarea.style.opacity = '1';
+        }, 280);
+      }
+    }, 4000);
+
+    /* Form Handler */
+    const form = document.getElementById('contactForm');
+    const successEl = document.getElementById('formSuccess');
+    const errorEl = document.getElementById('formError');
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        errorEl.style.display = 'none';
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const message = form.message.value.trim();
+        const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        if (!name || !email || !message || !emailValid) {
+          errorEl.style.display = 'block';
+          return;
+        }
+
+        // TODO: Replace with actual form submission (n8n webhook)
+        form.style.display = 'none';
+        successEl.style.display = 'block';
+      });
+    }
+
+    /* Scroll Reveal (Info Blocks + Audit CTA) */
+    const revealEls = document.querySelectorAll('.info-block, .audit-cta');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.classList.contains('info-block')
+            ? Array.from(document.querySelectorAll('.info-block')).indexOf(entry.target) * 100
+            : 0;
+          setTimeout(() => entry.target.classList.add('visible'), delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

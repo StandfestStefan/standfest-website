@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leistungen – Website, Social Media & Kontaktwege | Standfest Digital</title>
+  <meta name="description" content="Professionelle Website, Social-Media-Setup und klare Kontaktwege für KMU in Wien & NÖ. Drei Leistungen, ein Ansprechpartner – in 10–14 Tagen online.">
+  <link rel="canonical" href="https://standfestdigital.at/leistungen.html">
+  <meta property="og:title" content="Leistungen – Website, Social Media & Kontaktwege | Standfest Digital">
+  <meta property="og:description" content="Professionelle Website, Social-Media-Setup und klare Kontaktwege für KMU in Wien & NÖ. In 10–14 Tagen online.">
+  <meta property="og:image" content="https://standfestdigital.at/img/og-image.jpg">
+  <meta property="og:url" content="https://standfestdigital.at/leistungen.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_AT">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    /* ── Leistungen Page Styles ── */
+
+    /* === S1: Page Hero === */
+    .page-hero {
+      padding: 8rem 0 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(ellipse 60% 70% at 50% 40%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 40%, black 20%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .page-hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .page-hero-label svg { width: 16px; height: 16px; }
+    .page-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease 0.15s forwards;
+    }
+    .page-hero-sub {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease 0.3s forwards;
+    }
+
+    /* Hero Anchor Badges */
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease 0.45s forwards;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      background: var(--accent-subtle);
+      border: 1px solid rgba(74,124,89,0.25);
+      border-radius: 100px;
+      color: var(--accent-hover);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+    .hero-badge:hover {
+      background: rgba(74,124,89,0.25);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .hero-badge svg {
+      width: 16px; height: 16px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* === S2–S4: Detail Sections (Split Layout) === */
+    .detail-section {
+      padding: 5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .detail-section--alt {
+      background: var(--bg-card);
+    }
+    .detail-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .detail-split--reverse .detail-text { order: 2; }
+    .detail-split--reverse .detail-visual { order: 1; }
+    .detail-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .detail-eyebrow-line {
+      width: 24px; height: 2px;
+      background: var(--accent);
+      border-radius: 1px;
+    }
+    .detail-text h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2.125rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+    .detail-desc {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .detail-desc:last-of-type {
+      margin-bottom: 1.75rem;
+    }
+    .detail-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+      margin-bottom: 2rem;
+    }
+    .detail-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .detail-feature-icon {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      margin-top: 1px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .detail-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent-hover);
+      border-radius: 8px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+    .detail-cta:hover {
+      background: var(--accent);
+      color: var(--text-on-accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(74,124,89,0.3);
+    }
+    .detail-cta svg {
+      width: 16px; height: 16px;
+      stroke: currentColor; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      transition: transform 0.3s ease;
+    }
+    .detail-cta:hover svg { transform: translateX(3px); }
+
+    /* === CSS Device Mockups === */
+
+    /* Laptop Mockup */
+    .detail-laptop {
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .detail-laptop-screen {
+      background: #1a1d16;
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: 10px 10px 0 0;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+    }
+    .detail-laptop-chrome {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: #232720;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .dl-dots { display: flex; gap: 5px; }
+    .dl-dots span { width: 8px; height: 8px; border-radius: 50%; }
+    .dl-dots span:nth-child(1) { background: #b54a4a; }
+    .dl-dots span:nth-child(2) { background: var(--warning); }
+    .dl-dots span:nth-child(3) { background: var(--accent); }
+    .dl-url {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border-radius: 5px;
+      padding: 4px 10px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-family: var(--font);
+    }
+    .dl-body {
+      padding: 16px;
+      background: var(--bg-primary);
+      min-height: 180px;
+    }
+    .dl-nav {
+      display: flex; gap: 6px; align-items: center; margin-bottom: 14px;
+    }
+    .dl-nav-logo { width: 50px; height: 5px; background: var(--accent); border-radius: 3px; }
+    .dl-nav-links { display: flex; gap: 5px; margin-left: auto; }
+    .dl-nav-links span { width: 26px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+    .dl-hero-area {
+      background: linear-gradient(135deg, rgba(74,124,89,0.12), transparent);
+      border-radius: 6px;
+      padding: 14px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .dl-hero-title { height: 6px; background: rgba(255,255,255,0.3); border-radius: 3px; width: 65%; margin: 0 auto 8px; }
+    .dl-hero-sub { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; width: 50%; margin: 0 auto 10px; }
+    .dl-hero-btn { display: inline-block; padding: 4px 18px; background: var(--accent); border-radius: 4px; height: 12px; }
+    .dl-cards {
+      display: flex; gap: 8px;
+    }
+    .dl-card {
+      flex: 1;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
+      padding: 10px 8px;
+    }
+    .dl-card-icon {
+      width: 16px; height: 16px;
+      background: var(--accent-subtle);
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+    .dl-card-line {
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      margin-bottom: 4px;
+    }
+    .dl-card-line:last-child { margin-bottom: 0; }
+    .detail-laptop-base {
+      height: 12px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 0 0 4px 4px;
+      margin: 0 -12px;
+      position: relative;
+    }
+    .detail-laptop-base::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 48px; height: 4px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 0 0 4px 4px;
+    }
+    .detail-laptop-shadow {
+      height: 20px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.2), transparent 80%);
+      margin: 0 20px;
+    }
+
+    /* Phone Mockup */
+    .detail-phone {
+      width: 220px;
+      margin: 0 auto;
+      background: #1a1d16;
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 10px;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .detail-phone::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 50%; transform: translateX(-50%);
+      width: 60px; height: 5px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 3px;
+      z-index: 2;
+    }
+    .detail-phone-screen {
+      background: var(--bg-primary);
+      border-radius: 16px;
+      padding: 20px 12px 12px;
+      min-height: 300px;
+      overflow: hidden;
+    }
+
+    /* Google Business Mockup (Phone) */
+    .dp-gbiz-header {
+      background: rgba(74,124,89,0.1);
+      border-radius: 8px;
+      padding: 12px 10px 10px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .dp-gbiz-name {
+      height: 6px; background: rgba(255,255,255,0.3); border-radius: 3px; width: 70%; margin: 0 auto 8px;
+    }
+    .dp-gbiz-category {
+      height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; width: 45%; margin: 0 auto 8px;
+    }
+    .dp-gbiz-stars {
+      display: flex; gap: 3px; justify-content: center; margin-bottom: 4px;
+    }
+    .dp-gbiz-stars span {
+      width: 10px; height: 10px;
+      background: #c4963a;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+    .dp-gbiz-rating {
+      font-size: 0.6rem; color: var(--text-muted); text-align: center; margin-bottom: 2px;
+    }
+    .dp-gbiz-actions {
+      display: flex; gap: 6px; margin-bottom: 10px;
+    }
+    .dp-gbiz-action {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+    .dp-gbiz-action-circle {
+      width: 28px; height: 28px;
+      background: rgba(74,124,89,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .dp-gbiz-action-circle svg {
+      width: 12px; height: 12px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .dp-gbiz-action-label {
+      font-size: 0.45rem;
+      color: var(--text-muted);
+    }
+    .dp-gbiz-info {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .dp-gbiz-row {
+      display: flex; gap: 8px; align-items: center;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .dp-gbiz-row-icon {
+      width: 12px; height: 12px; border-radius: 3px;
+      background: rgba(74,124,89,0.15);
+      flex-shrink: 0;
+    }
+    .dp-gbiz-row-text {
+      height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; flex: 1;
+    }
+    .dp-gbiz-photos {
+      display: flex; gap: 4px; margin-top: 10px;
+    }
+    .dp-gbiz-photo {
+      flex: 1; height: 32px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+    }
+
+    /* Kontaktwege Mockup (Phone) */
+    .dp-contact-title {
+      height: 5px; background: rgba(255,255,255,0.2); border-radius: 3px; width: 55%; margin-bottom: 12px;
+    }
+    .dp-contact-form {
+      display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;
+    }
+    .dp-contact-field {
+      height: 24px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      position: relative;
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+    }
+    .dp-contact-field-label {
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      width: 40%;
+    }
+    .dp-contact-field--textarea {
+      height: 44px;
+      align-items: flex-start;
+      padding-top: 8px;
+    }
+    .dp-contact-submit {
+      height: 28px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dp-contact-submit-text {
+      height: 4px; background: rgba(255,255,255,0.5); border-radius: 2px; width: 50px;
+    }
+    .dp-contact-divider {
+      display: flex; align-items: center; gap: 8px;
+      margin: 4px 0;
+    }
+    .dp-contact-divider-line {
+      flex: 1; height: 1px; background: rgba(255,255,255,0.06);
+    }
+    .dp-contact-divider-text {
+      font-size: 0.5rem; color: var(--text-muted);
+    }
+    .dp-contact-buttons {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .dp-contact-btn {
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .dp-contact-btn--wa {
+      background: rgba(37,211,102,0.15);
+      border: 1px solid rgba(37,211,102,0.25);
+    }
+    .dp-contact-btn--call {
+      background: rgba(74,124,89,0.1);
+      border: 1px solid rgba(74,124,89,0.2);
+    }
+    .dp-contact-btn svg {
+      width: 12px; height: 12px;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none;
+    }
+    .dp-contact-btn--wa svg { stroke: #25d366; }
+    .dp-contact-btn--call svg { stroke: var(--accent); }
+    .dp-contact-btn-label {
+      height: 3px; border-radius: 2px; width: 40px;
+    }
+    .dp-contact-btn--wa .dp-contact-btn-label { background: rgba(37,211,102,0.3); }
+    .dp-contact-btn--call .dp-contact-btn-label { background: rgba(74,124,89,0.25); }
+
+    /* Mockup ambient glow */
+    .mockup-glow {
+      position: absolute;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(74,124,89,0.12), transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .mockup-glow--tl { top: -40px; left: -40px; }
+    .mockup-glow--br { bottom: -40px; right: -40px; }
+
+    /* === S5: Warum alle drei zusammen === */
+    .synergy-section {
+      padding: 5rem 0;
+      background: var(--bg-card);
+    }
+    .synergy-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .synergy-inner h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+    }
+    .synergy-points {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      text-align: left;
+    }
+    .synergy-point {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: all var(--transition);
+    }
+    .synergy-point:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    .synergy-point-icon {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      background: var(--accent-subtle);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .synergy-point-icon svg {
+      width: 20px; height: 20px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .synergy-point-text {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .synergy-point-text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .synergy-conclusion {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 1.5rem 2rem;
+      background: var(--accent-subtle);
+      border-radius: 12px;
+      border: 1px solid rgba(74,124,89,0.2);
+    }
+
+    /* === S6: Timeline === */
+    .timeline-section { padding: 5rem 0 6rem; }
+    .timeline {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+      padding-left: 60px;
+    }
+    .timeline-line {
+      position: absolute;
+      left: 24px; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-progress {
+      position: absolute;
+      left: 24px; top: 0;
+      width: 2px; height: 0;
+      background: linear-gradient(to bottom, var(--accent), rgba(74, 124, 89, 0.3));
+      z-index: 1;
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: 3.5rem;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item.is-visible { opacity: 1; transform: translateX(0); }
+    .timeline-dot {
+      position: absolute;
+      left: -44px; top: 4px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--border-strong);
+      background: var(--bg-primary);
+      z-index: 2;
+      transition: all 0.4s ease;
+    }
+    .timeline-item.is-active .timeline-dot {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(74, 124, 89, 0.2);
+    }
+    .timeline-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-title {
+      font-size: 1.375rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+    .timeline-text {
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+    .timeline-detail {
+      display: inline-block;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-subtle);
+      padding: 0.375rem 0.875rem;
+      border-radius: 100px;
+    }
+
+    /* === S7: Testimonial === */
+    .testimonial-section {
+      padding: 5rem 0;
+      background: var(--bg-card);
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonial-section::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(74,124,89,0.08), transparent 60%);
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .testimonial-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .testimonial-quote-mark {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .testimonial-quote-mark svg {
+      width: 40px; height: 40px;
+      fill: var(--accent);
+      opacity: 0.3;
+    }
+    .testimonial-text {
+      font-size: 1.25rem;
+      font-weight: 500;
+      line-height: 1.7;
+      color: var(--text-primary);
+      margin-bottom: 1.75rem;
+      font-style: italic;
+    }
+    .testimonial-stars {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 1.25rem;
+    }
+    .testimonial-stars svg {
+      width: 18px; height: 18px;
+      fill: #c4963a;
+      stroke: none;
+    }
+    .testimonial-author {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+    .testimonial-role {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    /* === S8: CTA Banner === */
+    .cta-banner { padding: 5rem 0 6rem; }
+    .cta-banner-inner {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3.5rem 2.5rem;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .cta-banner-inner.is-visible { opacity: 1; transform: translateY(0); }
+    .cta-banner-glow {
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 300px; height: 200px;
+      background: radial-gradient(ellipse, rgba(74, 124, 89, 0.15), transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+    .cta-banner-content { position: relative; z-index: 1; }
+    .cta-banner h2 {
+      font-size: clamp(1.375rem, 3vw, 1.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .cta-banner-sub {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .cta-btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .cta-banner-hint {
+      display: block;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+    }
+
+    /* === Scroll Reveal Helper === */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 968px) {
+      .detail-split {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .detail-split--reverse .detail-text { order: 1; }
+      .detail-split--reverse .detail-visual { order: 2; }
+      .detail-laptop { max-width: 380px; }
+    }
+
+    @media (max-width: 768px) {
+      .page-hero { padding: 7rem 0 3rem; }
+      .detail-section { padding: 3.5rem 0; }
+      .synergy-section { padding: 3.5rem 0; }
+      .timeline-section { padding: 3.5rem 0 4rem; }
+      .testimonial-section { padding: 3.5rem 0; }
+      .cta-banner-inner { padding: 2.5rem 1.5rem; }
+      .detail-laptop { max-width: 320px; }
+      .detail-phone { width: 180px; }
+      .synergy-point { padding: 1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-badges { flex-direction: column; align-items: center; }
+      .timeline { padding-left: 48px; }
+      .timeline-line, .timeline-progress { left: 16px; }
+      .timeline-dot { left: -40px; }
+      .detail-phone { width: 160px; }
+      .testimonial-text { font-size: 1.0625rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/leistungen.html" class="active">Leistungen</a></li>
+        <li><a href="/pakete.html">Pakete</a></li>
+        <li><a href="/kontakt.html">Kontakt</a></li>
+        <li><a href="/audit-buchen.html" class="nav-cta">Audit buchen</a></li>
+      </ul>
+      <button class="nav-login" id="loginBtn" aria-label="Anmelden">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Anmelden</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menü" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- S1: Page Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero-inner">
+          <div class="page-hero-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Unsere Leistungen
+          </div>
+          <h1>Drei Leistungen. Ein Ansprechpartner. In&nbsp;10–14&nbsp;Tagen online.</h1>
+          <p class="page-hero-sub">Website, Social Media und Kontaktwege – aufeinander abgestimmt, aus einer Hand. Kein Projektmarathon, keine versteckten Kosten.</p>
+          <div class="hero-badges">
+            <a href="#website" class="hero-badge">
+              <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              Website
+            </a>
+            <a href="#social-media" class="hero-badge">
+              <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              Social Media
+            </a>
+            <a href="#kontaktwege" class="hero-badge">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Kontaktwege
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S2: Leistung 1 – Website (Text links, Laptop rechts) -->
+    <section class="detail-section" id="website">
+      <div class="container">
+        <div class="detail-split">
+          <div class="detail-text reveal-up">
+            <div class="detail-eyebrow">
+              <span class="detail-eyebrow-line"></span>
+              Leistung 1
+            </div>
+            <h2>Professionelle Website – Ihr digitales Aushängeschild</h2>
+            <p class="detail-desc">Wir bauen keine Template-Seiten von der Stange. Jede Website wird für Ihren Betrieb gestaltet – mit Ihren Leistungen, Ihren Farben, Ihrer Sprache. Modern, mobilfreundlich, schnell. Und in 10–14 Tagen fertig.</p>
+            <p class="detail-desc">Ihre Kunden sehen sofort, was Sie anbieten und wie sie Sie erreichen. Keine langen Ladezeiten, kein Suchen nach dem Kontakt-Button.</p>
+            <div class="detail-features">
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Responsive Design – perfekt auf Handy, Tablet und Desktop</span>
+              </div>
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Suchmaschinen-optimiert (SEO-Basis) für bessere Auffindbarkeit</span>
+              </div>
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Schnelle Ladezeiten – unter 3 Sekunden</span>
+              </div>
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Kontaktformular direkt integriert</span>
+              </div>
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Sie können Texte und Bilder selbst ändern</span>
+              </div>
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>SSL-Zertifikat (HTTPS) – sicher und vertrauenswürdig</span>
+              </div>
+            </div>
+            <a href="/pakete.html" class="detail-cta">
+              Website im Paket sichern
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="detail-visual reveal-up" style="transition-delay:0.15s;">
+            <div class="detail-laptop" style="position:relative;">
+              <div class="mockup-glow mockup-glow--tl"></div>
+              <div class="mockup-glow mockup-glow--br"></div>
+              <div class="detail-laptop-screen">
+                <div class="detail-laptop-chrome">
+                  <div class="dl-dots"><span></span><span></span><span></span></div>
+                  <div class="dl-url">ihrbetrieb.at</div>
+                </div>
+                <div class="dl-body">
+                  <div class="dl-nav">
+                    <div class="dl-nav-logo"></div>
+                    <div class="dl-nav-links"><span></span><span></span><span></span></div>
+                  </div>
+                  <div class="dl-hero-area">
+                    <div class="dl-hero-title"></div>
+                    <div class="dl-hero-sub"></div>
+                    <div class="dl-hero-btn"></div>
+                  </div>
+                  <div class="dl-cards">
+                    <div class="dl-card">
+                      <div class="dl-card-icon"></div>
+                      <div class="dl-card-line"></div>
+                      <div class="dl-card-line" style="width:60%"></div>
+                    </div>
+                    <div class="dl-card">
+                      <div class="dl-card-icon"></div>
+                      <div class="dl-card-line"></div>
+                      <div class="dl-card-line" style="width:70%"></div>
+                    </div>
+                    <div class="dl-card">
+                      <div class="dl-card-icon"></div>
+                      <div class="dl-card-line"></div>
+                      <div class="dl-card-line" style="width:55%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="detail-laptop-base"></div>
+              <div class="detail-laptop-shadow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S3: Leistung 2 – Social Media (Mockup links, Text rechts) -->
+    <section class="detail-section detail-section--alt" id="social-media">
+      <div class="container">
+        <div class="detail-split detail-split--reverse">
+          <div class="detail-text reveal-up">
+            <div class="detail-eyebrow">
+              <span class="detail-eyebrow-line"></span>
+              Leistung 2
+            </div>
+            <h2>Social-Media-Basics – Lokal sichtbar werden</h2>
+            <p class="detail-desc">Google Business ist der wichtigste Kanal für lokale Betriebe. Wenn jemand „Tischlerei Wien" oder „Installateur in meiner Nähe" sucht, entscheidet Ihr Google-Profil, ob Sie gefunden werden.</p>
+            <p class="detail-desc">Wir richten Ihr Profil ein – mit den richtigen Informationen, aktuellen Fotos und Startbeiträgen. Dazu Facebook und Instagram, wo es für Ihre Branche sinnvoll ist.</p>
+            <div class="detail-features">
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Google Business Profil – vollständig und optimiert</span>
+              </div>
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Facebook-Seite eingerichtet und verknüpft</span>
+              </div>
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Instagram-Profil (falls branchenrelevant)</span>
+              </div>
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Einheitliche Informationen auf allen Plattformen</span>
+              </div>
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Startbeiträge und Bio-Texte fertig formuliert</span>
+              </div>
+            </div>
+            <a href="/pakete.html" class="detail-cta">
+              Social Media im Paket sichern
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="detail-visual reveal-up" style="transition-delay:0.15s;">
+            <div class="detail-phone" style="position:relative;">
+              <div class="mockup-glow mockup-glow--tl"></div>
+              <div class="detail-phone-screen">
+                <div class="dp-gbiz-header">
+                  <div class="dp-gbiz-name"></div>
+                  <div class="dp-gbiz-category"></div>
+                  <div class="dp-gbiz-stars">
+                    <span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                  <div class="dp-gbiz-rating">4,8 · 47 Bewertungen</div>
+                </div>
+                <div class="dp-gbiz-actions">
+                  <div class="dp-gbiz-action">
+                    <div class="dp-gbiz-action-circle">
+                      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.1.65.22 1.3.38 1.93"/></svg>
+                    </div>
+                    <span class="dp-gbiz-action-label">Anrufen</span>
+                  </div>
+                  <div class="dp-gbiz-action">
+                    <div class="dp-gbiz-action-circle">
+                      <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </div>
+                    <span class="dp-gbiz-action-label">Route</span>
+                  </div>
+                  <div class="dp-gbiz-action">
+                    <div class="dp-gbiz-action-circle">
+                      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    </div>
+                    <span class="dp-gbiz-action-label">Nachricht</span>
+                  </div>
+                </div>
+                <div class="dp-gbiz-info">
+                  <div class="dp-gbiz-row">
+                    <div class="dp-gbiz-row-icon"></div>
+                    <div class="dp-gbiz-row-text" style="width:80%"></div>
+                  </div>
+                  <div class="dp-gbiz-row">
+                    <div class="dp-gbiz-row-icon"></div>
+                    <div class="dp-gbiz-row-text" style="width:65%"></div>
+                  </div>
+                  <div class="dp-gbiz-row">
+                    <div class="dp-gbiz-row-icon"></div>
+                    <div class="dp-gbiz-row-text" style="width:50%"></div>
+                  </div>
+                </div>
+                <div class="dp-gbiz-photos">
+                  <div class="dp-gbiz-photo"></div>
+                  <div class="dp-gbiz-photo"></div>
+                  <div class="dp-gbiz-photo"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S4: Leistung 3 – Kontaktwege (Text links, Phone rechts) -->
+    <section class="detail-section" id="kontaktwege">
+      <div class="container">
+        <div class="detail-split">
+          <div class="detail-text reveal-up">
+            <div class="detail-eyebrow">
+              <span class="detail-eyebrow-line"></span>
+              Leistung 3
+            </div>
+            <h2>Klare Kontaktwege – Damit Anfragen auch ankommen</h2>
+            <p class="detail-desc">Eine schöne Website ohne Kontaktmöglichkeit ist wie ein Geschäft ohne Tür. Besucher schauen sich um, finden keinen einfachen Weg zu Ihnen – und sind weg.</p>
+            <p class="detail-desc">Wir bauen Ihnen klare Wege: Kontaktformular, WhatsApp-Button, Terminbuchung und eine prominent platzierte Telefonnummer. So kommt jede Anfrage an.</p>
+            <div class="detail-features">
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Kontaktformular mit sofortiger Benachrichtigung</span>
+              </div>
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>WhatsApp Business Button – direkt vom Handy</span>
+              </div>
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Telefonnummer prominent auf jeder Seite</span>
+              </div>
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Online-Terminbuchung (ab Growth-Paket)</span>
+              </div>
+              <div class="detail-feature">
+                <svg class="detail-feature-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Call-to-Action auf jeder Seite – Besucher wissen immer, was sie tun sollen</span>
+              </div>
+            </div>
+            <a href="/pakete.html" class="detail-cta">
+              Kontaktwege im Paket sichern
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="detail-visual reveal-up" style="transition-delay:0.15s;">
+            <div class="detail-phone" style="position:relative;">
+              <div class="mockup-glow mockup-glow--br"></div>
+              <div class="detail-phone-screen">
+                <div class="dp-contact-title"></div>
+                <div class="dp-contact-form">
+                  <div class="dp-contact-field">
+                    <div class="dp-contact-field-label"></div>
+                  </div>
+                  <div class="dp-contact-field">
+                    <div class="dp-contact-field-label" style="width:55%"></div>
+                  </div>
+                  <div class="dp-contact-field dp-contact-field--textarea">
+                    <div class="dp-contact-field-label" style="width:30%"></div>
+                  </div>
+                  <div class="dp-contact-submit">
+                    <div class="dp-contact-submit-text"></div>
+                  </div>
+                </div>
+                <div class="dp-contact-divider">
+                  <div class="dp-contact-divider-line"></div>
+                  <span class="dp-contact-divider-text">oder</span>
+                  <div class="dp-contact-divider-line"></div>
+                </div>
+                <div class="dp-contact-buttons">
+                  <div class="dp-contact-btn dp-contact-btn--wa">
+                    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    <div class="dp-contact-btn-label"></div>
+                  </div>
+                  <div class="dp-contact-btn dp-contact-btn--call">
+                    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <div class="dp-contact-btn-label"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S5: Warum alle drei zusammen? -->
+    <section class="synergy-section">
+      <div class="container">
+        <div class="synergy-inner">
+          <div class="section-label" data-reveal>Deshalb ein Gesamtpaket</div>
+          <h2 data-reveal>Warum Website, Social Media und Kontaktwege zusammengehören</h2>
+
+          <div class="synergy-points">
+            <div class="synergy-point reveal-up">
+              <div class="synergy-point-icon">
+                <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <p class="synergy-point-text"><strong>Website allein reicht nicht.</strong> Wenn Sie bei Google Maps nicht erscheinen, findet Sie niemand in Ihrer Umgebung – egal wie gut die Website ist.</p>
+            </div>
+            <div class="synergy-point reveal-up" style="transition-delay:0.1s;">
+              <div class="synergy-point-icon">
+                <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              </div>
+              <p class="synergy-point-text"><strong>Google Business allein reicht nicht.</strong> Besucher klicken auf Ihren Eintrag und landen auf einer veralteten Seite oder gar keiner Website. Vertrauen weg.</p>
+            </div>
+            <div class="synergy-point reveal-up" style="transition-delay:0.2s;">
+              <div class="synergy-point-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <p class="synergy-point-text"><strong>Beides zusammen reicht nicht.</strong> Wenn Besucher auf Ihrer Website keinen einfachen Weg finden, bei Ihnen anzufragen, war der ganze Aufwand umsonst.</p>
+            </div>
+          </div>
+
+          <div class="synergy-conclusion reveal-up" style="transition-delay:0.3s;">
+            Deshalb bieten wir immer das Gesamtpaket. Aufeinander abgestimmt, aus einer Hand – damit am Ende nicht nur eine Website steht, sondern auch Anfragen kommen.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S6: Timeline – So funktioniert's -->
+    <section class="timeline-section">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <div class="section-label">So funktioniert's</div>
+          <h2>In vier Schritten zu Ihrem Online-Auftritt</h2>
+        </div>
+
+        <div class="timeline" id="timeline">
+          <div class="timeline-line"></div>
+          <div class="timeline-progress" id="timelineProgress"></div>
+
+          <div class="timeline-item" data-timeline-item>
+            <div class="timeline-dot"></div>
+            <div class="timeline-number">01</div>
+            <h3 class="timeline-title">48h-Audit</h3>
+            <p class="timeline-text">Wir prüfen Ihre aktuelle Online-Präsenz – Website, Google Business, Social Media und Anfrageprozess. Sie bekommen einen konkreten Maßnahmenplan mit den fünf wichtigsten Verbesserungen.</p>
+            <span class="timeline-detail">1-Pager + Erklär-Video · 199 € (wird bei Buchung angerechnet)</span>
+          </div>
+
+          <div class="timeline-item" data-timeline-item>
+            <div class="timeline-dot"></div>
+            <div class="timeline-number">02</div>
+            <h3 class="timeline-title">Paket wählen</h3>
+            <p class="timeline-text">Basierend auf dem Audit empfehlen wir das passende Paket. Starter, Growth oder Pro – je nachdem was Ihr Betrieb braucht. Klare Preise, kein Kleingedrucktes.</p>
+            <span class="timeline-detail">Ab 1.490 € Setup + 590 €/Monat</span>
+          </div>
+
+          <div class="timeline-item" data-timeline-item>
+            <div class="timeline-dot"></div>
+            <div class="timeline-number">03</div>
+            <h3 class="timeline-title">Aufbau &amp; Feedback</h3>
+            <p class="timeline-text">Wir setzen Website, Social Media und Kontaktwege auf. Sie sehen Zwischenstände und geben Feedback – so wird alles genau wie Sie es brauchen.</p>
+            <span class="timeline-detail">Tag 1–12 · Ihr Feedback fließt direkt ein</span>
+          </div>
+
+          <div class="timeline-item" data-timeline-item>
+            <div class="timeline-dot"></div>
+            <div class="timeline-number">04</div>
+            <h3 class="timeline-title">Go-Live in 10–14 Tagen</h3>
+            <p class="timeline-text">Ihre Website geht live, Google Business ist aktiv, Social-Profile sind eingerichtet und der Anfrageprozess läuft. Ab jetzt können Kunden Sie online finden und anfragen.</p>
+            <span class="timeline-detail">Alles steht · Monatliche Betreuung startet</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- S7: Testimonial / Platzhalter -->
+    <section class="testimonial-section">
+      <div class="container">
+        <div class="testimonial-inner reveal-up">
+          <div class="testimonial-quote-mark">
+            <svg viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+          </div>
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-text">Die Zusammenarbeit war unkompliziert und das Ergebnis hat unsere Erwartungen übertroffen. Nach 12 Tagen waren wir online – Website, Google Business, alles. Endlich kommen die Anfragen auch dort an, wo wir sie brauchen.</p>
+          <div class="testimonial-author">M. Berger</div>
+          <div class="testimonial-role">Tischlermeister · Wien</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S8: CTA Banner -->
+    <section class="cta-banner">
+      <div class="container">
+        <div class="cta-banner-inner" data-reveal>
+          <div class="cta-banner-glow"></div>
+          <div class="cta-banner-content">
+            <h2>Bereit für den ersten Schritt?</h2>
+            <p class="cta-banner-sub">Starten Sie mit unserem 48h-Audit – Sie erfahren sofort, wo Ihre größten Chancen liegen. Konkret, ehrlich und risikofrei.</p>
+            <div class="cta-btn-group">
+              <a href="/audit-buchen.html" class="btn btn--primary">Jetzt Audit buchen – 199 €</a>
+              <a href="/pakete.html" class="btn btn--secondary">Pakete ansehen</a>
+            </div>
+            <span class="cta-banner-hint">Die 199 € werden bei einer Paketbuchung angerechnet.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
+          <p>Webdesign, Social-Media-Setup &amp; Kontaktwege für KMU in Wien und Niederösterreich.</p>
+        </div>
+        <div>
+          <h4>Seiten</h4>
+          <ul class="footer-links">
+            <li><a href="/leistungen.html">Leistungen</a></li>
+            <li><a href="/pakete.html">Pakete &amp; Preise</a></li>
+            <li><a href="/audit-buchen.html">48h Audit</a></li>
+            <li><a href="/kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Rechtliches</h4>
+          <ul class="footer-links">
+            <li><a href="/impressum.html">Impressum</a></li>
+            <li><a href="/datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kontakt</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></li>
+            <li><a href="tel:+436601234567">+43 660 1234567</a></li>
+            <li>Wien &amp; Niederösterreich</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
+        <div>
+          <a href="/impressum.html" style="margin-right:1.5rem;">Impressum</a>
+          <a href="/datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js" defer></script>
+  <script defer>
+  (function() {
+    'use strict';
+
+    // Scroll Reveal (IntersectionObserver)
+    var revealEls = document.querySelectorAll('[data-reveal], .reveal-up, [data-timeline-item]');
+    if ('IntersectionObserver' in window) {
+      var revealObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(function(el) { revealObs.observe(el); });
+    } else {
+      revealEls.forEach(function(el) { el.classList.add('is-visible'); });
+    }
+
+    // Timeline: Scroll-Beam Progress
+    var timeline = document.getElementById('timeline');
+    var progress = document.getElementById('timelineProgress');
+    if (timeline && progress) {
+      function updateProgress() {
+        var rect = timeline.getBoundingClientRect();
+        var wh = window.innerHeight;
+        var scrolled = Math.max(0, Math.min(1, (wh * 0.6 - rect.top) / rect.height));
+        progress.style.height = (scrolled * 100) + '%';
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+    }
+
+    // Timeline: Activate Dots
+    var timelineItems = document.querySelectorAll('[data-timeline-item]');
+    if ('IntersectionObserver' in window && timelineItems.length) {
+      var dotObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-active');
+          }
+        });
+      }, { threshold: 0.3 });
+      timelineItems.forEach(function(item) { dotObs.observe(item); });
+    }
+
+    // Smooth scroll for anchor badges
+    document.querySelectorAll('.hero-badge').forEach(function(badge) {
+      badge.addEventListener('click', function(e) {
+        var href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          var target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            var navH = document.getElementById('navbar').offsetHeight || 70;
+            var top = target.getBoundingClientRect().top + window.pageYOffset - navH - 20;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>

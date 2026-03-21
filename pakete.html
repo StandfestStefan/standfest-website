@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pakete & Preise – Standfest Digital</title>
+  <meta name="description" content="Drei klare Pakete für Ihren Online-Start: Starter, Growth und Pro. Transparente Preise, keine versteckten Kosten. Ab 590 €/Monat.">
+  <link rel="canonical" href="https://standfestdigital.at/pakete.html">
+  <meta property="og:title" content="Pakete & Preise – Standfest Digital">
+  <meta property="og:description" content="Drei klare Pakete für Ihren Online-Start. Transparente Preise ab 590 €/Monat.">
+  <meta property="og:image" content="https://standfestdigital.at/img/og-image.jpg">
+  <meta property="og:url" content="https://standfestdigital.at/pakete.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_AT">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    /* ── Pakete Page Styles ── */
+
+    /* Hero override */
+    .hero {
+      position: relative;
+      padding: 8.5rem 0 4rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(74, 124, 89, 0.18) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse 60% 70% at 50% 30%, #000 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 30%, #000 30%, transparent 80%);
+      pointer-events: none;
+    }
+
+    .hero .container { position: relative; max-width: 720px; }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+    }
+
+    .hero .eyebrow {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
+    }
+
+    .hero .subheading {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+
+    /* Packages Grid */
+    .packages-section { padding: 0 0 2rem; }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      align-items: start;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Package Card */
+    .package-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem 2rem 2rem;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    .package-card.revealed,
+    .cta-box.revealed,
+    .scope-box.revealed {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .package-card:hover {
+      border-color: var(--border-strong);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .package-card.revealed:hover { transform: translateY(-4px); }
+
+    .package-card:not(.featured)::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .package-card:not(.featured):hover::before { opacity: 1; }
+
+    /* Featured Card (Growth) */
+    .package-card.featured { border-color: var(--accent); }
+
+    .package-card.featured::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(74, 124, 89, 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(74, 124, 89, 0.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, #000 60%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, #000 60%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .package-card.featured::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% -20%, rgba(74, 124, 89, 0.14), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .package-card.featured:hover { border-color: var(--accent-hover); }
+    .package-card.featured > * { position: relative; z-index: 1; }
+
+    /* Badge */
+    .package-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.3rem 0.75rem;
+      background: var(--accent-subtle);
+      border: 1px solid rgba(74, 124, 89, 0.3);
+      color: var(--accent-hover);
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      width: fit-content;
+      position: static;
+      transform: none;
+      left: auto;
+    }
+
+    .package-badge::before {
+      content: '';
+      display: block;
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(74, 124, 89, 0.4); }
+      50% { box-shadow: 0 0 0 4px rgba(74, 124, 89, 0); }
+    }
+
+    /* Card Content */
+    .package-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.125rem;
+      text-transform: none;
+    }
+
+    .package-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .package-price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 0.125rem;
+    }
+
+    .package-price-unit {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .package-setup {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .package-laufzeit {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .package-desc {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Feature List */
+    .package-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+      margin-bottom: 2rem;
+      flex: 1;
+      list-style: none;
+    }
+
+    .package-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.625rem;
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      padding: 0;
+    }
+
+    .package-features li::before { content: none; }
+
+    .package-features li svg {
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+
+    .package-features li.highlight-item {
+      font-weight: 500;
+      color: var(--text-primary);
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 0.25rem;
+      margin-bottom: 0.125rem;
+    }
+
+    .package-features li.highlight-item svg { visibility: hidden; }
+
+    /* Packages Note */
+    .packages-note {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+
+    .packages-note strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Scope Box override */
+    .scope-box {
+      background: rgba(42, 46, 37, 0.45);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    .scope-box h3 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .scope-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 2rem;
+      list-style: none;
+    }
+
+    .scope-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      padding: 0;
+    }
+
+    .scope-list li::before { content: none; }
+
+    .scope-list li svg {
+      flex-shrink: 0;
+      width: 16px; height: 16px;
+      color: rgba(181, 74, 74, 0.6);
+      margin-top: 2px;
+    }
+
+    /* CTA Section */
+    .cta-section { padding: 0 0 5rem; }
+
+    .cta-box {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3.5rem 2.5rem;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -40%; left: 50%;
+      transform: translateX(-50%);
+      width: 120%; height: 80%;
+      background: radial-gradient(ellipse at center, rgba(74, 124, 89, 0.1), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-box > * { position: relative; z-index: 1; }
+
+    .cta-box h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .cta-box p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 540px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-box .eyebrow { margin-bottom: 0.75rem; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .packages-grid { gap: 1rem; }
+      .package-card { padding: 2rem 1.5rem 1.5rem; }
+      .package-price { font-size: 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .hero { padding: 7.5rem 0 3rem; }
+      .packages-grid {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .package-card.featured { order: -1; }
+      .scope-list { grid-template-columns: 1fr; }
+      .cta-box { padding: 2.5rem 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .package-price { font-size: 2rem; }
+      .hero h1 { font-size: 1.75rem; }
+      .btn-group { flex-direction: column; }
+      .btn-group .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/leistungen.html">Leistungen</a></li>
+        <li><a href="/pakete.html" class="active">Pakete</a></li>
+        <li><a href="/kontakt.html">Kontakt</a></li>
+        <li><a href="/audit-buchen.html" class="nav-cta">Audit buchen</a></li>
+      </ul>
+      <button class="nav-login" id="loginBtn" aria-label="Anmelden">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Anmelden</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menü" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">Pakete &amp; Preise</div>
+        <h1>Das passende Paket für Ihren Online-Start</h1>
+        <p class="subheading">Drei klare Pakete – je nach Ausgangslage.<br>Transparent, ohne versteckte Kosten.</p>
+      </div>
+    </section>
+
+    <!-- Packages -->
+    <section class="packages-section">
+      <div class="container">
+        <div class="packages-grid">
+
+          <!-- Starter -->
+          <div class="package-card">
+            <div class="package-name">Starter</div>
+            <div class="package-subtitle">Online-Basis</div>
+            <div class="package-price">590 € <span class="package-price-unit">/Monat</span></div>
+            <div class="package-setup">ab 1.490 € Setup</div>
+            <div class="package-laufzeit">3 Monate Mindestlaufzeit</div>
+            <p class="package-desc">Für den professionellen Online-Start.</p>
+            <ul class="package-features">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Website/Landingpage (1–3 Seiten)
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Google Unternehmensprofil (Basis)
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                1 Social-Media-Profil eingerichtet
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Kontaktformular
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Basis-SEO (Title, Meta)
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                E-Mail Support
+              </li>
+            </ul>
+            <a href="/kontakt.html" class="btn btn-primary">Paket anfragen</a>
+          </div>
+
+          <!-- Growth (Featured) -->
+          <div class="package-card featured">
+            <div class="package-badge">Beliebt</div>
+            <div class="package-name">Growth</div>
+            <div class="package-subtitle">Anfragen-System</div>
+            <div class="package-price">990 € <span class="package-price-unit">/Monat</span></div>
+            <div class="package-setup">ab 2.490 € Setup</div>
+            <div class="package-laufzeit">6 Monate Mindestlaufzeit</div>
+            <p class="package-desc">Für Betriebe, die regelmäßig Anfragen erhalten möchten.</p>
+            <ul class="package-features">
+              <li class="highlight-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Alles aus Starter, plus:
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Vollständige Website (5–8 Seiten)
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                2–3 Social-Media-Profile + Startvorlagen
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                WhatsApp Business + Terminbuchung
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Keyword-Strategie
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                E-Mail + monatlicher Call
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Monatlicher KPI-Report
+              </li>
+            </ul>
+            <a href="/kontakt.html" class="btn btn-primary">Paket anfragen</a>
+          </div>
+
+          <!-- Pro -->
+          <div class="package-card">
+            <div class="package-name">Pro</div>
+            <div class="package-subtitle">Rundum-Betreuung</div>
+            <div class="package-price">1.590 € <span class="package-price-unit">/Monat</span></div>
+            <div class="package-setup">ab 3.990 € Setup</div>
+            <div class="package-laufzeit">12 Monate Mindestlaufzeit</div>
+            <p class="package-desc">Für einen vollständigen Online-Auftritt mit persönlicher Betreuung.</p>
+            <ul class="package-features">
+              <li class="highlight-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Alles aus Growth, plus:
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Umfassende Website (8+ Seiten)
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Alle Social-Media-Profile + monatliche Empfehlungen
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Follow-up-System für Anfragen
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Monatlicher SEO-Check
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Priorität + wöchentlicher Call
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Monatlicher Report + Empfehlungen
+              </li>
+            </ul>
+            <a href="/kontakt.html" class="btn btn-primary">Paket anfragen</a>
+          </div>
+
+        </div>
+
+        <!-- Hinweise -->
+        <p class="packages-note">
+          <strong>Setup-Fee:</strong> 50 % bei Auftragserteilung, 50 % bei Go-Live.<br>
+          Nach Mindestlaufzeit monatlich kündbar.<br>
+          Alle Preise netto zzgl. 20 % USt.
+        </p>
+
+        <!-- Scope-Schutz -->
+        <div class="scope-box">
+          <h3>Nicht enthalten (für alle Pakete)</h3>
+          <ul class="scope-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              Logo-Design / Corporate Design
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              Texterstellung (Copywriting)
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              Foto-/Video-Produktion
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              Laufende Content-Erstellung
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              Rechtstexte / DSGVO (keine Rechtsberatung)
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              Bezahlte Werbung (Ads / Ad-Spend)
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              App-Entwicklung / individuelle Programmierung
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              Printmedien
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-box">
+          <div class="eyebrow">Nicht sicher welches Paket?</div>
+          <h2>Starten Sie mit dem 48h Online-Audit</h2>
+          <p>Für 199 € analysieren wir Ihren aktuellen Online-Auftritt und zeigen konkret, wo Potenzial liegt. Bei Paketbuchung wird der Betrag auf die Setup-Gebühr angerechnet.</p>
+          <div class="btn-group">
+            <a href="/audit-buchen.html" class="btn btn-primary">48h Audit sichern – 199 €</a>
+            <a href="/kontakt.html" class="btn btn-secondary">Erstgespräch vereinbaren</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
+          <p>Webdesign, Social-Media-Setup &amp; Kontaktwege für KMU in Wien und Niederösterreich.</p>
+        </div>
+        <div>
+          <h4>Seiten</h4>
+          <ul class="footer-links">
+            <li><a href="/leistungen.html">Leistungen</a></li>
+            <li><a href="/pakete.html">Pakete &amp; Preise</a></li>
+            <li><a href="/audit-buchen.html">48h Audit</a></li>
+            <li><a href="/kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Rechtliches</h4>
+          <ul class="footer-links">
+            <li><a href="/impressum.html">Impressum</a></li>
+            <li><a href="/datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kontakt</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></li>
+            <li><a href="tel:+436601234567">+43 660 1234567</a></li>
+            <li>Wien &amp; Niederösterreich</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
+        <div>
+          <a href="/impressum.html" style="margin-right:1.5rem;">Impressum</a>
+          <a href="/datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js" defer></script>
+  <script defer>
+    /* Scroll Reveal for packages */
+    const revealEls = document.querySelectorAll('.package-card, .cta-box, .scope-box');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.08}s`;
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

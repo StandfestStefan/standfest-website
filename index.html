@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Standfest Digital – Website & Anfragen in 10–14 Tagen</title>
+  <meta name="description" content="In 10–14 Tagen professionell online: Website, Social-Media-Basics und klare Kontaktwege für KMU in Wien & Niederösterreich. Jetzt 48h-Audit für 199 € buchen.">
+  <link rel="canonical" href="https://standfestdigital.at/">
+  <meta property="og:title" content="Standfest Digital – Website & Anfragen in 10–14 Tagen">
+  <meta property="og:description" content="Professionelle Website, Social-Media-Basics und klare Kontaktwege für KMU in Wien & Niederösterreich. In 10–14 Tagen online.">
+  <meta property="og:image" content="https://standfestdigital.at/img/og-image.jpg">
+  <meta property="og:url" content="https://standfestdigital.at/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_AT">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Schema.org LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Standfest Digital",
+    "description": "Webdesign, Social-Media-Setup & Kontaktwege für KMU in Wien und Niederösterreich.",
+    "url": "https://standfestdigital.at",
+    "telephone": "+436601234567",
+    "email": "office@standfestdigital.at",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Wien",
+      "addressRegion": "Wien",
+      "addressCountry": "AT"
+    },
+    "areaServed": ["Wien", "Niederösterreich"],
+    "priceRange": "€€"
+  }
+  </script>
+
+  <style>
+    /* ===== INDEX – Seitenspezifische Styles ===== */
+
+    /* --- S1: Hero --- */
+    .hero {
+  position: relative;
+  min-height: max(100vh, 700px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 160px 1.5rem 100px;
+  overflow: hidden;
+  background: var(--bg-primary);
+  text-align: center;
+}
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 20%, transparent 70%);
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 20%, transparent 70%);
+      z-index: 0;
+    }
+
+    .hero-spotlight {
+      position: absolute;
+      top: -40%;
+      left: 0;
+      width: 138%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      animation: spotlightIn 2s ease-out 0.1s forwards;
+    }
+    @keyframes spotlightIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(-50%); }
+      to { opacity: 1; transform: translateX(0) translateY(0); }
+    }
+    @media (min-width: 1024px) {
+      .hero-spotlight { top: -20%; left: 60%; width: 84%; }
+    }
+
+    .hero-ambient {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(74,124,89,0.12) 0%, transparent 70%);
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-badge, .hero-headline, .hero-subline,
+    .hero-buttons, .hero-stats, .hero-scroll {
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .hero-badge { animation-delay: 0.1s; }
+    .hero-headline { animation-delay: 0.2s; }
+    .hero-subline { animation-delay: 0.35s; }
+    .hero-buttons { animation-delay: 0.5s; }
+    .hero-stats { animation-delay: 0.65s; }
+    .hero-scroll { animation-delay: 1s; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.375rem 1rem 0.375rem 0.75rem;
+      background: rgba(74,124,89,0.12);
+      border: 1px solid rgba(74,124,89,0.25);
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--accent-hover);
+      margin-bottom: 2rem;
+    }
+    .hero-badge-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(74,124,89,0.5); }
+      50% { box-shadow: 0 0 0 6px rgba(74,124,89,0); }
+    }
+
+    .hero-headline {
+      font-size: clamp(2.25rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+    .hero-headline-accent {
+      color: var(--accent-hover);
+      position: relative;
+      display: inline-block;
+    }
+    .hero-headline-accent::after {
+      content: '';
+      position: absolute;
+      bottom: 2px; left: 0;
+      width: 100%; height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: underlineIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.9s forwards;
+    }
+    @keyframes underlineIn { to { transform: scaleX(1); } }
+
+    .hero-subline {
+      font-size: clamp(1.0625rem, 2vw, 1.25rem);
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 3.5rem;
+    }
+    @media (max-width: 480px) {
+      .hero-buttons { flex-direction: column; width: 100%; max-width: 360px; }
+      .hero-buttons .btn { width: 100%; }
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      width: 100%;
+      max-width: 580px;
+    }
+    .hero-stat { flex: 1; text-align: center; position: relative; }
+    .hero-stat + .hero-stat::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 1px; background: var(--border);
+    }
+    .hero-stat-value {
+      display: block; font-size: 1.75rem; font-weight: 700;
+      color: var(--text-primary); letter-spacing: -0.02em; line-height: 1.2;
+    }
+    .hero-stat-label {
+      display: block; font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem;
+    }
+    @media (max-width: 480px) {
+      .hero-stats { flex-direction: column; gap: 1.25rem; border-top: none; padding-top: 1.5rem; }
+      .hero-stat + .hero-stat::before { display: none; }
+      .hero-stat { display: flex; align-items: baseline; gap: 0.5rem; text-align: left; justify-content: center; }
+      .hero-stat-value { font-size: 1.5rem; }
+    }
+
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+      color: var(--text-muted); font-size: 0.8125rem; font-weight: 500; z-index: 2;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 32px;
+      background: linear-gradient(to bottom, var(--text-muted), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+      30% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+      60% { opacity: 1; transform: scaleY(1); transform-origin: bottom; }
+      100% { opacity: 0; transform: scaleY(0); transform-origin: bottom; }
+    }
+    @media (max-width: 768px) { .hero-scroll { display: none; } }
+
+
+    /* --- S2: Vertrauensleiste --- */
+    .trust-bar {
+      padding: 56px 0;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .trust-bar::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%;
+      width: 400px; height: 200px;
+      background: radial-gradient(ellipse, rgba(74,124,89,0.08), transparent);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+      position: relative;
+    }
+    .trust-item { position: relative; }
+    .trust-item + .trust-item::before {
+      content: ''; position: absolute; left: -16px; top: 10%; height: 80%;
+      width: 1px; background: var(--border);
+    }
+    .trust-value {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700; color: var(--text-primary);
+      letter-spacing: -0.02em; line-height: 1.2;
+    }
+    .trust-value .trust-suffix {
+      font-size: 0.6em; font-weight: 600; color: var(--accent);
+    }
+    .trust-value .trust-prefix {
+      font-size: 0.6em; font-weight: 500; color: var(--text-muted);
+    }
+    .trust-label {
+      font-size: 0.85rem; color: var(--text-muted); margin-top: 0.375rem;
+    }
+    @media (max-width: 768px) {
+      .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
+      .trust-item + .trust-item::before { display: none; }
+    }
+    @media (max-width: 480px) {
+      .trust-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+
+    /* --- S3: Problem → Lösung --- */
+    .problem-section {
+      padding: 100px 0;
+      background: var(--bg-primary);
+      position: relative;
+    }
+    .problem-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border-strong), transparent);
+    }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 64px 1fr;
+      gap: 0;
+      align-items: start;
+    }
+
+    .problem-col-header, .solution-col-header {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+    .problem-col-header h2, .solution-col-header h2 {
+      font-size: clamp(1.25rem, 3vw, 1.6rem);
+    }
+    .col-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .col-icon svg { width: 22px; height: 22px; stroke-width: 2; }
+    .col-icon-problem { background: rgba(181,74,74,0.12); }
+    .col-icon-problem svg { stroke: var(--error); fill: none; }
+    .col-icon-solution { background: rgba(74,124,89,0.12); }
+    .col-icon-solution svg { stroke: var(--accent); fill: none; }
+
+    .problem-item, .solution-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.125rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .problem-item:last-child, .solution-item:last-child { border-bottom: none; }
+
+    .item-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .item-icon svg { width: 18px; height: 18px; stroke-width: 2; fill: none; }
+    .problem-item .item-icon { background: rgba(181,74,74,0.08); }
+    .problem-item .item-icon svg { stroke: #b54a4a; }
+    .solution-item .item-icon { background: rgba(74,124,89,0.08); }
+    .solution-item .item-icon svg { stroke: var(--accent); }
+
+    .item-text h4 {
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--text-primary); margin-bottom: 0.25rem;
+    }
+    .item-text p { font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.6; }
+
+    .problem-divider {
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .problem-divider-line {
+      width: 1px; height: 100%;
+      background: linear-gradient(to bottom, transparent, var(--border-strong) 20%, var(--border-strong) 80%, transparent);
+      position: absolute;
+    }
+    .problem-divider-arrow {
+      position: relative; z-index: 1;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--bg-card); border: 1px solid var(--border-strong);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .problem-divider-arrow svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 2; }
+
+    @media (max-width: 768px) {
+      .problem-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .problem-divider {
+        flex-direction: row; justify-content: center;
+        padding: 1rem 0;
+      }
+      .problem-divider-line { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--border-strong), transparent); }
+      .problem-divider-arrow svg { transform: rotate(90deg); }
+    }
+
+
+    /* --- S4: Drei Säulen --- */
+    .pillars-section {
+      padding: 100px 0;
+      background: var(--bg-card);
+      position: relative;
+      overflow: hidden;
+    }
+    .pillars-section::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(74,124,89,0.06), transparent 70%);
+      pointer-events: none;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .pillar-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .pillar-card:hover {
+      border-color: rgba(74,124,89,0.35);
+      transform: translateY(-4px);
+    }
+    .pillar-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .pillar-card:hover::before { opacity: 1; }
+
+    .pillar-spotlight {
+      position: absolute; inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s;
+      border-radius: var(--radius);
+    }
+    .pillar-card:hover .pillar-spotlight { opacity: 1; }
+
+    .pillar-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: var(--accent-subtle);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .pillar-icon svg { width: 28px; height: 28px; stroke: var(--accent); fill: none; stroke-width: 1.75; }
+
+    .pillar-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+    .pillar-card > p {
+      font-size: 0.925rem; color: var(--text-muted);
+      line-height: 1.7; margin-bottom: 1.25rem;
+    }
+    .pillar-features { list-style: none; padding: 0; margin: 0; }
+    .pillar-features li {
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      font-size: 0.875rem; color: var(--text-muted);
+      position: relative; line-height: 1.5;
+    }
+    .pillar-features li::before {
+      content: '\2713';
+      position: absolute; left: 0;
+      color: var(--accent); font-weight: 600;
+    }
+
+    @media (max-width: 968px) {
+      .pillars-grid { grid-template-columns: 1fr; max-width: 540px; margin: 0 auto; }
+    }
+
+
+    /* --- S5: Timeline --- */
+    .process-section {
+      padding: 100px 0;
+      background: var(--bg-primary);
+    }
+    .timeline {
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+      padding-left: 48px;
+    }
+    .timeline-track {
+      position: absolute;
+      left: 15px; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-beam {
+      position: absolute;
+      left: 15px; top: 0;
+      width: 2px; height: 0;
+      background: linear-gradient(to bottom, var(--accent), rgba(74,124,89,0.3));
+      transition: height 0.1s linear;
+      z-index: 1;
+    }
+
+    .timeline-step {
+      position: relative;
+      padding: 0 0 56px 0;
+    }
+    .timeline-step:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -48px; top: 4px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--text-muted);
+      transition: all 0.4s ease;
+      z-index: 2;
+    }
+    .timeline-dot.reached {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+
+    .timeline-tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: var(--accent-subtle);
+      border-radius: 6px;
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.625rem;
+    }
+    .timeline-step h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+    .timeline-step p { font-size: 0.9rem; color: var(--text-muted); margin: 0; line-height: 1.7; }
+
+    @media (max-width: 480px) {
+      .timeline { padding-left: 40px; }
+      .timeline-dot { left: -40px; width: 28px; height: 28px; font-size: 0.75rem; }
+      .timeline-track, .timeline-beam { left: 13px; }
+    }
+
+
+    /* --- S6: Über uns --- */
+    .about-section {
+      padding: 100px 0;
+      background: var(--bg-card);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-section::before {
+      content: '';
+      position: absolute;
+      bottom: -120px; left: -120px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(74,124,89,0.06), transparent 70%);
+      pointer-events: none;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .about-text h2 { margin-bottom: 1.25rem; }
+    .about-text p { font-size: 1rem; line-height: 1.8; }
+    .about-text .lead {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      font-weight: 500;
+      line-height: 1.7;
+    }
+
+    .about-values {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .about-value {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: border-color var(--transition);
+    }
+    .about-value:hover { border-color: rgba(74,124,89,0.3); }
+    .about-value-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--accent-subtle);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.875rem;
+    }
+    .about-value-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 2; }
+    .about-value h4 { font-size: 0.95rem; margin-bottom: 0.375rem; }
+    .about-value p { font-size: 0.825rem; color: var(--text-muted); margin: 0; }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-visual { order: -1; }
+    }
+
+
+    /* --- S7: Audit Teaser --- */
+    .audit-section {
+      padding: 100px 0;
+      background: var(--bg-primary);
+    }
+    .audit-card {
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 64px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .audit-card::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 300px;
+      background: radial-gradient(ellipse, rgba(74,124,89,0.1), transparent);
+      pointer-events: none;
+    }
+    .audit-card > * { position: relative; z-index: 1; }
+
+    .audit-eyebrow {
+      display: inline-block;
+      padding: 0.375rem 1rem;
+      background: var(--accent-subtle);
+      border-radius: 100px;
+      font-size: 0.8rem; font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 1.5rem;
+    }
+    .audit-price-big {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+    .audit-price-note {
+      font-size: 1rem; color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+    .audit-benefits {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .audit-benefit {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.625rem 1.125rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.875rem; color: var(--text-muted);
+    }
+    .audit-benefit svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 2; }
+
+    .btn-glow {
+      position: relative;
+      overflow: visible;
+    }
+    .btn-glow::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 11px;
+      background: var(--accent);
+      opacity: 0;
+      z-index: -1;
+      filter: blur(16px);
+      animation: glowPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.4; }
+    }
+
+    .audit-note-small {
+      font-size: 0.825rem; color: var(--text-muted);
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 480px) {
+      .audit-card { padding: 48px 24px; }
+      .audit-benefits { flex-direction: column; align-items: center; }
+    }
+
+
+    /* --- S8: FAQ --- */
+    .faq-section {
+      padding: 100px 0;
+      background: var(--bg-card);
+      position: relative;
+    }
+    .faq-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border-strong), transparent);
+    }
+
+
+    /* --- S9: Final CTA --- */
+    .final-cta {
+      padding: 100px 0;
+      background: var(--bg-primary);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .final-cta-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px; height: 400px;
+      background: radial-gradient(ellipse, rgba(74,124,89,0.1), transparent 70%);
+      pointer-events: none;
+    }
+    .final-cta .container { position: relative; z-index: 1; }
+    .final-cta h2 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      margin-bottom: 1rem;
+    }
+    .final-cta p {
+      font-size: 1.1rem;
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+    }
+    .final-cta .btn-group { justify-content: center; }
+
+    .final-cta-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 28px 28px;
+      -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 10%, transparent 70%);
+      mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 10%, transparent 70%);
+      pointer-events: none;
+    }
+
+
+    /* ====================================================
+       VISUALS: Browser Mockups, Device Previews, Illustration
+       ==================================================== */
+
+    /* --- S3: Vorher/Nachher Browser Mockups --- */
+    .mockup-row {
+      display: grid;
+      grid-template-columns: 1fr 64px 1fr;
+      gap: 0;
+      margin-bottom: 48px;
+      align-items: center;
+    }
+    .browser-mockup {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    .browser-chrome {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: #232720;
+      border-bottom: 1px solid var(--border);
+    }
+    .browser-dots {
+      display: flex; gap: 5px;
+    }
+    .browser-dots span {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .browser-dots span:nth-child(1) { background: #b54a4a; }
+    .browser-dots span:nth-child(2) { background: var(--warning); }
+    .browser-dots span:nth-child(3) { background: var(--accent); }
+    .browser-url {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border-radius: 5px;
+      padding: 4px 10px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-family: var(--font);
+    }
+    .browser-body {
+      padding: 16px;
+      min-height: 140px;
+      position: relative;
+    }
+
+    /* Vorher (kaputt) */
+    .mockup-bad .browser-body {
+      background: #2c2c2c;
+    }
+    .mockup-bad-nav {
+      height: 6px; background: #444; border-radius: 3px; width: 60%; margin-bottom: 14px;
+    }
+    .mockup-bad-hero {
+      height: 40px; background: #383838; border-radius: 4px; margin-bottom: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mockup-bad-hero span {
+      font-size: 0.6rem; color: #666; font-family: serif; letter-spacing: 0;
+    }
+    .mockup-bad-text {
+      height: 5px; background: #3a3a3a; border-radius: 2px; margin-bottom: 6px;
+    }
+    .mockup-bad-text:nth-child(4) { width: 80%; }
+    .mockup-bad-text:nth-child(5) { width: 55%; }
+    .mockup-bad-stamp {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%) rotate(-12deg);
+      border: 2px solid rgba(181,74,74,0.4);
+      color: rgba(181,74,74,0.5);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      pointer-events: none;
+    }
+
+    /* Nachher (modern) */
+    .mockup-good .browser-body {
+      background: var(--bg-primary);
+    }
+    .mockup-good-nav {
+      display: flex; gap: 6px; align-items: center; margin-bottom: 14px;
+    }
+    .mockup-good-nav-logo {
+      width: 50px; height: 6px; background: var(--accent); border-radius: 3px;
+    }
+    .mockup-good-nav-links {
+      display: flex; gap: 4px; margin-left: auto;
+    }
+    .mockup-good-nav-links span {
+      width: 24px; height: 5px; background: rgba(255,255,255,0.12); border-radius: 2px;
+    }
+    .mockup-good-hero {
+      background: linear-gradient(135deg, rgba(74,124,89,0.15), rgba(74,124,89,0.05));
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .mockup-good-hero-title {
+      height: 7px; background: var(--text-primary); border-radius: 3px; width: 70%; margin: 0 auto 8px;
+    }
+    .mockup-good-hero-sub {
+      height: 4px; background: rgba(255,255,255,0.15); border-radius: 2px; width: 55%; margin: 0 auto 10px;
+    }
+    .mockup-good-cta {
+      display: inline-block;
+      padding: 3px 14px;
+      background: var(--accent);
+      border-radius: 4px;
+      font-size: 0.55rem;
+      color: #fff;
+      font-weight: 600;
+    }
+    .mockup-good-blocks {
+      display: flex; gap: 6px;
+    }
+    .mockup-good-block {
+      flex: 1; height: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+    .mockup-good-stamp {
+      position: absolute;
+      top: 8px; right: 8px;
+      width: 22px; height: 22px;
+      background: rgba(74,124,89,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mockup-good-stamp svg {
+      width: 12px; height: 12px; stroke: var(--accent); fill: none; stroke-width: 2.5;
+    }
+
+    .mockup-row .problem-divider { align-self: center; }
+
+    @media (max-width: 768px) {
+      .mockup-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 32px;
+      }
+      .mockup-row .problem-divider { padding: 0.5rem 0; }
+    }
+
+
+    /* --- S4: Mini Device Mockups auf Pillar-Cards --- */
+    .pillar-preview {
+      margin-bottom: 1.25rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Laptop-Mockup */
+    .mini-laptop {
+      width: 180px;
+      position: relative;
+    }
+    .mini-laptop-screen {
+      background: #1a1d16;
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 6px 6px 0 0;
+      padding: 8px;
+      min-height: 100px;
+    }
+    .mini-laptop-base {
+      height: 8px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 0 0 4px 4px;
+      margin: 0 -8px;
+      position: relative;
+    }
+    .mini-laptop-base::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 36px; height: 3px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 0 0 3px 3px;
+    }
+    .ml-nav {
+      display: flex; gap: 3px; align-items: center; margin-bottom: 8px;
+    }
+    .ml-nav-logo { width: 28px; height: 4px; background: var(--accent); border-radius: 2px; }
+    .ml-nav-links { display: flex; gap: 3px; margin-left: auto; }
+    .ml-nav-links span { width: 14px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 1px; }
+    .ml-hero {
+      background: linear-gradient(135deg, rgba(74,124,89,0.12), transparent);
+      border-radius: 4px; padding: 8px; text-align: center; margin-bottom: 6px;
+    }
+    .ml-hero-line { height: 4px; background: rgba(255,255,255,0.25); border-radius: 2px; width: 60%; margin: 0 auto 5px; }
+    .ml-hero-sub { height: 3px; background: rgba(255,255,255,0.08); border-radius: 1px; width: 45%; margin: 0 auto 6px; }
+    .ml-hero-btn { display: inline-block; padding: 2px 10px; background: var(--accent); border-radius: 3px; font-size: 0; height: 8px; }
+    .ml-cols { display: flex; gap: 4px; }
+    .ml-col { flex: 1; height: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 3px; }
+
+    /* Phone-Mockup */
+    .mini-phone {
+      width: 90px;
+      background: #1a1d16;
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 6px;
+      position: relative;
+    }
+    .mini-phone::before {
+      content: '';
+      position: absolute;
+      top: 4px; left: 50%; transform: translateX(-50%);
+      width: 28px; height: 3px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+    }
+    .mini-phone-screen {
+      background: var(--bg-primary);
+      border-radius: 8px;
+      padding: 10px 6px 6px;
+      min-height: 120px;
+    }
+
+    /* Google Business Mockup (auf Phone) */
+    .mp-gbiz-header {
+      background: rgba(74,124,89,0.1);
+      border-radius: 4px;
+      padding: 5px;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+    .mp-gbiz-name {
+      height: 4px; background: rgba(255,255,255,0.25); border-radius: 2px; width: 70%; margin: 0 auto 4px;
+    }
+    .mp-gbiz-stars {
+      display: flex; gap: 2px; justify-content: center; margin-bottom: 2px;
+    }
+    .mp-gbiz-stars span {
+      width: 6px; height: 6px;
+      background: #c4963a;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+    .mp-gbiz-rating {
+      font-size: 0.5rem; color: var(--text-muted); text-align: center;
+    }
+    .mp-gbiz-row {
+      display: flex; gap: 4px; align-items: center;
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .mp-gbiz-row-icon {
+      width: 8px; height: 8px; border-radius: 2px;
+      background: rgba(74,124,89,0.2);
+      flex-shrink: 0;
+    }
+    .mp-gbiz-row-text {
+      height: 3px; background: rgba(255,255,255,0.08); border-radius: 1px; flex: 1;
+    }
+    .mp-gbiz-btns {
+      display: flex; gap: 3px; margin-top: 6px;
+    }
+    .mp-gbiz-btn {
+      flex: 1; height: 12px;
+      background: var(--accent);
+      border-radius: 3px;
+      opacity: 0.7;
+    }
+    .mp-gbiz-btn:last-child {
+      background: transparent;
+      border: 1px solid var(--border);
+      opacity: 1;
+    }
+
+    /* Chat/Formular Mockup (auf Phone) */
+    .mp-chat-header {
+      display: flex; align-items: center; gap: 4px;
+      padding-bottom: 5px; margin-bottom: 5px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .mp-chat-avatar {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent); opacity: 0.5;
+    }
+    .mp-chat-name {
+      height: 4px; background: rgba(255,255,255,0.15); border-radius: 2px; width: 40px;
+    }
+    .mp-chat-bubble {
+      max-width: 80%;
+      padding: 4px 7px;
+      border-radius: 6px;
+      margin-bottom: 4px;
+      font-size: 0.45rem;
+      line-height: 1.4;
+    }
+    .mp-chat-bubble-in {
+      background: rgba(255,255,255,0.06);
+      color: var(--text-muted);
+      border-bottom-left-radius: 2px;
+    }
+    .mp-chat-bubble-out {
+      background: rgba(74,124,89,0.2);
+      color: var(--accent-hover);
+      margin-left: auto;
+      border-bottom-right-radius: 2px;
+    }
+    .mp-chat-input {
+      display: flex; gap: 3px; margin-top: 6px;
+      align-items: center;
+    }
+    .mp-chat-field {
+      flex: 1; height: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 7px;
+    }
+    .mp-chat-send {
+      width: 14px; height: 14px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .mp-chat-send svg {
+      width: 7px; height: 7px; stroke: #fff; fill: none; stroke-width: 2.5;
+    }
+
+    @media (max-width: 968px) {
+      .mini-laptop { width: 200px; }
+    }
+
+
+    /* --- S6: Über-uns-Illustration --- */
+    .about-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .about-illustration {
+      display: flex;
+      justify-content: center;
+    }
+    .about-illustration svg {
+      width: 100%;
+      max-width: 360px;
+      height: auto;
+    }
+    @media (max-width: 768px) {
+      .about-visual { order: -1; }
+      .about-illustration svg { max-width: 280px; }
+    }
+
+
+    /* --- S7: Audit 1-Pager Mockup --- */
+    .audit-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: center;
+      text-align: left;
+    }
+    .audit-text { text-align: center; }
+    .audit-mockup-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .onepager-mockup {
+      width: 180px;
+      background: #ffffff;
+      border-radius: 6px;
+      padding: 14px 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.15);
+      transform: rotate(2deg);
+      position: relative;
+      z-index: 1;
+    }
+    .op-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid #4a7c59;
+    }
+    .op-logo {
+      font-size: 0.5rem;
+      font-weight: 700;
+      color: #1e2119;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-family: var(--font);
+    }
+    .op-logo span { color: #4a7c59; }
+    .op-badge {
+      font-size: 0.4rem;
+      color: #4a7c59;
+      background: rgba(74,124,89,0.1);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+    .op-company {
+      font-size: 0.55rem; font-weight: 600; color: #1e2119;
+      margin-bottom: 3px;
+    }
+    .op-meta {
+      font-size: 0.4rem; color: #999; margin-bottom: 8px;
+    }
+    .op-title {
+      font-size: 0.5rem; font-weight: 700; color: #1e2119;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    .op-item {
+      display: flex; gap: 5px; align-items: flex-start;
+      margin-bottom: 6px;
+    }
+    .op-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .op-dot-p1 { background: #b54a4a; }
+    .op-dot-p2 { background: #c4963a; }
+    .op-dot-p3 { background: #4a7c59; }
+    .op-item-text {
+      flex: 1;
+    }
+    .op-item-title {
+      font-size: 0.45rem; font-weight: 600; color: #1e2119; margin-bottom: 1px;
+    }
+    .op-item-desc {
+      height: 2px; background: #ddd; border-radius: 1px; width: 90%;
+    }
+    .op-cta-block {
+      margin-top: 10px;
+      padding-top: 6px;
+      border-top: 1px solid #eee;
+      text-align: center;
+    }
+    .op-cta-text {
+      font-size: 0.4rem; color: #666; margin-bottom: 3px;
+    }
+    .op-cta-btn {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #4a7c59;
+      border-radius: 2px;
+      font-size: 0.4rem;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .audit-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .audit-mockup-wrap { order: -1; margin-bottom: 1rem; }
+      .onepager-mockup { width: 160px; transform: rotate(0); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/leistungen.html">Leistungen</a></li>
+        <li><a href="/pakete.html">Pakete</a></li>
+        <li><a href="/kontakt.html">Kontakt</a></li>
+        <li><a href="/audit-buchen.html" class="nav-cta">Audit buchen</a></li>
+      </ul>
+      <button class="nav-login" id="loginBtn" aria-label="Anmelden">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Anmelden</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menü" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+
+  <main>
+
+    <!-- ===== S1: HERO ===== -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-ambient" aria-hidden="true"></div>
+
+      <svg class="hero-spotlight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3787 2842" fill="none" aria-hidden="true">
+        <g filter="url(#sf)">
+          <ellipse cx="1924.71" cy="273.501" rx="1924.71" ry="273.501"
+            transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
+            fill="#4a7c59" fill-opacity="0.21" />
+        </g>
+        <defs>
+          <filter id="sf" x="0.86" y="0.84" width="3785.16" height="2840.26"
+            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="bg" />
+            <feBlend mode="normal" in="SourceGraphic" in2="bg" result="shape" />
+            <feGaussianBlur stdDeviation="151" result="blur" />
+          </filter>
+        </defs>
+      </svg>
+
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot" aria-hidden="true"></span>
+          Wien &amp; Niederösterreich
+        </div>
+
+        <h1 id="hero-heading" class="hero-headline">
+          Ihr Unternehmen.<br>
+          <span class="hero-headline-accent">In 10–14 Tagen online.</span>
+        </h1>
+
+        <p class="hero-subline">
+          Website, Social-Media-Basics und ein klarer Weg für Kundenanfragen – alles aus einer Hand, professionell eingerichtet.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="/audit-buchen.html" class="btn btn--primary">48h-Audit buchen – 199&nbsp;€</a>
+          <a href="/leistungen.html" class="btn btn--secondary">Leistungen ansehen</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="hero-stat-value">10–14</span>
+            <span class="hero-stat-label">Tage bis Go-Live</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">3</span>
+            <span class="hero-stat-label">Leistungen aus einer Hand</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">199&nbsp;€</span>
+            <span class="hero-stat-label">Online-Audit als Einstieg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-scroll" aria-hidden="true">
+        <span>Mehr erfahren</span>
+        <div class="hero-scroll-line"></div>
+      </div>
+    </section>
+
+
+    <!-- ===== S2: VERTRAUENSLEISTE ===== -->
+    <section class="trust-bar" aria-label="Kennzahlen">
+      <div class="container">
+        <div class="trust-grid">
+          <div class="trust-item reveal">
+            <div class="trust-value"><span data-count="14">0</span> <span class="trust-suffix">Tage</span></div>
+            <div class="trust-label">bis Ihr Auftritt steht</div>
+          </div>
+          <div class="trust-item reveal" data-delay="0.1">
+            <div class="trust-value"><span data-count="3">0</span> <span class="trust-suffix">Säulen</span></div>
+            <div class="trust-label">ein Ansprechpartner</div>
+          </div>
+          <div class="trust-item reveal" data-delay="0.2">
+            <div class="trust-value"><span class="trust-prefix">ab </span><span data-count="590">0</span> <span class="trust-suffix">€</span></div>
+            <div class="trust-label">monatliche Betreuung</div>
+          </div>
+          <div class="trust-item reveal" data-delay="0.3">
+            <div class="trust-value"><span data-count="48">0</span> <span class="trust-suffix">Stunden</span></div>
+            <div class="trust-label">für Ihren Online-Audit</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== S3: PROBLEM → LÖSUNG ===== -->
+    <section class="problem-section" aria-labelledby="problem-heading">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <span class="section-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+            Ausgangslage
+          </span>
+          <h2 id="problem-heading">Was Ihre Kunden heute sehen – und was sie sehen sollten</h2>
+        </div>
+
+        <div class="mockup-row reveal" style="margin-bottom: 48px;">
+          <!-- Vorher: Kaputte Website -->
+          <div class="browser-mockup mockup-bad">
+            <div class="browser-chrome">
+              <div class="browser-dots"><span></span><span></span><span></span></div>
+              <div class="browser-url">meine-alte-seite.at</div>
+            </div>
+            <div class="browser-body">
+              <div class="mockup-bad-nav"></div>
+              <div class="mockup-bad-hero"><span>Willkommen auf unserer Homepage</span></div>
+              <div class="mockup-bad-text"></div>
+              <div class="mockup-bad-text"></div>
+              <div class="mockup-bad-text"></div>
+              <div class="mockup-bad-stamp">Veraltet</div>
+            </div>
+          </div>
+
+          <!-- Divider Arrow -->
+          <div class="problem-divider">
+            <div class="problem-divider-arrow">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+
+          <!-- Nachher: Moderne Website -->
+          <div class="browser-mockup mockup-good">
+            <div class="browser-chrome">
+              <div class="browser-dots"><span></span><span></span><span></span></div>
+              <div class="browser-url">tischlerei-huber.at</div>
+            </div>
+            <div class="browser-body">
+              <div class="mockup-good-nav">
+                <div class="mockup-good-nav-logo"></div>
+                <div class="mockup-good-nav-links"><span></span><span></span><span></span></div>
+              </div>
+              <div class="mockup-good-hero">
+                <div class="mockup-good-hero-title"></div>
+                <div class="mockup-good-hero-sub"></div>
+                <div class="mockup-good-cta">Jetzt anfragen</div>
+              </div>
+              <div class="mockup-good-blocks">
+                <div class="mockup-good-block"></div>
+                <div class="mockup-good-block"></div>
+                <div class="mockup-good-block"></div>
+              </div>
+              <div class="mockup-good-stamp">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="problem-grid">
+
+          <div class="problem-col reveal">
+            <div class="problem-col-header">
+              <div class="col-icon col-icon-problem">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              </div>
+              <h2>Kommt Ihnen das bekannt vor?</h2>
+            </div>
+
+            <div class="problem-item">
+              <div class="item-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <div class="item-text">
+                <h4>Keine oder veraltete Website</h4>
+                <p>Potenzielle Kunden suchen online – und finden Sie nicht. Oder finden eine Seite von 2015.</p>
+              </div>
+            </div>
+
+            <div class="problem-item">
+              <div class="item-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </div>
+              <div class="item-text">
+                <h4>Am Handy unbedienbar</h4>
+                <p>Über 60 % suchen am Handy. Wenn die Seite dort nicht funktioniert, sind Besucher sofort weg.</p>
+              </div>
+            </div>
+
+            <div class="problem-item">
+              <div class="item-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="item-text">
+                <h4>Kein Weg für Anfragen</h4>
+                <p>Kein Formular, keine Terminbuchung – nur eine E-Mail-Adresse, die viele nicht nutzen.</p>
+              </div>
+            </div>
+
+            <div class="problem-item">
+              <div class="item-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </div>
+              <div class="item-text">
+                <h4>Bei Google unsichtbar</h4>
+                <p>Kein Google-Business-Profil, kein Karteneintrag – Ihr Wettbewerb wird gefunden, Sie nicht.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="problem-divider">
+            <div class="problem-divider-line"></div>
+            <div class="problem-divider-arrow">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+
+          <div class="solution-col reveal" data-delay="0.15">
+            <div class="solution-col-header">
+              <div class="col-icon col-icon-solution">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <h2>Das ändern wir.</h2>
+            </div>
+
+            <div class="solution-item">
+              <div class="item-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="item-text">
+                <h4>Professionelle Website</h4>
+                <p>Modern, mobilfreundlich, schnell ladend. In Ihrem Stil, für Ihre Zielgruppe. In 10–14 Tagen.</p>
+              </div>
+            </div>
+
+            <div class="solution-item">
+              <div class="item-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="item-text">
+                <h4>Funktioniert überall</h4>
+                <p>Jede Seite für Desktop, Tablet und Handy optimiert – damit kein Besucher verloren geht.</p>
+              </div>
+            </div>
+
+            <div class="solution-item">
+              <div class="item-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="item-text">
+                <h4>Klare Kontaktwege</h4>
+                <p>Formular, WhatsApp, Terminbuchung – so einfach, dass Kunden direkt anfragen können.</p>
+              </div>
+            </div>
+
+            <div class="solution-item">
+              <div class="item-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="item-text">
+                <h4>Sichtbar bei Google</h4>
+                <p>Google-Business-Profil, SEO-Basics und Karteneintrag – damit Sie lokal gefunden werden.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== S4: DREI SÄULEN ===== -->
+    <section class="pillars-section" aria-labelledby="pillars-heading">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <span class="section-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Unsere drei Säulen
+          </span>
+          <h2 id="pillars-heading">Alles was Sie online brauchen – aus einer Hand</h2>
+          <p class="subheading" style="margin: 1rem auto 0;">Kein Stückwerk, sondern ein stimmiges Gesamtpaket. Website, Social Media und Kontaktwege greifen ineinander.</p>
+        </div>
+
+        <div class="pillars-grid">
+
+          <div class="pillar-card reveal">
+            <div class="pillar-spotlight" aria-hidden="true"></div>
+            <div class="pillar-preview" aria-hidden="true">
+              <div class="mini-laptop">
+                <div class="mini-laptop-screen">
+                  <div class="ml-nav">
+                    <div class="ml-nav-logo"></div>
+                    <div class="ml-nav-links"><span></span><span></span><span></span></div>
+                  </div>
+                  <div class="ml-hero">
+                    <div class="ml-hero-line"></div>
+                    <div class="ml-hero-sub"></div>
+                    <div class="ml-hero-btn"></div>
+                  </div>
+                  <div class="ml-cols"><div class="ml-col"></div><div class="ml-col"></div><div class="ml-col"></div></div>
+                </div>
+                <div class="mini-laptop-base"></div>
+              </div>
+            </div>
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3>Website</h3>
+            <p>Ihr digitales Schaufenster – modern, schnell und für jedes Gerät optimiert.</p>
+            <ul class="pillar-features">
+              <li>Professionelles Design in Ihrem Stil</li>
+              <li>Mobilfreundlich ab dem ersten Pixel</li>
+              <li>Schnelle Ladezeiten, saubere Technik</li>
+              <li>Sie können Texte selbst ändern</li>
+            </ul>
+          </div>
+
+          <div class="pillar-card reveal" data-delay="0.1">
+            <div class="pillar-spotlight" aria-hidden="true"></div>
+            <div class="pillar-preview" aria-hidden="true">
+              <div class="mini-phone">
+                <div class="mini-phone-screen">
+                  <div class="mp-gbiz-header">
+                    <div class="mp-gbiz-name"></div>
+                    <div class="mp-gbiz-stars"><span></span><span></span><span></span><span></span><span></span></div>
+                    <div class="mp-gbiz-rating">4,9</div>
+                  </div>
+                  <div class="mp-gbiz-row"><div class="mp-gbiz-row-icon"></div><div class="mp-gbiz-row-text"></div></div>
+                  <div class="mp-gbiz-row"><div class="mp-gbiz-row-icon"></div><div class="mp-gbiz-row-text"></div></div>
+                  <div class="mp-gbiz-row"><div class="mp-gbiz-row-icon"></div><div class="mp-gbiz-row-text"></div></div>
+                  <div class="mp-gbiz-btns"><div class="mp-gbiz-btn"></div><div class="mp-gbiz-btn"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </div>
+            <h3>Social Media</h3>
+            <p>Profile die professionell aussehen und zu Ihrer Website passen.</p>
+            <ul class="pillar-features">
+              <li>Facebook &amp; Instagram Profil-Setup</li>
+              <li>Einheitliches Erscheinungsbild</li>
+              <li>Bio-Texte und Profilbilder</li>
+              <li>Startvorlagen für erste Beiträge</li>
+            </ul>
+          </div>
+
+          <div class="pillar-card reveal" data-delay="0.2">
+            <div class="pillar-spotlight" aria-hidden="true"></div>
+            <div class="pillar-preview" aria-hidden="true">
+              <div class="mini-phone">
+                <div class="mini-phone-screen">
+                  <div class="mp-chat-header">
+                    <div class="mp-chat-avatar"></div>
+                    <div class="mp-chat-name"></div>
+                  </div>
+                  <div class="mp-chat-bubble mp-chat-bubble-in">Hallo, ich hätte eine Frage zu Ihren Leistungen.</div>
+                  <div class="mp-chat-bubble mp-chat-bubble-out">Gerne! Wie kann ich helfen?</div>
+                  <div class="mp-chat-bubble mp-chat-bubble-in">Können wir einen Termin vereinbaren?</div>
+                  <div class="mp-chat-input">
+                    <div class="mp-chat-field"></div>
+                    <div class="mp-chat-send">
+                      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            </div>
+            <h3>Kontaktwege</h3>
+            <p>Damit Besucher zu Kunden werden – mit einem klaren Weg zur Anfrage.</p>
+            <ul class="pillar-features">
+              <li>Kontaktformular auf der Website</li>
+              <li>WhatsApp-Integration</li>
+              <li>Online-Terminbuchung</li>
+              <li>Google Business Profil</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== S5: SO FUNKTIONIERT'S ===== -->
+    <section class="process-section" aria-labelledby="process-heading">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <span class="section-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            In vier Schritten
+          </span>
+          <h2 id="process-heading">So kommen Sie online</h2>
+          <p class="subheading" style="margin: 1rem auto 0;">Von der ersten Analyse bis zum Go-Live – klar, planbar, in 10–14 Tagen.</p>
+        </div>
+
+        <div class="timeline" id="timeline">
+          <div class="timeline-track" aria-hidden="true"></div>
+          <div class="timeline-beam" id="timelineBeam" aria-hidden="true"></div>
+
+          <div class="timeline-step reveal">
+            <div class="timeline-dot" data-step="1">1</div>
+            <div class="timeline-tag">Tag 1–2</div>
+            <h3>Online-Audit</h3>
+            <p>Wir schauen uns Ihren aktuellen Online-Auftritt an und zeigen Ihnen in einem 1-Pager die fünf wichtigsten Verbesserungen. Konkret, ehrlich, verständlich.</p>
+          </div>
+
+          <div class="timeline-step reveal" data-delay="0.1">
+            <div class="timeline-dot" data-step="2">2</div>
+            <div class="timeline-tag">Tag 3</div>
+            <h3>Paket wählen &amp; Kickoff</h3>
+            <p>Sie entscheiden sich für ein Paket, wir sammeln Zugänge und Inhalte. In einem kurzen Kickoff-Gespräch klären wir alles Wichtige.</p>
+          </div>
+
+          <div class="timeline-step reveal" data-delay="0.2">
+            <div class="timeline-dot" data-step="3">3</div>
+            <div class="timeline-tag">Tag 4–12</div>
+            <h3>Aufbau &amp; Feedback</h3>
+            <p>Wir bauen Ihre Website, richten Profile ein und setzen die Kontaktwege auf. Sie bekommen Zwischenstände und können jederzeit Feedback geben.</p>
+          </div>
+
+          <div class="timeline-step reveal" data-delay="0.3">
+            <div class="timeline-dot" data-step="4">4</div>
+            <div class="timeline-tag">Tag 13–14</div>
+            <h3>Go-Live</h3>
+            <p>Alles steht, alles funktioniert. Wir schalten Ihre Website live und sorgen dafür, dass Sie bei Google gefunden werden. Ab jetzt sind Sie professionell online.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ===== S6: ÜBER UNS ===== -->
+    <section class="about-section" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-grid">
+
+          <div class="about-text reveal">
+            <span class="section-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+              Über uns
+            </span>
+            <h2 id="about-heading">Zwei Webdesigner aus Niederösterreich.<br>Für kleine Betriebe.</h2>
+            <p class="lead">Wir sind Stefan und ein Partner – und wir glauben, dass jedes Unternehmen einen professionellen Online-Auftritt verdient. Egal ob Tischlerei, Friseursalon oder Installateur.</p>
+            <p>Wir sprechen die Sprache kleiner Betriebe, nicht Marketing-Deutsch. Bei uns gibt es keine Monats-Meetings, keine Buzzwords, keine endlosen Abstimmungsrunden. Stattdessen: klare Pakete, faire Preise und ein Ergebnis in 10–14 Tagen.</p>
+            <p>Weil wir selbst ein kleines Team sind, wissen wir, worauf es ankommt: Dass es funktioniert. Dass es gut aussieht. Und dass es sich am Ende in echten Anfragen bemerkbar macht.</p>
+          </div>
+
+          <div class="about-visual reveal" data-delay="0.15">
+
+            <!-- SVG Schreibtisch-Illustration -->
+            <div class="about-illustration" aria-hidden="true">
+              <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <!-- Schreibtisch -->
+                <rect x="40" y="155" width="320" height="8" rx="4" fill="#2a2e25" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                <!-- Tischbeine -->
+                <rect x="60" y="163" width="6" height="50" rx="2" fill="#232720"/>
+                <rect x="334" y="163" width="6" height="50" rx="2" fill="#232720"/>
+                <!-- Laptop links -->
+                <g transform="translate(70,95)">
+                  <!-- Screen -->
+                  <rect x="0" y="0" width="100" height="60" rx="4" fill="#1a1d16" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                  <!-- Screen content -->
+                  <rect x="8" y="8" width="30" height="3" rx="1.5" fill="#4a7c59" opacity="0.6"/>
+                  <rect x="8" y="16" width="84" height="12" rx="2" fill="rgba(74,124,89,0.08)"/>
+                  <rect x="16" y="20" width="40" height="3" rx="1" fill="rgba(255,255,255,0.15)"/>
+                  <rect x="8" y="34" width="26" height="18" rx="2" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+                  <rect x="38" y="34" width="26" height="18" rx="2" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+                  <rect x="68" y="34" width="26" height="18" rx="2" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+                  <!-- Keyboard -->
+                  <path d="M-5,60 L105,60 L100,68 L0,68 Z" fill="#232720" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                  <rect x="10" y="62" width="80" height="3" rx="1" fill="rgba(255,255,255,0.04)"/>
+                </g>
+                <!-- Laptop rechts (Partner) -->
+                <g transform="translate(220,100)">
+                  <rect x="0" y="0" width="90" height="55" rx="4" fill="#1a1d16" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                  <rect x="7" y="7" width="76" height="10" rx="2" fill="rgba(74,124,89,0.08)"/>
+                  <rect x="14" y="10" width="36" height="3" rx="1" fill="rgba(255,255,255,0.12)"/>
+                  <rect x="7" y="22" width="76" height="3" rx="1" fill="rgba(255,255,255,0.05)"/>
+                  <rect x="7" y="28" width="60" height="3" rx="1" fill="rgba(255,255,255,0.05)"/>
+                  <rect x="7" y="34" width="50" height="3" rx="1" fill="rgba(255,255,255,0.05)"/>
+                  <rect x="7" y="42" width="20" height="7" rx="2" fill="#4a7c59" opacity="0.4"/>
+                  <path d="M-5,55 L95,55 L90,62 L0,62 Z" fill="#232720" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                  <rect x="10" y="57" width="70" height="3" rx="1" fill="rgba(255,255,255,0.04)"/>
+                </g>
+                <!-- Kaffeetasse -->
+                <g transform="translate(195,130)">
+                  <rect x="0" y="5" width="18" height="18" rx="4" fill="#2a2e25" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                  <path d="M18,10 C24,10 24,20 18,20" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none"/>
+                  <ellipse cx="9" cy="6" rx="9" ry="2" fill="#232720" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+                  <!-- Dampf -->
+                  <path d="M6,2 Q8,-2 6,-5" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none"/>
+                  <path d="M11,1 Q13,-3 11,-7" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none"/>
+                </g>
+                <!-- Pflanze -->
+                <g transform="translate(335,90)">
+                  <rect x="5" y="40" width="20" height="25" rx="3" fill="#2a2e25" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                  <!-- Stängel und Blätter -->
+                  <line x1="15" y1="40" x2="15" y2="15" stroke="#4a7c59" stroke-width="1.5" opacity="0.5"/>
+                  <ellipse cx="8" cy="20" rx="8" ry="5" fill="#4a7c59" opacity="0.15" transform="rotate(-30,8,20)"/>
+                  <ellipse cx="22" cy="15" rx="8" ry="5" fill="#4a7c59" opacity="0.12" transform="rotate(25,22,15)"/>
+                  <ellipse cx="12" cy="8" rx="7" ry="4.5" fill="#4a7c59" opacity="0.1" transform="rotate(-15,12,8)"/>
+                </g>
+                <!-- Notizblock -->
+                <g transform="translate(45,132)">
+                  <rect x="0" y="0" width="22" height="24" rx="2" fill="#2a2e25" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+                  <line x1="4" y1="6" x2="18" y2="6" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                  <line x1="4" y1="10" x2="16" y2="10" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                  <line x1="4" y1="14" x2="14" y2="14" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                  <line x1="4" y1="18" x2="12" y2="18" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                </g>
+                <!-- Stift -->
+                <g transform="translate(38,140) rotate(-20)">
+                  <rect x="0" y="0" width="3" height="22" rx="1" fill="#4a7c59" opacity="0.3"/>
+                  <polygon points="0,22 1.5,27 3,22" fill="#4a7c59" opacity="0.4"/>
+                </g>
+                <!-- Person 1 (links, stilisiert) -->
+                <g transform="translate(110,55)">
+                  <circle cx="10" cy="8" r="10" fill="#2a2e25" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                  <path d="M0,38 Q0,20 10,18 Q20,20 20,38" fill="#2a2e25" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+                  <!-- Arm zum Laptop -->
+                  <path d="M2,30 L-15,40" stroke="rgba(255,255,255,0.06)" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M18,30 L30,42" stroke="rgba(255,255,255,0.06)" stroke-width="2" stroke-linecap="round"/>
+                </g>
+                <!-- Person 2 (rechts, stilisiert) -->
+                <g transform="translate(255,58)">
+                  <circle cx="10" cy="8" r="10" fill="#2a2e25" stroke="rgba(74,124,89,0.2)" stroke-width="1"/>
+                  <path d="M0,38 Q0,20 10,18 Q20,20 20,38" fill="#2a2e25" stroke="rgba(74,124,89,0.15)" stroke-width="0.5"/>
+                  <path d="M2,30 L-15,38" stroke="rgba(255,255,255,0.06)" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M18,30 L32,40" stroke="rgba(255,255,255,0.06)" stroke-width="2" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </div>
+
+            <div class="about-values">
+            <div class="about-value">
+              <div class="about-value-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+              </div>
+              <h4>Persönlich</h4>
+              <p>Ein Team, ein Ansprechpartner – keine Warteschleifen, kein Hin-und-her.</p>
+            </div>
+
+            <div class="about-value">
+              <div class="about-value-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+              <h4>Transparent</h4>
+              <p>Faire Fixpreise, kein Kleingedrucktes. Sie wissen vorher, was es kostet.</p>
+            </div>
+
+            <div class="about-value">
+              <div class="about-value-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <h4>Schnell</h4>
+              <p>In 10–14 Tagen sind Sie online. Nicht in Monaten.</p>
+            </div>
+
+            <div class="about-value">
+              <div class="about-value-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <h4>Aus Niederösterreich</h4>
+              <p>Wir kennen den lokalen Markt in Wien und NÖ. Persönliches Kennenlernen jederzeit möglich.</p>
+            </div>
+          </div>
+          </div><!-- /about-visual -->
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== S7: 48h AUDIT TEASER ===== -->
+    <section class="audit-section" aria-labelledby="audit-heading">
+      <div class="container">
+        <div class="audit-card reveal">
+          <div class="audit-inner">
+            <div class="audit-text">
+              <div class="audit-eyebrow">Ihr Einstieg</div>
+              <h2 id="audit-heading" style="font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1.5rem;">48-Stunden Online-Audit</h2>
+              <div class="audit-price-big">199&nbsp;€</div>
+              <div class="audit-price-note">netto, einmalig – wird bei Paketbuchung angerechnet</div>
+
+              <div class="audit-benefits">
+                <div class="audit-benefit">
+                  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  1-Pager mit Top-5-Maßnahmen
+                </div>
+                <div class="audit-benefit">
+                  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                  Persönliches Erklär-Video
+                </div>
+                <div class="audit-benefit">
+                  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Ergebnis in 48 Stunden
+                </div>
+              </div>
+
+              <a href="/audit-buchen.html" class="btn btn--primary btn-glow">Jetzt Audit buchen</a>
+              <div class="audit-note-small">Kein Abo, keine Verpflichtung. Die 199 € werden bei einer Paketbuchung vollständig angerechnet.</div>
+            </div>
+
+            <!-- 1-Pager Mockup -->
+            <div class="audit-mockup-wrap" aria-hidden="true">
+              <div class="onepager-mockup">
+                <div class="op-header">
+                  <div class="op-logo">Standfest <span>Digital</span></div>
+                  <div class="op-badge">48h Audit</div>
+                </div>
+                <div class="op-company">Tischlerei Huber GmbH</div>
+                <div class="op-meta">Wien · März 2026</div>
+                <div class="op-title">Top 5 Maßnahmen</div>
+                <div class="op-item">
+                  <div class="op-dot op-dot-p1"></div>
+                  <div class="op-item-text">
+                    <div class="op-item-title">Kein Kontaktformular</div>
+                    <div class="op-item-desc"></div>
+                  </div>
+                </div>
+                <div class="op-item">
+                  <div class="op-dot op-dot-p1"></div>
+                  <div class="op-item-text">
+                    <div class="op-item-title">Website nicht mobilfreundlich</div>
+                    <div class="op-item-desc"></div>
+                  </div>
+                </div>
+                <div class="op-item">
+                  <div class="op-dot op-dot-p2"></div>
+                  <div class="op-item-text">
+                    <div class="op-item-title">Google Business fehlt</div>
+                    <div class="op-item-desc"></div>
+                  </div>
+                </div>
+                <div class="op-item">
+                  <div class="op-dot op-dot-p2"></div>
+                  <div class="op-item-text">
+                    <div class="op-item-title">Kein klarer CTA</div>
+                    <div class="op-item-desc"></div>
+                  </div>
+                </div>
+                <div class="op-item">
+                  <div class="op-dot op-dot-p3"></div>
+                  <div class="op-item-text">
+                    <div class="op-item-title">Social Media inaktiv</div>
+                    <div class="op-item-desc"></div>
+                  </div>
+                </div>
+                <div class="op-cta-block">
+                  <div class="op-cta-text">Nächster Schritt</div>
+                  <div class="op-cta-btn">Termin vereinbaren</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== S8: FAQ ===== -->
+    <section class="faq-section" aria-labelledby="faq-heading">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <span class="section-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Häufige Fragen
+          </span>
+          <h2 id="faq-heading">Das werden wir oft gefragt</h2>
+        </div>
+
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question">Was kostet eine Website bei Standfest Digital?</button>
+            <div class="faq-answer">
+              <p>Unser Starter-Paket beginnt bei 1.490 € Setup plus 590 € monatlich. Darin enthalten sind Website, Social-Media-Setup und Kontaktwege – alles aufeinander abgestimmt. Transparente Preise, keine versteckten Kosten. Alle Pakete finden Sie auf unserer <a href="/pakete.html">Pakete-Seite</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">Wie läuft der Prozess ab?</button>
+            <div class="faq-answer">
+              <p>Nach dem Audit und der Paketauswahl starten wir mit einem kurzen Kickoff. In den nächsten 10–12 Tagen bauen wir alles auf – Sie bekommen Zwischenstände und können Feedback geben. Am Ende schalten wir alles live. Insgesamt dauert es 10–14 Tage vom Start bis zum fertigen Online-Auftritt.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">Brauche ich vorher Texte und Bilder?</button>
+            <div class="faq-answer">
+              <p>Wenn Sie Texte und Fotos haben – wunderbar, wir arbeiten damit. Falls nicht, helfen wir Ihnen dabei, die wichtigsten Inhalte zusammenzustellen. Profi-Fotografie und professionelles Copywriting sind nicht im Paket enthalten, aber wir empfehlen Ihnen gerne Partner dafür.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">Was ist im 48h-Audit enthalten?</button>
+            <div class="faq-answer">
+              <p>Der Audit kostet 199 € und liefert in 48 Stunden: einen 1-Pager mit den fünf wichtigsten Maßnahmen für Ihre Online-Präsenz, priorisiert nach Dringlichkeit, plus ein persönliches Erklär-Video. Die 199 € werden bei einer Paketbuchung vollständig angerechnet.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">Kann ich die Website danach selbst bearbeiten?</button>
+            <div class="faq-answer">
+              <p>Ja. Wir bauen Ihre Website so, dass Sie einfache Änderungen wie Texte oder Bilder selbst vornehmen können. Für größere Anpassungen oder neue Seiten sind wir als Ansprechpartner da – je nach Paket im monatlichen Support enthalten.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">Für welche Branchen arbeitet ihr?</button>
+            <div class="faq-answer">
+              <p>Wir arbeiten mit kleinen Unternehmen aller Branchen in Wien und Niederösterreich. Besonders oft mit Handwerksbetrieben, Gastronomiebetrieben, lokalen Dienstleistern und Gesundheitsberufen. Entscheidend ist nicht die Branche, sondern dass Sie professionell online auftreten möchten.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== S9: FINALER CTA ===== -->
+    <section class="final-cta" aria-labelledby="cta-heading">
+      <div class="final-cta-dots" aria-hidden="true"></div>
+      <div class="final-cta-glow" aria-hidden="true"></div>
+      <div class="container">
+        <h2 id="cta-heading" class="reveal">Bereit für Ihren professionellen Online-Auftritt?</h2>
+        <p class="reveal" data-delay="0.1">In 10–14 Tagen steht alles: Website, Social Media und ein klarer Weg für Anfragen. Starten Sie mit dem 48h-Audit oder sprechen Sie direkt mit uns.</p>
+        <div class="btn-group reveal" data-delay="0.2">
+          <a href="/audit-buchen.html" class="btn btn--primary btn-glow">48h-Audit buchen – 199&nbsp;€</a>
+          <a href="/kontakt.html" class="btn btn--secondary">Kontakt aufnehmen</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
+          <p>Webdesign, Social-Media-Setup &amp; Kontaktwege für KMU in Wien und Niederösterreich.</p>
+        </div>
+        <div>
+          <h4>Seiten</h4>
+          <ul class="footer-links">
+            <li><a href="/leistungen.html">Leistungen</a></li>
+            <li><a href="/pakete.html">Pakete &amp; Preise</a></li>
+            <li><a href="/audit-buchen.html">48h Audit</a></li>
+            <li><a href="/kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Rechtliches</h4>
+          <ul class="footer-links">
+            <li><a href="/impressum.html">Impressum</a></li>
+            <li><a href="/datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kontakt</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></li>
+            <li><a href="tel:+436601234567">+43 660 1234567</a></li>
+            <li>Wien &amp; Niederösterreich</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
+        <div>
+          <a href="/impressum.html" style="margin-right:1.5rem;">Impressum</a>
+          <a href="/datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js" defer></script>
+
+  <!-- Seitenspezifisches JS -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    /* ---- Animated Counters ---- */
+    const counters = document.querySelectorAll('[data-count]');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const duration = 1600;
+        const start = performance.now();
+        const update = (now) => {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          /* easeOutCubic */
+          const ease = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(target * ease);
+          if (progress < 1) requestAnimationFrame(update);
+        };
+        requestAnimationFrame(update);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterObserver.observe(c));
+
+
+    /* ---- Card Spotlight (Maus-Follow) ---- */
+    document.querySelectorAll('.pillar-card').forEach(card => {
+      const spotlight = card.querySelector('.pillar-spotlight');
+      if (!spotlight) return;
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        spotlight.style.background =
+          'radial-gradient(600px circle at ' + x + 'px ' + y + 'px, rgba(74,124,89,0.08), transparent 40%)';
+      });
+    });
+
+
+    /* ---- Timeline Scroll Beam ---- */
+    const timeline = document.getElementById('timeline');
+    const beam = document.getElementById('timelineBeam');
+    const dots = document.querySelectorAll('.timeline-dot');
+
+    if (timeline && beam) {
+      const updateBeam = () => {
+        const rect = timeline.getBoundingClientRect();
+        const trigger = window.innerHeight * 0.65;
+        const progress = (trigger - rect.top) / rect.height;
+        const clamped = Math.max(0, Math.min(1, progress));
+        beam.style.height = (clamped * 100) + '%';
+
+        dots.forEach(dot => {
+          const dotRect = dot.getBoundingClientRect();
+          if (dotRect.top < trigger) {
+            dot.classList.add('reached');
+          }
+        });
+      };
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => { updateBeam(); ticking = false; });
+          ticking = true;
+        }
+      }, { passive: true });
+      updateBeam();
+    }
+
+  });
+  </script>
+
+</body>
+</html>

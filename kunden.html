@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kundenkonto – Standfest Digital</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* =============================================
+       KUNDEN-DASHBOARD — Layout & Components
+       ============================================= */
+
+    /* --- Nav (gleich wie index.html) --- */
+    .nav-inner {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      height: 72px;
+      gap: 24px;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .nav-menu-btn {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 8px 16px; color: var(--text);
+      font-family: var(--font); font-size: 0.9rem; font-weight: 500;
+      cursor: pointer; transition: all 0.3s;
+    }
+    .nav-menu-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
+    .nav-menu-btn .hamburger-icon { display: flex; flex-direction: column; gap: 4px; }
+    .nav-menu-btn .hamburger-icon span { display: block; width: 18px; height: 2px; background: var(--text); }
+    .nav-logo-center { text-align: center; font-size: 1.15rem; font-weight: 600; color: var(--text); white-space: nowrap; }
+    .nav-logo-center span { color: var(--accent); font-weight: 400; }
+    .nav-links {
+      display: flex; align-items: center; gap: 28px;
+      list-style: none; justify-content: flex-end; flex-shrink: 0;
+    }
+    .nav-links a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: color 0.3s; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-cta {
+      background: var(--accent); color: var(--bg) !important;
+      padding: 10px 20px; border-radius: 8px;
+      font-weight: 600; font-size: 0.85rem; transition: background 0.3s;
+    }
+    .nav-cta:hover { background: var(--accent-hover); }
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer; padding: 8px;
+    }
+    .nav-toggle span { display: block; width: 26px; height: 2px; background: var(--text); margin: 6px 0; transition: 0.3s; }
+
+    @media (max-width: 968px) {
+      .nav-inner { grid-template-columns: 1fr auto; padding: 0 24px; }
+      .nav-menu-btn { display: none; }
+      .nav-logo-center { text-align: left; font-size: 1.3rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+      .nav-toggle { display: block; justify-self: end; }
+      .nav-links {
+        display: none; position: absolute; top: 72px; left: 0; right: 0;
+        background: var(--nav-bg-solid, rgba(235, 232, 225, 0.98)); backdrop-filter: blur(20px);
+        flex-direction: column; padding: 24px; gap: 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.open { display: flex; }
+    }
+
+    /* --- Dashboard Layout --- */
+    .dashboard {
+      padding-top: 72px;
+      min-height: 100vh;
+    }
+
+    .dashboard-header {
+      padding: 48px 0 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dashboard-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .dashboard-welcome h1 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      margin-bottom: 6px;
+    }
+
+    .dashboard-welcome p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    .dashboard-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-sm {
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      border-radius: 8px;
+    }
+
+    /* --- Dashboard Grid --- */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      padding: 40px 0;
+    }
+
+    .dashboard-grid .span-2 {
+      grid-column: span 2;
+    }
+
+    .dashboard-grid .span-3 {
+      grid-column: span 3;
+    }
+
+    /* --- Dashboard Cards --- */
+    .dash-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.3s;
+    }
+
+    .dash-card:hover {
+      border-color: rgba(74, 124, 89, 0.25);
+    }
+
+    .dash-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .dash-card-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+    }
+
+    .dash-card-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-active {
+      background: rgba(74, 124, 89, 0.15);
+      color: var(--accent-hover);
+    }
+
+    .badge-pending {
+      background: rgba(200, 170, 60, 0.15);
+      color: #c8aa3c;
+    }
+
+    .badge-done {
+      background: rgba(74, 124, 89, 0.15);
+      color: var(--accent-hover);
+    }
+
+    .badge-open {
+      background: rgba(200, 100, 60, 0.15);
+      color: #c8783c;
+    }
+
+    /* --- Status Overview --- */
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .status-item {
+      text-align: center;
+      padding: 20px 12px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .status-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .status-icon.green { background: rgba(74, 124, 89, 0.15); }
+    .status-icon.blue { background: rgba(60, 130, 200, 0.15); }
+    .status-icon.orange { background: rgba(200, 150, 60, 0.15); }
+    .status-icon.purple { background: rgba(140, 100, 200, 0.15); }
+
+    .status-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .status-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* --- Project Progress --- */
+    .project-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .project-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .project-package {
+      font-size: 0.8rem;
+      color: var(--accent);
+      background: rgba(74, 124, 89, 0.12);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .progress-bar-wrapper {
+      margin-bottom: 16px;
+    }
+
+    .progress-bar-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+    }
+
+    .progress-bar-header span:first-child { color: var(--text-muted); }
+    .progress-bar-header span:last-child { color: var(--accent); font-weight: 600; }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+      border-radius: 4px;
+      transition: width 1s ease;
+    }
+
+    .progress-steps {
+      display: flex;
+      gap: 0;
+      margin-top: 20px;
+    }
+
+    .p-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      padding-top: 28px;
+    }
+
+    .p-step::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .p-step:first-child::before { left: 50%; }
+    .p-step:last-child::before { right: 50%; }
+
+    .p-step::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.15);
+      background: var(--bg-card);
+      z-index: 1;
+    }
+
+    .p-step.done::before { background: var(--accent); }
+    .p-step.done::after { background: var(--accent); border-color: var(--accent); }
+    .p-step.active::after { border-color: var(--accent); background: var(--bg-card); box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.25); }
+
+    .p-step-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+    }
+
+    .p-step.done .p-step-label { color: var(--accent); }
+    .p-step.active .p-step-label { color: var(--text); font-weight: 600; }
+
+    /* --- Timeline / Activity --- */
+    .timeline { list-style: none; }
+
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .timeline-item:last-child { border-bottom: none; }
+
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .timeline-dot.muted { background: var(--text-muted); opacity: 0.4; }
+
+    .timeline-content p {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .timeline-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* --- Documents Table --- */
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .doc-table th {
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-table td {
+      padding: 14px 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .doc-table tr:last-child td { border-bottom: none; }
+
+    .doc-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .doc-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .doc-icon.pdf { background: rgba(200, 80, 80, 0.15); color: #c85050; }
+    .doc-icon.img { background: rgba(80, 140, 200, 0.15); color: #508cc8; }
+    .doc-icon.vid { background: rgba(160, 80, 200, 0.15); color: #a050c8; }
+    .doc-icon.doc { background: rgba(74, 124, 89, 0.15); color: var(--accent-hover); }
+
+    .doc-download {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .doc-download:hover { color: var(--accent-hover); }
+
+    /* --- Invoices --- */
+    .invoice-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      gap: 12px;
+    }
+
+    .invoice-row:last-child { border-bottom: none; }
+
+    .invoice-info {
+      flex: 1;
+    }
+
+    .invoice-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .invoice-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .invoice-amount {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    /* --- Quick Actions --- */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .quick-action {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .quick-action:hover {
+      background: rgba(74, 124, 89, 0.08);
+      border-color: rgba(74, 124, 89, 0.2);
+    }
+
+    .quick-action-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: rgba(74, 124, 89, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .quick-action-text {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .quick-action-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* --- Notifications Banner --- */
+    .notification-banner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: rgba(74, 124, 89, 0.1);
+      border: 1px solid rgba(74, 124, 89, 0.2);
+      border-radius: 10px;
+      margin-bottom: 24px;
+    }
+
+    .notification-banner-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .notification-banner p {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin: 0;
+      flex: 1;
+    }
+
+    .notification-banner p strong { color: var(--text); }
+
+    .notification-dismiss {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: color 0.3s;
+    }
+
+    .notification-dismiss:hover { color: var(--text); }
+
+    /* --- Support Card --- */
+    .support-card {
+      background: linear-gradient(135deg, rgba(74, 124, 89, 0.12), rgba(74, 124, 89, 0.04));
+      border-color: rgba(74, 124, 89, 0.2);
+      text-align: center;
+      padding: 32px 24px;
+    }
+
+    .support-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .support-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .support-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .support-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .support-link:hover {
+      background: rgba(74, 124, 89, 0.15);
+      color: var(--accent-hover);
+    }
+
+    /* --- User Avatar --- */
+    .user-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .welcome-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* --- Logout Button --- */
+    .btn-logout {
+      background: rgba(255,255,255,0.06);
+      color: var(--text-muted);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-logout:hover {
+      background: rgba(200, 80, 80, 0.12);
+      border-color: rgba(200, 80, 80, 0.25);
+      color: #c85050;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 968px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      .dashboard-grid .span-2,
+      .dashboard-grid .span-3 {
+        grid-column: span 1;
+      }
+      .status-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
+      .dashboard-header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .progress-steps {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .p-step {
+        min-width: 80px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .status-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .doc-table th:nth-child(3),
+      .doc-table td:nth-child(3) {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAV ========== -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner" style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;">
+      <button class="nav-menu-btn" aria-label="Menü" style="display:flex;align-items:center;gap:8px;background:rgba(0,0,0,0.04);border:1px solid var(--nav-border-strong);border-radius:8px;padding:8px 16px;color:var(--nav-text);font-family:var(--font);font-size:0.9rem;font-weight:500;cursor:pointer;">
+        <div class="hamburger-icon" style="display:flex;flex-direction:column;gap:4px;"><span style="display:block;width:18px;height:2px;background:var(--nav-text-hover);"></span><span style="display:block;width:18px;height:2px;background:var(--nav-text-hover);"></span><span style="display:block;width:18px;height:2px;background:var(--nav-text-hover);"></span></div>
+        Menü
+      </button>
+      <a href="/" class="nav-logo" style="text-align:center;">Standfest <span>Digital</span></a>
+      <ul class="nav-links" id="navLinks" style="justify-content:flex-end;flex-shrink:0;">
+        <li><a href="/">Start</a></li>
+        <li><a href="/leistungen.html">Leistungen</a></li>
+        <li><a href="/kontakt.html">Kontakt</a></li>
+        <li><a href="/kunden.html" class="active">Mein Konto</a></li>
+        <li><button class="btn-logout" id="logoutBtn">Abmelden</button></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menü" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== DASHBOARD ========== -->
+  <main class="dashboard">
+
+    <!-- Header -->
+    <div class="dashboard-header">
+      <div class="container">
+        <div class="dashboard-header-inner">
+          <div class="welcome-row">
+            <div class="user-avatar" id="userInitials">MF</div>
+            <div class="dashboard-welcome">
+              <h1>Willkommen, <span id="userName">Max</span></h1>
+              <p>Hier sehen Sie den aktuellen Stand Ihres Projekts auf einen Blick.</p>
+            </div>
+          </div>
+          <div class="dashboard-actions">
+            <a href="/kontakt.html" class="btn btn-primary btn-sm">Nachricht senden</a>
+            <a href="tel:+436601234567" class="btn btn-secondary btn-sm">Anrufen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Notification -->
+      <div style="padding-top: 32px;">
+        <div class="notification-banner" id="notifBanner">
+          <div class="notification-banner-icon">!</div>
+          <p><strong>Inhalte benötigt:</strong> Bitte senden Sie uns Ihr Logo und 3–5 Fotos, damit wir mit dem Website-Aufbau fortfahren können.</p>
+          <button class="notification-dismiss" onclick="document.getElementById('notifBanner').style.display='none'">×</button>
+        </div>
+      </div>
+
+      <!-- Status Overview Cards -->
+      <div class="dashboard-grid">
+
+        <!-- Projekt-Überblick (span 2) -->
+        <div class="dash-card span-2">
+          <div class="dash-card-header">
+            <span class="dash-card-title">Ihr Projekt</span>
+            <span class="dash-card-badge badge-active">In Arbeit</span>
+          </div>
+          <div class="project-info">
+            <span class="project-name">Website Neugestaltung</span>
+            <span class="project-package">Growth-Paket</span>
+          </div>
+          <div class="progress-bar-wrapper">
+            <div class="progress-bar-header">
+              <span>Fortschritt</span>
+              <span>60 %</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar-fill" style="width: 60%;"></div>
+            </div>
+          </div>
+          <div class="progress-steps">
+            <div class="p-step done"><span class="p-step-label">Analyse</span></div>
+            <div class="p-step done"><span class="p-step-label">Konzept</span></div>
+            <div class="p-step done"><span class="p-step-label">Design</span></div>
+            <div class="p-step active"><span class="p-step-label">Umsetzung</span></div>
+            <div class="p-step"><span class="p-step-label">Feedback</span></div>
+            <div class="p-step"><span class="p-step-label">Go-Live</span></div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <span class="dash-card-title">Schnellzugriff</span>
+          </div>
+          <div class="quick-actions">
+            <a href="/kontakt.html" class="quick-action">
+              <div class="quick-action-icon">✉</div>
+              <div>
+                <div class="quick-action-text">Nachricht</div>
+                <div class="quick-action-desc">Frage stellen</div>
+              </div>
+            </a>
+            <a href="#dokumente" class="quick-action">
+              <div class="quick-action-icon">📄</div>
+              <div>
+                <div class="quick-action-text">Dokumente</div>
+                <div class="quick-action-desc">Dateien ansehen</div>
+              </div>
+            </a>
+            <a href="#rechnungen" class="quick-action">
+              <div class="quick-action-icon">💰</div>
+              <div>
+                <div class="quick-action-text">Rechnungen</div>
+                <div class="quick-action-desc">Zahlungen prüfen</div>
+              </div>
+            </a>
+            <a href="/pakete.html" class="quick-action">
+              <div class="quick-action-icon">📦</div>
+              <div>
+                <div class="quick-action-text">Paket-Upgrade</div>
+                <div class="quick-action-desc">Optionen ansehen</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Status-Kennzahlen (span 3) -->
+        <div class="dash-card span-3">
+          <div class="dash-card-header">
+            <span class="dash-card-title">Übersicht</span>
+          </div>
+          <div class="status-grid">
+            <div class="status-item">
+              <div class="status-icon green">🌐</div>
+              <div class="status-value">5/7</div>
+              <div class="status-label">Seiten fertig</div>
+            </div>
+            <div class="status-item">
+              <div class="status-icon blue">✉</div>
+              <div class="status-value">2</div>
+              <div class="status-label">Offene Nachrichten</div>
+            </div>
+            <div class="status-item">
+              <div class="status-icon orange">📋</div>
+              <div class="status-value">3</div>
+              <div class="status-label">Offene Aufgaben</div>
+            </div>
+            <div class="status-item">
+              <div class="status-icon purple">📅</div>
+              <div class="status-value">28. Mär</div>
+              <div class="status-label">Geplanter Go-Live</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aktivitäten / Timeline -->
+        <div class="dash-card span-2" id="aktivitaeten">
+          <div class="dash-card-header">
+            <span class="dash-card-title">Letzte Aktivitäten</span>
+          </div>
+          <ul class="timeline">
+            <li class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <p>Design-Entwurf der Startseite wurde hochgeladen</p>
+                <div class="timeline-date">Heute, 14:30</div>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <p>Feedback zu den Service-Texten eingearbeitet</p>
+                <div class="timeline-date">Gestern, 10:15</div>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="timeline-dot muted"></div>
+              <div class="timeline-content">
+                <p>Konzeptfreigabe erteilt – Umsetzung gestartet</p>
+                <div class="timeline-date">12. März 2026</div>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="timeline-dot muted"></div>
+              <div class="timeline-content">
+                <p>Erstgespräch & Analyse abgeschlossen</p>
+                <div class="timeline-date">8. März 2026</div>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="timeline-dot muted"></div>
+              <div class="timeline-content">
+                <p>48h Online-Audit abgeschlossen & 1-Pager zugestellt</p>
+                <div class="timeline-date">5. März 2026</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Support / Kontakt -->
+        <div class="dash-card support-card">
+          <h3>Hilfe & Support</h3>
+          <p>Fragen zu Ihrem Projekt? Wir sind für Sie da.</p>
+          <div class="support-links">
+            <a href="mailto:office@standfestdigital.at" class="support-link">
+              ✉ &nbsp;office@standfestdigital.at
+            </a>
+            <a href="tel:+436601234567" class="support-link">
+              📞 &nbsp;+43 660 1234567
+            </a>
+            <a href="https://wa.me/436601234567" class="support-link" target="_blank" rel="noopener">
+              💬 &nbsp;WhatsApp schreiben
+            </a>
+          </div>
+        </div>
+
+        <!-- Dokumente (span 2) -->
+        <div class="dash-card span-2" id="dokumente">
+          <div class="dash-card-header">
+            <span class="dash-card-title">Dokumente & Dateien</span>
+          </div>
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Datei</th>
+                <th>Datum</th>
+                <th>Größe</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="doc-name">
+                    <span class="doc-icon pdf">PDF</span>
+                    Online-Audit — Ergebnisbericht
+                  </div>
+                </td>
+                <td>05.03.2026</td>
+                <td>1,2 MB</td>
+                <td><a href="#" class="doc-download">↓ Download</a></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="doc-name">
+                    <span class="doc-icon vid">VID</span>
+                    Audit — Erklär-Video
+                  </div>
+                </td>
+                <td>05.03.2026</td>
+                <td>24 MB</td>
+                <td><a href="#" class="doc-download">↓ Download</a></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="doc-name">
+                    <span class="doc-icon doc">DOC</span>
+                    Konzept & Seitenstruktur
+                  </div>
+                </td>
+                <td>10.03.2026</td>
+                <td>340 KB</td>
+                <td><a href="#" class="doc-download">↓ Download</a></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="doc-name">
+                    <span class="doc-icon img">IMG</span>
+                    Design-Entwurf Startseite
+                  </div>
+                </td>
+                <td>16.03.2026</td>
+                <td>2,8 MB</td>
+                <td><a href="#" class="doc-download">↓ Download</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Rechnungen -->
+        <div class="dash-card" id="rechnungen">
+          <div class="dash-card-header">
+            <span class="dash-card-title">Rechnungen</span>
+          </div>
+          <div class="invoice-row">
+            <div class="invoice-info">
+              <div class="invoice-title">48h Online-Audit</div>
+              <div class="invoice-meta">RE-2026-001 · 05.03.2026</div>
+            </div>
+            <span class="dash-card-badge badge-done">Bezahlt</span>
+            <div class="invoice-amount">199 €</div>
+          </div>
+          <div class="invoice-row">
+            <div class="invoice-info">
+              <div class="invoice-title">Growth-Paket (Anzahlung)</div>
+              <div class="invoice-meta">RE-2026-002 · 10.03.2026</div>
+            </div>
+            <span class="dash-card-badge badge-done">Bezahlt</span>
+            <div class="invoice-amount">495 €</div>
+          </div>
+          <div class="invoice-row">
+            <div class="invoice-info">
+              <div class="invoice-title">Growth-Paket (Restbetrag)</div>
+              <div class="invoice-meta">RE-2026-003 · fällig bei Go-Live</div>
+            </div>
+            <span class="dash-card-badge badge-open">Offen</span>
+            <div class="invoice-amount">495 €</div>
+          </div>
+          <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between;">
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Gesamt (netto)</span>
+            <span style="font-size: 1.05rem; font-weight: 700; color: var(--text);">1.189 €</span>
+          </div>
+        </div>
+
+      </div><!-- /dashboard-grid -->
+    </div><!-- /container -->
+
+    <!-- Footer mini -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
+            <p>Webdesign, Social-Media-Setup &amp; Kontaktwege für KMU in Wien und Niederösterreich.</p>
+          </div>
+          <div>
+            <h4>Seiten</h4>
+            <ul class="footer-links">
+              <li><a href="/leistungen.html">Leistungen</a></li>
+              <li><a href="/pakete.html">Pakete &amp; Preise</a></li>
+              <li><a href="/audit-buchen.html">48h Audit</a></li>
+              <li><a href="/kontakt.html">Kontakt</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Rechtliches</h4>
+            <ul class="footer-links">
+              <li><a href="/impressum.html">Impressum</a></li>
+              <li><a href="/datenschutz.html">Datenschutz</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Kontakt</h4>
+            <ul class="footer-links">
+              <li><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></li>
+              <li><a href="tel:+436601234567">+43 660 1234567</a></li>
+              <li>Wien &amp; Niederösterreich</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
+          <div>
+            <a href="/impressum.html" style="margin-right:1.5rem;">Impressum</a>
+            <a href="/datenschutz.html">Datenschutz</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="/js/main.js" defer></script>
+  <script>
+    // Notification dismiss
+    document.querySelectorAll('.notification-dismiss').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.notification-banner').style.display = 'none';
+      });
+    });
+
+    // Animate progress bar on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const fills = document.querySelectorAll('.progress-bar-fill');
+      fills.forEach(fill => {
+        const width = fill.style.width;
+        fill.style.width = '0%';
+        setTimeout(() => { fill.style.width = width; }, 300);
+      });
+
+      // Mobile nav: hide menu button on small screens
+      const menuBtn = document.querySelector('.nav-menu-btn');
+      if (menuBtn && window.innerWidth <= 968) {
+        menuBtn.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
