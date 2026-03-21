@@ -206,9 +206,10 @@ section {
   transform: translateY(-1px);
 }
 
-/* Login Button */
+/* Login Button – hidden until Kundenportal is live */
 .nav-login {
-  display: flex;
+  display: none;
+  /* display: flex; — re-enable when Kundenportal goes live */
   align-items: center;
   gap: 6px;
   background: none;
