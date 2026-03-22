@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- 5. Contact Form ---
-  const form = document.getElementById('contact-form');
+  const form = document.getElementById('contact-form') || document.getElementById('contactForm');
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();

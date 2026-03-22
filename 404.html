@@ -3,29 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Seite nicht gefunden – Standfest Digital</title>
+  <title>Seite nicht gefunden | Standfest Digital</title>
   <meta name="robots" content="noindex">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
   <style>
     .error-page {
-      min-height: 100vh;
+      min-height: calc(100vh - 280px);
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 2rem;
+      padding: 120px 2rem 4rem;
     }
-    .error-content { max-width: 480px; }
+    .error-content { max-width: 520px; }
     .error-code {
       font-size: clamp(5rem, 15vw, 8rem);
       font-weight: 700;
       line-height: 1;
       color: var(--accent);
-      opacity: 0.3;
+      opacity: 0.25;
       margin-bottom: 0.5rem;
     }
     .error-content h1 {
@@ -37,44 +36,44 @@
     .error-content p {
       color: var(--text-muted);
       font-size: 1rem;
-      line-height: 1.6;
+      line-height: 1.7;
       margin-bottom: 2rem;
     }
     .error-links {
       display: flex;
-      gap: 1rem;
+      gap: 0.75rem;
       justify-content: center;
       flex-wrap: wrap;
+      margin-bottom: 2.5rem;
     }
-    .error-links a {
-      padding: 0.75rem 1.5rem;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 0.9375rem;
-      text-decoration: none;
-      transition: all 0.2s;
+    .error-suggestions {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
     }
-    .error-links .btn-primary {
-      background: var(--accent);
-      color: var(--text-on-accent);
+    .error-suggestions p {
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
     }
-    .error-links .btn-primary:hover {
-      background: var(--accent-hover);
-      transform: translateY(-2px);
-    }
-    .error-links .btn-outline {
-      border: 1px solid var(--border-strong);
-      color: var(--text-muted);
-    }
-    .error-links .btn-outline:hover {
-      border-color: var(--accent);
+    .error-suggestions a {
       color: var(--accent);
+      font-weight: 500;
+    }
+    .error-suggestions a:hover {
+      color: var(--accent-hover);
+    }
+    @media (max-width: 600px) {
+      .error-links { flex-direction: column; }
+      .error-links a { width: 100%; text-align: center; }
     }
   </style>
 </head>
 <body>
 
+<<<<<<< Updated upstream
   <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
+=======
+  <!-- Navigation -->
+>>>>>>> Stashed changes
   <nav class="nav" id="navbar">
     <div class="nav-inner">
       <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
@@ -93,15 +92,64 @@
   <main class="error-page">
     <div class="error-content">
       <div class="error-code">404</div>
-      <h1>Seite nicht gefunden</h1>
-      <p>Die angeforderte Seite existiert nicht oder wurde verschoben. Kein Problem – hier geht's weiter.</p>
+      <h1>Diese Seite gibt es nicht</h1>
+      <p>Die angeforderte Seite existiert leider nicht oder wurde verschoben. Kein Problem – vielleicht finden Sie hier, was Sie suchen:</p>
       <div class="error-links">
-        <a href="/" class="btn-primary">Zur Startseite</a>
-        <a href="/kontakt.html" class="btn-outline">Kontakt aufnehmen</a>
+        <a href="/" class="btn btn-primary">Zur Startseite</a>
+        <a href="/leistungen.html" class="btn btn-secondary">Leistungen ansehen</a>
+        <a href="/kontakt.html" class="btn btn-secondary">Kontakt aufnehmen</a>
+      </div>
+      <div class="error-suggestions">
+        <p>Oder direkt zu: <a href="/pakete.html">Pakete &amp; Preise</a> · <a href="/audit-buchen.html">48h-Audit buchen</a></p>
       </div>
     </div>
   </main>
 
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
+          <p>Webdesign, Social-Media-Setup &amp; Kontaktwege für KMU in Wien und Niederösterreich.</p>
+        </div>
+        <div>
+          <h4>Seiten</h4>
+          <ul class="footer-links">
+            <li><a href="/leistungen.html">Leistungen</a></li>
+            <li><a href="/pakete.html">Pakete &amp; Preise</a></li>
+            <li><a href="/audit-buchen.html">48h Audit</a></li>
+            <li><a href="/kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Rechtliches</h4>
+          <ul class="footer-links">
+            <li><a href="/impressum.html">Impressum</a></li>
+            <li><a href="/datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kontakt</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></li>
+            <li><a href="tel:+436601234567">+43 660 1234567</a></li>
+            <li>Wien &amp; Niederösterreich</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
+        <div>
+          <a href="/impressum.html">Impressum</a>
+          <a href="/datenschutz.html">Datenschutz</a>
+          <a href="#" data-cookie-settings>Cookie-Einstellungen</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/cookie-banner.js" defer></script>
   <script src="/js/main.js" defer></script>
 </body>
 </html>

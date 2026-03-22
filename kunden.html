@@ -13,10 +13,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kundenkonto – Standfest Digital</title>
   <meta name="robots" content="noindex, nofollow">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <!-- Schema.org Breadcrumb -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://standfestdigital.at/"},{"@type":"ListItem","position":2,"name":"Kundenkonto","item":"https://standfestdigital.at/kunden.html"}]}
+  </script>
+
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
   <style>
     /* =============================================
@@ -701,13 +705,13 @@
 
   <!-- ========== NAV ========== -->
   <nav class="nav" id="navbar">
-    <div class="nav-inner" style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;">
-      <button class="nav-menu-btn" aria-label="Menü" style="display:flex;align-items:center;gap:8px;background:rgba(0,0,0,0.04);border:1px solid var(--nav-border-strong);border-radius:8px;padding:8px 16px;color:var(--nav-text);font-family:var(--font);font-size:0.9rem;font-weight:500;cursor:pointer;">
-        <div class="hamburger-icon" style="display:flex;flex-direction:column;gap:4px;"><span style="display:block;width:18px;height:2px;background:var(--nav-text-hover);"></span><span style="display:block;width:18px;height:2px;background:var(--nav-text-hover);"></span><span style="display:block;width:18px;height:2px;background:var(--nav-text-hover);"></span></div>
+    <div class="nav-inner">
+      <button class="nav-menu-btn" aria-label="Menü">
+        <div class="hamburger-icon"><span></span><span></span><span></span></div>
         Menü
       </button>
-      <a href="/" class="nav-logo" style="text-align:center;">Standfest <span>Digital</span></a>
-      <ul class="nav-links" id="navLinks" style="justify-content:flex-end;flex-shrink:0;">
+      <a href="/" class="nav-logo nav-logo-center">Standfest <span>Digital</span></a>
+      <ul class="nav-links" id="navLinks">
         <li><a href="/">Start</a></li>
         <li><a href="/leistungen.html">Leistungen</a></li>
         <li><a href="/kontakt.html">Kontakt</a></li>
@@ -936,7 +940,7 @@
                 </td>
                 <td>05.03.2026</td>
                 <td>1,2 MB</td>
-                <td><a href="#" class="doc-download">↓ Download</a></td>
+                <td><span class="doc-download doc-download--pending" title="Download wird nach Freigabe verfügbar">↓ Ausstehend</span></td>
               </tr>
               <tr>
                 <td>
@@ -947,7 +951,7 @@
                 </td>
                 <td>05.03.2026</td>
                 <td>24 MB</td>
-                <td><a href="#" class="doc-download">↓ Download</a></td>
+                <td><span class="doc-download doc-download--pending" title="Download wird nach Freigabe verfügbar">↓ Ausstehend</span></td>
               </tr>
               <tr>
                 <td>
@@ -958,7 +962,7 @@
                 </td>
                 <td>10.03.2026</td>
                 <td>340 KB</td>
-                <td><a href="#" class="doc-download">↓ Download</a></td>
+                <td><span class="doc-download doc-download--pending" title="Download wird nach Freigabe verfügbar">↓ Ausstehend</span></td>
               </tr>
               <tr>
                 <td>
@@ -969,7 +973,7 @@
                 </td>
                 <td>16.03.2026</td>
                 <td>2,8 MB</td>
-                <td><a href="#" class="doc-download">↓ Download</a></td>
+                <td><span class="doc-download doc-download--pending" title="Download wird nach Freigabe verfügbar">↓ Ausstehend</span></td>
               </tr>
             </tbody>
           </table>
@@ -1049,8 +1053,9 @@
         <div class="footer-bottom">
           <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
           <div>
-            <a href="/impressum.html" style="margin-right:1.5rem;">Impressum</a>
+            <a href="/impressum.html">Impressum</a>
             <a href="/datenschutz.html">Datenschutz</a>
+            <a href="#" data-cookie-settings>Cookie-Einstellungen</a>
           </div>
         </div>
       </div>
@@ -1058,6 +1063,7 @@
 
   </main>
 
+  <script src="/js/cookie-banner.js" defer></script>
   <script src="/js/main.js" defer></script>
   <script>
     // Notification dismiss

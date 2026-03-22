@@ -20,6 +20,7 @@
   <meta property="og:url" content="https://standfestdigital.at/audit-buchen.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_AT">
+<<<<<<< Updated upstream
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="48h Online-Audit buchen – 199 € | Standfest Digital">
   <meta name="twitter:description" content="In 48 Stunden wissen, wo Sie online stehen. 1-Pager + Erklär-Video. Bei Paketbuchung angerechnet.">
@@ -27,10 +28,40 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+=======
+>>>>>>> Stashed changes
   <!-- Konfigurator-Fonts entfernt (Playfair, Outfit, Crimson Pro, Figtree, Fraunces) – spart ~300ms. Preview nutzt DM Sans + system-ui -->
+  <!-- Schema.org Breadcrumb -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://standfestdigital.at/"},{"@type":"ListItem","position":2,"name":"48h-Audit buchen","item":"https://standfestdigital.at/audit-buchen.html"}]}
+  </script>
+
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+
+  <!-- Schema.org Product -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "48h Online-Audit",
+    "description": "Website-Audit für KMU: In 48h erfahren Sie, wo Ihre Online-Präsenz steht. 1-Pager + Erklär-Video.",
+    "brand": {
+      "@type": "Organization",
+      "name": "Standfest Digital"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "199",
+      "priceCurrency": "EUR",
+      "availability": "https://schema.org/InStock",
+      "url": "https://standfestdigital.at/audit-buchen.html"
+    }
+  }
+  </script>
+
   <style>
     /* ── Audit-Buchen Page Styles (base/nav/footer from style.css) ── */
     main { padding-top: 72px; }
@@ -1045,13 +1076,15 @@
     <div class="footer-bottom">
       <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
       <div>
-        <a href="/impressum.html" style="margin-right:1.5rem;">Impressum</a>
+        <a href="/impressum.html">Impressum</a>
         <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#" data-cookie-settings>Cookie-Einstellungen</a>
       </div>
     </div>
   </div>
 </footer>
 
+<script src="/js/cookie-banner.js" defer></script>
 <script src="/js/main.js" defer></script>
 
 <script>
@@ -1191,6 +1224,7 @@ const FALLBACK_EMAIL = 'office@standfestdigital.at';
     "timestamp":"ISO-8601", "quelle":"website-konfigurator" }
 */
 
+<<<<<<< Updated upstream
 let currentStep = 1;
 function goToStep(step) {
   currentStep = step;
@@ -1204,6 +1238,59 @@ function goToStep(step) {
     ind.classList.remove('active','done');
     if (s === step && step <= 3) ind.classList.add('active');
     else if (s < step) ind.classList.add('done');
+=======
+// ─── FORM ───────────────────────────────────────────
+const WEBHOOK_URL='https://n8n.standfestdigital.at/webhook/audit';
+const formWrapper=document.getElementById('formWrapper');
+const auditForm=document.getElementById('audit-form');
+
+auditForm.addEventListener('focusin',()=>formWrapper.classList.add('focus-active'));
+auditForm.addEventListener('focusout',()=>{setTimeout(()=>{if(!auditForm.contains(document.activeElement))formWrapper.classList.remove('focus-active')},10)});
+
+// Rotating placeholders
+const phs=['Was ist Ihre größte Herausforderung online?','Haben Sie schon eine Website?','Wie finden Kunden aktuell zu Ihnen?','Was wünschen Sie sich von Ihrem Online-Auftritt?'];
+let phi=0;const pf=document.getElementById('problem');
+setInterval(()=>{if(document.activeElement!==pf&&pf.value===''){phi=(phi+1)%phs.length;pf.placeholder=phs[phi]}},4000);
+
+auditForm.addEventListener('submit',e=>{
+  e.preventDefault();let ok=true;
+  const n=document.getElementById('name'),ne=document.getElementById('name-error');
+  if(!n.value.trim()){n.classList.add('error');ne.style.display='block';ok=false}else{n.classList.remove('error');ne.style.display='none'}
+  const em=document.getElementById('email'),ee=document.getElementById('email-error');
+  if(!em.value.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)){em.classList.add('error');ee.style.display='block';ok=false}else{em.classList.remove('error');ee.style.display='none'}
+  if(!ok)return;
+
+  const submitBtn=auditForm.querySelector('.form-submit');
+  submitBtn.disabled=true;submitBtn.textContent='Wird gesendet…';
+
+  const fd={
+    formular:'audit-buchen',
+    name:n.value.trim(),
+    email:em.value.trim(),
+    phone:document.getElementById('phone').value.trim(),
+    firma:document.getElementById('firma').value.trim(),
+    website:document.getElementById('website').value.trim(),
+    branche:document.getElementById('branche-select').value,
+    problem:document.getElementById('problem').value.trim(),
+    konfig_stil:S.style,
+    konfig_branche:S.branche,
+    konfig_farbe:S.accent,
+    konfig_firmenname:S.companyName.trim(),
+    konfig_prioritaeten:S.priorities.join(', '),
+    konfig_hat_logo:!!S.logoDataUrl,
+    seite:window.location.href,
+    zeitpunkt:new Date().toISOString()
+  };
+
+  fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(fd)})
+  .then(res=>{if(!res.ok)throw new Error('Netzwerkfehler');})
+  .catch(()=>{})
+  .finally(()=>{
+    auditForm.style.display='none';
+    document.getElementById('form-success').style.display='block';
+    formWrapper.classList.remove('focus-active');
+    submitBtn.disabled=false;submitBtn.textContent='Audit buchen – 199 €';
+>>>>>>> Stashed changes
   });
   if (step === 1) updateKonfigSummary();
   if (step === 3) updateAuditSummary();
