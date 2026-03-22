@@ -20,6 +20,10 @@
   <meta property="og:url" content="https://standfestdigital.at/audit-buchen.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_AT">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="48h Online-Audit buchen – 199 € | Standfest Digital">
+  <meta name="twitter:description" content="In 48 Stunden wissen, wo Sie online stehen. 1-Pager + Erklär-Video. Bei Paketbuchung angerechnet.">
+  <meta name="twitter:image" content="https://standfestdigital.at/img/og-image.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
@@ -425,16 +429,94 @@
       width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0;
     }
 
+    /* ── AUDIT STEP CONFIGURATOR ──────────────────── */
+    .audit-configurator { max-width: 840px; margin: 0 auto; padding: 0 1.5rem; }
+
+    .step-progress { margin-bottom: 2.5rem; }
+    .step-bar { height: 3px; background: var(--border); border-radius: 2px; margin-bottom: 1.5rem; overflow: hidden; }
+    .step-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); width: 33%; }
+    .step-indicators { display: flex; justify-content: space-between; }
+    .step-ind { display: flex; align-items: center; gap: 0.5rem; opacity: 0.35; transition: opacity 0.3s; }
+    .step-ind.active, .step-ind.done { opacity: 1; }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border-strong); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; transition: all 0.3s; flex-shrink: 0; }
+    .step-ind.active .step-num, .step-ind.done .step-num { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .step-ind-label { font-size: 0.8125rem; font-weight: 500; color: var(--text-muted); }
+    .step-ind.active .step-ind-label { color: var(--text-primary); }
+
+    .step-panel { display: none; animation: fadeUp 0.4s ease; }
+    .step-panel.active { display: block; }
+    .step-hd { text-align: center; margin-bottom: 2rem; }
+    .step-hd h2 { font-size: clamp(1.375rem,3vw,1.75rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .step-hd p { color: var(--text-muted); font-size: 0.9375rem; line-height: 1.6; }
+
+    /* Audit Areas */
+    .audit-areas { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+    .area-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; transition: all 0.25s; }
+    .area-card:hover { border-color: rgba(74,124,89,0.3); transform: translateY(-2px); }
+    .area-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-subtle); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+    .area-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .area-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.375rem; }
+    .area-card > p { font-size: 0.8125rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 0.75rem; }
+    .area-checks { list-style: none; padding: 0; }
+    .area-checks li { font-size: 0.75rem; color: var(--text-muted); padding: 0.2rem 0; padding-left: 1.25rem; position: relative; }
+    .area-checks li::before { content: ''; position: absolute; left: 0; top: 0.45em; width: 12px; height: 12px; border-radius: 50%; background: var(--accent-subtle); background-image: url("data:image/svg+xml,%3Csvg width='7' height='7' viewBox='0 0 24 24' fill='none' stroke='%234a7c59' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; background-size: 7px; }
+
+    /* Trust Badges */
+    .trust-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 2rem; }
+    .trust-badge { display: flex; align-items: center; gap: 0.625rem; padding: 0.75rem 1rem; background: rgba(74,124,89,0.06); border: 1px solid rgba(74,124,89,0.12); border-radius: 10px; }
+    .trust-badge-icon { font-size: 1.125rem; flex-shrink: 0; line-height: 1; }
+    .trust-badge-text { font-size: 0.8125rem; font-weight: 500; color: var(--text-primary); line-height: 1.35; }
+
+    /* Summary */
+    .audit-summary-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+    .audit-summary-row { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.875rem; }
+    .audit-summary-row:last-child { border-bottom: none; }
+    .audit-summary-label { color: var(--text-muted); font-weight: 500; }
+    .audit-summary-value { font-weight: 600; color: var(--text-primary); text-align: right; max-width: 60%; word-break: break-word; }
+
+    /* Step navigation */
+    .step-nav { display: flex; gap: 1rem; }
+    .step-next { flex: 1; padding: 1rem; background: var(--accent); color: #fff; border: none; border-radius: 10px; font-family: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+    .step-next:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .step-next:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .step-next svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+    .step-back { padding: 1rem 1.5rem; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 0.9375rem; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .step-back:hover { border-color: var(--border-strong); color: var(--text-primary); }
+
+    /* Form hint */
+    .form-hint { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.375rem; opacity: 0.7; line-height: 1.4; }
+
+    /* Audit success */
+    .audit-success { text-align: center; padding: 3rem 1.5rem; }
+    .audit-success-icon { width: 72px; height: 72px; border-radius: 50%; background: var(--accent-subtle); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+    .audit-success-icon svg { width: 36px; height: 36px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .audit-success h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .audit-success p { color: var(--text-muted); font-size: 0.9375rem; line-height: 1.65; max-width: 480px; margin: 0 auto; }
+    .audit-success-steps { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.625rem; align-items: center; }
+    .audit-success-step { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; color: var(--text-muted); }
+    .audit-success-step .snum { width: 24px; height: 24px; border-radius: 50%; background: var(--accent-subtle); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+
+    /* Social proof */
+    .social-proof { text-align: center; margin-top: 1.5rem; padding: 1rem; opacity: 0.6; }
+    .social-proof-text { font-size: 0.8125rem; color: var(--text-muted); font-style: italic; }
+
     @media (max-width: 768px) {
-      .audit-layout { grid-template-columns: 1fr; }
+      .audit-areas { grid-template-columns: 1fr; }
+      .trust-row { grid-template-columns: 1fr; }
+      .step-ind-label { display: none; }
       .form-row--half { grid-template-columns: 1fr; }
       .form-card { padding: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .step-nav { flex-direction: column-reverse; }
     }
 
     /* Footer styles from style.css */
   </style>
 </head>
 <body>
+
+  <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
 
 <!-- Navigation -->
 <nav class="nav" id="navbar">
@@ -456,7 +538,7 @@
   </div>
 </nav>
 
-<main>
+<main id="main-content">
 
 <!-- ══════════ DUAL-PATH HERO ══════════ -->
 <section class="dual-hero dot-grid-bg">
@@ -632,7 +714,7 @@
     <a href="#audit-form-section" class="btn-glow">Jetzt Audit buchen – 199 € <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M8 13l-3-3M8 13l3-3"/></svg></a>
   </div>
 
-  <!-- ══════════ AUDIT FORM (after Konfigurator) ══════════ -->
+  <!-- ══════════ AUDIT KONFIGURATOR (3-Step) ══════════ -->
   <section class="audit-section" id="audit-form-section">
     <div class="audit-header reveal">
       <div class="section-label">Der nächste Schritt</div>
@@ -640,94 +722,209 @@
       <p class="section-sub" style="margin:0 auto;">In 48 Stunden analysieren wir Ihren Online-Auftritt und zeigen konkret, wo Potenzial liegt.</p>
     </div>
 
-    <div class="audit-layout">
-      <!-- INFO -->
-      <div class="audit-info reveal">
-        <div class="info-card">
-          <div class="info-card-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
-          <div class="info-card-title">1-Pager mit Top-5-Fixes</div>
-          <div class="info-card-text">Priorisierte Handlungsempfehlungen (P1/P2/P3) – klar, konkret und sofort umsetzbar.</div>
-        </div>
-        <div class="info-card">
-          <div class="info-card-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
-          <div class="info-card-title">Persönliches Erklär-Video</div>
-          <div class="info-card-text">3–5 Minuten Video-Walkthrough durch Ihren Online-Auftritt mit konkreten Verbesserungen.</div>
-        </div>
-        <div class="audit-price-info">
-          <div class="audit-price-info-price">199 € <span>netto (zzgl. 20% USt.)</span></div>
-          <div class="audit-price-info-note">Wird bei Paketbuchung vollständig angerechnet.</div>
-          <div class="audit-price-info-detail">Lieferzeit: 48 Stunden nach Buchung.</div>
+    <div class="audit-configurator reveal">
+      <!-- Progress -->
+      <div class="step-progress">
+        <div class="step-bar"><div class="step-bar-fill" id="stepBarFill"></div></div>
+        <div class="step-indicators">
+          <div class="step-ind active" data-step="1"><div class="step-num">1</div><span class="step-ind-label">Ihre Firma</span></div>
+          <div class="step-ind" data-step="2"><div class="step-num">2</div><span class="step-ind-label">Audit-Bereiche</span></div>
+          <div class="step-ind" data-step="3"><div class="step-num">3</div><span class="step-ind-label">Absenden</span></div>
         </div>
       </div>
 
-      <!-- FORM -->
-      <div class="reveal" style="animation-delay:0.1s;">
-        <div class="form-card-wrapper" id="formWrapper">
-          <div class="form-card">
-            <div class="form-card-title">Ihre Daten für den Audit</div>
+      <!-- ── STEP 1: Firmendaten ── -->
+      <div class="step-panel active" id="auditStep1">
+        <div class="step-hd">
+          <h2>Erzählen Sie uns von Ihrem Unternehmen</h2>
+          <p>Damit wir den Audit auf Ihre Branche und Situation zuschneiden können.</p>
+        </div>
 
-            <!-- Konfigurator Summary (dynamically filled) -->
-            <div class="konfig-summary" id="konfigSummary" style="display:none;">
-              <div class="konfig-summary-title">Ihre Konfigurator-Auswahl</div>
-              <div class="konfig-summary-items" id="konfigSummaryItems"></div>
-            </div>
+        <!-- Konfigurator Summary (from website preview, dynamically filled) -->
+        <div class="konfig-summary" id="konfigSummary" style="display:none;">
+          <div class="konfig-summary-title">Ihre Konfigurator-Auswahl</div>
+          <div class="konfig-summary-items" id="konfigSummaryItems"></div>
+        </div>
 
-            <form id="audit-form" novalidate>
-              <div class="form-row form-row--half">
-                <div>
-                  <label class="form-label" for="name">Name <span class="required">*</span></label>
-                  <input class="form-input" type="text" id="name" name="name" required autocomplete="name" placeholder="Ihr Name">
-                  <div class="form-error-msg" id="name-error">Bitte geben Sie Ihren Namen ein.</div>
-                </div>
-                <div>
-                  <label class="form-label" for="email">E-Mail <span class="required">*</span></label>
-                  <input class="form-input" type="email" id="email" name="email" required autocomplete="email" placeholder="ihre@email.at">
-                  <div class="form-error-msg" id="email-error">Bitte geben Sie eine gültige E-Mail ein.</div>
-                </div>
-              </div>
-              <div class="form-row form-row--half">
-                <div>
-                  <label class="form-label" for="phone">Telefon</label>
-                  <input class="form-input" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+43 ...">
-                </div>
-                <div>
-                  <label class="form-label" for="firma">Firma</label>
-                  <input class="form-input" type="text" id="firma" name="firma" autocomplete="organization" placeholder="Firmenname">
-                </div>
-              </div>
-              <div class="form-row">
-                <label class="form-label" for="website">Website-URL</label>
-                <input class="form-input" type="url" id="website" name="website" placeholder="www.ihre-firma.at">
-              </div>
-              <div class="form-row">
-                <label class="form-label" for="branche-select">Branche</label>
-                <select class="form-select" id="branche-select" name="branche">
-                  <option value="">Bitte wählen</option>
-                  <option value="Tischlerei">Tischlerei</option>
-                  <option value="Installateur">Installateur</option>
-                  <option value="Friseur">Friseur</option>
-                  <option value="Arztpraxis">Arztpraxis</option>
-                  <option value="Bäckerei">Bäckerei</option>
-                  <option value="Gastronomie">Gastronomie</option>
-                  <option value="Handel">Handel</option>
-                  <option value="Sonstige">Sonstige</option>
-                </select>
-              </div>
-              <div class="form-row">
-                <label class="form-label" for="problem">Was beschäftigt Sie?</label>
-                <textarea class="form-textarea" id="problem" name="problem" placeholder="Was ist Ihre größte Herausforderung online?"></textarea>
-              </div>
-              <button type="submit" class="form-submit">Audit buchen – 199 €</button>
-            </form>
-            <div class="form-success" id="form-success">
-              <div class="form-success-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-              <div class="form-success-title">Anfrage erhalten!</div>
-              <div class="form-success-text">Wir melden uns innerhalb von 24 Stunden bei Ihnen. In 48 Stunden haben Sie Ihren 1-Pager und das Erklär-Video.</div>
+        <div class="form-row">
+          <label class="form-label" for="auditFirma">Firmenname <span class="required">*</span></label>
+          <input class="form-input" type="text" id="auditFirma" placeholder="z.B. Tischlerei Huber" minlength="2" required autocomplete="organization">
+          <div class="form-error-msg" id="auditFirma-error">Bitte geben Sie Ihren Firmennamen ein (min. 2 Zeichen).</div>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="auditUrl">Website-URL</label>
+          <input class="form-input" type="text" id="auditUrl" placeholder="www.ihre-firma.at (optional)">
+          <div class="form-hint">Keine Website? Kein Problem – wir analysieren Ihre Online-Sichtbarkeit auch ohne.</div>
+          <div class="form-error-msg" id="auditUrl-error">Bitte geben Sie eine gültige URL ein (z.B. www.ihre-firma.at).</div>
+        </div>
+        <div class="form-row form-row--half">
+          <div>
+            <label class="form-label" for="auditBranche">Branche <span class="required">*</span></label>
+            <select class="form-select" id="auditBranche" required>
+              <option value="">Bitte wählen</option>
+              <option value="Handwerk & Gewerbe">Handwerk &amp; Gewerbe</option>
+              <option value="Installateur / Haustechnik">Installateur / Haustechnik</option>
+              <option value="Gastronomie">Gastronomie</option>
+              <option value="Gesundheit & Pflege">Gesundheit &amp; Pflege</option>
+              <option value="Handel & Dienstleistung">Handel &amp; Dienstleistung</option>
+              <option value="Friseur / Beauty">Friseur / Beauty</option>
+              <option value="Kreativ & Beratung">Kreativ &amp; Beratung</option>
+              <option value="Sonstige">Sonstige</option>
+            </select>
+            <div class="form-error-msg" id="auditBranche-error">Bitte wählen Sie eine Branche.</div>
+          </div>
+          <div>
+            <label class="form-label" for="auditRegion">Region</label>
+            <select class="form-select" id="auditRegion">
+              <option value="Wien">Wien</option>
+              <option value="Niederösterreich">Niederösterreich</option>
+              <option value="Andere">Andere</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="step-next" id="step1Next">
+          Weiter – Audit-Bereiche ansehen
+          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <!-- ── STEP 2: Audit-Bereiche ── -->
+      <div class="step-panel" id="auditStep2">
+        <div class="step-hd">
+          <h2>Das prüfen wir für Sie</h2>
+          <p>In diesen 4 Bereichen decken wir die wichtigsten Stellschrauben auf.</p>
+        </div>
+        <div class="audit-areas">
+          <div class="area-card">
+            <div class="area-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <h3>Google Business &amp; Sichtbarkeit</h3>
+            <p>Finden Kunden Sie, wenn sie nach Ihrer Leistung suchen?</p>
+            <ul class="area-checks">
+              <li>Google Business Profil vollständig?</li>
+              <li>Lokale Suchergebnisse &amp; Rankings</li>
+              <li>NAP-Konsistenz (Name, Adresse, Telefon)</li>
+              <li>Bewertungen &amp; Antwortverhalten</li>
+            </ul>
+          </div>
+          <div class="area-card">
+            <div class="area-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <h3>Website / Landingpage</h3>
+            <p>Macht Ihre Seite einen guten ersten Eindruck?</p>
+            <ul class="area-checks">
+              <li>Ladezeit &amp; Mobile-Optimierung</li>
+              <li>Klare Handlungsaufforderung (CTA)</li>
+              <li>Vertrauenselemente &amp; Kontaktwege</li>
+              <li>SEO-Grundlagen &amp; Meta-Daten</li>
+            </ul>
+          </div>
+          <div class="area-card">
+            <div class="area-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+            <h3>Anfrageprozess</h3>
+            <p>Wie leicht ist es, Sie zu kontaktieren?</p>
+            <ul class="area-checks">
+              <li>Kontaktformular vorhanden &amp; funktional?</li>
+              <li>Telefon, E-Mail, WhatsApp sichtbar?</li>
+              <li>Reaktionszeit &amp; Erreichbarkeit</li>
+              <li>Angebotsprozess nachvollziehbar?</li>
+            </ul>
+          </div>
+          <div class="area-card">
+            <div class="area-icon"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div>
+            <h3>Social Media Basics</h3>
+            <p>Nutzen Sie soziale Kanäle als Schaufenster?</p>
+            <ul class="area-checks">
+              <li>Profile vorhanden &amp; aktuell?</li>
+              <li>Verknüpfung mit Website</li>
+              <li>Grundlegendes Branding konsistent?</li>
+              <li>Bewertungen auf Social-Plattformen</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step-nav">
+          <button type="button" class="step-back" data-to="1">Zurück</button>
+          <button type="button" class="step-next" id="step2Next">
+            Weiter – Zusammenfassung
+            <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 3: Zusammenfassung + Kontakt ── -->
+      <div class="step-panel" id="auditStep3">
+        <div class="step-hd">
+          <h2>Fast geschafft – Ihre Audit-Anfrage</h2>
+          <p>Prüfen Sie Ihre Angaben und hinterlassen Sie Ihre Kontaktdaten.</p>
+        </div>
+
+        <!-- Summary -->
+        <div class="audit-summary-card" id="auditSummaryCard">
+          <div class="audit-summary-row"><span class="audit-summary-label">Firma</span><span class="audit-summary-value" id="sumFirma">–</span></div>
+          <div class="audit-summary-row"><span class="audit-summary-label">Website</span><span class="audit-summary-value" id="sumUrl">–</span></div>
+          <div class="audit-summary-row"><span class="audit-summary-label">Branche</span><span class="audit-summary-value" id="sumBranche">–</span></div>
+          <div class="audit-summary-row"><span class="audit-summary-label">Region</span><span class="audit-summary-value" id="sumRegion">–</span></div>
+          <div class="audit-summary-row"><span class="audit-summary-label">Bereiche</span><span class="audit-summary-value">4 Bereiche werden geprüft</span></div>
+          <div class="audit-summary-row"><span class="audit-summary-label">Preis</span><span class="audit-summary-value" style="color:var(--accent);font-size:1rem;">199 € netto</span></div>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="trust-row">
+          <div class="trust-badge"><span class="trust-badge-icon">⏱️</span><span class="trust-badge-text">Ergebnis in 48 Stunden</span></div>
+          <div class="trust-badge"><span class="trust-badge-icon">🎬</span><span class="trust-badge-text">Persönliches Erklär-Video inklusive</span></div>
+          <div class="trust-badge"><span class="trust-badge-icon">💰</span><span class="trust-badge-text">Wird bei Paketbuchung angerechnet</span></div>
+          <div class="trust-badge"><span class="trust-badge-icon">🤝</span><span class="trust-badge-text">Kein Abo, keine Verpflichtung</span></div>
+        </div>
+
+        <!-- Contact Form -->
+        <form id="auditFinalForm" novalidate>
+          <div class="form-row form-row--half">
+            <div>
+              <label class="form-label" for="auditName">Name <span class="required">*</span></label>
+              <input class="form-input" type="text" id="auditName" required autocomplete="name" placeholder="Ihr Name">
+              <div class="form-error-msg" id="auditName-error">Bitte geben Sie Ihren Namen ein.</div>
             </div>
+            <div>
+              <label class="form-label" for="auditEmail">E-Mail <span class="required">*</span></label>
+              <input class="form-input" type="email" id="auditEmail" required autocomplete="email" placeholder="ihre@email.at">
+              <div class="form-error-msg" id="auditEmail-error">Bitte geben Sie eine gültige E-Mail ein.</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="auditPhone">Telefon (optional)</label>
+            <input class="form-input" type="tel" id="auditPhone" autocomplete="tel" placeholder="+43 …">
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="auditMessage">Anmerkungen (optional)</label>
+            <textarea class="form-textarea" id="auditMessage" placeholder="Gibt es etwas, das wir besonders beachten sollen?" style="min-height:70px;"></textarea>
+          </div>
+          <div class="step-nav">
+            <button type="button" class="step-back" data-to="2">Zurück</button>
+            <button type="submit" class="step-next" id="auditSubmitBtn">
+              Audit buchen – 199 €
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+          </div>
+        </form>
+
+        <div class="social-proof">
+          <div class="social-proof-text">Schon 25+ Audits für KMU in Wien und Niederösterreich durchgeführt.</div>
+        </div>
+      </div>
+
+      <!-- ── SUCCESS STATE ── -->
+      <div class="step-panel" id="auditStepSuccess">
+        <div class="audit-success">
+          <div class="audit-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h2>Vielen Dank!</h2>
+          <p>Wir haben Ihre Audit-Anfrage erhalten und melden uns innerhalb von 48 Stunden bei Ihnen.</p>
+          <div class="audit-success-steps">
+            <div class="audit-success-step"><span class="snum">1</span> Wir sichten Ihre Online-Präsenz</div>
+            <div class="audit-success-step"><span class="snum">2</span> 1-Pager mit Top-5-Fixes (P1/P2/P3) wird erstellt</div>
+            <div class="audit-success-step"><span class="snum">3</span> Persönliches Erklär-Video (3–5 Min) für Sie</div>
           </div>
         </div>
       </div>
-    </div>
+
+    </div><!-- /audit-configurator -->
   </section>
 
 </div><!-- /view-konfig -->
@@ -856,7 +1053,6 @@
 </footer>
 
 <script src="/js/main.js" defer></script>
-<script src="/js/branch-assistant.js" defer></script>
 
 <script>
 // ─── STATE ──────────────────────────────────────────
@@ -970,6 +1166,7 @@ document.querySelectorAll('.prio-chip').forEach(chip=>{
 function updateKonfigSummary(){
   const box=document.getElementById('konfigSummary');
   const items=document.getElementById('konfigSummaryItems');
+  if(!box||!items) return;
   const styleLabels={modern:'Modern',klassisch:'Klassisch',minimal:'Minimal',bold:'Bold',organisch:'Organisch',elegant:'Elegant'};
   const brancheLabels={tischlerei:'Tischlerei',installateur:'Installateur',friseur:'Friseur',arzt:'Arztpraxis',bakery:'Bäckerei'};
   let html=`<span class="konfig-summary-item">Stil: ${styleLabels[S.style]||S.style}</span>`;
@@ -981,66 +1178,139 @@ function updateKonfigSummary(){
   box.style.display='block';
 }
 
-// Update summary when scrolling to form
-const auditSection=document.getElementById('audit-form-section');
-const summaryObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)updateKonfigSummary()})},{threshold:0.1});
-summaryObserver.observe(auditSection);
+// ─── AUDIT STEP CONFIGURATOR ────────────────────────
+// Webhook URL (leicht austauschbar)
+const AUDIT_WEBHOOK_URL = 'https://n8n.standfestdigital.at/webhook/audit';
+const FALLBACK_EMAIL = 'office@standfestdigital.at';
+/*
+  POST-Datenformat:
+  { "firma":"...", "url":"...", "branche":"...", "region":"...",
+    "name":"...", "email":"...", "telefon":"...", "anmerkungen":"...",
+    "konfig_stil":"...", "konfig_branche":"...", "konfig_farbe":"...",
+    "konfig_firmenname":"...", "konfig_prioritaeten":"...",
+    "timestamp":"ISO-8601", "quelle":"website-konfigurator" }
+*/
 
-// ─── FORM ───────────────────────────────────────────
-const WEBHOOK_URL='https://n8n.standfestdigital.at/webhook/audit';
-const formWrapper=document.getElementById('formWrapper');
-const auditForm=document.getElementById('audit-form');
-
-auditForm.addEventListener('focusin',()=>formWrapper.classList.add('focus-active'));
-auditForm.addEventListener('focusout',()=>{setTimeout(()=>{if(!auditForm.contains(document.activeElement))formWrapper.classList.remove('focus-active')},10)});
-
-// Rotating placeholders
-const phs=['Was ist Ihre größte Herausforderung online?','Haben Sie schon eine Website?','Wie finden Kunden aktuell zu Ihnen?','Was wünschen Sie sich von Ihrem Online-Auftritt?'];
-let phi=0;const pf=document.getElementById('problem');
-setInterval(()=>{if(document.activeElement!==pf&&pf.value===''){phi=(phi+1)%phs.length;pf.placeholder=phs[phi]}},4000);
-
-auditForm.addEventListener('submit',e=>{
-  e.preventDefault();let ok=true;
-  const n=document.getElementById('name'),ne=document.getElementById('name-error');
-  if(!n.value.trim()){n.classList.add('error');ne.style.display='block';ok=false}else{n.classList.remove('error');ne.style.display='none'}
-  const em=document.getElementById('email'),ee=document.getElementById('email-error');
-  if(!em.value.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)){em.classList.add('error');ee.style.display='block';ok=false}else{em.classList.remove('error');ee.style.display='none'}
-  if(!ok)return;
-
-  const submitBtn=auditForm.querySelector('.form-submit');
-  submitBtn.disabled=true;submitBtn.textContent='Wird gesendet…';
-
-  const fd={
-    formular:'audit-buchen',
-    name:n.value.trim(),
-    email:em.value.trim(),
-    phone:document.getElementById('phone').value.trim(),
-    firma:document.getElementById('firma').value.trim(),
-    website:document.getElementById('website').value.trim(),
-    branche:document.getElementById('branche-select').value,
-    problem:document.getElementById('problem').value.trim(),
-    konfig_stil:S.style,
-    konfig_branche:S.branche,
-    konfig_farbe:S.accent,
-    konfig_firmenname:S.companyName.trim(),
-    konfig_prioritaeten:S.priorities.join(', '),
-    konfig_hat_logo:!!S.logoDataUrl,
-    seite:window.location.href,
-    zeitpunkt:new Date().toISOString()
-  };
-
-  fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(fd)})
-  .then(res=>{if(!res.ok)throw new Error('Netzwerkfehler');})
-  .catch(err=>console.error('Webhook:',err))
-  .finally(()=>{
-    auditForm.style.display='none';
-    document.getElementById('form-success').style.display='block';
-    formWrapper.classList.remove('focus-active');
-    submitBtn.disabled=false;submitBtn.textContent='Audit buchen – 199 €';
+let currentStep = 1;
+function goToStep(step) {
+  currentStep = step;
+  document.querySelectorAll('#audit-form-section .step-panel').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById(step === 4 ? 'auditStepSuccess' : 'auditStep'+step);
+  if (target) target.classList.add('active');
+  const fill = document.getElementById('stepBarFill');
+  fill.style.width = (Math.min(step, 3) / 3 * 100) + '%';
+  document.querySelectorAll('.step-ind').forEach(ind => {
+    const s = parseInt(ind.dataset.step);
+    ind.classList.remove('active','done');
+    if (s === step && step <= 3) ind.classList.add('active');
+    else if (s < step) ind.classList.add('done');
   });
+  if (step === 1) updateKonfigSummary();
+  if (step === 3) updateAuditSummary();
+  document.getElementById('audit-form-section').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function updateAuditSummary() {
+  document.getElementById('sumFirma').textContent = document.getElementById('auditFirma').value.trim();
+  const url = document.getElementById('auditUrl').value.trim();
+  document.getElementById('sumUrl').textContent = url || 'Keine Website angegeben';
+  document.getElementById('sumBranche').textContent = document.getElementById('auditBranche').value;
+  document.getElementById('sumRegion').textContent = document.getElementById('auditRegion').value;
+}
+
+function showErr(id){const el=document.getElementById(id),e=document.getElementById(id+'-error');if(el)el.classList.add('error');if(e)e.style.display='block'}
+function clearErr(id){const el=document.getElementById(id),e=document.getElementById(id+'-error');if(el)el.classList.remove('error');if(e)e.style.display='none'}
+
+function normalizeUrl(v){v=v.trim();if(!v)return'';if(!/^https?:\/\//i.test(v))v='https://'+v;return v}
+function validateUrl(v){if(!v.trim())return true;try{new URL(normalizeUrl(v));return true}catch{return false}}
+
+// Step 1 → 2
+document.getElementById('step1Next').addEventListener('click',()=>{
+  let ok=true;
+  const firma=document.getElementById('auditFirma').value.trim();
+  if(!firma||firma.length<2){showErr('auditFirma');ok=false}else clearErr('auditFirma');
+  if(!document.getElementById('auditBranche').value){showErr('auditBranche');ok=false}else clearErr('auditBranche');
+  const urlVal=document.getElementById('auditUrl').value.trim();
+  if(urlVal&&!validateUrl(urlVal)){showErr('auditUrl');ok=false}else clearErr('auditUrl');
+  if(ok) goToStep(2);
 });
 
-document.querySelectorAll('.form-input,.form-select,.form-textarea').forEach(el=>{el.addEventListener('input',()=>{el.classList.remove('error');const e=el.parentElement.querySelector('.form-error-msg');if(e)e.style.display='none'})});
+// Step 2 → 3
+document.getElementById('step2Next').addEventListener('click',()=>goToStep(3));
+
+// Back buttons
+document.querySelectorAll('.step-back').forEach(btn=>{btn.addEventListener('click',()=>goToStep(parseInt(btn.dataset.to)))});
+
+// Clear errors on input
+document.querySelectorAll('#audit-form-section .form-input,#audit-form-section .form-select').forEach(el=>{
+  el.addEventListener('input',()=>{el.classList.remove('error');const e=el.parentElement.querySelector('.form-error-msg');if(e)e.style.display='none'});
+});
+
+// Pre-fill from website konfigurator
+const auditSection=document.getElementById('audit-form-section');
+const summaryObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{
+  if(e.isIntersecting){
+    updateKonfigSummary();
+    const f=document.getElementById('auditFirma');
+    if(!f.value&&S.companyName.trim())f.value=S.companyName.trim();
+    const bMap={tischlerei:'Handwerk & Gewerbe',installateur:'Installateur / Haustechnik',friseur:'Friseur / Beauty',arzt:'Gesundheit & Pflege',bakery:'Gastronomie'};
+    const b=document.getElementById('auditBranche');
+    if(!b.value&&bMap[S.branche])b.value=bMap[S.branche];
+  }
+})},{threshold:0.1});
+summaryObserver.observe(auditSection);
+
+// ─── FORM SUBMIT (Timeout 10s + mailto Fallback) ────
+document.getElementById('auditFinalForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  let ok=true;
+  const name=document.getElementById('auditName').value.trim();
+  if(!name){showErr('auditName');ok=false}else clearErr('auditName');
+  const email=document.getElementById('auditEmail').value.trim();
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showErr('auditEmail');ok=false}else clearErr('auditEmail');
+  if(!ok)return;
+
+  const btn=document.getElementById('auditSubmitBtn');
+  btn.disabled=true; btn.innerHTML='<span>Wird gesendet\u2026</span>';
+
+  const urlVal=document.getElementById('auditUrl').value.trim();
+  const payload={
+    firma:document.getElementById('auditFirma').value.trim(),
+    url:normalizeUrl(urlVal),
+    branche:document.getElementById('auditBranche').value,
+    region:document.getElementById('auditRegion').value,
+    name, email,
+    telefon:document.getElementById('auditPhone').value.trim(),
+    anmerkungen:document.getElementById('auditMessage').value.trim(),
+    konfig_stil:S.style, konfig_branche:S.branche, konfig_farbe:S.accent,
+    konfig_firmenname:S.companyName.trim(),
+    konfig_prioritaeten:S.priorities.join(', '),
+    timestamp:new Date().toISOString(),
+    quelle:'website-konfigurator'
+  };
+
+  const ctrl=new AbortController();
+  const tmout=setTimeout(()=>ctrl.abort(),10000);
+
+  fetch(AUDIT_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:ctrl.signal})
+  .then(res=>{clearTimeout(tmout);if(!res.ok)throw new Error('HTTP '+res.status);goToStep(4)})
+  .catch(err=>{
+    clearTimeout(tmout);
+    if(err.name==='AbortError'){
+      goToStep(4);
+      console.warn('Audit-Webhook Timeout – Anfrage wird möglicherweise trotzdem verarbeitet.');
+    } else {
+      console.error('Audit-Webhook Fehler:',err);
+      const subj=encodeURIComponent('Audit-Anfrage: '+payload.firma);
+      const body=encodeURIComponent('Firma: '+payload.firma+'\nWebsite: '+(payload.url||'keine')+'\nBranche: '+payload.branche+'\nRegion: '+payload.region+'\nName: '+payload.name+'\nE-Mail: '+payload.email+'\nTelefon: '+(payload.telefon||'\u2013'));
+      const fallback='mailto:'+FALLBACK_EMAIL+'?subject='+subj+'&body='+body;
+      goToStep(4);
+      const sp=document.querySelector('.audit-success p');
+      if(sp)sp.innerHTML='Es gab ein technisches Problem. <a href="'+fallback+'" style="color:var(--accent);text-decoration:underline;">Klicken Sie hier, um uns per E-Mail zu kontaktieren</a>.';
+    }
+  })
+  .finally(()=>{btn.disabled=false;btn.innerHTML='Audit buchen \u2013 199 \u20AC <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>'});
+});
 
 // ─── SCROLL & ANIMATIONS ────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(l=>{l.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(l.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
@@ -1048,10 +1318,7 @@ document.querySelectorAll('a[href^="#"]').forEach(l=>{l.addEventListener('click'
 const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-// Nav toggle handled by main.js
-
 // ─── INIT ───────────────────────────────────────────
-document.getElementById('branche-select').value='Tischlerei';
 render();
 </script>
 </body>

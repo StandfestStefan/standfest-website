@@ -7,6 +7,15 @@
 /* ---------- Reset & Base ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ---------- Skip-to-Content ---------- */
+.skip-link {
+  position: absolute; top: -100%; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #fff; padding: 0.75rem 1.5rem;
+  border-radius: 0 0 8px 8px; font-size: 0.875rem; font-weight: 600;
+  z-index: 10000; text-decoration: none; transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
 :root {
   /* Backgrounds */
   --bg-primary: #1e2119;
@@ -1139,7 +1148,13 @@ section {
 .btn:focus-visible,
 .nav-links a:focus-visible,
 .nav-cta:focus-visible,
-.nav-logo:focus-visible {
+.nav-logo:focus-visible,
+.form-input:focus-visible,
+.form-textarea:focus-visible,
+.form-select:focus-visible,
+.nav-toggle:focus-visible,
+.nav-login:focus-visible,
+.footer-links a:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
   border-radius: 4px;

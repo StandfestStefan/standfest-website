@@ -20,6 +20,10 @@
   <meta property="og:url" content="https://standfestdigital.at/kontakt.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_AT">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kontakt – Standfest Digital Wien">
+  <meta name="twitter:description" content="Kontaktieren Sie Standfest Digital. Per Formular, WhatsApp oder Telefon. Antwort innerhalb 24–48 Stunden.">
+  <meta name="twitter:image" content="https://standfestdigital.at/img/og-image.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -224,6 +228,18 @@
       padding: 0.5rem 0;
     }
 
+    .form-input.error, .form-textarea.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(181,74,74,0.15);
+    }
+    .field-error {
+      display: none;
+      font-size: 0.75rem;
+      color: var(--error);
+      margin-top: 0.25rem;
+    }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
     /* Contact Info */
     .contact-info h3 {
       font-size: 1.25rem;
@@ -319,6 +335,8 @@
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
+
   <!-- Navigation -->
   <nav class="nav" id="navbar">
     <div class="nav-inner">
@@ -339,7 +357,7 @@
     </div>
   </nav>
 
-  <main>
+  <main id="main-content">
     <!-- Page Header -->
     <section class="page-header">
       <div class="container">
@@ -362,10 +380,12 @@
                 <div class="form-group">
                   <label class="form-label" for="name">Name *</label>
                   <input class="form-input" type="text" id="name" name="name" placeholder="Ihr vollständiger Name" required autocomplete="name">
+                  <div class="field-error" id="name-error">Bitte geben Sie Ihren Namen ein.</div>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="email">E-Mail *</label>
                   <input class="form-input" type="email" id="email" name="email" placeholder="ihre@email.at" required autocomplete="email">
+                  <div class="field-error" id="email-error">Bitte geben Sie eine gültige E-Mail-Adresse ein.</div>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="phone">Telefon</label>
@@ -378,6 +398,7 @@
                 <div class="form-group">
                   <label class="form-label" for="message">Nachricht *</label>
                   <textarea class="form-textarea" id="message" name="message" placeholder="Erzählen Sie uns kurz von Ihrem Vorhaben…" required></textarea>
+                  <div class="field-error" id="message-error">Bitte schreiben Sie uns eine kurze Nachricht.</div>
                 </div>
                 <button type="submit" class="btn-submit">
                   <span>Nachricht senden</span>
@@ -510,7 +531,6 @@
   </footer>
 
   <script src="/js/main.js" defer></script>
-<script src="/js/branch-assistant.js" defer></script>
   <script defer>
     /* Rotating Placeholders */
     const placeholders = [
@@ -533,33 +553,46 @@
     }, 4000);
 
     /* Form Handler */
+    // Webhook URL (leicht austauschbar)
+    const KONTAKT_WEBHOOK_URL = 'https://n8n.standfestdigital.at/webhook/kontakt';
+    const KONTAKT_FALLBACK_EMAIL = 'office@standfestdigital.at';
+
     const form = document.getElementById('contactForm');
     const successEl = document.getElementById('formSuccess');
     const errorEl = document.getElementById('formError');
+
+    function showFieldErr(id) { const el=document.getElementById(id); const e=document.getElementById(id+'-error'); if(el)el.classList.add('error'); if(e)e.style.display='block'; }
+    function clearFieldErr(id) { const el=document.getElementById(id); const e=document.getElementById(id+'-error'); if(el)el.classList.remove('error'); if(e)e.style.display='none'; }
+
+    // Clear errors on input
+    document.querySelectorAll('.form-input,.form-textarea').forEach(el => {
+      el.addEventListener('input', () => { el.classList.remove('error'); const e=el.parentElement.querySelector('.field-error'); if(e)e.style.display='none'; errorEl.style.display='none'; });
+    });
 
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         errorEl.style.display = 'none';
+        let ok = true;
+
         const name = form.name.value.trim();
+        if (!name) { showFieldErr('name'); ok = false; } else clearFieldErr('name');
+
         const email = form.email.value.trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFieldErr('email'); ok = false; } else clearFieldErr('email');
+
         const message = form.message.value.trim();
-        const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!message) { showFieldErr('message'); ok = false; } else clearFieldErr('message');
 
-        if (!name || !email || !message || !emailValid) {
-          errorEl.style.display = 'block';
-          return;
-        }
+        if (!ok) { errorEl.style.display = 'block'; return; }
 
-        // n8n Webhook – Kontaktformular
         const btn = form.querySelector('.btn-submit');
         btn.disabled = true;
-        btn.innerHTML = '<span>Wird gesendet…</span>';
+        btn.innerHTML = '<span>Wird gesendet\u2026</span>';
 
         const payload = {
           formular: 'kontakt',
-          name,
-          email,
+          name, email,
           telefon: form.phone.value.trim(),
           firma: form.company.value.trim(),
           nachricht: message,
@@ -567,20 +600,37 @@
           zeitpunkt: new Date().toISOString()
         };
 
-        fetch('https://n8n.standfestdigital.at/webhook/kontakt', {
+        // Timeout 10s
+        const ctrl = new AbortController();
+        const tmout = setTimeout(() => ctrl.abort(), 10000);
+
+        fetch(KONTAKT_WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload),
+          signal: ctrl.signal
         })
         .then(res => {
-          if (!res.ok) throw new Error('Netzwerkfehler');
+          clearTimeout(tmout);
+          if (!res.ok) throw new Error('HTTP ' + res.status);
           form.style.display = 'none';
           successEl.style.display = 'block';
         })
-        .catch(() => {
-          // Fallback: trotzdem Erfolg zeigen (Daten gehen nicht verloren dank n8n retry)
-          form.style.display = 'none';
-          successEl.style.display = 'block';
+        .catch(err => {
+          clearTimeout(tmout);
+          if (err.name === 'AbortError') {
+            // Timeout: show success (request may still process)
+            form.style.display = 'none';
+            successEl.style.display = 'block';
+            successEl.querySelector('p').textContent = 'Ihre Anfrage wird verarbeitet – wir melden uns schnellstmöglich.';
+          } else {
+            // Network error: mailto fallback
+            const subj = encodeURIComponent('Kontaktanfrage von ' + name);
+            const body = encodeURIComponent('Name: ' + name + '\nE-Mail: ' + email + '\nTelefon: ' + (payload.telefon || '\u2013') + '\nFirma: ' + (payload.firma || '\u2013') + '\nNachricht: ' + message);
+            form.style.display = 'none';
+            successEl.style.display = 'block';
+            successEl.querySelector('p').innerHTML = 'Es gab ein technisches Problem. <a href="mailto:' + KONTAKT_FALLBACK_EMAIL + '?subject=' + subj + '&body=' + body + '" style="color:var(--accent);text-decoration:underline;">Klicken Sie hier, um uns per E-Mail zu kontaktieren</a>.';
+          }
         })
         .finally(() => {
           btn.disabled = false;
