@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4SGGPLWQMW"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-4SGGPLWQMW');
-  </script>
+  <!-- GA4 wird DSGVO-konform über cookie-banner.js geladen (nur nach Consent) -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Standfest Digital – Website & Anfragen in 10–14 Tagen</title>
@@ -50,63 +43,7 @@
   }
   </script>
 
-  <!-- Schema.org FAQPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Was kostet eine Website bei Standfest Digital?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Das Starter-Paket beginnt bei 1.490 € Setup plus 590 € monatlich. Darin enthalten sind Website, Social-Media-Setup und Kontaktwege. Alle Pakete auf standfestdigital.at/pakete.html."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Wie läuft der Prozess ab?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Nach dem Audit und der Paketauswahl starten wir mit einem kurzen Kickoff. In 10–12 Tagen bauen wir alles auf – mit Zwischenständen und Feedback-Möglichkeit. Insgesamt 10–14 Tage vom Start bis zum fertigen Online-Auftritt."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Brauche ich vorher Texte und Bilder?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Wenn Sie Texte und Fotos haben, arbeiten wir damit. Falls nicht, helfen wir Ihnen, die wichtigsten Inhalte zusammenzustellen."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Was ist im 48h-Audit enthalten?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Der Audit kostet 199 € und liefert in 48 Stunden einen 1-Pager mit den fünf wichtigsten Maßnahmen plus ein persönliches Erklär-Video. Die 199 € werden bei einer Paketbuchung vollständig angerechnet."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Kann ich die Website danach selbst bearbeiten?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Ja. Einfache Änderungen wie Texte oder Bilder können Sie selbst vornehmen. Für größere Anpassungen sind wir als Ansprechpartner da – je nach Paket im monatlichen Support enthalten."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Für welche Branchen arbeitet ihr?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Wir arbeiten mit kleinen Unternehmen aller Branchen in Wien und Niederösterreich – besonders Handwerk, Gastronomie, lokale Dienstleister und Gesundheitsberufe."
-        }
-      }
-    ]
-  }
-  </script>
+  <!-- FAQ-Schema wurde auf leistungen.html verschoben -->
 
   <style>
     /* ===== INDEX – Seitenspezifische Styles ===== */
@@ -285,9 +222,9 @@
     }
 
     .hero-scroll {
-      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
       display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
       color: var(--text-muted); font-size: 0.8125rem; font-weight: 500; z-index: 2;
+      margin-top: 1rem;
     }
     .hero-scroll-line {
       width: 1px; height: 32px;
@@ -472,6 +409,8 @@
       padding: 40px 32px;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
       transition: border-color var(--transition), transform var(--transition);
     }
     .pillar-card:hover {
@@ -508,7 +447,7 @@
       font-size: 0.925rem; color: var(--text-muted);
       line-height: 1.7; margin-bottom: 1.25rem;
     }
-    .pillar-features { list-style: none; padding: 0; margin: 0; }
+    .pillar-features { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
     .pillar-features li {
       padding: 0.5rem 0 0.5rem 1.5rem;
       font-size: 0.875rem; color: var(--text-muted);
@@ -538,13 +477,13 @@
     }
     .timeline-track {
       position: absolute;
-      left: 15px; top: 0; bottom: 0;
+      left: 19px; top: 0; bottom: 0;
       width: 2px;
       background: var(--border);
     }
     .timeline-beam {
       position: absolute;
-      left: 15px; top: 0;
+      left: 19px; top: 0;
       width: 2px; height: 0;
       background: linear-gradient(to bottom, var(--accent), rgba(74,124,89,0.3));
       transition: height 0.1s linear;
@@ -560,20 +499,22 @@
     .timeline-dot {
       position: absolute;
       left: -48px; top: 4px;
-      width: 32px; height: 32px;
+      width: 40px; height: 40px;
       border-radius: 50%;
-      background: var(--bg-card);
-      border: 2px solid var(--border);
+      background: var(--accent);
+      border: 3px solid rgba(74,124,89,0.4);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.8rem; font-weight: 700;
-      color: var(--text-muted);
+      font-size: 1rem; font-weight: 700;
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(74,124,89,0.15);
       transition: all 0.4s ease;
       z-index: 2;
     }
     .timeline-dot.reached {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: var(--bg-primary);
+      border-color: var(--accent-hover);
+      background: var(--accent-hover);
+      color: #fff;
+      box-shadow: 0 0 0 6px rgba(74,124,89,0.25);
     }
 
     .timeline-tag {
@@ -591,9 +532,9 @@
     .timeline-step p { font-size: 0.9rem; color: var(--text-muted); margin: 0; line-height: 1.7; }
 
     @media (max-width: 480px) {
-      .timeline { padding-left: 40px; }
-      .timeline-dot { left: -40px; width: 28px; height: 28px; font-size: 0.75rem; }
-      .timeline-track, .timeline-beam { left: 13px; }
+      .timeline { padding-left: 44px; }
+      .timeline-dot { left: -44px; width: 34px; height: 34px; font-size: 0.85rem; }
+      .timeline-track, .timeline-beam { left: 16px; }
     }
 
 
@@ -672,15 +613,7 @@
       position: relative;
       overflow: hidden;
     }
-    .audit-card::before {
-      content: '';
-      position: absolute;
-      top: -80px; left: 50%;
-      transform: translateX(-50%);
-      width: 500px; height: 300px;
-      background: radial-gradient(ellipse, rgba(74,124,89,0.1), transparent);
-      pointer-events: none;
-    }
+    /* Dekorativer Hintergrund-Glow entfernt (wirkte wie grünes Rechteck) */
     .audit-card > * { position: relative; z-index: 1; }
 
     .audit-eyebrow {
@@ -967,6 +900,8 @@
       margin-bottom: 1.25rem;
       display: flex;
       justify-content: center;
+      align-items: center;
+      min-height: 180px;
     }
 
     /* Laptop-Mockup */
@@ -1577,7 +1512,7 @@
             Unsere drei Säulen
           </span>
           <h2 id="pillars-heading">Alles was Sie online brauchen – aus einer Hand</h2>
-          <p class="subheading" style="margin: 1rem auto 0;">Kein Stückwerk, sondern ein stimmiges Gesamtpaket. Website, Social Media und Kontaktwege greifen ineinander.</p>
+          <p class="subheading" style="margin: 1rem auto 0;">Kein Stückwerk, sondern ein stimmiges Gesamtpaket. Website, lokale Sichtbarkeit und Kontaktwege greifen ineinander.</p>
         </div>
 
         <div class="pillars-grid">
@@ -1632,15 +1567,15 @@
               </div>
             </div>
             <div class="pillar-icon">
-              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
-            <h3>Social Media</h3>
-            <p>Profile die professionell aussehen und zu Ihrer Website passen.</p>
+            <h3>Lokale Sichtbarkeit</h3>
+            <p>Google Business, Social-Profile und Brancheneinträge – damit Kunden Sie finden.</p>
             <ul class="pillar-features">
-              <li>Facebook &amp; Instagram Profil-Setup</li>
+              <li>Google Business Profil einrichten</li>
+              <li>Instagram, Facebook oder LinkedIn Setup</li>
               <li>Einheitliches Erscheinungsbild</li>
               <li>Bio-Texte und Profilbilder</li>
-              <li>Startvorlagen für erste Beiträge</li>
             </ul>
           </div>
 
@@ -1962,65 +1897,7 @@
     </section>
 
 
-    <!-- ===== S8: FAQ ===== -->
-    <section class="faq-section" aria-labelledby="faq-heading">
-      <div class="container">
-
-        <div class="section-header reveal">
-          <span class="section-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            Häufige Fragen
-          </span>
-          <h2 id="faq-heading">Das werden wir oft gefragt</h2>
-        </div>
-
-        <div class="faq-list">
-
-          <div class="faq-item">
-            <button class="faq-question">Was kostet eine Website bei Standfest Digital?</button>
-            <div class="faq-answer">
-              <p>Unser Starter-Paket beginnt bei 1.490 € Setup plus 590 € monatlich. Darin enthalten sind Website, Social-Media-Setup und Kontaktwege – alles aufeinander abgestimmt. Transparente Preise, keine versteckten Kosten. Alle Pakete finden Sie auf unserer <a href="/pakete.html">Pakete-Seite</a>.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question">Wie läuft der Prozess ab?</button>
-            <div class="faq-answer">
-              <p>Nach dem Audit und der Paketauswahl starten wir mit einem kurzen Kickoff. In den nächsten 10–12 Tagen bauen wir alles auf – Sie bekommen Zwischenstände und können Feedback geben. Am Ende schalten wir alles live. Insgesamt dauert es 10–14 Tage vom Start bis zum fertigen Online-Auftritt.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question">Brauche ich vorher Texte und Bilder?</button>
-            <div class="faq-answer">
-              <p>Wenn Sie Texte und Fotos haben – wunderbar, wir arbeiten damit. Falls nicht, helfen wir Ihnen dabei, die wichtigsten Inhalte zusammenzustellen. Profi-Fotografie und professionelles Copywriting sind nicht im Paket enthalten, aber wir empfehlen Ihnen gerne Partner dafür.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question">Was ist im 48h-Audit enthalten?</button>
-            <div class="faq-answer">
-              <p>Der Audit kostet 199 € und liefert in 48 Stunden: einen 1-Pager mit den fünf wichtigsten Maßnahmen für Ihre Online-Präsenz, priorisiert nach Dringlichkeit, plus ein persönliches Erklär-Video. Die 199 € werden bei einer Paketbuchung vollständig angerechnet.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question">Kann ich die Website danach selbst bearbeiten?</button>
-            <div class="faq-answer">
-              <p>Ja. Wir bauen Ihre Website so, dass Sie einfache Änderungen wie Texte oder Bilder selbst vornehmen können. Für größere Anpassungen oder neue Seiten sind wir als Ansprechpartner da – je nach Paket im monatlichen Support enthalten.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question">Für welche Branchen arbeitet ihr?</button>
-            <div class="faq-answer">
-              <p>Wir arbeiten mit kleinen Unternehmen aller Branchen in Wien und Niederösterreich. Besonders oft mit Handwerksbetrieben, Gastronomiebetrieben, lokalen Dienstleistern und Gesundheitsberufen. Entscheidend ist nicht die Branche, sondern dass Sie professionell online auftreten möchten.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
+    <!-- FAQ wurde auf leistungen.html verschoben -->
 
 
     <!-- ===== S9: FINALER CTA ===== -->
