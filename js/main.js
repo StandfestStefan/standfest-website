@@ -6,19 +6,26 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- 1. Mobile Nav Toggle ---
+  // --- 1. Mobile Nav Toggle (overlay + animated burger) ---
   const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  if (navToggle && navLinks) {
+  const navOverlay = document.getElementById('navOverlay');
+  const navbar = document.getElementById('navbar');
+  if (navToggle && navOverlay) {
     navToggle.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('open');
+      const isOpen = navOverlay.classList.toggle('open');
+      navToggle.classList.toggle('is-open', isOpen);
       navToggle.setAttribute('aria-expanded', isOpen);
+      if (navbar) navbar.classList.toggle('nav--menu-open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
     // Close on link click
-    navLinks.querySelectorAll('a').forEach(link => {
+    navOverlay.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
+        navOverlay.classList.remove('open');
+        navToggle.classList.remove('is-open');
         navToggle.setAttribute('aria-expanded', 'false');
+        if (navbar) navbar.classList.remove('nav--menu-open');
+        document.body.style.overflow = '';
       });
     });
   }
@@ -211,26 +218,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ============================================
-   FLOATING NAV (outside DOMContentLoaded)
+   STICKY NAV — scroll shrink effect
    ============================================ */
 (function() {
   const nav = document.getElementById('navbar');
   if (!nav) return;
-  let lastY = window.scrollY, ticking = false;
+  let ticking = false;
   function update() {
-    const y = window.scrollY;
-    nav.classList.toggle('nav--scrolled', y > 20);
-    if (y < 60) {
-      nav.classList.remove('nav--hidden');
-    } else if (y - lastY > 5) {
-      nav.classList.add('nav--hidden');
-    } else if (lastY - y > 5) {
-      nav.classList.remove('nav--hidden');
-    }
-    lastY = y;
+    nav.classList.toggle('nav--scrolled', window.scrollY > 10);
     ticking = false;
   }
   window.addEventListener('scroll', () => {
     if (!ticking) { requestAnimationFrame(update); ticking = true; }
   }, { passive: true });
+  update(); // check on load
 })();
