@@ -473,17 +473,19 @@
       max-width: 680px;
       margin: 0 auto;
       position: relative;
-      padding-left: 48px;
+      padding-left: 56px;
     }
     .timeline-track {
       position: absolute;
-      left: 19px; top: 0; bottom: 0;
+      left: 27px; top: 56px; bottom: 56px;
       width: 2px;
       background: var(--border);
+      border-style: dashed;
+      z-index: 1;
     }
     .timeline-beam {
       position: absolute;
-      left: 19px; top: 0;
+      left: 27px; top: 56px;
       width: 2px; height: 0;
       background: linear-gradient(to bottom, var(--accent), rgba(74,124,89,0.3));
       transition: height 0.1s linear;
@@ -498,15 +500,15 @@
 
     .timeline-dot {
       position: absolute;
-      left: -48px; top: 4px;
-      width: 40px; height: 40px;
+      left: -56px; top: 0;
+      width: 56px; height: 56px;
       border-radius: 50%;
       background: var(--accent);
       border: 3px solid rgba(74,124,89,0.4);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; font-weight: 700;
+      font-size: 1.25rem; font-weight: 700;
       color: #fff;
-      box-shadow: 0 0 0 4px rgba(74,124,89,0.15);
+      box-shadow: 0 4px 12px rgba(74,124,89,0.3);
       transition: all 0.4s ease;
       z-index: 2;
     }
@@ -514,7 +516,7 @@
       border-color: var(--accent-hover);
       background: var(--accent-hover);
       color: #fff;
-      box-shadow: 0 0 0 6px rgba(74,124,89,0.25);
+      box-shadow: 0 4px 16px rgba(74,124,89,0.4), 0 0 0 6px rgba(74,124,89,0.15);
     }
 
     .timeline-tag {
@@ -532,9 +534,10 @@
     .timeline-step p { font-size: 0.9rem; color: var(--text-muted); margin: 0; line-height: 1.7; }
 
     @media (max-width: 480px) {
-      .timeline { padding-left: 44px; }
-      .timeline-dot { left: -44px; width: 34px; height: 34px; font-size: 0.85rem; }
-      .timeline-track, .timeline-beam { left: 16px; }
+      .timeline { padding-left: 48px; }
+      .timeline-dot { left: -48px; width: 44px; height: 44px; font-size: 1rem; }
+      .timeline-track, .timeline-beam { left: 21px; top: 44px; }
+      .timeline-track { bottom: 44px; }
     }
 
 
@@ -1678,10 +1681,10 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
               Über uns
             </span>
-            <h2 id="about-heading">Zwei Webdesigner aus Niederösterreich.<br>Für kleine Betriebe.</h2>
-            <p class="lead">Wir sind Stefan und ein Partner – und wir glauben, dass jedes Unternehmen einen professionellen Online-Auftritt verdient. Egal ob Tischlerei, Friseursalon oder Installateur.</p>
+            <h2 id="about-heading">Ein Team aus Niederösterreich.<br>Für kleine Betriebe.</h2>
+            <p class="lead">Wir sind ein kleines Team aus Niederösterreich – und wir glauben, dass jedes Unternehmen einen professionellen Online-Auftritt verdient. Egal ob Tischlerei, Friseursalon oder Installateur.</p>
             <p>Wir sprechen die Sprache kleiner Betriebe, nicht Marketing-Deutsch. Bei uns gibt es keine Monats-Meetings, keine Buzzwords, keine endlosen Abstimmungsrunden. Stattdessen: klare Pakete, faire Preise und ein Ergebnis in 10–14 Tagen.</p>
-            <p>Weil wir selbst ein kleines Team sind, wissen wir, worauf es ankommt: Dass es funktioniert. Dass es gut aussieht. Und dass es sich am Ende in echten Anfragen bemerkbar macht.</p>
+            <p>Weil wir selbst ein kleiner Betrieb sind, wissen wir, worauf es ankommt: Dass es funktioniert. Dass es gut aussieht. Und dass es sich am Ende in echten Anfragen bemerkbar macht.</p>
           </div>
 
           <div class="about-visual reveal" data-delay="0.15">
