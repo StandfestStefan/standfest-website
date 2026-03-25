@@ -189,26 +189,30 @@ section {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  border-bottom: 1px solid transparent;
-  background: transparent;
-  transition: max-width 0.35s ease, top 0.35s ease, background 0.35s ease,
-              border-color 0.35s ease, box-shadow 0.35s ease, border-radius 0.35s ease;
+  border: 1px solid transparent;
+  background: rgba(26, 29, 25, 0.5);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: max-width 0.4s ease, top 0.4s ease, background 0.4s ease,
+              border-color 0.4s ease, box-shadow 0.4s ease, border-radius 0.4s ease;
 }
 
-/* Scrolled state: shrink, float, glassmorphism */
+/* Scrolled state: shrink, float, liquid glass */
 .nav--scrolled {
-  background: rgba(26, 29, 25, 0.85);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  border-color: var(--nav-border);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  background: rgba(26, 29, 25, 0.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  backdrop-filter: blur(24px) saturate(1.4);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 @media (min-width: 769px) {
   .nav--scrolled {
     top: 16px;
-    max-width: 960px;
-    border-radius: 12px;
-    border: 1px solid var(--nav-border);
+    max-width: 1000px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -220,27 +224,28 @@ section {
 .nav-inner {
   max-width: 100%;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 56px;
-  transition: height 0.35s ease, padding 0.35s ease;
+  height: 64px;
+  transition: height 0.4s ease, padding 0.4s ease;
 }
 @media (min-width: 769px) {
   .nav-inner {
-    padding: 0 24px;
-    height: 48px;
+    padding: 0 28px;
+    height: 60px;
   }
   .nav--scrolled .nav-inner {
-    padding: 0 12px;
+    padding: 0 20px;
+    height: 52px;
   }
 }
 
 .nav-logo {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--nav-text-hover);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   white-space: nowrap;
