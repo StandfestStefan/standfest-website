@@ -190,35 +190,40 @@ section {
   max-width: 1200px;
   margin: 0 auto;
   border: 1px solid transparent;
-  background: rgba(26, 29, 25, 0.5);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  background: rgba(26, 29, 25, 0.88);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
   transition: max-width 0.4s ease, top 0.4s ease, background 0.4s ease,
               border-color 0.4s ease, box-shadow 0.4s ease, border-radius 0.4s ease;
+  /* Override light-theme nav vars for dark glass header */
+  --nav-text: rgba(255, 255, 255, 0.7);
+  --nav-text-hover: #fff;
+  --nav-border: rgba(255, 255, 255, 0.08);
+  --nav-border-strong: rgba(255, 255, 255, 0.15);
 }
 
 /* Scrolled state: shrink, float, liquid glass */
 .nav--scrolled {
-  background: rgba(26, 29, 25, 0.6);
-  -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  backdrop-filter: blur(24px) saturate(1.4);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(26, 29, 25, 0.92);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  backdrop-filter: blur(28px) saturate(1.5);
+  border-color: rgba(255, 255, 255, 0.1);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 @media (min-width: 769px) {
   .nav--scrolled {
     top: 16px;
-    max-width: 1000px;
+    max-width: 1040px;
     border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
 }
 
 /* Mobile open state */
 .nav--menu-open {
-  background: rgba(26, 29, 25, 0.92);
+  background: rgba(26, 29, 25, 0.95);
 }
 
 .nav-inner {
@@ -228,22 +233,22 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 72px;
   transition: height 0.4s ease, padding 0.4s ease;
 }
 @media (min-width: 769px) {
   .nav-inner {
-    padding: 0 28px;
-    height: 60px;
+    padding: 0 32px;
+    height: 68px;
   }
   .nav--scrolled .nav-inner {
-    padding: 0 20px;
-    height: 52px;
+    padding: 0 24px;
+    height: 56px;
   }
 }
 
 .nav-logo {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: #fff;
   letter-spacing: 0.5px;
