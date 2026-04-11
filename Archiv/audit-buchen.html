@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- GA4 wird DSGVO-konform über cookie-banner.js geladen (nur nach Consent) -->
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4SGGPLWQMW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4SGGPLWQMW');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>48h Online-Audit buchen – 199 € | Standfest Digital</title>
@@ -17,38 +24,13 @@
   <meta name="twitter:title" content="48h Online-Audit buchen – 199 € | Standfest Digital">
   <meta name="twitter:description" content="In 48 Stunden wissen, wo Sie online stehen. 1-Pager + Erklär-Video. Bei Paketbuchung angerechnet.">
   <meta name="twitter:image" content="https://standfestdigital.at/img/og-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
   <!-- Konfigurator-Fonts entfernt (Playfair, Outfit, Crimson Pro, Figtree, Fraunces) – spart ~300ms. Preview nutzt DM Sans + system-ui -->
-  <!-- Schema.org Breadcrumb -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://standfestdigital.at/"},{"@type":"ListItem","position":2,"name":"48h-Audit buchen","item":"https://standfestdigital.at/audit-buchen.html"}]}
-  </script>
-
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-
-  <!-- Schema.org Product -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "48h Online-Audit",
-    "description": "Website-Audit für KMU: In 48h erfahren Sie, wo Ihre Online-Präsenz steht. 1-Pager + Erklär-Video.",
-    "brand": {
-      "@type": "Organization",
-      "name": "Standfest Digital"
-    },
-    "offers": {
-      "@type": "Offer",
-      "price": "199",
-      "priceCurrency": "EUR",
-      "availability": "https://schema.org/InStock",
-      "url": "https://standfestdigital.at/audit-buchen.html"
-    }
-  }
-  </script>
-
   <style>
     /* ── Audit-Buchen Page Styles (base/nav/footer from style.css) ── */
     main { padding-top: 72px; }
@@ -130,9 +112,9 @@
     @media (max-width: 520px) { .path-cards { grid-template-columns: 1fr; } }
 
     /* ── VIEW TOGGLE (smooth switch) ─────────────── */
-    .view-konfig, .view-termin { transition: opacity 0.35s ease; }
-    .view-konfig.hidden, .view-termin.hidden { opacity: 0; max-height: 0; overflow: hidden; pointer-events: none; padding: 0; margin: 0; }
-    .view-konfig:not(.hidden) { opacity: 1; }
+    .view-konfig, .view-termin { transition: opacity 0.35s ease, max-height 0.4s ease; overflow: hidden; }
+    .view-konfig.hidden, .view-termin.hidden { opacity: 0; max-height: 0; pointer-events: none; padding: 0; margin: 0; }
+    .view-konfig:not(.hidden) { opacity: 1; max-height: 5000px; }
     .view-termin:not(.hidden) { opacity: 1; max-height: 5000px; }
 
     /* ── PHASE 1: KONFIGURATOR ─────────────────────── */
@@ -190,23 +172,6 @@
       font-family: inherit; font-size: 0.875rem; outline: none; transition: all 0.2s;
     }
     .konfig-input::placeholder { color: rgba(154,152,144,0.5); }
-
-    /* Sekundärfarbe Color-Picker */
-    .sek-color-picker {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      width: 48px; height: 40px;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      cursor: pointer;
-      background: transparent;
-      padding: 0;
-      flex-shrink: 0;
-    }
-    .sek-color-picker::-webkit-color-swatch-wrapper { padding: 3px; }
-    .sek-color-picker::-webkit-color-swatch { border: none; border-radius: 4px; }
-    .sek-color-picker::-moz-color-swatch { border: none; border-radius: 4px; }
     .konfig-input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(74,124,89,0.15); }
 
     /* ── LOGO UPLOAD ─────────────────────────────── */
@@ -242,8 +207,6 @@
     .konfig-preview {
       border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
       background: #d5d0c8; display: flex; flex-direction: column;
-      position: sticky; top: 80px; align-self: start;
-      max-height: calc(100vh - 100px);
       min-height: 540px; max-height: 70vh;
     }
     .browser-chrome {
@@ -268,7 +231,7 @@
     @media (max-width: 900px) {
       .konfig-layout { grid-template-columns: 1fr; }
       .konfig-panel { position: static; }
-      .konfig-preview { min-height: 400px; max-height: 55vh; position: static; }
+      .konfig-preview { min-height: 400px; max-height: 55vh; }
     }
     @media (max-width: 520px) {
       .style-grid { grid-template-columns: repeat(3, 1fr); }
@@ -565,22 +528,15 @@
       <li><a href="/kontakt.html">Kontakt</a></li>
       <li><a href="/audit-buchen.html" class="nav-cta">Audit buchen</a></li>
     </ul>
+    <button class="nav-login" id="loginBtn" aria-label="Anmelden">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Anmelden</span>
+    </button>
     <button class="nav-toggle" id="navToggle" aria-label="Menü" aria-expanded="false">
-      <div style="position:relative;width:18px;height:14px"><span></span><span></span><span></span></div>
+      <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
-<!-- Mobile overlay -->
-<div class="nav-overlay" id="navOverlay">
-  <div>
-    <a href="/leistungen.html">Leistungen</a>
-    <a href="/pakete.html">Pakete</a>
-    <a href="/kontakt.html">Kontakt</a>
-  </div>
-  <div class="nav-overlay-cta">
-    <a href="/audit-buchen.html" class="nav-cta">Audit buchen</a>
-  </div>
-</div>
 
 <main id="main-content">
 
@@ -621,7 +577,7 @@
   <section class="konfig-section dot-grid-bg">
     <div class="konfig-header">
       <h2 class="section-headline reveal">So könnte Ihre Website aussehen</h2>
-      <p class="section-sub reveal" style="margin:0 auto;">Wählen Sie Stil, Branche, Farbe und Ihre Wünsche – die Vorschau aktualisiert sich sofort.</p>
+      <p class="section-sub reveal" style="margin:0 auto;">Wählen Sie Stil, Branche und Farbe – die Vorschau aktualisiert sich sofort.</p>
     </div>
 
     <div class="konfig-layout">
@@ -694,18 +650,17 @@
         <div class="ctrl-group">
           <div class="ctrl-label">Branche</div>
           <div class="pills" data-key="branche">
-            <button class="pill on" data-val="tischlerei">Handwerk</button>
+            <button class="pill on" data-val="tischlerei">Tischlerei</button>
             <button class="pill" data-val="installateur">Installateur</button>
-            <button class="pill" data-val="friseur">Friseur / Beauty</button>
-            <button class="pill" data-val="arzt">Gesundheit</button>
-            <button class="pill" data-val="bakery">Gastro / Bäckerei</button>
-            <button class="pill" data-val="sonstige">Dienstleister / Sonstige</button>
+            <button class="pill" data-val="friseur">Friseur</button>
+            <button class="pill" data-val="arzt">Arztpraxis</button>
+            <button class="pill" data-val="bakery">Bäckerei</button>
           </div>
         </div>
 
         <!-- Accent Color -->
         <div class="ctrl-group">
-          <div class="ctrl-label">Primär- / Akzentfarbe</div>
+          <div class="ctrl-label">Akzentfarbe</div>
           <div class="swatches">
             <div class="swatch on" data-color="#4f8ef7" style="background:#4f8ef7;" title="Blau"></div>
             <div class="swatch" data-color="#c17f3a" style="background:#c17f3a;" title="Kupfer"></div>
@@ -739,58 +694,6 @@
             <button class="prio-chip" data-prio="buchung">Online-Buchung</button>
           </div>
         </div>
-
-        <!-- Divider -->
-        <div style="border-top:1px solid var(--border);margin:0.75rem 0;"></div>
-
-        <!-- Ausstrahlung -->
-        <div class="ctrl-group">
-          <div class="ctrl-label">Website-Ausstrahlung</div>
-          <select class="konfig-input" id="auditAusstrahlung" style="padding:10px 12px;border-radius:8px;background:var(--bg-primary);border:1px solid var(--border);color:var(--text-primary);font-family:inherit;font-size:0.9rem;width:100%;">
-            <option value="">Optional wählen</option>
-            <option value="Vertrauen & Seriosität">Vertrauen &amp; Seriosität</option>
-            <option value="Modern & Innovativ">Modern &amp; Innovativ</option>
-            <option value="Traditionell & Bodenständig">Traditionell &amp; Bodenständig</option>
-            <option value="Kreativ & Auffällig">Kreativ &amp; Auffällig</option>
-            <option value="Schlicht & Minimalistisch">Schlicht &amp; Minimalistisch</option>
-          </select>
-        </div>
-
-        <!-- Sekundärfarbe (Akzentfarbe oben = Primärfarbe) -->
-        <div class="ctrl-group">
-          <div class="ctrl-label">Sekundärfarbe</div>
-          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:6px;">Akzentfarbe oben = Ihre Primärfarbe. Hier eine zweite Farbe wählen.</div>
-          <div style="display:flex;gap:8px;align-items:center;">
-            <input type="color" id="auditFarbeSekundaerPicker" value="#1e2119" class="sek-color-picker">
-            <input class="konfig-input" type="text" id="auditFarbeSekundaer" placeholder="#1e2119" style="flex:1;padding:10px 12px;font-size:0.875rem;font-family:monospace;">
-          </div>
-        </div>
-
-        <!-- Seitenanzahl -->
-        <div class="ctrl-group">
-          <div class="ctrl-label">Gewünschte Seitenanzahl</div>
-          <select class="konfig-input" id="auditSeiten" style="padding:10px 12px;border-radius:8px;background:var(--bg-primary);border:1px solid var(--border);color:var(--text-primary);font-family:inherit;font-size:0.9rem;width:100%;">
-            <option value="">Noch unklar</option>
-            <option value="1-3">1–3 Seiten (Onepager)</option>
-            <option value="4-6">4–6 Seiten (Standard)</option>
-            <option value="7-10">7–10 Seiten (umfangreich)</option>
-            <option value="10+">10+ Seiten</option>
-          </select>
-        </div>
-
-        <!-- Referenz-Links -->
-        <div class="ctrl-group">
-          <div class="ctrl-label">Websites die Ihnen gefallen</div>
-          <input class="konfig-input" type="text" id="auditRefLinks" placeholder="z.B. www.beispiel.at" maxlength="200">
-          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:4px;">Bis zu 3 URLs, kommagetrennt</div>
-        </div>
-
-        <!-- Bild-Upload -->
-        <div class="ctrl-group">
-          <div class="ctrl-label">Referenzbilder (optional)</div>
-          <input type="file" id="auditLogoUpload" accept="image/*,.pdf" multiple style="width:100%;padding:8px 10px;background:var(--bg-primary);border:1px dashed var(--border-strong);border-radius:8px;color:var(--text-muted);font-family:inherit;font-size:0.8rem;cursor:pointer;">
-          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:4px;">JPG, PNG, SVG, PDF. Max. 5 MB/Datei</div>
-        </div>
       </div>
 
       <!-- PREVIEW -->
@@ -804,7 +707,12 @@
     </div>
   </section>
 
-  <!-- Transition-CTA entfernt -->
+  <!-- TRANSITION CTA -->
+  <div class="transition-cta reveal">
+    <p class="transition-cta-text">Gefällt Ihnen, was Sie sehen?</p>
+    <p class="transition-cta-sub">Lassen Sie uns Ihren echten Online-Auftritt prüfen.</p>
+    <a href="#audit-form-section" class="btn-glow">Jetzt Audit buchen – 199 € <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M8 13l-3-3M8 13l3-3"/></svg></a>
+  </div>
 
   <!-- ══════════ AUDIT KONFIGURATOR (3-Step) ══════════ -->
   <section class="audit-section" id="audit-form-section">
@@ -954,7 +862,6 @@
           <div class="audit-summary-row"><span class="audit-summary-label">Website</span><span class="audit-summary-value" id="sumUrl">–</span></div>
           <div class="audit-summary-row"><span class="audit-summary-label">Branche</span><span class="audit-summary-value" id="sumBranche">–</span></div>
           <div class="audit-summary-row"><span class="audit-summary-label">Region</span><span class="audit-summary-value" id="sumRegion">–</span></div>
-          <div class="audit-summary-row"><span class="audit-summary-label">Wünsche</span><span class="audit-summary-value" id="sumExtras">–</span></div>
           <div class="audit-summary-row"><span class="audit-summary-label">Bereiche</span><span class="audit-summary-value">4 Bereiche werden geprüft</span></div>
           <div class="audit-summary-row"><span class="audit-summary-label">Preis</span><span class="audit-summary-value" style="color:var(--accent);font-size:1rem;">199 € netto</span></div>
         </div>
@@ -999,7 +906,7 @@
         </form>
 
         <div class="social-proof">
-          <div class="social-proof-text">Speziell für KMU in Wien und Niederösterreich.</div>
+          <div class="social-proof-text">Schon 25+ Audits für KMU in Wien und Niederösterreich durchgeführt.</div>
         </div>
       </div>
 
@@ -1077,7 +984,7 @@
             </div>
             <h3>Termin vereinbaren</h3>
             <p>Schreiben Sie uns eine kurze Nachricht mit Ihrem Wunschtermin – wir melden uns innerhalb von 24 Stunden.</p>
-            <a href="https://wa.me/436644123928?text=Hallo%2C%20ich%20möchte%20gerne%20ein%20kostenloses%20Erstgespräch%20vereinbaren." class="btn-glow" target="_blank" rel="noopener">
+            <a href="https://wa.me/436601234567?text=Hallo%2C%20ich%20möchte%20gerne%20ein%20kostenloses%20Erstgespräch%20vereinbaren." class="btn-glow" target="_blank" rel="noopener">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.319 0-4.476-.677-6.3-1.838l-.452-.289-2.638.884.884-2.638-.29-.452A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
               WhatsApp schreiben
             </a>
@@ -1130,7 +1037,7 @@
         <h4>Kontakt</h4>
         <ul class="footer-links">
           <li><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></li>
-          <li><a href="tel:+436644123928">+43 664 4123928</a></li>
+          <li><a href="tel:+436601234567">+43 660 1234567</a></li>
           <li>Wien &amp; Niederösterreich</li>
         </ul>
       </div>
@@ -1138,15 +1045,13 @@
     <div class="footer-bottom">
       <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
       <div>
-        <a href="/impressum.html">Impressum</a>
+        <a href="/impressum.html" style="margin-right:1.5rem;">Impressum</a>
         <a href="/datenschutz.html">Datenschutz</a>
-        <a href="#" data-cookie-settings>Cookie-Einstellungen</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="/js/cookie-banner.js" defer></script>
 <script src="/js/main.js" defer></script>
 
 <script>
@@ -1159,8 +1064,7 @@ const BRANCHEN = {
   installateur: { name:'Installationen Mayr', slug:'installationen-mayr.at', tagline:'Schnell. Sauber. Zuverlässig.', sub:'Heizung, Sanitär und Klima – professionell und termingerecht in der Region Krems.', cta:'Termin vereinbaren', services:[{icon:'🔧',title:'Heizungsanlagen',text:'Einbau und Wartung von Gas-, Öl- und Wärmepumpenanlagen.'},{icon:'🚿',title:'Badsanierung',text:'Komplette Badsanierungen – vom alten Bad zum Wohlfühlbad.'},{icon:'❄️',title:'Klimaanlagen',text:'Klimaanlagen-Montage und Wartung für Wohn- und Gewerberäume.'}], about:'Mayr Installationen ist Ihr verlässlicher Partner für alle Heizungs-, Sanitär- und Klimaarbeiten. Mit über 20 Jahren Erfahrung und einem eingespielten Team sind wir schnell zur Stelle.', city:'Krems & Umgebung', phone:'+43 2732 123456', email:'office@installationen-mayr.at' },
   friseur: { name:'Haarzeit by Sandra', slug:'haarzeit-sandra.at', tagline:'Ihr Auftritt. Unser Handwerk.', sub:'Schnitt, Farbe und Styling – für Ihren perfekten Look im Herzen von Mödling.', cta:'Termin online buchen', services:[{icon:'✂️',title:'Schnitt & Styling',text:'Klassische Schnitte oder moderne Looks – wir beraten Sie persönlich.'},{icon:'🎨',title:'Farbe & Strähnen',text:'Von natürlichen Tönen bis zu trendigen Highlights und Balayage.'},{icon:'💆',title:'Pflege & Behandlung',text:'Pflegende Haarmasken und Treatments für gesundes, glänzendes Haar.'}], about:'Sandra und ihr Team begrüßen Sie herzlich in unserem modernen Salon. Bei uns steht Ihre Zufriedenheit an erster Stelle – in entspannter Atmosphäre und mit viel Liebe zum Detail.', city:'Mödling, Niederösterreich', phone:'+43 2236 456789', email:'hallo@haarzeit-sandra.at' },
   arzt: { name:'Dr. med. Fischer', slug:'ordination-fischer.at', tagline:'Ihre Gesundheit in guten Händen.', sub:'Allgemeinmedizin und Vorsorge – persönlich, ganzheitlich und mit Zeit für Sie in St. Pölten.', cta:'Online Termin buchen', services:[{icon:'🩺',title:'Allgemeinmedizin',text:'Ganzheitliche Betreuung für die gesamte Familie – von jung bis alt.'},{icon:'📋',title:'Vorsorgeuntersuchung',text:'Umfassende Gesundheitschecks zur Früherkennung und Vorbeugung.'},{icon:'💉',title:'Impfungen',text:'Alle gängigen Impfungen – Beratung inklusive.'}], about:'Dr. Fischer betreibt die Ordination seit 2005 mit einem Schwerpunkt auf ganzheitlicher Medizin und persönlicher Betreuung. Kurze Wartezeiten und ein offenes Ohr sind für uns selbstverständlich.', city:'St. Pölten', phone:'+43 2742 789012', email:'ordination@dr-fischer.at' },
-  bakery: { name:'Bäckerei Gruber', slug:'baeckerei-gruber.at', tagline:'Frisch. Ehrlich. Vom Bäcker.', sub:'Handwerklich gebackenes Brot, Gebäck und Torten – täglich frisch in Tulln.', cta:'Vorbestellen', services:[{icon:'🍞',title:'Brot & Gebäck',text:'Sauerteig, Dinkel, Roggen – traditionell gebacken nach eigenen Rezepten.'},{icon:'🎂',title:'Torten & Mehlspeisen',text:'Hochzeitstorten, Geburtstagskuchen und Mehlspeisen nach Wunsch.'},{icon:'☕',title:'Café-Ecke',text:'Frühstück und Jause mit frischen Waren direkt aus der Backstube.'}], about:'Seit vier Generationen backen wir mit denselben Grundsätzen: gute Zutaten, ehrliches Handwerk und Liebe zum Produkt. Kommen Sie vorbei – der Duft frischer Semmeln empfängt Sie täglich ab 6 Uhr.', city:'Tulln, Niederösterreich', phone:'+43 2272 345678', email:'info@baeckerei-gruber.at' },
-  sonstige: { name:'Mein Unternehmen', slug:'mein-unternehmen.at', tagline:'Professionell. Persönlich. Online.', sub:'Ihr lokaler Partner – zuverlässig, kompetent und immer für Sie da.', cta:'Jetzt anfragen', services:[{icon:'⭐',title:'Unsere Leistung',text:'Kompetente Beratung und professionelle Umsetzung – genau auf Ihre Bedürfnisse abgestimmt.'},{icon:'🤝',title:'Persönliche Betreuung',text:'Ein Ansprechpartner für alle Fragen. Wir nehmen uns Zeit für Sie.'},{icon:'📍',title:'Lokal verwurzelt',text:'Aus der Region, für die Region. Wir kennen den Markt und Ihre Kunden.'}], about:'Wir sind ein lokales Unternehmen mit Leidenschaft für unsere Arbeit. Persönliche Betreuung und hohe Qualität stehen bei uns an erster Stelle.', city:'Wien & Niederösterreich', phone:'+43 660 1234567', email:'office@mein-unternehmen.at' }
+  bakery: { name:'Bäckerei Gruber', slug:'baeckerei-gruber.at', tagline:'Frisch. Ehrlich. Vom Bäcker.', sub:'Handwerklich gebackenes Brot, Gebäck und Torten – täglich frisch in Tulln.', cta:'Vorbestellen', services:[{icon:'🍞',title:'Brot & Gebäck',text:'Sauerteig, Dinkel, Roggen – traditionell gebacken nach eigenen Rezepten.'},{icon:'🎂',title:'Torten & Mehlspeisen',text:'Hochzeitstorten, Geburtstagskuchen und Mehlspeisen nach Wunsch.'},{icon:'☕',title:'Café-Ecke',text:'Frühstück und Jause mit frischen Waren direkt aus der Backstube.'}], about:'Seit vier Generationen backen wir mit denselben Grundsätzen: gute Zutaten, ehrliches Handwerk und Liebe zum Produkt. Kommen Sie vorbei – der Duft frischer Semmeln empfängt Sie täglich ab 6 Uhr.', city:'Tulln, Niederösterreich', phone:'+43 2272 345678', email:'info@baeckerei-gruber.at' }
 };
 
 // ─── HELPERS ────────────────────────────────────────
@@ -1215,7 +1119,7 @@ document.getElementById('switchToKonfig').addEventListener('click',()=>{switchPa
 // ─── CONTROLS ───────────────────────────────────────
 document.querySelectorAll('.style-card').forEach(card=>{card.addEventListener('click',()=>{S.style=card.dataset.style;document.querySelectorAll('.style-card').forEach(c=>c.classList.toggle('on',c===card));const defaults={modern:'#4f8ef7',klassisch:'#c17f3a',minimal:'#111111',bold:'#f5d020',organisch:'#6aaa6a',elegant:'#d4af5a'};if(defaults[S.style]){S.accent=defaults[S.style];document.querySelectorAll('.swatch').forEach(sw=>sw.classList.toggle('on',sw.dataset.color===S.accent))}render()})});
 
-document.querySelectorAll('.pills').forEach(g=>{g.addEventListener('click',e=>{const p=e.target.closest('.pill');if(!p)return;S[g.dataset.key]=p.dataset.val;g.querySelectorAll('.pill').forEach(x=>x.classList.toggle('on',x===p));if(g.dataset.key==='branche'){const map={tischlerei:'Handwerk & Gewerbe',installateur:'Installateur / Haustechnik',friseur:'Friseur / Beauty',arzt:'Gesundheit & Pflege',bakery:'Gastronomie',sonstige:'Sonstige'};const sel=document.getElementById('auditBranche');if(sel&&map[S.branche])sel.value=map[S.branche]}render()})});
+document.querySelectorAll('.pills').forEach(g=>{g.addEventListener('click',e=>{const p=e.target.closest('.pill');if(!p)return;S[g.dataset.key]=p.dataset.val;g.querySelectorAll('.pill').forEach(x=>x.classList.toggle('on',x===p));if(g.dataset.key==='branche'){const map={tischlerei:'Tischlerei',installateur:'Installateur',friseur:'Friseur',arzt:'Arztpraxis',bakery:'Bäckerei'};const sel=document.getElementById('branche-select');if(sel&&map[S.branche])sel.value=map[S.branche]}render()})});
 
 document.querySelectorAll('.swatch').forEach(sw=>{sw.addEventListener('click',()=>{S.accent=sw.dataset.color;document.querySelectorAll('.swatch').forEach(x=>x.classList.toggle('on',x===sw));render()})});
 
@@ -1276,7 +1180,7 @@ function updateKonfigSummary(){
 
 // ─── AUDIT STEP CONFIGURATOR ────────────────────────
 // Webhook URL (leicht austauschbar)
-const AUDIT_WEBHOOK_URL = 'https://n8n.standfestdigital.at/webhook/audit-komplett';
+const AUDIT_WEBHOOK_URL = 'https://n8n.standfestdigital.at/webhook/audit';
 const FALLBACK_EMAIL = 'office@standfestdigital.at';
 /*
   POST-Datenformat:
@@ -1312,15 +1216,6 @@ function updateAuditSummary() {
   document.getElementById('sumUrl').textContent = url || 'Keine Website angegeben';
   document.getElementById('sumBranche').textContent = document.getElementById('auditBranche').value;
   document.getElementById('sumRegion').textContent = document.getElementById('auditRegion').value;
-  // Neue optionale Felder in Summary
-  const extras=[];
-  const aus=document.getElementById('auditAusstrahlung')?.value;
-  if(aus) extras.push('Stil: '+aus);
-  const seiten=document.getElementById('auditSeiten')?.value;
-  if(seiten) extras.push('Seiten: '+seiten);
-  if(S.accent) extras.push('Farbe: '+S.accent);
-  const sumExtras=document.getElementById('sumExtras');
-  if(sumExtras) sumExtras.textContent=extras.length?extras.join(' · '):'–';
 }
 
 function showErr(id){const el=document.getElementById(id),e=document.getElementById(id+'-error');if(el)el.classList.add('error');if(e)e.style.display='block'}
@@ -1358,40 +1253,12 @@ const summaryObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{
     updateKonfigSummary();
     const f=document.getElementById('auditFirma');
     if(!f.value&&S.companyName.trim())f.value=S.companyName.trim();
-    const bMap={tischlerei:'Handwerk & Gewerbe',installateur:'Installateur / Haustechnik',friseur:'Friseur / Beauty',arzt:'Gesundheit & Pflege',bakery:'Gastronomie',sonstige:'Sonstige'};
+    const bMap={tischlerei:'Handwerk & Gewerbe',installateur:'Installateur / Haustechnik',friseur:'Friseur / Beauty',arzt:'Gesundheit & Pflege',bakery:'Gastronomie'};
     const b=document.getElementById('auditBranche');
     if(!b.value&&bMap[S.branche])b.value=bMap[S.branche];
   }
 })},{threshold:0.1});
 summaryObserver.observe(auditSection);
-
-// ─── BRANCHE DROPDOWN → KONFIGURATOR SYNC ───────────
-(function(){
-  const sel=document.getElementById('auditBranche');
-  if(!sel) return;
-  const reverseMap={'Handwerk & Gewerbe':'tischlerei','Installateur / Haustechnik':'installateur','Gastronomie':'bakery','Gesundheit & Pflege':'arzt','Handel & Dienstleistung':'sonstige','Friseur / Beauty':'friseur','Kreativ & Beratung':'sonstige','Sonstige':'sonstige'};
-  sel.addEventListener('change',()=>{
-    const val=reverseMap[sel.value];
-    if(val&&BRANCHEN[val]){
-      S.branche=val;
-      document.querySelectorAll('.pills[data-key="branche"] .pill').forEach(p=>p.classList.toggle('on',p.dataset.val===val));
-      render();
-    }
-  });
-})();
-
-// ─── SEKUNDÄRFARBE PICKER SYNC ──────────────────────
-(function(){
-  const picker=document.getElementById('auditFarbeSekundaerPicker');
-  const input=document.getElementById('auditFarbeSekundaer');
-  if(picker&&input){
-    picker.addEventListener('input',e=>{input.value=e.target.value});
-    input.addEventListener('input',e=>{
-      const v=e.target.value.trim();
-      if(/^#[0-9a-fA-F]{6}$/.test(v)) picker.value=v;
-    });
-  }
-})();
 
 // ─── FORM SUBMIT (Timeout 10s + mailto Fallback) ────
 document.getElementById('auditFinalForm').addEventListener('submit',e=>{
@@ -1418,11 +1285,6 @@ document.getElementById('auditFinalForm').addEventListener('submit',e=>{
     konfig_stil:S.style, konfig_branche:S.branche, konfig_farbe:S.accent,
     konfig_firmenname:S.companyName.trim(),
     konfig_prioritaeten:S.priorities.join(', '),
-    referenz_links:(document.getElementById('auditRefLinks')?.value||'').trim(),
-    ausstrahlung:(document.getElementById('auditAusstrahlung')?.value||''),
-    farbe_primaer:S.accent,
-    farbe_sekundaer:(document.getElementById('auditFarbeSekundaer')?.value||'').trim(),
-    seitenanzahl:(document.getElementById('auditSeiten')?.value||''),
     timestamp:new Date().toISOString(),
     quelle:'website-konfigurator'
   };

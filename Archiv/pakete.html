@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- GA4 wird DSGVO-konform über cookie-banner.js geladen (nur nach Consent) -->
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4SGGPLWQMW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4SGGPLWQMW');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pakete & Preise – Standfest Digital</title>
-  <meta name="description" content="Website erstellen lassen in Wien & NÖ: Starter ab 1.490 €, Growth ab 2.490 €, Pro ab 3.990 € – inkl. Social Media & Kontaktwege. Fertig in 10–14 Tagen.">
+  <meta name="description" content="Website erstellen lassen in Wien & NÖ: Starter ab 1.490 €, Growth ab 2.490 €, Pro ab 3.990 € – jeweils inkl. Social Media & Kontaktwege. Transparente Preise, fertig in 10–14 Tagen.">
   <link rel="canonical" href="https://standfestdigital.at/pakete.html">
   <meta property="og:title" content="Pakete & Preise – Standfest Digital">
   <meta property="og:description" content="Drei klare Pakete für Ihren Online-Start. Transparente Preise ab 590 €/Monat.">
@@ -17,14 +24,11 @@
   <meta name="twitter:title" content="Pakete & Preise – ab 1.490 € | Standfest Digital">
   <meta name="twitter:description" content="Drei klare Pakete für Ihren Online-Start. Transparente Preise, fertig in 10–14 Tagen.">
   <meta name="twitter:image" content="https://standfestdigital.at/img/og-image.jpg">
-
-  <!-- Schema.org Breadcrumb -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://standfestdigital.at/"},{"@type":"ListItem","position":2,"name":"Pakete & Preise","item":"https://standfestdigital.at/pakete.html"}]}
-  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 
   <!-- Schema.org Service/Offer -->
@@ -500,22 +504,15 @@
         <li><a href="/kontakt.html">Kontakt</a></li>
         <li><a href="/audit-buchen.html" class="nav-cta">Audit buchen</a></li>
       </ul>
+      <button class="nav-login" id="loginBtn" aria-label="Anmelden">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Anmelden</span>
+      </button>
       <button class="nav-toggle" id="navToggle" aria-label="Menü" aria-expanded="false">
-        <div style="position:relative;width:18px;height:14px"><span></span><span></span><span></span></div>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
-  <!-- Mobile overlay -->
-  <div class="nav-overlay" id="navOverlay">
-    <div>
-      <a href="/leistungen.html">Leistungen</a>
-      <a href="/pakete.html">Pakete</a>
-      <a href="/kontakt.html">Kontakt</a>
-    </div>
-    <div class="nav-overlay-cta">
-      <a href="/audit-buchen.html" class="nav-cta">Audit buchen</a>
-    </div>
-  </div>
 
   <main id="main-content">
     <!-- Hero -->
@@ -661,46 +658,46 @@
           Alle Preise netto zzgl. 20 % USt.
         </p>
 
-        <!-- Scope-Hinweis -->
-        <div class="scope-box" style="margin-bottom:0;">
-          <h3>Dafür empfehlen wir Ihnen gerne Partner</h3>
-          <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:1rem;line-height:1.6;">Wir konzentrieren uns auf das, was wir am besten können. Für spezialisierte Leistungen vermitteln wir Sie an unsere Partnernetzwerk-Profis.</p>
+        <!-- Scope-Schutz -->
+        <div class="scope-box">
+          <h3>Nicht enthalten (für alle Pakete)</h3>
           <ul class="scope-list">
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
-              Logo-Design &amp; Corporate Design
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              Logo-Design / Corporate Design
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
-              Professionelle Texterstellung
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              Texterstellung (Copywriting)
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
-              Foto- &amp; Video-Produktion
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              Foto-/Video-Produktion
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
               Laufende Content-Erstellung
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
-              Bezahlte Werbung (Ads)
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              Rechtstexte / DSGVO (keine Rechtsberatung)
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
-              Native App-Entwicklung
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              Bezahlte Werbung (Ads / Ad-Spend)
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+              App-Entwicklung / individuelle Programmierung
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
               Printmedien
             </li>
           </ul>
         </div>
       </div>
     </section>
-
-    <!-- Spacer -->
-    <div style="height:60px;"></div>
 
     <!-- CTA Section -->
     <section class="cta-section">
@@ -746,7 +743,7 @@
           <h4>Kontakt</h4>
           <ul class="footer-links">
             <li><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></li>
-            <li><a href="tel:+436644123928">+43 664 4123928</a></li>
+            <li><a href="tel:+436601234567">+43 660 1234567</a></li>
             <li>Wien &amp; Niederösterreich</li>
           </ul>
         </div>
@@ -754,15 +751,13 @@
       <div class="footer-bottom">
         <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
         <div>
-          <a href="/impressum.html">Impressum</a>
+          <a href="/impressum.html" style="margin-right:1.5rem;">Impressum</a>
           <a href="/datenschutz.html">Datenschutz</a>
-          <a href="#" data-cookie-settings>Cookie-Einstellungen</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="/js/cookie-banner.js" defer></script>
   <script src="/js/main.js" defer></script>
   <script defer>
     /* Scroll Reveal for packages */

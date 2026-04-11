@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- GA4 wird DSGVO-konform über cookie-banner.js geladen (nur nach Consent) -->
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4SGGPLWQMW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4SGGPLWQMW');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Datenschutzerklärung – Standfest Digital</title>
@@ -9,7 +16,6 @@
   <link rel="canonical" href="https://standfestdigital.at/datenschutz.html">
   <meta property="og:title" content="Datenschutzerklärung – Standfest Digital">
   <meta property="og:description" content="Datenschutzerklärung von Standfest Digital gemäß DSGVO. Informationen zu Hosting, Kontaktformular, Google Fonts und Ihren Rechten.">
-  <meta property="og:image" content="https://standfestdigital.at/img/og-image.jpg">
   <meta property="og:url" content="https://standfestdigital.at/datenschutz.html">
   <meta property="og:image" content="https://standfestdigital.at/img/og-image.jpg">
   <meta property="og:type" content="website">
@@ -17,14 +23,11 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Datenschutzerklärung | Standfest Digital">
   <meta name="twitter:description" content="Datenschutzerklärung von Standfest Digital gemäß DSGVO.">
-
-  <!-- Schema.org Breadcrumb -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://standfestdigital.at/"},{"@type":"ListItem","position":2,"name":"Datenschutzerklärung","item":"https://standfestdigital.at/datenschutz.html"}]}
-  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
   <style>
     /* ── Datenschutz Page Styles ── */
@@ -217,22 +220,15 @@
         <li><a href="/kontakt.html">Kontakt</a></li>
         <li><a href="/audit-buchen.html" class="nav-cta">Audit buchen</a></li>
       </ul>
+      <button class="nav-login" id="loginBtn" aria-label="Anmelden">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Anmelden</span>
+      </button>
       <button class="nav-toggle" id="navToggle" aria-label="Menü" aria-expanded="false">
-        <div style="position:relative;width:18px;height:14px"><span></span><span></span><span></span></div>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
-  <!-- Mobile overlay -->
-  <div class="nav-overlay" id="navOverlay">
-    <div>
-      <a href="/leistungen.html">Leistungen</a>
-      <a href="/pakete.html">Pakete</a>
-      <a href="/kontakt.html">Kontakt</a>
-    </div>
-    <div class="nav-overlay-cta">
-      <a href="/audit-buchen.html" class="nav-cta">Audit buchen</a>
-    </div>
-  </div>
 
   <main id="main-content">
     <!-- Page Header -->
@@ -284,7 +280,7 @@
         </div>
         <p>
           E-Mail: <a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a><br>
-          Telefon: +43 664 4123928<br>
+          Telefon: +43 660 1234567<br>
           Website: <a href="https://standfestdigital.at">standfestdigital.at</a>
         </p>
 
@@ -366,27 +362,49 @@
         <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bearbeitung von Anfragen).</p>
         <p><strong>Speicherdauer:</strong> Ihre Daten werden gelöscht, sobald sie für die Bearbeitung Ihres Anliegens nicht mehr erforderlich sind, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
 
-        <!-- 7. Google Fonts (lokal) -->
-        <h2 id="google-fonts"><span class="section-number">7</span> Google Fonts (lokal eingebunden)</h2>
-        <p>Diese Website nutzt die Schriftart „DM Sans" von Google Fonts. Die Schriftdateien sind <strong>lokal auf unserem Server</strong> gespeichert. Beim Aufruf unserer Website wird <strong>keine Verbindung zu Servern von Google</strong> hergestellt. Es werden keine Daten an Google übermittelt.</p>
+        <!-- 7. Google Fonts -->
+        <h2 id="google-fonts"><span class="section-number">7</span> Google Fonts</h2>
+        <p>Diese Website nutzt die Schriftart „DM Sans" von Google Fonts. Die Einbindung erfolgt über eine externe Verbindung zu Servern von Google (fonts.googleapis.com und fonts.gstatic.com). Beim Aufruf unserer Website wird eine Verbindung zu den Servern von Google hergestellt, wodurch Google Kenntnis darüber erlangt, dass unsere Website über Ihre IP-Adresse aufgerufen wurde.</p>
+        <p><strong>Anbieter:</strong> Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Für den europäischen Wirtschaftsraum und die Schweiz ist Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Irland) als datenschutzrechtlich Verantwortlicher zuständig.</p>
+        <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer einheitlichen und ansprechenden Darstellung unserer Website).</p>
+        <p><strong>Hinweis:</strong> Eine lokale Einbindung der Schriftart ohne Verbindung zu Google-Servern ist als Alternative möglich und wird geprüft.</p>
+        <p>Weitere Informationen zum Datenschutz bei Google finden Sie unter: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a></p>
 
         <!-- 8. Google Analytics -->
         <h2 id="google-analytics"><span class="section-number">8</span> Google Analytics</h2>
-        <p>Diese Website nutzt <strong>Google Analytics 4</strong> zur Analyse des Nutzungsverhaltens. Google Analytics wird <strong>ausschließlich nach Ihrer ausdrücklichen Einwilligung</strong> über unseren Cookie-Banner geladen. Ohne Ihre Zustimmung werden keine Analyse-Cookies gesetzt und kein Tracking-Script geladen.</p>
-        <p>Google Analytics verwendet Cookies – Textdateien, die auf Ihrem Endgerät gespeichert werden und die eine Analyse der Nutzung unserer Website ermöglichen. Die durch das Cookie erzeugten Informationen über Ihre Nutzung dieser Website werden an einen Server von Google übertragen und dort gespeichert. Google Analytics 4 verwendet standardmäßig die IP-Anonymisierung, sodass Ihre IP-Adresse innerhalb der Europäischen Union gekürzt wird.</p>
+        <p>Diese Website nutzt Google Analytics 4, einen Webanalysedienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
+
+        <h3>Zweck der Verarbeitung</h3>
+        <p>Google Analytics hilft uns zu verstehen, wie Besucher unsere Website nutzen – zum Beispiel welche Seiten aufgerufen werden und woher Besucher kommen. Damit können wir unsere Website für Sie verbessern.</p>
+
+        <h3>Erfasste Daten</h3>
+        <p>Google Analytics erfasst unter anderem: aufgerufene Seiten, Verweildauer, verwendetes Gerät und Browser, ungefährer Standort (Land/Region), sowie die Quelle Ihres Besuchs (z.&nbsp;B. Suchmaschine, direkter Aufruf). Ihre IP-Adresse wird von Google anonymisiert, bevor sie gespeichert wird.</p>
+
+        <h3>Rechtsgrundlage</h3>
+        <p>Die Verarbeitung erfolgt auf Grundlage Ihrer Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO.</p>
+
+        <h3>Speicherdauer</h3>
+        <p>Die Daten werden für 14 Monate gespeichert und danach automatisch gelöscht.</p>
+
+        <h3>Widerspruch</h3>
+        <p>Sie können die Erfassung durch Google Analytics verhindern, indem Sie das Browser-Add-on zur Deaktivierung von Google Analytics installieren: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">tools.google.com/dlpage/gaoptout</a></p>
+        <p>Weitere Informationen zum Umgang mit Nutzerdaten bei Google finden Sie in der Datenschutzerklärung von Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a></p>
         <p><strong>Mess-ID:</strong> G-4SGGPLWQMW</p>
-        <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Google Analytics wird nur nach Ihrer ausdrücklichen Einwilligung über den Cookie-Banner aktiviert (Opt-in).</p>
-        <p><strong>Widerruf:</strong> Sie können Ihre Einwilligung jederzeit widerrufen, indem Sie im Footer auf „Cookie-Einstellungen" klicken und „Nur notwendige" wählen. Bereits gesetzte GA-Cookies (_ga, _gid) werden dann gelöscht. Zusätzlich können Sie das Browser-Add-on zur Deaktivierung von Google Analytics installieren: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">tools.google.com/dlpage/gaoptout</a></p>
-        <p><strong>Anbieter:</strong> Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
 
         <!-- 9. Cookies -->
         <h2 id="cookies"><span class="section-number">9</span> Cookies</h2>
         <p>Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden und die Ihr Browser beim nächsten Besuch wieder an die Website sendet. Sie dienen dazu, bestimmte Funktionen zu ermöglichen und die Nutzungserfahrung zu verbessern.</p>
 
-        <h3>Eingesetzte Cookies</h3>
+        <h3>Aktuelle Situation</h3>
+        <p>Unsere Website setzt derzeit <strong>keine eigenen Cookies</strong>. Bei der Nutzung von Google Fonts kann es vorkommen, dass Google eigene Cookies setzt – darauf haben wir keinen Einfluss.</p>
+
+        <h3>Geplante Änderungen</h3>
+        <p>Sobald Google Analytics aktiviert wird, werden Analyse-Cookies gesetzt. In diesem Fall wird ein Cookie-Banner eingerichtet, der Sie vor dem Setzen dieser Cookies um Ihre Einwilligung bittet. Sie können Ihre Einwilligung jederzeit widerrufen.</p>
+
+        <h3>Arten von Cookies</h3>
         <ul>
-          <li><strong>Technisch notwendig:</strong> Wir speichern Ihre Cookie-Einstellung (Consent) im localStorage Ihres Browsers. Dabei handelt es sich technisch nicht um ein Cookie, sondern um einen lokalen Speichereintrag, der keine personenbezogenen Daten an unseren Server übermittelt.</li>
-          <li><strong>Analyse-Cookies (nur mit Einwilligung):</strong> Google Analytics setzt die Cookies <code>_ga</code> (Laufzeit: 2 Jahre) und <code>_gid</code> (Laufzeit: 24 Stunden) zur statistischen Auswertung. Diese werden <strong>nur nach Ihrer ausdrücklichen Zustimmung</strong> im Cookie-Banner gesetzt.</li>
+          <li><strong>Technisch notwendige Cookies:</strong> Diese Cookies sind für den Betrieb der Website erforderlich und können nicht deaktiviert werden. Sie speichern keine personenbezogenen Daten. Aktuell verwenden wir keine technisch notwendigen Cookies.</li>
+          <li><strong>Analyse-Cookies:</strong> Diese Cookies ermöglichen es uns, die Nutzung der Website statistisch auszuwerten. Sie werden nur mit Ihrer ausdrücklichen Einwilligung gesetzt (geplant, noch nicht aktiv).</li>
         </ul>
         <p>Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben. Bei der Deaktivierung von Cookies kann die Funktionalität unserer Website eingeschränkt sein.</p>
 
@@ -458,7 +476,7 @@
           <h4>Kontakt</h4>
           <ul class="footer-links">
             <li><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></li>
-            <li><a href="tel:+436644123928">+43 664 4123928</a></li>
+            <li><a href="tel:+436601234567">+43 660 1234567</a></li>
             <li>Wien &amp; Niederösterreich</li>
           </ul>
         </div>
@@ -466,15 +484,13 @@
       <div class="footer-bottom">
         <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
         <div>
-          <a href="/impressum.html">Impressum</a>
+          <a href="/impressum.html" style="margin-right:1.5rem;">Impressum</a>
           <a href="/datenschutz.html">Datenschutz</a>
-          <a href="#" data-cookie-settings>Cookie-Einstellungen</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="/js/cookie-banner.js" defer></script>
   <script src="/js/main.js" defer></script>
 </body>
 </html>

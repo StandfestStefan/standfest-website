@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- GA4 wird DSGVO-konform über cookie-banner.js geladen (nur nach Consent) -->
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4SGGPLWQMW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4SGGPLWQMW');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Standfest Digital – Website & Anfragen in 10–14 Tagen</title>
-  <meta name="description" content="In 10–14 Tagen online: Website, Social Media & Kontaktwege für KMU in Wien & NÖ. Jetzt 48h-Audit für 199 € buchen.">
+  <meta name="description" content="In 10–14 Tagen professionell online: Website, Social-Media-Basics und klare Kontaktwege für KMU in Wien & Niederösterreich. Jetzt 48h-Audit für 199 € buchen.">
   <link rel="canonical" href="https://standfestdigital.at/">
   <meta property="og:title" content="Standfest Digital – Website & Anfragen in 10–14 Tagen">
   <meta property="og:description" content="Professionelle Website, Social-Media-Basics und klare Kontaktwege für KMU in Wien & Niederösterreich. In 10–14 Tagen online.">
@@ -17,9 +24,11 @@
   <meta name="twitter:title" content="Standfest Digital – Website & Anfragen für KMU in Wien">
   <meta name="twitter:description" content="In 10–14 Tagen professionell online: Website, Social-Media-Basics und klare Kontaktwege für KMU in Wien & Niederösterreich.">
   <meta name="twitter:image" content="https://standfestdigital.at/img/og-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 
   <!-- Schema.org LocalBusiness -->
@@ -30,7 +39,7 @@
     "name": "Standfest Digital",
     "description": "Webdesign, Social-Media-Setup & Kontaktwege für KMU in Wien und Niederösterreich.",
     "url": "https://standfestdigital.at",
-    "telephone": "+436644123928",
+    "telephone": "+436601234567",
     "email": "office@standfestdigital.at",
     "address": {
       "@type": "PostalAddress",
@@ -43,7 +52,63 @@
   }
   </script>
 
-  <!-- FAQ-Schema wurde auf leistungen.html verschoben -->
+  <!-- Schema.org FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Was kostet eine Website bei Standfest Digital?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Das Starter-Paket beginnt bei 1.490 € Setup plus 590 € monatlich. Darin enthalten sind Website, Social-Media-Setup und Kontaktwege. Alle Pakete auf standfestdigital.at/pakete.html."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie läuft der Prozess ab?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nach dem Audit und der Paketauswahl starten wir mit einem kurzen Kickoff. In 10–12 Tagen bauen wir alles auf – mit Zwischenständen und Feedback-Möglichkeit. Insgesamt 10–14 Tage vom Start bis zum fertigen Online-Auftritt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Brauche ich vorher Texte und Bilder?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Wenn Sie Texte und Fotos haben, arbeiten wir damit. Falls nicht, helfen wir Ihnen, die wichtigsten Inhalte zusammenzustellen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was ist im 48h-Audit enthalten?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Der Audit kostet 199 € und liefert in 48 Stunden einen 1-Pager mit den fünf wichtigsten Maßnahmen plus ein persönliches Erklär-Video. Die 199 € werden bei einer Paketbuchung vollständig angerechnet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kann ich die Website danach selbst bearbeiten?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja. Einfache Änderungen wie Texte oder Bilder können Sie selbst vornehmen. Für größere Anpassungen sind wir als Ansprechpartner da – je nach Paket im monatlichen Support enthalten."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Für welche Branchen arbeitet ihr?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Wir arbeiten mit kleinen Unternehmen aller Branchen in Wien und Niederösterreich – besonders Handwerk, Gastronomie, lokale Dienstleister und Gesundheitsberufe."
+        }
+      }
+    ]
+  }
+  </script>
 
   <style>
     /* ===== INDEX – Seitenspezifische Styles ===== */
@@ -222,9 +287,9 @@
     }
 
     .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
       display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
       color: var(--text-muted); font-size: 0.8125rem; font-weight: 500; z-index: 2;
-      margin-top: 1rem;
     }
     .hero-scroll-line {
       width: 1px; height: 32px;
@@ -409,8 +474,6 @@
       padding: 40px 32px;
       position: relative;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
       transition: border-color var(--transition), transform var(--transition);
     }
     .pillar-card:hover {
@@ -447,7 +510,7 @@
       font-size: 0.925rem; color: var(--text-muted);
       line-height: 1.7; margin-bottom: 1.25rem;
     }
-    .pillar-features { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+    .pillar-features { list-style: none; padding: 0; margin: 0; }
     .pillar-features li {
       padding: 0.5rem 0 0.5rem 1.5rem;
       font-size: 0.875rem; color: var(--text-muted);
@@ -473,53 +536,46 @@
       max-width: 680px;
       margin: 0 auto;
       position: relative;
-      padding-left: 56px;
+      padding-left: 48px;
     }
     .timeline-track {
       position: absolute;
-      left: 27px; top: 56px; bottom: 56px;
-      width: 0;
-      border-left: 2px dashed var(--border);
-      background: none;
-      z-index: 0;
+      left: 15px; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border);
     }
     .timeline-beam {
       position: absolute;
-      left: 27px; top: 56px;
-      width: 0; height: 0;
-      border-left: 2px solid var(--accent);
-      background: none;
+      left: 15px; top: 0;
+      width: 2px; height: 0;
+      background: linear-gradient(to bottom, var(--accent), rgba(74,124,89,0.3));
       transition: height 0.1s linear;
-      z-index: 0;
+      z-index: 1;
     }
 
     .timeline-step {
       position: relative;
       padding: 0 0 56px 0;
-      z-index: 2;
     }
     .timeline-step:last-child { padding-bottom: 0; }
 
     .timeline-dot {
       position: absolute;
-      left: -56px; top: 0;
-      width: 56px; height: 56px;
+      left: -48px; top: 4px;
+      width: 32px; height: 32px;
       border-radius: 50%;
-      background: var(--accent);
-      border: 3px solid rgba(74,124,89,0.5);
+      background: var(--bg-card);
+      border: 2px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; font-weight: 800;
-      color: #fff;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-      box-shadow: 0 4px 14px rgba(74,124,89,0.35);
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--text-muted);
       transition: all 0.4s ease;
-      z-index: 3;
+      z-index: 2;
     }
     .timeline-dot.reached {
-      border-color: var(--accent-hover);
-      background: var(--accent-hover);
-      color: #fff;
-      box-shadow: 0 4px 18px rgba(74,124,89,0.45), 0 0 0 6px rgba(74,124,89,0.18);
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--bg-primary);
     }
 
     .timeline-tag {
@@ -537,10 +593,9 @@
     .timeline-step p { font-size: 0.9rem; color: var(--text-muted); margin: 0; line-height: 1.7; }
 
     @media (max-width: 480px) {
-      .timeline { padding-left: 48px; }
-      .timeline-dot { left: -48px; width: 44px; height: 44px; font-size: 1rem; }
-      .timeline-track, .timeline-beam { left: 21px; top: 44px; }
-      .timeline-track { bottom: 44px; }
+      .timeline { padding-left: 40px; }
+      .timeline-dot { left: -40px; width: 28px; height: 28px; font-size: 0.75rem; }
+      .timeline-track, .timeline-beam { left: 13px; }
     }
 
 
@@ -619,7 +674,15 @@
       position: relative;
       overflow: hidden;
     }
-    /* Dekorativer Hintergrund-Glow entfernt (wirkte wie grünes Rechteck) */
+    .audit-card::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 300px;
+      background: radial-gradient(ellipse, rgba(74,124,89,0.1), transparent);
+      pointer-events: none;
+    }
     .audit-card > * { position: relative; z-index: 1; }
 
     .audit-eyebrow {
@@ -906,8 +969,6 @@
       margin-bottom: 1.25rem;
       display: flex;
       justify-content: center;
-      align-items: center;
-      min-height: 180px;
     }
 
     /* Laptop-Mockup */
@@ -1230,22 +1291,15 @@
         <li><a href="/kontakt.html">Kontakt</a></li>
         <li><a href="/audit-buchen.html" class="nav-cta">Audit buchen</a></li>
       </ul>
+      <button class="nav-login" id="loginBtn" aria-label="Anmelden">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Anmelden</span>
+      </button>
       <button class="nav-toggle" id="navToggle" aria-label="Menü" aria-expanded="false">
-        <div style="position:relative;width:18px;height:14px"><span></span><span></span><span></span></div>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
-  <!-- Mobile overlay -->
-  <div class="nav-overlay" id="navOverlay">
-    <div>
-      <a href="/leistungen.html">Leistungen</a>
-      <a href="/pakete.html">Pakete</a>
-      <a href="/kontakt.html">Kontakt</a>
-    </div>
-    <div class="nav-overlay-cta">
-      <a href="/audit-buchen.html" class="nav-cta">Audit buchen</a>
-    </div>
-  </div>
 
 
   <main id="main-content">
@@ -1525,7 +1579,7 @@
             Unsere drei Säulen
           </span>
           <h2 id="pillars-heading">Alles was Sie online brauchen – aus einer Hand</h2>
-          <p class="subheading" style="margin: 1rem auto 0;">Kein Stückwerk, sondern ein stimmiges Gesamtpaket. Website, lokale Sichtbarkeit und Kontaktwege greifen ineinander.</p>
+          <p class="subheading" style="margin: 1rem auto 0;">Kein Stückwerk, sondern ein stimmiges Gesamtpaket. Website, Social Media und Kontaktwege greifen ineinander.</p>
         </div>
 
         <div class="pillars-grid">
@@ -1580,15 +1634,15 @@
               </div>
             </div>
             <div class="pillar-icon">
-              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
             </div>
-            <h3>Lokale Sichtbarkeit</h3>
-            <p>Google Business, Social-Profile und Brancheneinträge – damit Kunden Sie finden.</p>
+            <h3>Social Media</h3>
+            <p>Profile die professionell aussehen und zu Ihrer Website passen.</p>
             <ul class="pillar-features">
-              <li>Google Business Profil einrichten</li>
-              <li>Instagram, Facebook oder LinkedIn Setup</li>
+              <li>Facebook &amp; Instagram Profil-Setup</li>
               <li>Einheitliches Erscheinungsbild</li>
               <li>Bio-Texte und Profilbilder</li>
+              <li>Startvorlagen für erste Beiträge</li>
             </ul>
           </div>
 
@@ -1691,10 +1745,10 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
               Über uns
             </span>
-            <h2 id="about-heading">Ein Team aus Niederösterreich.<br>Für kleine Betriebe.</h2>
-            <p class="lead">Wir sind ein kleines Team aus Niederösterreich – und wir glauben, dass jedes Unternehmen einen professionellen Online-Auftritt verdient. Egal ob Tischlerei, Friseursalon oder Installateur.</p>
+            <h2 id="about-heading">Zwei Webdesigner aus Niederösterreich.<br>Für kleine Betriebe.</h2>
+            <p class="lead">Wir sind Stefan und ein Partner – und wir glauben, dass jedes Unternehmen einen professionellen Online-Auftritt verdient. Egal ob Tischlerei, Friseursalon oder Installateur.</p>
             <p>Wir sprechen die Sprache kleiner Betriebe, nicht Marketing-Deutsch. Bei uns gibt es keine Monats-Meetings, keine Buzzwords, keine endlosen Abstimmungsrunden. Stattdessen: klare Pakete, faire Preise und ein Ergebnis in 10–14 Tagen.</p>
-            <p>Weil wir selbst ein kleiner Betrieb sind, wissen wir, worauf es ankommt: Dass es funktioniert. Dass es gut aussieht. Und dass es sich am Ende in echten Anfragen bemerkbar macht.</p>
+            <p>Weil wir selbst ein kleines Team sind, wissen wir, worauf es ankommt: Dass es funktioniert. Dass es gut aussieht. Und dass es sich am Ende in echten Anfragen bemerkbar macht.</p>
           </div>
 
           <div class="about-visual reveal" data-delay="0.15">
@@ -1910,7 +1964,65 @@
     </section>
 
 
-    <!-- FAQ wurde auf leistungen.html verschoben -->
+    <!-- ===== S8: FAQ ===== -->
+    <section class="faq-section" aria-labelledby="faq-heading">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <span class="section-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Häufige Fragen
+          </span>
+          <h2 id="faq-heading">Das werden wir oft gefragt</h2>
+        </div>
+
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question">Was kostet eine Website bei Standfest Digital?</button>
+            <div class="faq-answer">
+              <p>Unser Starter-Paket beginnt bei 1.490 € Setup plus 590 € monatlich. Darin enthalten sind Website, Social-Media-Setup und Kontaktwege – alles aufeinander abgestimmt. Transparente Preise, keine versteckten Kosten. Alle Pakete finden Sie auf unserer <a href="/pakete.html">Pakete-Seite</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">Wie läuft der Prozess ab?</button>
+            <div class="faq-answer">
+              <p>Nach dem Audit und der Paketauswahl starten wir mit einem kurzen Kickoff. In den nächsten 10–12 Tagen bauen wir alles auf – Sie bekommen Zwischenstände und können Feedback geben. Am Ende schalten wir alles live. Insgesamt dauert es 10–14 Tage vom Start bis zum fertigen Online-Auftritt.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">Brauche ich vorher Texte und Bilder?</button>
+            <div class="faq-answer">
+              <p>Wenn Sie Texte und Fotos haben – wunderbar, wir arbeiten damit. Falls nicht, helfen wir Ihnen dabei, die wichtigsten Inhalte zusammenzustellen. Profi-Fotografie und professionelles Copywriting sind nicht im Paket enthalten, aber wir empfehlen Ihnen gerne Partner dafür.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">Was ist im 48h-Audit enthalten?</button>
+            <div class="faq-answer">
+              <p>Der Audit kostet 199 € und liefert in 48 Stunden: einen 1-Pager mit den fünf wichtigsten Maßnahmen für Ihre Online-Präsenz, priorisiert nach Dringlichkeit, plus ein persönliches Erklär-Video. Die 199 € werden bei einer Paketbuchung vollständig angerechnet.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">Kann ich die Website danach selbst bearbeiten?</button>
+            <div class="faq-answer">
+              <p>Ja. Wir bauen Ihre Website so, dass Sie einfache Änderungen wie Texte oder Bilder selbst vornehmen können. Für größere Anpassungen oder neue Seiten sind wir als Ansprechpartner da – je nach Paket im monatlichen Support enthalten.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">Für welche Branchen arbeitet ihr?</button>
+            <div class="faq-answer">
+              <p>Wir arbeiten mit kleinen Unternehmen aller Branchen in Wien und Niederösterreich. Besonders oft mit Handwerksbetrieben, Gastronomiebetrieben, lokalen Dienstleistern und Gesundheitsberufen. Entscheidend ist nicht die Branche, sondern dass Sie professionell online auftreten möchten.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
 
 
     <!-- ===== S9: FINALER CTA ===== -->
@@ -1958,7 +2070,7 @@
           <h4>Kontakt</h4>
           <ul class="footer-links">
             <li><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></li>
-            <li><a href="tel:+436644123928">+43 664 4123928</a></li>
+            <li><a href="tel:+436601234567">+43 660 1234567</a></li>
             <li>Wien &amp; Niederösterreich</li>
           </ul>
         </div>
@@ -1966,15 +2078,13 @@
       <div class="footer-bottom">
         <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
         <div>
-          <a href="/impressum.html">Impressum</a>
+          <a href="/impressum.html" style="margin-right:1.5rem;">Impressum</a>
           <a href="/datenschutz.html">Datenschutz</a>
-          <a href="#" data-cookie-settings>Cookie-Einstellungen</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="/js/cookie-banner.js" defer></script>
   <script src="/js/main.js" defer></script>
 
   <!-- Seitenspezifisches JS -->

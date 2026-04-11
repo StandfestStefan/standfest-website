@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website-Analyse – Standfest Digital</title>
+<meta name="robots" content="noindex">
+<style>
+  @import url('css/style.css');
+
+  /* ── Report Overrides ── */
+  :root {
+    --bg-primary: #1e2119;
+    --bg-card: #2a2e25;
+    --bg-card-hover: #333828;
+    --accent: #4a7c59;
+    --accent-hover: #5a9469;
+    --text-primary: #e8e6e1;
+    --text-muted: #a8a49c;
+    --border: rgba(255,255,255,0.08);
+    --ok: #4a7c59;
+    --warn: #c4963a;
+    --err: #b54a4a;
+    --font: 'DM Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: -0.01em; }
+  h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; }
+
+  .report-header {
+    text-align: center;
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+  .report-header p { color: var(--text-muted); font-size: 0.9375rem; }
+  .timestamp { color: var(--text-muted); font-size: 0.8125rem; margin-top: 0.5rem; }
+
+  /* Summary Cards */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .summary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .summary-card .number {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .summary-card .label {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+  .number.ok { color: var(--ok); }
+  .number.warn { color: var(--warn); }
+  .number.err { color: var(--err); }
+  .number.neutral { color: var(--text-primary); }
+
+  /* Details/Summary Sections */
+  details {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  summary {
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+    font-size: 1.0625rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  summary:hover { background: var(--bg-card-hover); }
+  summary::marker { content: ''; }
+  summary::before {
+    content: '\25B6';
+    font-size: 0.75rem;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  details[open] > summary::before { transform: rotate(90deg); }
+  .detail-body { padding: 0 1.25rem 1.25rem; }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    margin-left: auto;
+  }
+  .badge-ok { background: rgba(74,124,89,0.15); color: var(--ok); }
+  .badge-warn { background: rgba(196,150,58,0.15); color: var(--warn); }
+  .badge-err { background: rgba(181,74,74,0.15); color: var(--err); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+  th {
+    text-align: left;
+    padding: 0.625rem 0.75rem;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  td {
+    padding: 0.625rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .status { font-weight: 600; white-space: nowrap; }
+  .s-ok { color: var(--ok); }
+  .s-warn { color: var(--warn); }
+  .s-err { color: var(--err); }
+  .mono { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.8125rem; }
+  .truncate { max-width: 350px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .small { font-size: 0.8125rem; color: var(--text-muted); }
+
+  /* TODO List */
+  .todo-list { list-style: none; }
+  .todo-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .todo-item:last-child { border-bottom: none; }
+  .todo-prio {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    min-width: 32px;
+    text-align: center;
+  }
+  .p0 { background: rgba(181,74,74,0.2); color: var(--err); }
+  .p1 { background: rgba(196,150,58,0.2); color: var(--warn); }
+  .p2 { background: rgba(74,124,89,0.2); color: var(--ok); }
+
+  .note-box {
+    background: rgba(196,150,58,0.08);
+    border: 1px solid rgba(196,150,58,0.2);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: var(--warn);
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    body { padding: 1rem; }
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    table { font-size: 0.8125rem; }
+    td, th { padding: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================= HEADER ============================= -->
+<div class="report-header">
+  <h1>Website-Analyse Report</h1>
+  <p>Standfest Digital – standfestdigital.at</p>
+  <div class="timestamp">Analyse-Zeitpunkt: 11.04.2026 | Verzeichnis: C:\StandfestDigital\standfest-website</div>
+</div>
+
+<!-- ============================= ZUSAMMENFASSUNG ============================= -->
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="number neutral">31</div>
+    <div class="label">Dateien gesamt</div>
+  </div>
+  <div class="summary-card">
+    <div class="number neutral">9</div>
+    <div class="label">HTML-Seiten</div>
+  </div>
+  <div class="summary-card">
+    <div class="number neutral">555 KB</div>
+    <div class="label">Gesamtgroesse</div>
+  </div>
+  <div class="summary-card">
+    <div class="number err">4</div>
+    <div class="label">Kritische Fehler</div>
+  </div>
+  <div class="summary-card">
+    <div class="number warn">8</div>
+    <div class="label">Warnungen</div>
+  </div>
+  <div class="summary-card">
+    <div class="number ok">38</div>
+    <div class="label">Checks bestanden</div>
+  </div>
+</div>
+
+<!-- ============================= 1. DATEI-INVENTAR ============================= -->
+<details open>
+  <summary>1. Datei-Inventar <span class="badge badge-ok">31 Dateien</span></summary>
+  <div class="detail-body">
+    <h3>HTML-Dateien</h3>
+    <table>
+      <tr><th>Datei</th><th>Groesse</th><th>Letzte Aenderung</th></tr>
+      <tr><td class="mono">index.html</td><td>79.5 KB</td><td>09.06.2026</td></tr>
+      <tr><td class="mono">audit-buchen.html</td><td>107.0 KB</td><td>09.06.2026</td></tr>
+      <tr><td class="mono">leistungen.html</td><td>60.9 KB</td><td>09.06.2026</td></tr>
+      <tr><td class="mono">kunden.html</td><td>33.2 KB</td><td>09.06.2026</td></tr>
+      <tr><td class="mono">pakete.html</td><td>28.5 KB</td><td>09.06.2026</td></tr>
+      <tr><td class="mono">kontakt.html</td><td>26.9 KB</td><td>09.06.2026</td></tr>
+      <tr><td class="mono">datenschutz.html</td><td>25.6 KB</td><td>09.06.2026</td></tr>
+      <tr><td class="mono">impressum.html</td><td>11.1 KB</td><td>09.06.2026</td></tr>
+      <tr><td class="mono">404.html</td><td>5.5 KB</td><td>09.06.2026</td></tr>
+    </table>
+
+    <h3>CSS / JS</h3>
+    <table>
+      <tr><th>Datei</th><th>Groesse</th></tr>
+      <tr><td class="mono">css/style.css</td><td>26.1 KB</td></tr>
+      <tr><td class="mono">js/main.js</td><td>9.1 KB</td></tr>
+      <tr><td class="mono">js/cookie-banner.js</td><td>9.2 KB</td></tr>
+      <tr><td class="mono">js/branch-assistant.js</td><td>22.0 KB</td></tr>
+    </table>
+
+    <h3>Fonts (lokal)</h3>
+    <table>
+      <tr><th>Datei</th><th>Groesse</th></tr>
+      <tr><td class="mono">fonts/dm-sans-latin-400-normal.woff2</td><td>13.9 KB</td></tr>
+      <tr><td class="mono">fonts/dm-sans-latin-500-normal.woff2</td><td>14.0 KB</td></tr>
+      <tr><td class="mono">fonts/dm-sans-latin-600-normal.woff2</td><td>13.8 KB</td></tr>
+      <tr><td class="mono">fonts/dm-sans-latin-700-normal.woff2</td><td>14.0 KB</td></tr>
+    </table>
+
+    <h3>Bilder / Icons</h3>
+    <table>
+      <tr><th>Datei</th><th>Groesse</th></tr>
+      <tr><td class="mono">img/og-image.jpg</td><td>63.0 KB</td></tr>
+      <tr><td class="mono">img/apple-touch-icon.png</td><td>3.1 KB</td></tr>
+      <tr><td class="mono">img/favicon.svg</td><td>0.3 KB</td></tr>
+      <tr><td class="mono">favicon.ico</td><td>0.3 KB</td></tr>
+    </table>
+
+    <h3>Sonstige</h3>
+    <table>
+      <tr><th>Datei</th><th>Groesse</th></tr>
+      <tr><td class="mono">robots.txt</td><td>0.1 KB</td></tr>
+      <tr><td class="mono">sitemap.xml</td><td>1.3 KB</td></tr>
+      <tr><td class="mono">nginx/standfestdigital.at.conf</td><td>4.2 KB</td></tr>
+      <tr><td class="mono">nginx/security-headers.conf</td><td>1.1 KB</td></tr>
+      <tr><td class="mono">package-lock.json</td><td>0.1 KB</td></tr>
+      <tr><td class="mono">.gitignore</td><td>0.04 KB</td></tr>
+      <tr><td class="mono">README.md</td><td>0.02 KB</td></tr>
+      <tr><td class="mono">AUDIT-ERGEBNIS.md</td><td>15.9 KB</td></tr>
+      <tr><td class="mono">GO-LIVE-CHECKLIST.md</td><td>3.1 KB</td></tr>
+      <tr><td class="mono">Ohne Titel.rtf</td><td>0.4 KB</td></tr>
+    </table>
+  </div>
+</details>
+
+<!-- ============================= 2. ENCODING ============================= -->
+<details>
+  <summary>2. Encoding-Check <span class="badge badge-ok">Alles OK</span></summary>
+  <div class="detail-body">
+    <table>
+      <tr><th>Datei</th><th>BOM</th><th>Mojibake</th><th>charset UTF-8</th><th>Status</th></tr>
+      <tr><td class="mono">index.html</td><td class="status s-ok">Nein</td><td class="status s-ok">Keine</td><td class="status s-ok">Ja</td><td class="status s-ok">OK</td></tr>
+      <tr><td class="mono">leistungen.html</td><td class="status s-ok">Nein</td><td class="status s-ok">Keine</td><td class="status s-ok">Ja</td><td class="status s-ok">OK</td></tr>
+      <tr><td class="mono">pakete.html</td><td class="status s-ok">Nein</td><td class="status s-ok">Keine</td><td class="status s-ok">Ja</td><td class="status s-ok">OK</td></tr>
+      <tr><td class="mono">kontakt.html</td><td class="status s-ok">Nein</td><td class="status s-ok">Keine</td><td class="status s-ok">Ja</td><td class="status s-ok">OK</td></tr>
+      <tr><td class="mono">kunden.html</td><td class="status s-ok">Nein</td><td class="status s-ok">Keine</td><td class="status s-ok">Ja</td><td class="status s-ok">OK</td></tr>
+      <tr><td class="mono">audit-buchen.html</td><td class="status s-ok">Nein</td><td class="status s-ok">Keine</td><td class="status s-ok">Ja</td><td class="status s-ok">OK</td></tr>
+      <tr><td class="mono">datenschutz.html</td><td class="status s-ok">Nein</td><td class="status s-ok">Keine</td><td class="status s-ok">Ja</td><td class="status s-ok">OK</td></tr>
+      <tr><td class="mono">impressum.html</td><td class="status s-ok">Nein</td><td class="status s-ok">Keine</td><td class="status s-ok">Ja</td><td class="status s-ok">OK</td></tr>
+      <tr><td class="mono">404.html</td><td class="status s-ok">Nein</td><td class="status s-ok">Keine</td><td class="status s-ok">Ja</td><td class="status s-ok">OK</td></tr>
+    </table>
+  </div>
+</details>
+
+<!-- ============================= 3. SEO ============================= -->
+<details>
+  <summary>3. SEO-Check <span class="badge badge-warn">3 Warnungen</span></summary>
+  <div class="detail-body">
+    <table>
+      <tr><th>Datei</th><th>title</th><th>meta description</th><th>Laenge</th><th>canonical</th><th>OG Tags</th><th>H1</th><th>robots</th></tr>
+      <tr>
+        <td class="mono">index.html</td>
+        <td class="status s-ok">Standfest Digital – Website &amp; Anfragen in 10–14 Tagen</td>
+        <td class="status s-ok truncate">In 10–14 Tagen online: Website, Social Media &amp; Kontaktwege...</td>
+        <td>121</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Alle</td>
+        <td class="status s-ok">1</td>
+        <td class="status s-ok">–</td>
+      </tr>
+      <tr>
+        <td class="mono">leistungen.html</td>
+        <td class="status s-ok">Leistungen – Website, Lokale Sichtbarkeit &amp; Kontaktwege | Standfest Digital</td>
+        <td class="status s-ok truncate">Professionelle Website, Google Business Setup...</td>
+        <td>157</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Alle</td>
+        <td class="status s-ok">1</td>
+        <td class="status s-ok">–</td>
+      </tr>
+      <tr>
+        <td class="mono">pakete.html</td>
+        <td class="status s-ok">Pakete &amp; Preise – Standfest Digital</td>
+        <td class="status s-warn truncate">162 Zeichen (leicht ueber 160)</td>
+        <td class="status s-warn">162</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Alle</td>
+        <td class="status s-ok">1</td>
+        <td class="status s-ok">–</td>
+      </tr>
+      <tr>
+        <td class="mono">kontakt.html</td>
+        <td class="status s-ok">Kontakt – Standfest Digital</td>
+        <td class="status s-ok truncate">Kontakt zu Standfest Digital – Webdesign-Agentur...</td>
+        <td>160</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Alle</td>
+        <td class="status s-ok">1</td>
+        <td class="status s-ok">–</td>
+      </tr>
+      <tr>
+        <td class="mono">kunden.html</td>
+        <td class="status s-ok">Kundenkonto – Standfest Digital</td>
+        <td class="status s-warn">FEHLT</td>
+        <td>–</td>
+        <td class="status s-warn">Fehlt</td>
+        <td class="status s-warn">Fehlen</td>
+        <td class="status s-ok">1</td>
+        <td class="status s-ok">noindex, nofollow</td>
+      </tr>
+      <tr>
+        <td class="mono">audit-buchen.html</td>
+        <td class="status s-ok">48h Online-Audit buchen – 199 EUR | Standfest Digital</td>
+        <td class="status s-ok truncate">Website-Audit fuer KMU in Wien &amp; NOe...</td>
+        <td>162</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Alle</td>
+        <td class="status s-err">7 (!!)</td>
+        <td class="status s-ok">–</td>
+      </tr>
+      <tr>
+        <td class="mono">datenschutz.html</td>
+        <td class="status s-ok">Datenschutzerklaerung – Standfest Digital</td>
+        <td class="status s-ok truncate">Datenschutzerklaerung von Standfest Digital...</td>
+        <td>133</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-warn">og:image doppelt</td>
+        <td class="status s-ok">1</td>
+        <td class="status s-ok">–</td>
+      </tr>
+      <tr>
+        <td class="mono">impressum.html</td>
+        <td class="status s-ok">Impressum – Standfest Digital</td>
+        <td class="status s-ok truncate">Impressum von Standfest Digital...</td>
+        <td>144</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Alle</td>
+        <td class="status s-ok">1</td>
+        <td class="status s-ok">–</td>
+      </tr>
+      <tr>
+        <td class="mono">404.html</td>
+        <td class="status s-ok">Seite nicht gefunden | Standfest Digital</td>
+        <td class="status s-warn">FEHLT</td>
+        <td>–</td>
+        <td class="status s-warn">Fehlt</td>
+        <td class="status s-warn">Fehlen</td>
+        <td class="status s-ok">1</td>
+        <td class="status s-ok">noindex</td>
+      </tr>
+    </table>
+
+    <div class="note-box">
+      <strong>audit-buchen.html:</strong> 7 H1-Tags gefunden! 1 im HTML, 6 weitere in JavaScript-Template-Literals (Design-Konfigurator-Preview). Die JS-generierten H1s sind im DOM problematisch fuer SEO-Crawler.<br>
+      <strong>kunden.html / 404.html:</strong> Fehlende Meta-Description und OG-Tags sind akzeptabel, da beide auf noindex stehen.<br>
+      <strong>datenschutz.html:</strong> og:image-Tag ist doppelt vorhanden (Zeile 13 + 14).
+    </div>
+  </div>
+</details>
+
+<!-- ============================= 4. DSGVO ============================= -->
+<details>
+  <summary>4. DSGVO-Check <span class="badge badge-ok">Konform</span></summary>
+  <div class="detail-body">
+    <table>
+      <tr><th>Datei</th><th>Cookie-Banner</th><th>GA4 direkt?</th><th>Google Fonts extern?</th><th>Datenschutz-Link</th><th>Impressum-Link</th></tr>
+      <tr>
+        <td class="mono">index.html</td>
+        <td class="status s-ok">Ja (cookie-banner.js)</td>
+        <td class="status s-ok">Nein (nur via Consent)</td>
+        <td class="status s-ok">Nein (lokal)</td>
+        <td class="status s-ok">Ja (Footer)</td>
+        <td class="status s-ok">Ja (Footer)</td>
+      </tr>
+      <tr>
+        <td class="mono">leistungen.html</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Ja</td>
+      </tr>
+      <tr>
+        <td class="mono">pakete.html</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Ja</td>
+      </tr>
+      <tr>
+        <td class="mono">kontakt.html</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Ja</td>
+      </tr>
+      <tr>
+        <td class="mono">kunden.html</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Ja</td>
+      </tr>
+      <tr>
+        <td class="mono">audit-buchen.html</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Ja</td>
+      </tr>
+      <tr>
+        <td class="mono">datenschutz.html</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Nein (nur erwaehnt)</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Ja</td>
+      </tr>
+      <tr>
+        <td class="mono">impressum.html</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Ja</td>
+      </tr>
+      <tr>
+        <td class="mono">404.html</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Nein</td>
+        <td class="status s-ok">Ja</td>
+        <td class="status s-ok">Ja</td>
+      </tr>
+    </table>
+    <p class="small" style="margin-top:0.75rem;">GA4 (G-4SGGPLWQMW) wird ausschliesslich ueber cookie-banner.js nach explizitem Consent geladen. Google Fonts (DM Sans) sind lokal eingebunden – kein DSGVO-Verstoss. Alle Seiten haben Datenschutz- und Impressum-Links im Footer. Cookie-Einstellungen Button im Footer vorhanden.</p>
+  </div>
+</details>
+
+<!-- ============================= 5. FUNKTIONALITAET ============================= -->
+<details>
+  <summary>5. Funktionalitaet <span class="badge badge-ok">Links OK</span></summary>
+  <div class="detail-body">
+    <h3>Interne Links</h3>
+    <table>
+      <tr><th>Link-Ziel</th><th>Vorkommen</th><th>Datei existiert?</th></tr>
+      <tr><td class="mono">/</td><td>21x</td><td class="status s-ok">Ja (index.html)</td></tr>
+      <tr><td class="mono">/leistungen.html</td><td>28x</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">/pakete.html</td><td>32x</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">/kontakt.html</td><td>35x</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">/audit-buchen.html</td><td>32x</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">/impressum.html</td><td>18x</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">/datenschutz.html</td><td>18x</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">/kunden.html</td><td>1x</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">/css/style.css</td><td>9x</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">/js/main.js</td><td>9x</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">/js/cookie-banner.js</td><td>9x</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">/img/favicon.svg</td><td>9x</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">/img/apple-touch-icon.png</td><td>9x</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">/favicon.ico</td><td>9x</td><td class="status s-ok">Ja</td></tr>
+    </table>
+    <p class="small">Alle internen Links verweisen auf existierende Dateien. Keine toten Links gefunden.</p>
+
+    <h3>Bilder</h3>
+    <p class="small">Keine &lt;img src="..."&gt; Referenzen in den HTML-Dateien gefunden. Alle Grafiken sind inline SVGs oder als OG-Image (og:image) referenziert. Das OG-Image <span class="mono">img/og-image.jpg</span> (63 KB) existiert.</p>
+
+    <h3>Formulare &amp; Webhooks</h3>
+    <table>
+      <tr><th>Seite</th><th>Formular</th><th>Webhook-URL</th></tr>
+      <tr>
+        <td class="mono">kontakt.html</td>
+        <td>Kontaktformular</td>
+        <td class="mono">https://n8n.standfestdigital.at/webhook/kontaktformular</td>
+      </tr>
+      <tr>
+        <td class="mono">audit-buchen.html</td>
+        <td>Audit-Buchungsformular</td>
+        <td class="mono">https://n8n.standfestdigital.at/webhook/audit-komplett</td>
+      </tr>
+    </table>
+
+    <h3>Externe Ressourcen</h3>
+    <p class="small">Keine externen CDNs, APIs oder Stylesheets eingebunden. Alle Ressourcen werden lokal geladen. Einzige externe Verbindungen: Webhook-URLs (n8n) und WhatsApp-Link (wa.me).</p>
+  </div>
+</details>
+
+<!-- ============================= 6. DESIGN-SYSTEM ============================= -->
+<details>
+  <summary>6. Design-System Compliance <span class="badge badge-warn">1 Warnung</span></summary>
+  <div class="detail-body">
+    <table>
+      <tr><th>Check</th><th>Ergebnis</th><th>Status</th></tr>
+      <tr>
+        <td>DM Sans lokal eingebunden?</td>
+        <td>Ja – 4 Gewichte (400, 500, 600, 700) als woff2 mit font-display: swap</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td>CSS-Klassen Naming</td>
+        <td>Konsistent kebab-case (z.B. .nav-inner, .footer-brand, .btn--primary)</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td>CSS Custom Properties</td>
+        <td>198 CSS-Variablen definiert in :root (--bg-primary, --accent, --text-primary, etc.)</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td>Inline-Styles</td>
+        <td>
+          audit-buchen.html: <strong>66 Inline-Styles</strong><br>
+          leistungen.html: 20<br>
+          index.html: 5 | kontakt.html: 5 | kunden.html: 5<br>
+          pakete.html: 4 | datenschutz.html: 3 | impressum.html: 2 | 404.html: 1
+        </td>
+        <td class="status s-warn">audit-buchen.html hat zu viele</td>
+      </tr>
+    </table>
+    <div class="note-box">
+      <strong>audit-buchen.html</strong> hat 66 Inline-Styles – hauptsaechlich im Design-Konfigurator (JS Template Literals fuer Live-Preview). Fuer die Preview-Funktion technisch begruendet, aber bei Gelegenheit in CSS-Klassen auslagern.
+    </div>
+  </div>
+</details>
+
+<!-- ============================= 7. PERFORMANCE ============================= -->
+<details>
+  <summary>7. Performance-Indikatoren <span class="badge badge-warn">2 Warnungen</span></summary>
+  <div class="detail-body">
+    <table>
+      <tr><th>Datei</th><th>Groesse</th><th>CSS-Refs</th><th>JS-Refs</th><th>Bewertung</th></tr>
+      <tr>
+        <td class="mono">index.html</td><td>79.5 KB</td><td>1</td><td>2</td>
+        <td class="status s-warn">Gross (viel Inline-CSS/JS)</td>
+      </tr>
+      <tr>
+        <td class="mono">audit-buchen.html</td><td>107.0 KB</td><td>1</td><td>2</td>
+        <td class="status s-err">Sehr gross! Konfigurator-Code inline</td>
+      </tr>
+      <tr>
+        <td class="mono">leistungen.html</td><td>60.9 KB</td><td>1</td><td>2</td>
+        <td class="status s-warn">Gross (Inline-CSS/Styles)</td>
+      </tr>
+      <tr>
+        <td class="mono">kunden.html</td><td>33.2 KB</td><td>1</td><td>2</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td class="mono">pakete.html</td><td>28.5 KB</td><td>1</td><td>2</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td class="mono">kontakt.html</td><td>26.9 KB</td><td>1</td><td>2</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td class="mono">datenschutz.html</td><td>25.6 KB</td><td>1</td><td>2</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td class="mono">impressum.html</td><td>11.1 KB</td><td>1</td><td>2</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td class="mono">404.html</td><td>5.5 KB</td><td>1</td><td>2</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+    </table>
+
+    <h3>Bilder</h3>
+    <table>
+      <tr><th>Datei</th><th>Format</th><th>Groesse</th><th>lazy-loading</th></tr>
+      <tr>
+        <td class="mono">img/og-image.jpg</td><td>JPEG</td><td>63.0 KB</td>
+        <td class="status s-warn">Kein lazy-loading (OG only)</td>
+      </tr>
+      <tr>
+        <td class="mono">img/apple-touch-icon.png</td><td>PNG</td><td>3.1 KB</td>
+        <td class="small">N/A (Link-Element)</td>
+      </tr>
+      <tr>
+        <td class="mono">img/favicon.svg</td><td>SVG</td><td>0.3 KB</td>
+        <td class="small">N/A (Link-Element)</td>
+      </tr>
+    </table>
+    <p class="small">Keine &lt;img&gt; Tags im HTML vorhanden – alle Grafiken sind inline SVGs. Kein lazy-loading notwendig. Gut fuer Performance, da keine zusaetzlichen Bildrequests.</p>
+
+    <div class="note-box">
+      <strong>audit-buchen.html (107 KB)</strong> ist die groesste Datei. Der Konfigurator-Code (HTML + CSS + JS) ist komplett inline. Auslagerung in separate Dateien wuerde Caching ermoeglichen und die Seitengroesse reduzieren.
+    </div>
+  </div>
+</details>
+
+<!-- ============================= 8. NAVIGATION ============================= -->
+<details>
+  <summary>8. Navigation &amp; Konsistenz <span class="badge badge-ok">Konsistent</span></summary>
+  <div class="detail-body">
+    <h3>Navigation (Header)</h3>
+    <table>
+      <tr><th>Datei</th><th>nav-links</th><th>Mobile Overlay</th><th>Links identisch?</th></tr>
+      <tr><td class="mono">index.html</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">leistungen.html</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">pakete.html</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">kontakt.html</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">kunden.html</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">audit-buchen.html</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">datenschutz.html</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">impressum.html</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">404.html</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+    </table>
+    <p class="small">Alle Seiten haben dieselbe Navigation: Leistungen | Pakete | Kontakt | Audit buchen (CTA). Mobile-Overlay identisch.</p>
+
+    <h3>Footer</h3>
+    <p class="small">Alle 9 Seiten haben denselben Footer mit: Seiten (Leistungen, Pakete, 48h Audit, Kontakt), Rechtliches (Impressum, Datenschutz), Kontaktdaten, Copyright 2026, Cookie-Einstellungen Button.</p>
+
+    <h3>Erreichbarkeit ueber Navigation</h3>
+    <table>
+      <tr><th>Seite</th><th>In Nav?</th><th>In Footer?</th><th>Erreichbar?</th></tr>
+      <tr><td class="mono">index.html (/)</td><td class="status s-ok">Logo-Link</td><td class="status s-ok">Logo-Link</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">leistungen.html</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">pakete.html</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">kontakt.html</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">audit-buchen.html</td><td class="status s-ok">Ja (CTA)</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">impressum.html</td><td class="small">–</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">datenschutz.html</td><td class="small">–</td><td class="status s-ok">Ja</td><td class="status s-ok">Ja</td></tr>
+      <tr><td class="mono">kunden.html</td><td class="small">–</td><td class="small">–</td><td class="status s-warn">Nur via Direktlink</td></tr>
+      <tr><td class="mono">404.html</td><td class="small">–</td><td class="small">–</td><td class="status s-ok">Server-Fehlerseite</td></tr>
+    </table>
+    <p class="small">kunden.html ist absichtlich nicht in der Navigation (noindex, Login-Bereich). 404.html wird vom Server ausgeliefert.</p>
+  </div>
+</details>
+
+<!-- ============================= 9. INHALTLICH ============================= -->
+<details>
+  <summary>9. Inhaltliche Pruefung <span class="badge badge-err">2 Kritisch</span></summary>
+  <div class="detail-body">
+
+    <h3>Platzhalter-Texte</h3>
+    <table>
+      <tr><th>Datei</th><th>Zeile</th><th>Platzhalter</th><th>Status</th></tr>
+      <tr>
+        <td class="mono">impressum.html</td><td>211</td>
+        <td>Inhaber: [Vorname Nachname]</td>
+        <td class="status s-err">KRITISCH – Muss vor Go-Live ersetzt werden</td>
+      </tr>
+      <tr>
+        <td class="mono">impressum.html</td><td>212</td>
+        <td>[Strasse Hausnummer]</td>
+        <td class="status s-err">KRITISCH</td>
+      </tr>
+      <tr>
+        <td class="mono">impressum.html</td><td>213</td>
+        <td>[PLZ Ort], Oesterreich</td>
+        <td class="status s-err">KRITISCH</td>
+      </tr>
+      <tr>
+        <td class="mono">impressum.html</td><td>214</td>
+        <td>Telefon: [Telefon]</td>
+        <td class="status s-err">KRITISCH</td>
+      </tr>
+      <tr>
+        <td class="mono">impressum.html</td><td>224</td>
+        <td>Gewerbebehörde: [Bezirkshauptmannschaft ... / Magistrat ...]</td>
+        <td class="status s-err">KRITISCH</td>
+      </tr>
+      <tr>
+        <td class="mono">impressum.html</td><td>232</td>
+        <td>UID: [ATU...]</td>
+        <td class="status s-err">KRITISCH</td>
+      </tr>
+    </table>
+    <div class="note-box">
+      <strong>BLOCKER:</strong> Das Impressum enthaelt 6 Platzhalter in eckigen Klammern. Ohne korrekte Angaben ist die Website nicht rechtskonform nach ECG/E-Commerce-Gesetz!
+    </div>
+
+    <h3>Telefonnummer</h3>
+    <table>
+      <tr><th>Check</th><th>Ergebnis</th><th>Status</th></tr>
+      <tr>
+        <td>Hauptnummer</td>
+        <td class="mono">+43 660 1234567 (14x als tel:-Link, 12x als Text)</td>
+        <td class="status s-err">Platzhalter-Nummer!</td>
+      </tr>
+      <tr>
+        <td>Konsistenz</td>
+        <td>Dieselbe Nummer auf allen Seiten</td>
+        <td class="status s-ok">Konsistent</td>
+      </tr>
+    </table>
+    <div class="note-box">
+      <strong>+43 660 1234567</strong> sieht wie eine Platzhalter-Telefonnummer aus (1234567). Muss vor Go-Live durch die echte Nummer ersetzt werden!
+    </div>
+
+    <h3>E-Mail-Adressen</h3>
+    <table>
+      <tr><th>E-Mail</th><th>Vorkommen</th><th>Status</th></tr>
+      <tr>
+        <td class="mono">office@standfestdigital.at</td><td>33x</td>
+        <td class="status s-ok">Konsistent, Hauptadresse</td>
+      </tr>
+      <tr>
+        <td class="mono">ihre@email.at</td><td>2x (Formular-Placeholder)</td>
+        <td class="status s-ok">OK (Platzhalter im Input)</td>
+      </tr>
+      <tr>
+        <td class="mono">Beispiel-Kunden-Mails</td><td>5x (kunden.html Demo-Daten)</td>
+        <td class="status s-ok">OK (Demo)</td>
+      </tr>
+    </table>
+
+    <h3>Preise</h3>
+    <table>
+      <tr><th>Preis</th><th>Erwartet (pakete.json)</th><th>Auf Website</th><th>Status</th></tr>
+      <tr>
+        <td>Audit</td><td>199 EUR</td>
+        <td class="status s-ok">199 EUR (konsistent auf allen Seiten)</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td>Starter Setup</td><td>1.490 EUR</td>
+        <td class="status s-ok">1.490 EUR</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td>Starter monatl.</td><td>590 EUR</td>
+        <td class="status s-ok">590 EUR</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td>Growth Setup</td><td>2.490 EUR</td>
+        <td class="status s-ok">2.490 EUR</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td>Growth monatl.</td><td>990 EUR</td>
+        <td class="status s-ok">990 EUR</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td>Pro Setup</td><td>3.990 EUR</td>
+        <td class="status s-ok">3.990 EUR</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td>Pro monatl.</td><td>1.590 EUR</td>
+        <td class="status s-ok">1.590 EUR</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+    </table>
+
+    <h3>Sonstiges</h3>
+    <table>
+      <tr><th>Check</th><th>Ergebnis</th><th>Status</th></tr>
+      <tr>
+        <td>Lorem ipsum / TODO / FIXME / XXX</td>
+        <td>Keine gefunden</td>
+        <td class="status s-ok">OK</td>
+      </tr>
+      <tr>
+        <td>Oeffnungszeiten</td>
+        <td>"Mo–Fr, 8–17 Uhr" (kontakt.html), "Werktags 24–48h" (konsistent)</td>
+        <td class="status s-ok">Konsistent</td>
+      </tr>
+      <tr>
+        <td>Datenschutz-Hinweis</td>
+        <td>"Vorlage – wird vor Launch von Rechtsanwalt geprueft"</td>
+        <td class="status s-warn">Noch nicht finalisiert</td>
+      </tr>
+    </table>
+  </div>
+</details>
+
+<!-- ============================= 10. GIT ============================= -->
+<details>
+  <summary>10. Git-Status <span class="badge badge-warn">1 Commit nicht gepusht</span></summary>
+  <div class="detail-body">
+    <table>
+      <tr><th>Info</th><th>Wert</th></tr>
+      <tr><td>Branch</td><td class="mono">main</td></tr>
+      <tr><td>Remote</td><td class="mono">https://github.com/StandfestStefan/standfest-website.git</td></tr>
+      <tr><td>Status</td><td class="status s-warn">1 Commit ahead of origin/main</td></tr>
+      <tr><td>Uncommitted Changes</td><td class="status s-ok">Keine (nur untracked: .claude/, Archiv/)</td></tr>
+      <tr><td>Letzter Commit</td><td class="mono">84a6127 – Webhook-URLs korrigiert: kontakt → kontaktformular, audit → audit-komplett</td></tr>
+    </table>
+
+    <h3>Letzte 5 Commits</h3>
+    <table>
+      <tr><th>Hash</th><th>Message</th></tr>
+      <tr><td class="mono">84a6127</td><td>Webhook-URLs korrigiert: kontakt → kontaktformular, audit → audit-komplett</td></tr>
+      <tr><td class="mono">798d036</td><td>design: Header groesser, opaker, helle Schrift auf dunklem Glass</td></tr>
+      <tr><td class="mono">ce8a1b2</td><td>design: Header groesser, Liquid-Glass-Effekt, Logo prominenter</td></tr>
+      <tr><td class="mono">5cbe409</td><td>design: Header komplett ueberarbeitet nach shadcn header-2 Vorbild</td></tr>
+      <tr><td class="mono">d27b1f3</td><td>fix: Header-Navigation auf Desktop sichtbar + Timeline-Zahlen lesbar</td></tr>
+    </table>
+
+    <h3>Untracked Verzeichnisse</h3>
+    <table>
+      <tr><th>Verzeichnis</th><th>Empfehlung</th></tr>
+      <tr><td class="mono">.claude/</td><td>In .gitignore aufnehmen</td></tr>
+      <tr><td class="mono">Archiv/</td><td>Entscheiden: versionieren oder .gitignore</td></tr>
+    </table>
+  </div>
+</details>
+
+<!-- ============================= TODO-LISTE ============================= -->
+<details open>
+  <summary>Priorisierte TODO-Liste <span class="badge badge-err">4 P0 | 4 P1 | 4 P2</span></summary>
+  <div class="detail-body">
+    <ul class="todo-list">
+      <li class="todo-item">
+        <span class="todo-prio p0">P0</span>
+        <div>
+          <strong>Impressum: Platzhalter ersetzen</strong><br>
+          <span class="small">impressum.html Zeilen 211–214, 224, 232: [Vorname Nachname], [Strasse], [PLZ Ort], [Telefon], [Gewerbebehörde], [ATU...] muessen vor Go-Live mit echten Daten befuellt werden. Ohne korrektes Impressum: Rechtsverstoß (ECG).</span>
+        </div>
+      </li>
+      <li class="todo-item">
+        <span class="todo-prio p0">P0</span>
+        <div>
+          <strong>Telefonnummer: Platzhalter ersetzen</strong><br>
+          <span class="small">+43 660 1234567 ist auf allen 9 Seiten als Kontaktnummer angegeben. Diese Nummer sieht nach Platzhalter aus (1234567). Echte Geschaeftsnummer eintragen – betrifft HTML + Schema.org JSON-LD.</span>
+        </div>
+      </li>
+      <li class="todo-item">
+        <span class="todo-prio p0">P0</span>
+        <div>
+          <strong>Datenschutzerklaerung finalisieren</strong><br>
+          <span class="small">datenschutz.html enthaelt den Hinweis "Vorlage – wird vor Launch von Rechtsanwalt geprueft". Vor Go-Live muss der Text juristisch abgenommen und die Platzhalter-Hinweise entfernt werden.</span>
+        </div>
+      </li>
+      <li class="todo-item">
+        <span class="todo-prio p0">P0</span>
+        <div>
+          <strong>Git: Letzten Commit pushen</strong><br>
+          <span class="small">Branch main ist 1 Commit ahead of origin. <code>git push origin main</code> ausfuehren, damit die Webhook-URL-Korrektur auch im Remote-Repo ist.</span>
+        </div>
+      </li>
+      <li class="todo-item">
+        <span class="todo-prio p1">P1</span>
+        <div>
+          <strong>audit-buchen.html: Multiple H1-Tags fixen</strong><br>
+          <span class="small">7 H1-Tags auf einer Seite (6 davon in JS Template Literals fuer den Konfigurator). Fuer SEO sollte nur 1 H1 pro Seite vorhanden sein. Die JS-generierten Headlines auf H2 oder andere Tags aendern.</span>
+        </div>
+      </li>
+      <li class="todo-item">
+        <span class="todo-prio p1">P1</span>
+        <div>
+          <strong>datenschutz.html: Doppeltes og:image entfernen</strong><br>
+          <span class="small">Zeile 14: og:image ist zweimal vorhanden. Duplikat entfernen.</span>
+        </div>
+      </li>
+      <li class="todo-item">
+        <span class="todo-prio p1">P1</span>
+        <div>
+          <strong>audit-buchen.html / pakete.html: Meta Description kuerzen</strong><br>
+          <span class="small">Beide haben 162 Zeichen – ideal sind max. 155–160. Leicht kuerzen, damit Google den Text nicht abschneidet.</span>
+        </div>
+      </li>
+      <li class="todo-item">
+        <span class="todo-prio p1">P1</span>
+        <div>
+          <strong>Archiv/ und .claude/ in .gitignore aufnehmen</strong><br>
+          <span class="small">Beide Verzeichnisse sind untracked und sollten entweder versioniert oder explizit in .gitignore eingetragen werden.</span>
+        </div>
+      </li>
+      <li class="todo-item">
+        <span class="todo-prio p2">P2</span>
+        <div>
+          <strong>audit-buchen.html: Inline-Styles reduzieren</strong><br>
+          <span class="small">66 Inline-Styles – hauptsaechlich im Konfigurator-JS. Bei Gelegenheit CSS-Klassen daraus machen, um Wartbarkeit und CSP-Kompatibilitaet zu verbessern.</span>
+        </div>
+      </li>
+      <li class="todo-item">
+        <span class="todo-prio p2">P2</span>
+        <div>
+          <strong>audit-buchen.html: Code auslagern</strong><br>
+          <span class="small">107 KB fuer eine HTML-Datei. Den Konfigurator-Code (CSS + JS) in separate Dateien auslagern wuerde Caching ermoeglichen und die Seite schneller machen.</span>
+        </div>
+      </li>
+      <li class="todo-item">
+        <span class="todo-prio p2">P2</span>
+        <div>
+          <strong>branch-assistant.js pruefen</strong><br>
+          <span class="small">22 KB grosse JS-Datei die auf keiner Seite referenziert wird (wird nicht per &lt;script&gt; eingebunden). Wenn nicht verwendet, kann sie entfernt werden.</span>
+        </div>
+      </li>
+      <li class="todo-item">
+        <span class="todo-prio p2">P2</span>
+        <div>
+          <strong>"Ohne Titel.rtf" entfernen</strong><br>
+          <span class="small">Eine 409-Byte RTF-Datei im Root-Verzeichnis die nicht zur Website gehoert. Aufraumen.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</details>
+
+<div style="text-align:center; padding: 2rem 0 1rem; color: var(--text-muted); font-size: 0.8125rem;">
+  Generiert am 11.04.2026 durch Claude Code Analyse-Agent | Standfest Digital
+</div>
+
+</body>
+</html>

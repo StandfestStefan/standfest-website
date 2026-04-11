@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- GA4 wird DSGVO-konform über cookie-banner.js geladen (nur nach Consent) -->
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4SGGPLWQMW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4SGGPLWQMW');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Impressum – Standfest Digital</title>
@@ -16,14 +23,11 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Impressum | Standfest Digital">
   <meta name="twitter:description" content="Impressum von Standfest Digital. Angaben gemäß E-Commerce-Gesetz (ECG).">
-
-  <!-- Schema.org Breadcrumb -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://standfestdigital.at/"},{"@type":"ListItem","position":2,"name":"Impressum","item":"https://standfestdigital.at/impressum.html"}]}
-  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
   <style>
     /* ── Impressum Page Styles ── */
@@ -171,22 +175,15 @@
         <li><a href="/kontakt.html">Kontakt</a></li>
         <li><a href="/audit-buchen.html" class="nav-cta">Audit buchen</a></li>
       </ul>
+      <button class="nav-login" id="loginBtn" aria-label="Anmelden">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Anmelden</span>
+      </button>
       <button class="nav-toggle" id="navToggle" aria-label="Menü" aria-expanded="false">
-        <div style="position:relative;width:18px;height:14px"><span></span><span></span><span></span></div>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
-  <!-- Mobile overlay -->
-  <div class="nav-overlay" id="navOverlay">
-    <div>
-      <a href="/leistungen.html">Leistungen</a>
-      <a href="/pakete.html">Pakete</a>
-      <a href="/kontakt.html">Kontakt</a>
-    </div>
-    <div class="nav-overlay-cta">
-      <a href="/audit-buchen.html" class="nav-cta">Audit buchen</a>
-    </div>
-  </div>
 
   <main id="main-content">
     <section class="container">
@@ -207,11 +204,11 @@
         <!-- Anbieter (highlighted) -->
         <h2>Anbieter</h2>
         <div class="legal-card-highlight">
-          <p class="highlight-name">Standfest Digital OG (in Gründung)</p>
-          <p>Inhaber: Marvin Blatnig und Stefan Maurer</p>
-          <p>Kaiser Franz Josef Straße</p>
-          <p>2114 Großrussbach, Österreich</p>
-          <p style="margin-top: 0.75rem;">Telefon: <a href="tel:+436644123928">+43 664 4123928</a></p>
+          <p class="highlight-name">Standfest Digital</p>
+          <p>Inhaber: [Vorname Nachname]</p>
+          <p>[Straße Hausnummer]</p>
+          <p>[PLZ Ort], Österreich</p>
+          <p style="margin-top: 0.75rem;">Telefon: [Telefon]</p>
           <p>E-Mail: <a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></p>
         </div>
 
@@ -221,7 +218,7 @@
 
         <!-- Gewerbe / Aufsichtsbehörde -->
         <h2>Gewerbe / Aufsichtsbehörde</h2>
-        <p>Gewerbebehörde: Bezirkshauptmannschaft Korneuburg</p>
+        <p>Gewerbebehörde: [Bezirkshauptmannschaft … / Magistrat …]</p>
 
         <!-- Mitgliedschaften -->
         <h2>Mitgliedschaften</h2>
@@ -229,7 +226,8 @@
 
         <!-- UID-Nummer -->
         <h2>UID-Nummer</h2>
-        <p><strong>UID:</strong> in Beantragung</p>
+        <p><strong>UID:</strong> [ATU…]</p>
+        <p class="legal-hint">Falls Kleinunternehmerregelung: Zeile entfernen.</p>
 
         <!-- Haftung für Inhalte -->
         <h2>Haftung für Inhalte</h2>
@@ -286,7 +284,7 @@
           <h4>Kontakt</h4>
           <ul class="footer-links">
             <li><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></li>
-            <li><a href="tel:+436644123928">+43 664 4123928</a></li>
+            <li><a href="tel:+436601234567">+43 660 1234567</a></li>
             <li>Wien &amp; Niederösterreich</li>
           </ul>
         </div>
@@ -294,15 +292,13 @@
       <div class="footer-bottom">
         <span>&copy; 2026 Standfest Digital. Alle Rechte vorbehalten.</span>
         <div>
-          <a href="/impressum.html">Impressum</a>
+          <a href="/impressum.html" style="margin-right:1.5rem;">Impressum</a>
           <a href="/datenschutz.html">Datenschutz</a>
-          <a href="#" data-cookie-settings>Cookie-Einstellungen</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="/js/cookie-banner.js" defer></script>
   <script src="/js/main.js" defer></script>
 </body>
 </html>
