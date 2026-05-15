@@ -407,6 +407,11 @@
             <div class="form-card-inner">
               <h3>Kontaktformular</h3>
               <form id="contactForm" novalidate>
+                <!-- Honeypot – unsichtbar für echte Nutzer, fängt Bots ab -->
+                <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+                  <label for="website">Website</label>
+                  <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                </div>
                 <div class="form-group">
                   <label class="form-label" for="name">Name *</label>
                   <input class="form-input" type="text" id="name" name="name" placeholder="Ihr vollständiger Name" required autocomplete="name">
@@ -604,6 +609,9 @@
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
+        // Honeypot check
+        const hp = document.getElementById('website');
+        if (hp && hp.value) { form.style.display='none'; successEl.style.display='block'; return; }
         errorEl.style.display = 'none';
         let ok = true;
 
