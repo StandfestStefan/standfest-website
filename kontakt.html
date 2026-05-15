@@ -129,13 +129,20 @@
     }
 
     .form-card:focus-within {
-      background: conic-gradient(
-        from var(--border-angle, 0deg),
-        transparent 0%, transparent 5%,
-        var(--accent) 12%, var(--accent-hover) 16%,
-        transparent 24%, transparent 100%
-      );
-      animation: rotateBorder 3.5s linear infinite;
+      /* Fallback for browsers without @property support (e.g. older Firefox) */
+      background: var(--accent);
+    }
+
+    @supports (background: conic-gradient(from 0deg, red, blue)) {
+      .form-card:focus-within {
+        background: conic-gradient(
+          from var(--border-angle, 0deg),
+          transparent 0%, transparent 5%,
+          var(--accent) 12%, var(--accent-hover) 16%,
+          transparent 24%, transparent 100%
+        );
+        animation: rotateBorder 3.5s linear infinite;
+      }
     }
 
     @keyframes rotateBorder {
