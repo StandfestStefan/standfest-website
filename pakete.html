@@ -485,6 +485,16 @@
       .btn-group { flex-direction: column; }
       .btn-group .btn { width: 100%; }
     }
+  
+    /* Trust Hint under CTAs */
+    .trust-hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      text-align: center;
+      opacity: 0.7;
+    }
+
   </style>
 </head>
 <body>
@@ -568,7 +578,8 @@
                 E-Mail Support
               </li>
             </ul>
-            <a href="/kontakt.html" class="btn btn-primary">Paket anfragen</a>
+            <a href="/kontakt.html?paket=Starter" class="btn btn-primary">Paket anfragen</a>
+            <p class="trust-hint">Antwort innerhalb von 24 Stunden</p>
           </div>
 
           <!-- Growth (Featured) -->
@@ -610,7 +621,8 @@
                 Monatlicher KPI-Report
               </li>
             </ul>
-            <a href="/kontakt.html" class="btn btn-primary">Paket anfragen</a>
+            <a href="/kontakt.html?paket=Growth" class="btn btn-primary">Paket anfragen</a>
+            <p class="trust-hint">Antwort innerhalb von 24 Stunden</p>
           </div>
 
           <!-- Pro -->
@@ -651,7 +663,8 @@
                 Monatlicher Report + Empfehlungen
               </li>
             </ul>
-            <a href="/kontakt.html" class="btn btn-primary">Paket anfragen</a>
+            <a href="/kontakt.html?paket=Pro" class="btn btn-primary">Paket anfragen</a>
+            <p class="trust-hint">Antwort innerhalb von 24 Stunden</p>
           </div>
 
         </div>

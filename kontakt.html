@@ -591,6 +591,18 @@
 
     /* Form Handler */
     // Webhook URL (leicht austauschbar)
+    /* Paket-Parameter aus URL lesen und ins Nachrichtenfeld vorausfüllen */
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const paket = params.get('paket');
+      if (paket) {
+        const msg = document.getElementById('message');
+        if (msg && !msg.value) {
+          msg.value = 'Ich interessiere mich für das ' + paket + '-Paket.';
+        }
+      }
+    })();
+
     const KONTAKT_WEBHOOK_URL = 'https://n8n.standfestdigital.at/webhook/kontaktformular';
     const KONTAKT_FALLBACK_EMAIL = 'office@standfestdigital.at';
 
