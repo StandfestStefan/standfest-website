@@ -863,14 +863,6 @@
             </select>
             <div class="form-error-msg" id="auditBranche-error">Bitte wählen Sie eine Branche.</div>
           </div>
-          <div>
-            <label class="form-label" for="auditRegion">Region</label>
-            <select class="form-select" id="auditRegion">
-              <option value="Wien">Wien</option>
-              <option value="Niederösterreich">Niederösterreich</option>
-              <option value="Andere">Andere</option>
-            </select>
-          </div>
         </div>
         <button type="button" class="step-next" id="step1Next">
           Weiter – Audit-Bereiche ansehen
@@ -951,7 +943,6 @@
           <div class="audit-summary-row"><span class="audit-summary-label">Firma</span><span class="audit-summary-value" id="sumFirma">–</span></div>
           <div class="audit-summary-row"><span class="audit-summary-label">Website</span><span class="audit-summary-value" id="sumUrl">–</span></div>
           <div class="audit-summary-row"><span class="audit-summary-label">Branche</span><span class="audit-summary-value" id="sumBranche">–</span></div>
-          <div class="audit-summary-row"><span class="audit-summary-label">Region</span><span class="audit-summary-value" id="sumRegion">–</span></div>
           <div class="audit-summary-row"><span class="audit-summary-label">Wünsche</span><span class="audit-summary-value" id="sumExtras">–</span></div>
           <div class="audit-summary-row"><span class="audit-summary-label">Bereiche</span><span class="audit-summary-value">4 Bereiche werden geprüft</span></div>
         </div>
@@ -996,7 +987,7 @@
         </form>
 
         <div class="social-proof">
-          <div class="social-proof-text">Speziell für KMU in Wien und Niederösterreich.</div>
+          <div class="social-proof-text">Speziell für KMU in ganz Österreich.</div>
         </div>
       </div>
 
@@ -1105,7 +1096,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
-        <p>Webdesign, Social-Media-Setup &amp; Kontaktwege für KMU in Wien und Niederösterreich.</p>
+        <p>Webdesign, Social-Media-Setup &amp; Kontaktwege für KMU.</p>
       </div>
       <div>
         <h4>Seiten</h4>
@@ -1128,7 +1119,6 @@
         <ul class="footer-links">
           <li><a href="mailto:office@standfestdigital.at">office@standfestdigital.at</a></li>
           <li><a href="tel:+436644123928">+43 664 4123928</a></li>
-          <li>Wien &amp; Niederösterreich</li>
         </ul>
       </div>
     </div>
@@ -1308,7 +1298,6 @@ function updateAuditSummary() {
   const url = document.getElementById('auditUrl').value.trim();
   document.getElementById('sumUrl').textContent = url || 'Keine Website angegeben';
   document.getElementById('sumBranche').textContent = document.getElementById('auditBranche').value;
-  document.getElementById('sumRegion').textContent = document.getElementById('auditRegion').value;
   // Neue optionale Felder in Summary
   const extras=[];
   const aus=document.getElementById('auditAusstrahlung')?.value;
@@ -1408,7 +1397,6 @@ document.getElementById('auditFinalForm').addEventListener('submit',e=>{
     firma:document.getElementById('auditFirma').value.trim(),
     url:normalizeUrl(urlVal),
     branche:document.getElementById('auditBranche').value,
-    region:document.getElementById('auditRegion').value,
     name, email,
     telefon:document.getElementById('auditPhone').value.trim(),
     anmerkungen:document.getElementById('auditMessage').value.trim(),
