@@ -303,6 +303,45 @@
       margin-bottom: 1.25rem;
     }
 
+    /* Pricing-Struktur Growth + Pro (F-09) */
+    .package-pricing {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .price-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+    }
+    .price-amount {
+      font-size: var(--step-3);
+      font-weight: 700;
+      font-family: var(--font-heading);
+      line-height: 1.1;
+      color: var(--ink);
+    }
+    .price-period {
+      font-size: var(--step-0);
+      font-weight: 400;
+      color: var(--ink-muted);
+    }
+    .price-note {
+      font-size: var(--step--1);
+      color: var(--ink-muted);
+      display: block;
+      margin-top: 0.25rem;
+    }
+    .price-divider {
+      height: 1px;
+      background: var(--paper-border);
+      margin: 0.5rem 0;
+      max-width: 60px;
+    }
+
     .package-desc {
       font-size: 0.9375rem;
       color: var(--text-muted);
@@ -598,9 +637,19 @@
             <div class="package-badge">Beliebt</div>
             <div class="package-name">Growth</div>
             <div class="package-subtitle">Anfragen-System</div>
-            <div class="package-price">149 € <span class="package-price-unit">/Monat</span></div>
-            <div class="package-setup">ab 990 € Setup · 3 Monate Laufzeit</div>
-            <div class="package-laufzeit">3 Monate Mindestlaufzeit</div>
+            <div class="package-pricing">
+              <div class="price-block">
+                <span class="price-label">SETUP</span>
+                <div class="price-amount">990 €</div>
+                <span class="price-note">einmalig</span>
+              </div>
+              <div class="price-divider"></div>
+              <div class="price-block">
+                <span class="price-label">DANN</span>
+                <div class="price-amount">149 € <span class="price-period">/Monat</span></div>
+                <span class="price-note">3 Monate Mindestlaufzeit</span>
+              </div>
+            </div>
             <p class="package-desc">Für Betriebe, die regelmäßig Anfragen erhalten möchten.</p>
             <ul class="package-features">
               <li class="highlight-item">
@@ -640,9 +689,19 @@
           <div class="package-card">
             <div class="package-name">Pro</div>
             <div class="package-subtitle">Rundum-Betreuung</div>
-            <div class="package-price">390 € <span class="package-price-unit">/Monat</span></div>
-            <div class="package-setup">ab 1.990 € Setup · 6 Monate Laufzeit</div>
-            <div class="package-laufzeit">6 Monate Mindestlaufzeit</div>
+            <div class="package-pricing">
+              <div class="price-block">
+                <span class="price-label">SETUP</span>
+                <div class="price-amount">1.990 €</div>
+                <span class="price-note">einmalig</span>
+              </div>
+              <div class="price-divider"></div>
+              <div class="price-block">
+                <span class="price-label">DANN</span>
+                <div class="price-amount">390 € <span class="price-period">/Monat</span></div>
+                <span class="price-note">6 Monate Mindestlaufzeit</span>
+              </div>
+            </div>
             <p class="package-desc">Für einen vollständigen Online-Auftritt mit persönlicher Betreuung.</p>
             <ul class="package-features">
               <li class="highlight-item">
