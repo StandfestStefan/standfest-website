@@ -187,6 +187,37 @@ h1, .hero-title {
   .hero-visual { display: none; }
 }
 
+/* ---------- Editorial-Pullquote (P-W05) ---------- */
+.pullquote {
+  font-family: var(--font-heading);
+  font-size: var(--step-2);
+  font-style: italic;
+  line-height: 1.35;
+  padding: 1.5rem 0 1.5rem 2rem;
+  border-left: 3px solid var(--accent);
+  margin: 2.5rem 0;
+  max-width: 36ch;
+}
+.pullquote p { margin: 0; }
+.pullquote cite {
+  display: block;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--ink-muted, #6a6a5a);
+  margin-top: 1rem;
+}
+.drop-cap {
+  font-size: 3em;
+  float: left;
+  line-height: 0.85;
+  margin: 0.1em 0.15em 0 -0.05em;
+  font-weight: 600;
+  color: var(--accent-strong, var(--accent));
+  font-style: normal;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
