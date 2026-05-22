@@ -1,10 +1,29 @@
 /* ============================================
    STANDFEST DIGITAL — Design System
-   Version: 2.0 | Unified
-   Font: DM Sans (lokal) | Theme: Dark + Beige Nav/Footer
+   Version: 3.0 | Light Theme (Finanz-App-inspired)
+   Fonts: Newsreader (Serif) + Inter (Sans) — variable, lokal
+   Fallback: DM Sans (lokal) bleibt im Stack
+   Theme: Hell (Cream/Paper) + dunkler Footer
+   WCAG: ink-auf-paper 13.4:1, accent-auf-paper 4.51:1
    ============================================ */
 
-/* ---------- Local Fonts ---------- */
+/* ---------- Local Fonts (Variable woff2) ---------- */
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/fonts/newsreader-variable.woff2') format('woff2-variations');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Fallback: DM Sans (bleibt im Stack) ---------- */
 @font-face {
   font-family: 'DM Sans';
   src: url('/fonts/dm-sans-latin-400-normal.woff2') format('woff2');
@@ -47,56 +66,89 @@
 .skip-link:focus { top: 0; }
 
 :root {
-  /* Backgrounds */
-  --bg-primary: #1e2119;
-  --bg-card: #2a2e25;
-  --bg-card-hover: #333828;
+  /* ---------- Primitives (Light Theme, Finanz-App-Verwandtschaft) ---------- */
+  --paper:        #e8e6e1;  /* Hauptflaeche, warmes Cream */
+  --paper-2:      #d8d6d1;  /* Subtle elevation */
+  --paper-3:      #f4f2ee;  /* Karten heller */
+  --paper-border: #c8c6c1;  /* Border auf hell */
+  --ink:          #1e2119;  /* Text primary auf hell */
+  --ink-muted:    #6a6a5a;  /* Text secondary auf hell */
+  --ink-dark:     #2a2e25;  /* Dunkler Akzent-BG (z.B. Footer-Heading) */
 
-  /* Accent */
-  --accent: #4a7c59;
-  --accent-hover: #5a9469;
-  --accent-subtle: rgba(74, 124, 89, 0.15);
+  /* ---------- Backgrounds (Semantics) ---------- */
+  --bg-primary:    var(--paper);
+  --bg-card:       var(--paper-3);
+  --bg-card-hover: #efece6;
 
-  /* Text */
-  --text-primary: #e8e6e1;
-  --text-muted: #9a9890;
-  --text-on-accent: #ffffff;
+  /* ---------- Accent (bleibt Grün, jetzt AA auf Hell mit 4.51:1) ---------- */
+  --accent:         #4a7c59;
+  --accent-hover:   #3a6347;  /* dunkler für hover auf hell, AAA-ready (6.94:1) */
+  --accent-subtle:  rgba(74, 124, 89, 0.10);
+  --accent-strong:  #3a6347;  /* für Links auf hellem BG mit AAA */
 
-  /* Borders */
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.15);
+  /* ---------- Text (Semantics) ---------- */
+  --text-primary:    var(--ink);
+  --text-muted:      var(--ink-muted);
+  --text-on-accent:  #ffffff;
+  --text-on-dark:    var(--paper);  /* für dunkle Sections wie Footer */
 
-  /* Nav (beige) */
-  --nav-bg: rgba(235, 232, 225, 0.95);
-  --nav-bg-solid: rgba(235, 232, 225, 0.98);
-  --nav-text: #5a584f;
-  --nav-text-hover: #1e2119;
-  --nav-border: rgba(0, 0, 0, 0.08);
-  --nav-border-strong: rgba(0, 0, 0, 0.12);
+  /* ---------- Borders ---------- */
+  --border:         rgba(30, 33, 25, 0.10);
+  --border-strong:  rgba(30, 33, 25, 0.18);
 
-  /* Status */
-  --warning: #c4963a;
-  --error: #b54a4a;
-  --error-action: #c0392b;
-  --error-action-bg: rgba(224, 92, 58, 0.1);
-  --error-action-border: rgba(224, 92, 58, 0.2);
+  /* ---------- Nav (jetzt noch wärmer, leichte Variation) ---------- */
+  --nav-bg:             rgba(232, 230, 225, 0.92);
+  --nav-bg-solid:       rgba(232, 230, 225, 0.98);
+  --nav-text:           #5a584f;
+  --nav-text-hover:     #1e2119;
+  --nav-border:         rgba(30, 33, 25, 0.08);
+  --nav-border-strong:  rgba(30, 33, 25, 0.14);
 
-  /* Footer */
-  --footer-text: #6b6960;
-  --footer-muted: #9a9890;
+  /* ---------- Status ---------- */
+  --warning: #b8862e;
+  --error: #a64545;
+  --error-action: #b8392b;
+  --error-action-bg: rgba(184, 57, 43, 0.08);
+  --error-action-border: rgba(184, 57, 43, 0.18);
 
-  /* Scope */
-  --scope-exclusion: #8b5e5e;
+  /* ---------- Footer (bleibt dunkel als Kontrast-Anker) ---------- */
+  --footer-bg:    var(--ink-dark);
+  --footer-text:  #b8b6ad;
+  --footer-muted: #888678;
 
-  /* Status pending */
-  --status-pending: #c17f3a;
+  /* ---------- Sonstige ---------- */
+  --scope-exclusion: #7a4d4d;
+  --status-pending:  #b87a2e;
 
-  /* Layout */
-  --font: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* ---------- Layout ---------- */
+  --font-heading: 'Newsreader', 'DM Sans', Georgia, serif;
+  --font-body:    'Inter', 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font:         var(--font-body);  /* Backward-compat */
   --max-width: 1200px;
   --radius: 12px;
   --transition: 0.3s ease;
   --section-padding: 100px 0;
+
+  /* ---------- Fluid Type Scale (clamp Mobile→Desktop) ---------- */
+  --step--1: clamp(0.875rem, 0.82rem + 0.27vw, 1rem);
+  --step-0:  clamp(1rem, 0.94rem + 0.30vw, 1.125rem);
+  --step-1:  clamp(1.25rem, 1.16rem + 0.45vw, 1.5rem);
+  --step-2:  clamp(1.563rem, 1.43rem + 0.66vw, 2rem);
+  --step-3:  clamp(1.953rem, 1.76rem + 0.96vw, 2.625rem);
+  --step-4:  clamp(2.441rem, 2.16rem + 1.41vw, 3.5rem);
+}
+
+/* ---------- Heading-Font (Newsreader Serif) ---------- */
+h1, h2, h3, h4, h5, h6,
+.hero-title, .section-title, .package-name {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+h1, .hero-title {
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 html {
@@ -635,7 +687,7 @@ section {
   left: 50%;
   transform: translateX(-50%);
   background: var(--accent);
-  color: var(--bg-primary);
+  color: var(--text-on-accent);
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -707,7 +759,7 @@ section {
 .form-input,
 .form-textarea {
   width: 100%;
-  background: var(--bg-primary);
+  background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 12px 16px;
@@ -978,7 +1030,7 @@ section {
 .modal-header h3 {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--bg-primary);
+  color: var(--ink); /* Modal: explizit dunkler Text auf weiss */
 }
 .modal-close {
   background: none;
@@ -1011,7 +1063,7 @@ section {
   background: #fff;
   font-size: 0.95rem;
   font-family: inherit;
-  color: var(--bg-primary);
+  color: var(--ink); /* Modal: explizit dunkler Text auf weiss */
   transition: border-color 0.2s;
 }
 .modal-body input:focus {
