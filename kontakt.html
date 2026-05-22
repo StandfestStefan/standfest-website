@@ -361,6 +361,25 @@
     @media (max-width: 480px) {
       .page-header h1 { font-size: 1.75rem; }
     }
+
+    /* Datenschutz-Hinweis ueber Submit-Button (DSGVO, OGH-konform) */
+    .form-datenschutz-hinweis {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin: 1.5rem 0 1rem 0;
+      line-height: 1.5;
+      max-width: 60ch;
+    }
+    .form-datenschutz-hinweis a {
+      color: var(--text-primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .form-datenschutz-hinweis a:hover,
+    .form-datenschutz-hinweis a:focus {
+      color: var(--accent);
+      text-decoration-thickness: 2px;
+    }
   </style>
 </head>
 <body>
@@ -443,6 +462,9 @@
                   <textarea class="form-textarea" id="message" name="message" placeholder="Erzählen Sie uns kurz von Ihrem Vorhaben…" required></textarea>
                   <div class="field-error" id="message-error">Bitte schreiben Sie uns eine kurze Nachricht.</div>
                 </div>
+                <p class="form-datenschutz-hinweis">
+                  Mit dem Absenden willigen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung Ihrer Anfrage ein. Details in unserer <a href="/datenschutz.html">Datenschutzerklärung</a>. Sie können jederzeit Widerspruch einlegen.
+                </p>
                 <button type="submit" class="btn-submit">
                   <span>Nachricht senden</span>
                   <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
@@ -656,7 +678,8 @@
           firma: form.company.value.trim(),
           nachricht: message,
           seite: window.location.href,
-          zeitpunkt: new Date().toISOString()
+          zeitpunkt: new Date().toISOString(),
+          consent_timestamp: new Date().toISOString()
         };
 
         // Timeout 10s
