@@ -163,6 +163,30 @@ h1, .hero-title {
   pointer-events: none;
 }
 
+/* ---------- Asymmetrisches Hero 65/35 (P-W04) ---------- */
+@media (min-width: 768px) {
+  .hero-content {
+    display: grid;
+    grid-template-columns: 65% 35%;
+    gap: 2.5rem;
+    align-items: center;
+  }
+}
+.hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-visual-placeholder {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  opacity: 0.85;
+}
+@media (max-width: 767px) {
+  .hero-visual { display: none; }
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
