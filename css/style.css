@@ -922,6 +922,18 @@ section {
   color: var(--ink);
 }
 
+/* ---------- Pricing-Hierarchie (F-13) ---------- */
+/* Hoeher-spezifische Selektoren noetig, weil Basis-.price-amount in pakete.html
+   inline-style nach style.css definiert wird. */
+.price-amount.price-amount--setup {
+  font-size: var(--step-4);
+  color: var(--ink);
+}
+.price-amount.price-amount--monthly {
+  font-size: var(--step-2);
+  color: var(--ink);
+}
+
 /* ---------- CTA Section ---------- */
 .cta-section {
   text-align: center;
