@@ -151,6 +151,18 @@ h1, .hero-title {
   letter-spacing: -0.02em;
 }
 
+/* ---------- Hand-drawn SVG Accents (P-W03) ---------- */
+.hero-headline-accent { position: relative; }
+.hero-headline-accent::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -8px;
+  height: 12px;
+  background: url('/img/svg/handdrawn-underline.svg') center bottom / 100% auto no-repeat;
+  pointer-events: none;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
