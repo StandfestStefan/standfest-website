@@ -3,3 +3,6 @@ dist
 .next
 .env
 .DS_Store
+
+# Claude Code lokale Settings (Background-Guard aus, nicht committen)
+.claude/settings.json
