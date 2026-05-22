@@ -1331,19 +1331,19 @@
       <div class="container">
         <div class="trust-grid">
           <div class="trust-item reveal">
-            <div class="trust-value"><span data-count="14">0</span> <span class="trust-suffix">Tage</span></div>
+            <div class="trust-value">10–14 <span class="trust-suffix">Tage</span></div>
             <div class="trust-label">bis Ihr Auftritt steht</div>
           </div>
           <div class="trust-item reveal" data-delay="0.1">
-            <div class="trust-value"><span data-count="3">0</span> <span class="trust-suffix">Säulen</span></div>
-            <div class="trust-label">ein Ansprechpartner</div>
+            <div class="trust-value">3 <span class="trust-suffix">Bereiche</span></div>
+            <div class="trust-label">aus einer Hand</div>
           </div>
           <div class="trust-item reveal" data-delay="0.2">
-            <div class="trust-value"><span class="trust-prefix">ab </span><span data-count="590">0</span> <span class="trust-suffix">€</span></div>
+            <div class="trust-value"><span class="trust-prefix">ab </span>149 <span class="trust-suffix">€</span></div>
             <div class="trust-label">monatliche Betreuung</div>
           </div>
           <div class="trust-item reveal" data-delay="0.3">
-            <div class="trust-value"><span data-count="48">0</span> <span class="trust-suffix">Stunden</span></div>
+            <div class="trust-value">48 <span class="trust-suffix">Stunden</span></div>
             <div class="trust-label">für Ihren Online-Audit</div>
           </div>
         </div>
@@ -1997,30 +1997,6 @@
   <!-- Seitenspezifisches JS -->
   <script>
   document.addEventListener('DOMContentLoaded', () => {
-
-    /* ---- Animated Counters ---- */
-    const counters = document.querySelectorAll('[data-count]');
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const target = parseInt(el.dataset.count, 10);
-        const duration = 1600;
-        const start = performance.now();
-        const update = (now) => {
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
-          /* easeOutCubic */
-          const ease = 1 - Math.pow(1 - progress, 3);
-          el.textContent = Math.round(target * ease);
-          if (progress < 1) requestAnimationFrame(update);
-        };
-        requestAnimationFrame(update);
-        counterObserver.unobserve(el);
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(c => counterObserver.observe(c));
-
 
     /* ---- Card Spotlight (Maus-Follow) ---- */
     document.querySelectorAll('.pillar-card').forEach(card => {
