@@ -179,7 +179,7 @@ h1, .hero-title {
 }
 .hero-visual-placeholder {
   width: 100%;
-  max-width: 320px;
+  max-width: 280px;
   height: auto;
   opacity: 0.85;
 }
