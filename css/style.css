@@ -128,6 +128,7 @@
   --radius: 12px;
   --transition: 0.3s ease;
   --section-padding: 100px 0;
+  --nav-height: 100px;
 
   /* ---------- Fluid Type Scale (clamp Mobile→Desktop) ---------- */
   --step--1: clamp(0.875rem, 0.82rem + 0.27vw, 1rem);
@@ -232,6 +233,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  padding-top: var(--nav-height);
 }
 
 a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
@@ -302,8 +304,10 @@ section {
    ============================================ */
 /* ---------- Header (inspired by shadcn header-2) ---------- */
 .nav {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   width: 100%;
   max-width: 1200px;
@@ -1289,7 +1293,7 @@ section {
 }
 
 @media (max-width: 768px) {
-  :root { --section-padding: 60px 0; }
+  :root { --section-padding: 60px 0; --nav-height: 80px; }
   .hero { padding: 120px 0 60px; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-inner { padding: 0 1.25rem; }
