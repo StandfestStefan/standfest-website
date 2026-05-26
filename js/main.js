@@ -235,6 +235,27 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('has-sticky-contact');
   }
 
+  // --- 13. Footer Social Links (zentral gepflegt) ---
+  // TODO Stefan: echte Profil-URLs bestaetigen/ersetzen (Platzhalter-Handles).
+  const SOCIAL = {
+    instagram: 'https://www.instagram.com/standfestdigital',
+    facebook:  'https://www.facebook.com/standfestdigital',
+    linkedin:  'https://www.linkedin.com/company/standfest-digital'
+  };
+  const footerBrand = document.querySelector('.footer-brand');
+  if (footerBrand && !footerBrand.querySelector('.footer-social')) {
+    const igSvg = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>';
+    const fbSvg = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>';
+    const liSvg = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>';
+    const socialHTML =
+      '<div class="footer-social">' +
+        '<a href="' + SOCIAL.instagram + '" target="_blank" rel="noopener" aria-label="Standfest Digital auf Instagram">' + igSvg + '</a>' +
+        '<a href="' + SOCIAL.facebook + '" target="_blank" rel="noopener" aria-label="Standfest Digital auf Facebook">' + fbSvg + '</a>' +
+        '<a href="' + SOCIAL.linkedin + '" target="_blank" rel="noopener" aria-label="Standfest Digital auf LinkedIn">' + liSvg + '</a>' +
+      '</div>';
+    footerBrand.insertAdjacentHTML('beforeend', socialHTML);
+  }
+
 });
 
 /* ============================================
