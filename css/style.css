@@ -229,7 +229,7 @@ body {
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
-  font-size: 16px;
+  font-size: 17px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -264,8 +264,11 @@ h4 { font-size: 1.1rem; }
   line-height: 1.7;
 }
 
-p { color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem; }
+/* Fliesstext in voller Tinte (13.42:1 AAA) statt muted — Lesbarkeit Zielgruppe 45-60 */
+p { color: var(--text-primary); line-height: 1.7; margin-bottom: 1rem; }
 p:last-child { margin-bottom: 0; }
+/* Guard: Footer bleibt heller Text auf dunklem BG (gegenlaeufig zur Aenderung oben) */
+.footer p { color: var(--footer-text); }
 
 /* ---------- Layout ---------- */
 .container {
@@ -799,7 +802,7 @@ section {
 .package-features li {
   padding: 8px 0;
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 1rem;
   padding-left: 24px;
   position: relative;
 }
@@ -1402,5 +1405,64 @@ section {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
+  }
+}
+
+/* ============================================
+   Sticky Mobile-Kontaktleiste (Anrufen + WhatsApp)
+   Nur Mobil. Belegter Conversion-Hebel fuer lokale Services (3-18% Lift).
+   Per main.js injiziert; nicht im Kunden-Dashboard.
+   ============================================ */
+.sticky-contact { display: none; }
+
+@media (max-width: 768px) {
+  .sticky-contact {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 900;
+    gap: 1px;
+    background: var(--paper-border);
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -2px 12px rgba(30, 33, 25, 0.12);
+  }
+  .sticky-contact-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 52px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .sticky-contact-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .sticky-contact-call {
+    background: var(--accent);
+    color: var(--text-on-accent);
+  }
+  .sticky-contact-wa {
+    background: #25d366;
+    color: #fff;
+  }
+  .sticky-contact-wa svg {
+    fill: #fff;
+    stroke: none;
+  }
+  /* Platz schaffen, damit die fixe Leiste Inhalt/Footer nicht verdeckt */
+  body.has-sticky-contact {
+    padding-bottom: calc(52px + env(safe-area-inset-bottom));
   }
 }
