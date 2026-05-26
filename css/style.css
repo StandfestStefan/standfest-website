@@ -130,6 +130,16 @@
   --section-padding: 100px 0;
   --nav-height: 100px;
 
+  /* ---------- Motion & Elevation Tokens ---------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.2s;
+  --dur: 0.3s;
+  --dur-slow: 0.6s;
+  --shadow-sm: 0 2px 8px rgba(30, 33, 25, 0.06);
+  --shadow-md: 0 10px 28px rgba(30, 33, 25, 0.10);
+  --shadow-lg: 0 18px 48px rgba(30, 33, 25, 0.14);
+
   /* ---------- Fluid Type Scale (clamp Mobile→Desktop) ---------- */
   --step--1: clamp(0.875rem, 0.82rem + 0.27vw, 1rem);
   --step-0:  clamp(1rem, 0.94rem + 0.30vw, 1.125rem);
@@ -320,12 +330,18 @@ section {
   -webkit-backdrop-filter: blur(20px) saturate(1.2);
   backdrop-filter: blur(20px) saturate(1.2);
   transition: max-width 0.4s ease, top 0.4s ease, background 0.4s ease,
-              border-color 0.4s ease, box-shadow 0.4s ease, border-radius 0.4s ease;
+              border-color 0.4s ease, box-shadow 0.4s ease, border-radius 0.4s ease,
+              transform 0.35s var(--ease-out);
   /* Override light-theme nav vars for dark glass header */
   --nav-text: rgba(255, 255, 255, 0.7);
   --nav-text-hover: #fff;
   --nav-border: rgba(255, 255, 255, 0.08);
   --nav-border-strong: rgba(255, 255, 255, 0.15);
+}
+
+/* Hide on scroll down, show on scroll up (nav direction logic in main.js) */
+.nav--hidden {
+  transform: translateY(-130%);
 }
 
 /* Scrolled state: shrink, float, liquid glass */
@@ -1606,4 +1622,26 @@ section {
 .lp-cross-links a:hover {
   border-color: var(--accent);
   color: var(--accent-strong);
+}
+
+/* ============================================
+   Reduced Motion — respektiert OS-Einstellung (WCAG 2.3.3 + Best Practice)
+   Nutzer mit "Bewegung reduzieren" sehen Endzustaende sofort, keine Animation.
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .nav--hidden {
+    transform: none !important;
+  }
 }

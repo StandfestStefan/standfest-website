@@ -244,8 +244,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const nav = document.getElementById('navbar');
   if (!nav) return;
   let ticking = false;
+  let lastY = window.scrollY;
   function update() {
-    nav.classList.toggle('nav--scrolled', window.scrollY > 10);
+    const y = window.scrollY;
+    // Shrink/float state
+    nav.classList.toggle('nav--scrolled', y > 10);
+    // Hide on scroll down, show on scroll up.
+    // Always visible near the top or while the mobile menu is open.
+    const overlay = document.getElementById('navOverlay');
+    const menuOpen = overlay && overlay.classList.contains('open');
+    if (menuOpen || y < 120) {
+      nav.classList.remove('nav--hidden');
+    } else if (y > lastY + 4) {
+      nav.classList.add('nav--hidden');      // scrolling down
+    } else if (y < lastY - 4) {
+      nav.classList.remove('nav--hidden');   // scrolling up
+    }
+    lastY = y;
     ticking = false;
   }
   window.addEventListener('scroll', () => {
