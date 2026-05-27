@@ -920,7 +920,15 @@
     <div class="nav-inner">
       <a href="/" class="nav-logo">Standfest <span>Digital</span></a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="/leistungen.html" class="active">Leistungen</a></li>
+        <li class="nav-has-dropdown">
+          <a href="/leistungen.html" class="active">Leistungen</a>
+          <ul class="nav-dropdown">
+            <li><a href="/website-fuer-handwerker.html">Für Handwerksbetriebe</a></li>
+            <li><a href="/website-fuer-gastronomie.html">Für Gastronomie</a></li>
+            <li><a href="/website-fuer-friseure.html">Für Friseure</a></li>
+            <li><a href="/leistungen.html">Alle Leistungen</a></li>
+          </ul>
+        </li>
         <li><a href="/pakete.html">Pakete</a></li>
         <li><a href="/kontakt.html">Kontakt</a></li>
         <li><a href="/audit-buchen.html" class="nav-cta">Audit buchen</a></li>
@@ -1341,10 +1349,22 @@
         <span class="section-label">Für Ihre Branche</span>
         <h2>Speziell für Ihren Betrieb</h2>
         <p class="lp-hero-sub" style="margin:0.75rem auto 0;">Wir kennen die Anforderungen verschiedener Branchen. Sehen Sie, wie Ihre Website aussehen kann:</p>
-        <div class="lp-cross-links">
-          <a href="/website-fuer-handwerker.html">Website für Handwerksbetriebe</a>
-          <a href="/website-fuer-gastronomie.html">Website für Gastronomie</a>
-          <a href="/website-fuer-friseure.html">Website für Friseure</a>
+        <div class="lp-grid" style="margin-top:2rem;">
+          <a class="lp-card reveal" href="/website-fuer-handwerker.html">
+            <span class="lp-card-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+            <h3>Handwerk &amp; Gewerbe</h3>
+            <p>Leistungen, Referenzen und ein klarer Weg zur Anfrage – damit Sie in Ihrer Region gefunden werden.</p>
+          </a>
+          <a class="lp-card reveal" data-delay="0.08" href="/website-fuer-gastronomie.html">
+            <span class="lp-card-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></span>
+            <h3>Gastronomie &amp; Bäckerei</h3>
+            <p>Speisekarte, Öffnungszeiten und Reservierung – damit Gäste gerne vorbeikommen.</p>
+          </a>
+          <a class="lp-card reveal" data-delay="0.16" href="/website-fuer-friseure.html">
+            <span class="lp-card-icon"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></span>
+            <h3>Friseure &amp; Beauty</h3>
+            <p>Terminanfrage, Galerie und klare Preise – damit aus Suchenden Stammkunden werden.</p>
+          </a>
         </div>
       </div>
     </section>
