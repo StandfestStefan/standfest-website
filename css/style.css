@@ -1051,6 +1051,15 @@ section {
   margin-top: 0.75rem;
 }
 
+/* Footer-Adresse (sichtbares NAP, via main.js injiziert) */
+.footer-address {
+  color: var(--footer-muted);
+  font-size: 0.85rem;
+  font-style: normal;
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+
 /* Social-Icons (zentral via main.js in .footer-brand injiziert) */
 .footer-social {
   display: flex;
