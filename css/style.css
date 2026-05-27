@@ -1347,8 +1347,9 @@ section {
   list-style: none;
   margin: 0;
   padding: 0.5rem;
-  background: var(--nav-bg-solid);
-  border: 1px solid var(--nav-border-strong);
+  /* Eigene, kontext-unabhaengige Farben: .nav--scrolled kippt --nav-text auf hell */
+  background: var(--paper-3);
+  border: 1px solid var(--paper-border);
   border-radius: 12px;
   box-shadow: var(--shadow-md);
   display: flex;
@@ -1372,7 +1373,7 @@ section {
   display: block;
   padding: 0.55rem 0.85rem;
   border-radius: 8px;
-  color: var(--nav-text);
+  color: var(--text-primary);
   font-size: 0.95rem;
   font-weight: 500;
   white-space: nowrap;
@@ -1381,7 +1382,7 @@ section {
 .nav-dropdown a:hover,
 .nav-dropdown a:focus-visible {
   background: var(--accent-subtle);
-  color: var(--nav-text-hover);
+  color: var(--accent-strong);
 }
 /* Eingerueckte Branchen-Sublinks im Mobile-Overlay */
 .nav-overlay a.nav-sub {
