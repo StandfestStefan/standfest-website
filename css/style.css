@@ -113,8 +113,8 @@
 
   /* ---------- Footer (bleibt dunkel als Kontrast-Anker) ---------- */
   --footer-bg:    var(--ink-dark);
-  --footer-text:  var(--ink-muted);
-  --footer-muted: #888678;
+  --footer-text:  #b8b6ad;  /* auf #2a2e25: ~6.8:1 AAA (war ink-muted = 2.4:1 FAIL) */
+  --footer-muted: #a8a69b;  /* auf #2a2e25: ~5.9:1 AA  (war #888678 = 3.6:1 FAIL) */
 
   /* ---------- Sonstige ---------- */
   --scope-exclusion: #7a4d4d;
