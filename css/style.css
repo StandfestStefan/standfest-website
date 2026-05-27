@@ -1556,6 +1556,101 @@ section {
   font-size: var(--step-1);
   color: var(--text-muted);
 }
+
+/* --- Branchen-Hero: Badge, 2-Spalten-Layout, gestaltetes Visual --- */
+.lp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 1rem 0.375rem 0.75rem;
+  background: var(--accent-subtle);
+  border: 1px solid rgba(74, 124, 89, 0.25);
+  border-radius: 100px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent-hover);
+  margin-bottom: 1.25rem;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.lp-badge-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: lpPulse 2s ease-in-out infinite;
+}
+@keyframes lpPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(74,124,89,0.5); }
+  50%      { box-shadow: 0 0 0 6px rgba(74,124,89,0); }
+}
+.lp-hero-underline {
+  display: block;
+  width: 150px;
+  margin: 0.25rem auto 1.5rem;
+  opacity: 0.85;
+}
+.lp-hero .btn-group { justify-content: center; }
+.lp-hero-visual { display: flex; align-items: center; justify-content: center; }
+.lp-craft { position: relative; width: 264px; max-width: 100%; }
+.lp-craft-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--paper-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 0.85rem;
+}
+.lp-craft-card:nth-child(1) { transform: rotate(-1.5deg); }
+.lp-craft-card:nth-child(2) { transform: rotate(0.8deg) translateX(16px); box-shadow: var(--shadow-md); z-index: 2; }
+.lp-craft-card:nth-child(3) { transform: rotate(-0.7deg) translateX(4px); }
+.lp-craft-icon {
+  flex: none;
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: var(--accent-subtle);
+  color: var(--accent-strong);
+  display: grid;
+  place-items: center;
+}
+.lp-craft-icon svg {
+  width: 16px; height: 16px;
+  fill: none; stroke: currentColor; stroke-width: 2.4;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.lp-craft-label {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+/* Hand-drawn Signatur (auch auf Branchen-/Unterseiten nutzbar) */
+.section-signature {
+  display: block;
+  width: 220px;
+  max-width: 60%;
+  margin: 1.25rem auto 0;
+  opacity: 0.7;
+}
+@media (min-width: 768px) {
+  .lp-hero { text-align: left; }
+  .lp-hero .container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .lp-hero h1 { max-width: none; margin-left: 0; margin-right: 0; }
+  .lp-hero-sub { margin-left: 0; margin-right: 0; }
+  .lp-hero-underline { margin-left: 0; }
+  .lp-hero .btn-group { justify-content: flex-start; }
+}
+@media (max-width: 767px) {
+  .lp-hero-visual { display: none; }
+}
+
 .lp-section { padding: 4.5rem 0; }
 .lp-section--alt { background: var(--bg-card); }
 .lp-section-head {
