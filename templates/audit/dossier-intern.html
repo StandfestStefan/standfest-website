@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Audit-Dossier · INTERN · {{firma_name}} · Standfest Digital</title>
+<style>
+  @font-face {
+    font-family: 'DM Sans';
+    src: url('fonts/dm-sans-latin-400-normal.woff2') format('woff2');
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'DM Sans';
+    src: url('fonts/dm-sans-latin-500-normal.woff2') format('woff2');
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+
+  :root {
+    --bg: #ffffff;
+    --ink: #1e2119;
+    --muted: #5a584f;
+    --accent: #4a7c59;
+    --accent-soft: #f0f4ee;
+    --warn: #c4963a;
+    --warn-soft: #fef5e7;
+    --error: #b54a4a;
+    --error-soft: #fbeeee;
+    --surface: #f8f8f5;
+    --hairline: #e5e3dc;
+    --hairline-strong: rgba(0,0,0,0.08);
+    --radius: 12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #ececea;
+    color: var(--ink);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 24px 16px 48px;
+  }
+
+  /* A4 = 210 x 297 mm — 18mm margins inside, but we use 8mm top for confid strip */
+  .page {
+    width: 210mm;
+    height: 297mm;
+    background: var(--bg);
+    color: var(--ink);
+    position: relative;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 12px 40px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    line-height: 1.5;
+    overflow: hidden;
+  }
+
+  @media print {
+    @page { size: A4; margin: 0; }
+    body { background: #fff; padding: 0; gap: 0; }
+    .page { box-shadow: none; page-break-after: always; }
+    .page:last-child { page-break-after: auto; }
+  }
+
+  /* ---------- CONFIDENTIAL STRIP (every page) ---------- */
+  .confidential {
+    height: 8mm;
+    background: var(--warn-soft);
+    border-bottom: 1px solid rgba(196, 150, 58, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 8.5px;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #7a5d1f;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .confidential > * { white-space: nowrap; }
+  .confidential::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--warn);
+    box-shadow: 0 0 0 3px rgba(196,150,58,0.18);
+  }
+  .confidential span {
+    opacity: 0.5;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+  }
+
+  /* ---------- INNER FRAME ---------- */
+  .frame {
+    flex: 1;
+    padding: 10mm 18mm 0 18mm;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  /* ---------- FOOTER (every page) ---------- */
+  .foot {
+    margin-top: auto;
+    padding: 6mm 18mm 7mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8.5px;
+    color: var(--muted);
+    letter-spacing: 0.4px;
+    border-top: 1px solid var(--hairline);
+    flex-shrink: 0;
+    gap: 10mm;
+  }
+  .foot > * { white-space: nowrap; }
+  .foot strong { color: var(--ink); font-weight: 500; }
+
+  /* ---------- GENERIC SECTION HEADERS ---------- */
+  .section-head {
+    margin-bottom: 6mm;
+  }
+  .section-eyebrow {
+    font-size: 9px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .section-sub {
+    font-size: 10.5px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.2px;
+  }
+
+  /* ===================================================== */
+  /* PAGE 1 — EXECUTIVE SUMMARY                            */
+  /* ===================================================== */
+  .p1-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .brand-mark {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .brand-mark span { color: var(--ink); }
+  .brand-sub {
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+    margin-top: 2px;
+  }
+  .p1-meta {
+    text-align: right;
+    font-size: 9.5px;
+    color: var(--muted);
+    line-height: 1.7;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 8px;
+    row-gap: 2px;
+    justify-content: end;
+    align-items: baseline;
+    white-space: nowrap;
+  }
+  .p1-meta strong { color: var(--ink); font-weight: 500; text-align: left; }
+  .p1-meta span { color: var(--ink); }
+
+  .p1-title-block {
+    margin-top: 7mm;
+    padding-bottom: 5mm;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .p1-title-eyebrow {
+    font-size: 9.5px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--warn);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .p1-title {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    line-height: 1.05;
+    color: var(--ink);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .p1-client {
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.3px;
+    text-align: center;
+  }
+  .p1-client-meta {
+    font-size: 10.5px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  /* Score cards — same as 1-pager but compact */
+  .scores {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3mm;
+    margin-top: 5mm;
+  }
+  .score-card {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 10px 11px 11px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .score-label {
+    font-size: 8.5px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .score-value {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+  }
+  .score-num {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.8px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .score-max {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .score-dot {
+    margin-left: auto;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    align-self: center;
+    position: relative;
+  }
+  .score-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    opacity: 0.3;
+  }
+  .score-bar {
+    height: 3mm;
+    background: #eeece4;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .score-fill {
+    height: 100%;
+    border-radius: 999px;
+  }
+  .t-red   { color: var(--error); }
+  .t-warn  { color: var(--warn); }
+  .t-green { color: var(--accent); }
+  .t-red   .score-dot   { background: var(--error); }
+  .t-warn  .score-dot   { background: var(--warn); }
+  .t-green .score-dot   { background: var(--accent); }
+  .t-red   .score-fill  { background: var(--error); }
+  .t-warn  .score-fill  { background: var(--warn); }
+  .t-green .score-fill  { background: var(--accent); }
+
+  .total {
+    margin-top: 3mm;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 14px;
+    padding: 8px 14px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border-left: 3px solid var(--warn);
+  }
+  .total-label {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .total-bar {
+    width: 130px;
+    height: 3mm;
+    background: #eeece4;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .total-bar-fill {
+    width: 54%; height: 100%;
+    background: var(--warn);
+    border-radius: 999px;
+  }
+  .total-num {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    color: var(--warn);
+    line-height: 1;
+  }
+  .total-num span {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* Pitch box */
+  .pitch-box {
+    margin-top: 4mm;
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 5mm 6mm;
+  }
+  .pitch-head {
+    font-size: 9px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .pitch-body {
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  /* Impact tiles */
+  .impact {
+    margin-top: 4mm;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3mm;
+  }
+  .impact-tile {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 4mm 5mm;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .impact-label {
+    font-size: 8.5px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .impact-num {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.6px;
+    line-height: 1;
+  }
+  .impact-num.red   { color: var(--error); }
+  .impact-num.warn  { color: var(--warn); }
+  .impact-num.green { color: var(--accent); }
+  .impact-sub {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* Paket recommendation */
+  .pakete-block {
+    margin-top: 4mm;
+  }
+  .pakete-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2.5mm;
+  }
+  .pakete-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.1px;
+  }
+  .pakete-caption {
+    font-size: 9.5px;
+    color: var(--muted);
+  }
+  .pakete {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3mm;
+  }
+  .paket {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 4mm 4mm 4mm;
+    background: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .paket.recommended {
+    border: 2px solid var(--accent);
+    padding: calc(4mm - 1px) calc(4mm - 1px) calc(4mm - 1px);
+  }
+  .paket-badge {
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #fff;
+    font-size: 8.5px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .paket-name {
+    font-size: 11px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .paket-price {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.2px;
+    line-height: 1.2;
+  }
+  .paket-price span {
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .paket-note {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .paket-why {
+    margin-top: 3mm;
+    font-size: 10.5px;
+    color: var(--ink);
+    line-height: 1.5;
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 3mm 4mm;
+  }
+  .paket-why strong { font-weight: 500; color: var(--accent); }
+
+  /* Einstiegssatz */
+  .einstieg {
+    margin-top: 4mm;
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    padding: 4mm 6mm;
+    border-left: 3px solid var(--accent);
+  }
+  .einstieg-head {
+    font-size: 9px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+  .einstieg-quote {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink);
+    font-style: italic;
+  }
+  .einstieg-quote::before { content: '„'; color: var(--accent); margin-right: 2px; }
+  .einstieg-quote::after { content: '"'; color: var(--accent); }
+
+  /* ===================================================== */
+  /* PAGE 2 — DETAILFUNDE                                   */
+  /* ===================================================== */
+  .bereich {
+    display: grid;
+    grid-template-columns: 72mm 1fr;
+    gap: 6mm;
+    padding: 5mm 0;
+    border-top: 1px solid var(--hairline);
+    align-items: start;
+  }
+  .bereich:first-of-type { border-top: none; padding-top: 2mm; }
+  .bereich:last-of-type { padding-bottom: 0; }
+
+  .bereich-left {
+    display: flex;
+    flex-direction: column;
+    gap: 3mm;
+  }
+  .bereich-name {
+    font-size: 9px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .bereich-score-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .bereich-score-num {
+    font-size: 38px;
+    font-weight: 500;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .bereich-score-max {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .bereich-bar {
+    height: 3mm;
+    background: #eeece4;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 1mm;
+  }
+  .bereich-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+  }
+  .bereich-label-box {
+    font-size: 10px;
+    color: var(--muted);
+    padding: 2mm 3mm;
+    background: var(--surface);
+    border-radius: 6px;
+    line-height: 1.4;
+  }
+
+  .bereich-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5mm;
+  }
+  .finding-row {
+    display: grid;
+    grid-template-columns: 24mm 1fr;
+    gap: 4mm;
+    align-items: baseline;
+  }
+  .finding-label {
+    font-size: 9px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    padding-top: 1px;
+  }
+  .finding-label.ok { color: var(--accent); }
+  .finding-label.miss { color: var(--error); }
+  .finding-text {
+    font-size: 10.5px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .finding-text em {
+    font-style: normal;
+    color: var(--muted);
+  }
+  .finding-divider {
+    border: none;
+    border-top: 1px dashed var(--hairline);
+    margin: 0;
+  }
+
+  /* ===================================================== */
+  /* PAGE 3 — MAßNAHMENKATALOG                              */
+  /* ===================================================== */
+  .mass-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+    margin-top: 2mm;
+  }
+  .mass-table thead th {
+    background: var(--accent-soft);
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 9px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    padding: 3mm 3mm;
+    text-align: left;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .mass-table thead th.num { text-align: right; }
+  .mass-table tbody td {
+    padding: 2.8mm 3mm;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+    line-height: 1.45;
+  }
+  .mass-table tbody td.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .mass-table tbody tr:hover { background: var(--surface); }
+
+  .mass-prio {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-size: 9px;
+    letter-spacing: 0.6px;
+    font-weight: 500;
+  }
+  .mass-prio.p1 { background: #f3dada; color: #8a3434; }
+  .mass-prio.p2 { background: #f2e4c3; color: #7a5d1f; }
+  .mass-prio.p3 { background: #dde8e0; color: #2e5a3d; }
+
+  .mass-action {
+    font-weight: 500;
+    color: var(--ink);
+    font-size: 10.5px;
+  }
+  .mass-tech {
+    color: var(--muted);
+    font-size: 9.5px;
+    line-height: 1.45;
+  }
+  .mass-paket {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+  }
+  .mass-paket.starter { color: #2e5a3d; }
+  .mass-paket.growth { color: var(--accent); font-weight: 500; }
+  .mass-paket.pro { color: #1e2119; font-weight: 500; }
+
+  .mass-sum-row td {
+    background: var(--surface);
+    font-weight: 500;
+    color: var(--ink);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .mass-sum-row .lbl {
+    font-size: 9.5px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .margin-block {
+    margin-top: 4mm;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3mm;
+  }
+  .margin-tile {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 3.5mm 4mm;
+  }
+  .margin-tile .lbl {
+    font-size: 8.5px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+  .margin-tile .val {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.3px;
+  }
+  .margin-tile .val.green { color: var(--accent); }
+  .margin-tile .sub {
+    font-size: 9.5px;
+    color: var(--muted);
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+
+  .mass-hinweis {
+    margin-top: 3mm;
+    font-size: 9.5px;
+    color: var(--muted);
+    padding: 2.5mm 3mm;
+    background: var(--warn-soft);
+    border-left: 3px solid var(--warn);
+    border-radius: 6px;
+  }
+  .mass-hinweis strong { color: #7a5d1f; font-weight: 500; }
+
+  /* ===================================================== */
+  /* PAGE 4 — VERKAUFS-ARGUMENTARIUM                        */
+  /* ===================================================== */
+  .einwand-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm;
+    margin-top: 1mm;
+  }
+  .einwand {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 3.5mm 4mm;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5mm;
+  }
+  .einwand-q {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+    padding-bottom: 2.5mm;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .einwand-q::before {
+    content: '„';
+    color: var(--error);
+    margin-right: 2px;
+  }
+  .einwand-q::after {
+    content: '"';
+    color: var(--error);
+  }
+  .einwand-a {
+    font-size: 10px;
+    line-height: 1.5;
+    color: var(--muted);
+    display: flex;
+    gap: 3mm;
+  }
+  .einwand-a::before {
+    content: '→';
+    color: var(--accent);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .einwand-a strong { color: var(--ink); font-weight: 500; }
+
+  .einwand.full { grid-column: 1 / -1; }
+
+  /* Pricing compare */
+  .compare {
+    margin-top: 3mm;
+  }
+  .compare-head {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2mm;
+  }
+  .compare-caption {
+    font-size: 9.5px;
+    color: var(--muted);
+    margin-bottom: 3mm;
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 42mm 1fr 22mm;
+    gap: 4mm;
+    align-items: center;
+    padding: 2mm 0;
+    border-bottom: 1px dashed var(--hairline);
+    font-size: 10px;
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-label {
+    color: var(--ink);
+  }
+  .compare-label.us {
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .compare-label .note {
+    color: var(--muted);
+    font-size: 9px;
+    display: block;
+    margin-top: 1px;
+  }
+  .compare-bar {
+    height: 3mm;
+    background: #eeece4;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .compare-bar-fill {
+    height: 100%;
+    background: var(--muted);
+    opacity: 0.35;
+    border-radius: 999px;
+  }
+  .compare-row.us .compare-bar-fill {
+    background: var(--accent);
+    opacity: 1;
+  }
+  .compare-val {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .compare-row.us .compare-val { color: var(--accent); }
+
+  /* Upsell timeline */
+  .upsell {
+    margin-top: 4mm;
+  }
+  .upsell-head {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 3mm;
+  }
+  .timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    height: 1px;
+    background: var(--hairline);
+    z-index: 0;
+  }
+  .t-step {
+    position: relative;
+    padding-top: 22px;
+    padding-right: 4mm;
+    z-index: 1;
+  }
+  .t-step::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--muted);
+  }
+  .t-step.now::before { border-color: var(--accent); background: var(--accent); }
+  .t-step .when {
+    font-size: 9px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  .t-step.now .when { color: var(--accent); }
+  .t-step .what {
+    font-size: 10.5px;
+    color: var(--ink);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  .t-step .sub {
+    font-size: 9.5px;
+    color: var(--muted);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  /* Referenz hooks */
+  .refs {
+    margin-top: 4mm;
+  }
+  .refs-head {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2.5mm;
+  }
+  .refs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3mm;
+  }
+  .ref {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 3.5mm 4mm;
+    min-height: 30mm;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .ref.todo {
+    background: repeating-linear-gradient(
+      135deg,
+      #fafaf7,
+      #fafaf7 6px,
+      #fff 6px,
+      #fff 12px
+    );
+    border: 1px dashed var(--hairline);
+  }
+  .ref-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .ref-result {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.45;
+    margin-top: 2px;
+  }
+  .ref-kpi {
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+    padding-top: 3mm;
+    border-top: 1px solid var(--hairline);
+    font-size: 9.5px;
+    color: var(--muted);
+  }
+  .ref-kpi strong { color: var(--accent); font-weight: 500; }
+  .ref.todo .ref-name,
+  .ref.todo .ref-result { color: var(--muted); font-style: italic; font-weight: 400; }
+
+  /* ===================================================== */
+  /* PAGE 5 — TECHNISCHE NOTIZEN                            */
+  /* ===================================================== */
+  .infra-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+    margin-top: 2mm;
+  }
+  .infra-table thead th {
+    background: var(--accent-soft);
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 9px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    padding: 2mm 3mm;
+    text-align: left;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .infra-table tbody td {
+    padding: 1.5mm 3mm;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+    line-height: 1.35;
+    font-size: 9.5px;
+  }
+  .infra-table .bereich-cell {
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .infra-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    color: var(--ink);
+  }
+  .infra-status::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+  .infra-status.ok::before { background: var(--accent); }
+  .infra-status.warn::before { background: var(--warn); }
+  .infra-status.err::before { background: var(--error); }
+  .infra-table .details-cell { color: var(--muted); }
+
+  .risks {
+    margin-top: 2mm;
+  }
+  .risks-head, .onboard-head {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 1.5mm;
+    margin-top: 2mm;
+  }
+  .onboard {
+    margin-top: 2mm;
+  }
+  .tasks-split {
+    margin-top: 2mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3mm;
+  }
+
+  .risk {
+    display: grid;
+    grid-template-columns: 6mm 1fr;
+    gap: 2mm;
+    padding: 1.1mm 0;
+    border-top: 1px solid var(--hairline);
+    align-items: baseline;
+    font-size: 9.5px;
+    line-height: 1.35;
+  }
+  .risk-flag { font-size: 9px; line-height: 1; padding-top: 2px; }
+  .risk:first-of-type { border-top: none; }
+  .risk-flag {
+    font-size: 9px;
+    line-height: 1;
+    padding-top: 2px;
+  }
+  .risk-text strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .risk-text em {
+    font-style: normal;
+    color: var(--muted);
+  }
+
+  /* Onboarding */
+
+  .onboard-head {
+    /* merged above */
+    display: block;
+  }
+  .onboard-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 8mm;
+    row-gap: 2mm;
+    list-style: none;
+    counter-reset: step;
+    font-size: 10px;
+  }
+  .onboard-list li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 9mm 1fr;
+    gap: 2mm;
+    align-items: baseline;
+    padding: 0.6mm 0;
+    border-top: 1px solid var(--hairline);
+    font-size: 9.5px;
+  }
+  .onboard-list li::before {
+    content: counter(step, decimal-leading-zero);
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .onboard-list li span {
+    color: var(--ink);
+    line-height: 1.45;
+  }
+  .onboard-list li span em {
+    font-style: normal;
+    color: var(--muted);
+    display: block;
+    font-size: 9.5px;
+    margin-top: 1px;
+  }
+
+
+  .task-col {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 2.2mm 3mm;
+    display: flex;
+    flex-direction: column;
+    gap: 1mm;
+  }
+  .task-col .tc-head {
+    font-size: 9px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 1mm;
+  }
+  .task-col.stefan .tc-head { color: var(--error); }
+  .task-col.extern .tc-head { color: var(--warn); }
+  .task-col .tc-who {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2mm;
+  }
+  .task-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1mm;
+  }
+  .task-col li {
+    font-size: 9.5px;
+    line-height: 1.35;
+    color: var(--ink);
+    padding-left: 10px;
+    position: relative;
+  }
+  .task-col li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 7px;
+    width: 4px; height: 1px;
+    background: var(--muted);
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ==================================================================== -->
+<!-- PAGE 1 — EXECUTIVE SUMMARY                                            -->
+<!-- ==================================================================== -->
+<section class="page" data-screen-label="01 Executive Summary">
+  <div class="confidential">
+    <div>Intern · Vertraulich · Nicht an Kunden weitergeben</div>
+    <span>Standfest Digital</span>
+  </div>
+
+  <div class="frame">
+    <!-- header -->
+    <header class="p1-header">
+      <div>
+        <div class="brand-mark">Standfest<span>Digital</span></div>
+        <div class="brand-sub">Digitalagentur Wien &amp; NÖ · Audit-Dossier</div>
+      </div>
+      <div class="p1-meta">
+        <strong>Audit-Datum</strong><span>{{audit_datum}}</span>
+        <strong>Auditor</strong><span>{{auditor_name}}</span>
+        <strong>Lead-Status</strong><span>{{lead_status}}</span>
+      </div>
+    </header>
+
+    <!-- title block -->
+    <div class="p1-title-block">
+      <div class="p1-title-eyebrow" style="text-align:center;">Audit-Dossier · Intern</div>
+      <h1 class="p1-title">Audit-Dossier</h1>
+      <div class="p1-client">{{firma_name}}</div>
+      <div class="p1-client-meta">{{ort}}{{#bundesland}} · {{bundesland}}{{/bundesland}} · {{branche}}{{#firma_gruendung}} · seit {{firma_gruendung}}{{/firma_gruendung}}{{#mitarbeiter}} · {{mitarbeiter}} MA{{/mitarbeiter}}{{#umsatz}} · Umsatz {{umsatz}}{{/umsatz}}</div>
+    </div>
+
+    <!-- scores -->
+    <section class="scores">
+      <div class="score-card {{theme_website}}">
+        <div class="score-label">Website</div>
+        <div class="score-value">
+          <span class="score-num">{{score_website}}</span><span class="score-max">/100</span>
+          <span class="score-dot"></span>
+        </div>
+        <div class="score-bar"><div class="score-fill" style="width:{{score_website}}%"></div></div>
+      </div>
+      <div class="score-card {{theme_gbp}}">
+        <div class="score-label">Google Business</div>
+        <div class="score-value">
+          <span class="score-num">{{score_gbp}}</span><span class="score-max">/100</span>
+          <span class="score-dot"></span>
+        </div>
+        <div class="score-bar"><div class="score-fill" style="width:{{score_gbp}}%"></div></div>
+      </div>
+      <div class="score-card {{theme_anfragen}}">
+        <div class="score-label">Anfragen</div>
+        <div class="score-value">
+          <span class="score-num">{{score_anfragen}}</span><span class="score-max">/100</span>
+          <span class="score-dot"></span>
+        </div>
+        <div class="score-bar"><div class="score-fill" style="width:{{score_anfragen}}%"></div></div>
+      </div>
+      <div class="score-card {{theme_social}}">
+        <div class="score-label">Social Media</div>
+        <div class="score-value">
+          <span class="score-num">{{score_social}}</span><span class="score-max">/100</span>
+          <span class="score-dot"></span>
+        </div>
+        <div class="score-bar"><div class="score-fill" style="width:{{score_social}}%"></div></div>
+      </div>
+    </section>
+
+    <div class="total">
+      <div class="total-label">Gesamtbewertung</div>
+      <div class="total-bar"><div class="total-bar-fill"></div></div>
+      <div class="total-num">{{score_gesamt}}<span>/100</span></div>
+    </div>
+
+    <!-- pitch -->
+    <div class="pitch-box">
+      <div class="pitch-head">Der Pitch in 3 Sätzen</div>
+      <div class="pitch-body">
+        {{pitch}}
+      </div>
+    </div>
+
+    <!-- impact -->
+    <div class="impact">
+      <div class="impact-tile">
+        <div class="impact-label">Geschätzter Monatsverlust</div>
+        <div class="impact-num red">€ 2.800</div>
+        <div class="impact-sub">durch verpasste Anfragen</div>
+      </div>
+      <div class="impact-tile">
+        <div class="impact-label">Sichtbarkeits-Verlust</div>
+        <div class="impact-num warn">−60 %</div>
+        <div class="impact-sub">vs. lokale Konkurrenz</div>
+      </div>
+      <div class="impact-tile">
+        <div class="impact-label">Amortisation Starter</div>
+        <div class="impact-num green">2 Monate</div>
+        <div class="impact-sub">bei nur 2 Zusatz-Aufträgen/Monat</div>
+      </div>
+    </div>
+
+    <!-- pakete -->
+    <div class="pakete-block">
+      <div class="pakete-head">
+        <div class="pakete-title">Empfohlenes Paket</div>
+        <div class="pakete-caption">Interne Empfehlung — final nach Erstgespräch</div>
+      </div>
+      <div class="pakete">
+        <div class="paket">
+          <div class="paket-name">Starter</div>
+          <div class="paket-price">1.490 € <span>+ 290 €/Mo · 3 Mo</span></div>
+          <div class="paket-note">wenn Budget wirklich eng</div>
+        </div>
+        <div class="paket recommended">
+          <div class="paket-badge">Empfohlen</div>
+          <div class="paket-name" style="color: var(--accent);">Growth</div>
+          <div class="paket-price">2.490 € <span>+ 490 €/Mo · 6 Mo</span></div>
+          <div class="paket-note">optimale Wahl</div>
+        </div>
+        <div class="paket">
+          <div class="paket-name">Pro</div>
+          <div class="paket-price">3.990 € <span>+ 990 €/Mo · 12 Mo</span></div>
+          <div class="paket-note">wenn Wachstum priorisiert</div>
+        </div>
+      </div>
+      <div class="paket-why">
+        <strong>Warum Growth:</strong> Fally hat stabilen Stamm, braucht System für Neukundengewinnung ohne Tech-Überforderung. 6 Monate reichen um Wirkung zu messen.
+      </div>
+    </div>
+
+    <!-- einstieg -->
+    <div class="einstieg">
+      <div class="einstieg-head">Einstiegssatz für Marvin</div>
+      <div class="einstieg-quote">Herr Fally, ich hab Ihre Tischlerei angeschaut — die Qualität die Sie online zeigen, passt nicht zur Qualität die Sie liefern. Darf ich Ihnen in 10 Minuten zeigen woran das liegt?</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><strong>{{firma_name}}</strong> · Audit {{audit_datum}} · Dossier intern</div>
+    <div>Seite <strong>1</strong> / 5</div>
+  </div>
+</section>
+
+
+<!-- ==================================================================== -->
+<!-- PAGE 2 — DETAILFUNDE                                                  -->
+<!-- ==================================================================== -->
+<section class="page" data-screen-label="02 Detailfunde">
+  <div class="confidential">
+    <div>Intern · Vertraulich · Nicht an Kunden weitergeben</div>
+    <span>Standfest Digital</span>
+  </div>
+
+  <div class="frame">
+    <div class="section-head">
+      <div class="section-eyebrow">Seite 2 · Detailfunde</div>
+      <h2 class="section-title">Detailanalyse nach Bereichen</h2>
+      <div class="section-sub">Score-Herleitung und konkrete Fundstellen · für Stefan &amp; Marvin</div>
+    </div>
+
+    <!-- BEREICH 1 — Website -->
+    <div class="bereich">
+      <div class="bereich-left">
+        <div class="bereich-name">Website</div>
+        <div class="bereich-score-row t-warn">
+          <div class="bereich-score-num" style="color: var(--warn);">{{score_website}}</div>
+          <div class="bereich-score-max">/100</div>
+          <span class="score-dot" style="background: var(--warn); margin-left: auto; align-self: center;"></span>
+        </div>
+        <div class="bereich-bar"><div class="bereich-bar-fill" style="width:{{score_website}}%; background: var(--warn);"></div></div>
+        <div class="bereich-label-box">{{detail_website_summary}}</div>
+      </div>
+      <div class="bereich-right">
+        <div class="finding-row">
+          <div class="finding-label ok">Funktioniert</div>
+          <div class="finding-text">{{detail_website_ok}}</div>
+        </div>
+        <hr class="finding-divider">
+        <div class="finding-row">
+          <div class="finding-label miss">Fehlt</div>
+          <div class="finding-text">{{detail_website_miss}}</div>
+        </div>
+        <hr class="finding-divider">
+        <div class="finding-row">
+          <div class="finding-label">Quellen</div>
+          <div class="finding-text"><em>{{detail_website_quellen}}</em></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEREICH 2 — GBP -->
+    <div class="bereich">
+      <div class="bereich-left">
+        <div class="bereich-name">Google Business Profile</div>
+        <div class="bereich-score-row t-red">
+          <div class="bereich-score-num" style="color: var(--error);">{{score_gbp}}</div>
+          <div class="bereich-score-max">/100</div>
+          <span class="score-dot" style="background: var(--error); margin-left: auto; align-self: center;"></span>
+        </div>
+        <div class="bereich-bar"><div class="bereich-bar-fill" style="width:{{score_gbp}}%; background: var(--error);"></div></div>
+        <div class="bereich-label-box">{{detail_gbp_summary}}</div>
+      </div>
+      <div class="bereich-right">
+        <div class="finding-row">
+          <div class="finding-label ok">Funktioniert</div>
+          <div class="finding-text">{{detail_gbp_ok}}</div>
+        </div>
+        <hr class="finding-divider">
+        <div class="finding-row">
+          <div class="finding-label miss">Fehlt</div>
+          <div class="finding-text">{{detail_gbp_miss}}</div>
+        </div>
+        <hr class="finding-divider">
+        <div class="finding-row">
+          <div class="finding-label">Benchmark</div>
+          <div class="finding-text">{{detail_gbp_benchmark}}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEREICH 3 — Anfragen -->
+    <div class="bereich">
+      <div class="bereich-left">
+        <div class="bereich-name">Anfragen-System</div>
+        <div class="bereich-score-row t-red">
+          <div class="bereich-score-num" style="color: var(--error);">{{score_anfragen}}</div>
+          <div class="bereich-score-max">/100</div>
+          <span class="score-dot" style="background: var(--error); margin-left: auto; align-self: center;"></span>
+        </div>
+        <div class="bereich-bar"><div class="bereich-bar-fill" style="width:{{score_anfragen}}%; background: var(--error);"></div></div>
+        <div class="bereich-label-box">{{detail_anfragen_summary}}</div>
+      </div>
+      <div class="bereich-right">
+        <div class="finding-row">
+          <div class="finding-label ok">Funktioniert</div>
+          <div class="finding-text">{{detail_anfragen_ok}}</div>
+        </div>
+        <hr class="finding-divider">
+        <div class="finding-row">
+          <div class="finding-label miss">Fehlt</div>
+          <div class="finding-text">{{detail_anfragen_miss}}</div>
+        </div>
+        <hr class="finding-divider">
+        <div class="finding-row">
+          <div class="finding-label">Conversion-Pfad</div>
+          <div class="finding-text"><em>{{detail_anfragen_conversion}}</em></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEREICH 4 — Social -->
+    <div class="bereich">
+      <div class="bereich-left">
+        <div class="bereich-name">Social Media</div>
+        <div class="bereich-score-row t-green">
+          <div class="bereich-score-num" style="color: var(--accent);">{{score_social}}</div>
+          <div class="bereich-score-max">/100</div>
+          <span class="score-dot" style="background: var(--accent); margin-left: auto; align-self: center;"></span>
+        </div>
+        <div class="bereich-bar"><div class="bereich-bar-fill" style="width:{{score_social}}%; background: var(--accent);"></div></div>
+        <div class="bereich-label-box">{{detail_social_summary}}</div>
+      </div>
+      <div class="bereich-right">
+        <div class="finding-row">
+          <div class="finding-label ok">Funktioniert</div>
+          <div class="finding-text">{{detail_social_ok}}</div>
+        </div>
+        <hr class="finding-divider">
+        <div class="finding-row">
+          <div class="finding-label miss">Fehlt</div>
+          <div class="finding-text">{{detail_social_miss}}</div>
+        </div>
+        <hr class="finding-divider">
+        <div class="finding-row">
+          <div class="finding-label">Potenzial</div>
+          <div class="finding-text"><em>{{detail_social_potenzial}}</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><strong>{{firma_name}}</strong> · Audit {{audit_datum}} · Dossier intern</div>
+    <div>Seite <strong>2</strong> / 5</div>
+  </div>
+</section>
+
+
+<!-- ==================================================================== -->
+<!-- PAGE 3 — MAßNAHMENKATALOG                                             -->
+<!-- ==================================================================== -->
+<section class="page" data-screen-label="03 Maßnahmenkatalog">
+  <div class="confidential">
+    <div>Intern · Vertraulich · Nicht an Kunden weitergeben</div>
+    <span>Standfest Digital</span>
+  </div>
+
+  <div class="frame">
+    <div class="section-head">
+      <div class="section-eyebrow">Seite 3 · Maßnahmenkatalog</div>
+      <h2 class="section-title">Maßnahmenkatalog</h2>
+      <div class="section-sub">Technische Umsetzung · interne Kalkulation · Paket-Zuordnung · Satz 75 €/h</div>
+    </div>
+
+    <table class="mass-table">
+      <thead>
+        <tr>
+          <th style="width: 14mm;">Prio</th>
+          <th style="width: 42mm;">Maßnahme</th>
+          <th>Technische Details</th>
+          <th class="num" style="width: 14mm;">Stunden</th>
+          <th class="num" style="width: 22mm;">Kosten intern</th>
+          <th style="width: 16mm;">Paket</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="mass-prio p1">P1</span></td>
+          <td class="mass-action">Kontaktformular</td>
+          <td class="mass-tech">HTML + Backend-Form → V1 n8n-Webhook → E-Mail</td>
+          <td class="num">2,0 h</td>
+          <td class="num">150 €</td>
+          <td><span class="mass-paket starter">Starter</span></td>
+        </tr>
+        <tr>
+          <td><span class="mass-prio p1">P1</span></td>
+          <td class="mass-action">GBP beanspruchen + füllen</td>
+          <td class="mass-tech">Verifizierung + 12 Kategorien + Zeiten + 20 Fotos</td>
+          <td class="num">3,0 h</td>
+          <td class="num">225 €</td>
+          <td><span class="mass-paket starter">Starter</span></td>
+        </tr>
+        <tr>
+          <td><span class="mass-prio p1">P1</span></td>
+          <td class="mass-action">Notfall-Nummer sticky</td>
+          <td class="mass-tech">CSS-Sticky-Button · Telefon-Link mobil · tel:-Protokoll</td>
+          <td class="num">1,0 h</td>
+          <td class="num">75 €</td>
+          <td><span class="mass-paket starter">Starter</span></td>
+        </tr>
+        <tr>
+          <td><span class="mass-prio p2">P2</span></td>
+          <td class="mass-action">Website-Texte überarbeiten</td>
+          <td class="mass-tech">5 Seiten überarbeiten · SEO-orientiert · H1/Meta/Alt</td>
+          <td class="num">6,0 h</td>
+          <td class="num">450 €</td>
+          <td><span class="mass-paket growth">Growth</span></td>
+        </tr>
+        <tr>
+          <td><span class="mass-prio p2">P2</span></td>
+          <td class="mass-action">GBP-Postings einrichten</td>
+          <td class="mass-tech">Template + 4 Wochen Vorlauf + Briefing für Kunde</td>
+          <td class="num">4,0 h</td>
+          <td class="num">300 €</td>
+          <td><span class="mass-paket growth">Growth</span></td>
+        </tr>
+        <tr>
+          <td><span class="mass-prio p2">P2</span></td>
+          <td class="mass-action">WhatsApp-Business-Button</td>
+          <td class="mass-tech">Integration + FAQ-Antworten · Abwesenheits-Nachricht</td>
+          <td class="num">2,0 h</td>
+          <td class="num">150 €</td>
+          <td><span class="mass-paket growth">Growth</span></td>
+        </tr>
+        <tr>
+          <td><span class="mass-prio p2">P2</span></td>
+          <td class="mass-action">Online-Terminbuchung</td>
+          <td class="mass-tech">Calendly o. ä. einrichten · Website-Embed · Kalender-Sync</td>
+          <td class="num">3,0 h</td>
+          <td class="num">225 €</td>
+          <td><span class="mass-paket growth">Growth</span></td>
+        </tr>
+        <tr>
+          <td><span class="mass-prio p3">P3</span></td>
+          <td class="mass-action">Instagram-Website-Verknüpfung</td>
+          <td class="mass-tech">Bio-Link · Swipe-up-Alternative · UTM-Tracking</td>
+          <td class="num">0,5 h</td>
+          <td class="num">40 €</td>
+          <td><span class="mass-paket growth">Growth</span></td>
+        </tr>
+        <tr>
+          <td><span class="mass-prio p3">P3</span></td>
+          <td class="mass-action">Follow-up-E-Mail-Automation</td>
+          <td class="mass-tech">n8n-Workflow nach Anfrage · 3-Stufen-Sequenz</td>
+          <td class="num">4,0 h</td>
+          <td class="num">300 €</td>
+          <td><span class="mass-paket pro">Pro</span></td>
+        </tr>
+        <tr>
+          <td><span class="mass-prio p3">P3</span></td>
+          <td class="mass-action">Analytics + Reporting</td>
+          <td class="mass-tech">GA4 · Consent-Mode · monatlicher KPI-Report (PDF)</td>
+          <td class="num">3,0 h</td>
+          <td class="num">225 €</td>
+          <td><span class="mass-paket pro">Pro</span></td>
+        </tr>
+        <tr class="mass-sum-row">
+          <td></td>
+          <td class="lbl">Summe</td>
+          <td></td>
+          <td class="num">28,5 h</td>
+          <td class="num">2.140 €</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="margin-block">
+      <div class="margin-tile">
+        <div class="lbl">Starter-Paket intern</div>
+        <div class="val">450 €</div>
+        <div class="sub">6,0 h · Starter-Preis 1.490 € → <strong style="color: var(--accent);">70 % Marge</strong></div>
+      </div>
+      <div class="margin-tile">
+        <div class="lbl">Growth-Paket intern</div>
+        <div class="val green">1.615 €</div>
+        <div class="sub">21,5 h · Growth-Preis 2.490 € + 6×490 € → stabile Marge</div>
+      </div>
+      <div class="margin-tile">
+        <div class="lbl">Pro-Paket intern</div>
+        <div class="val">2.140 €</div>
+        <div class="sub">28,5 h · Pro-Preis 3.990 € + 12×990 € → inkl. Wartung</div>
+      </div>
+    </div>
+
+    <div class="mass-hinweis">
+      <strong>Hinweis:</strong> Interne Kalkulation vertraulich. Kunden-Preise und Angebotsstruktur ausschließlich über den Pricing-Skill. Stunden sind Schätzungen aus Audit-Sicht; tatsächlicher Aufwand nach Discovery möglicherweise ±20 %.
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><strong>{{firma_name}}</strong> · Audit {{audit_datum}} · Dossier intern</div>
+    <div>Seite <strong>3</strong> / 5</div>
+  </div>
+</section>
+
+
+<!-- ==================================================================== -->
+<!-- PAGE 4 — VERKAUFS-ARGUMENTARIUM                                       -->
+<!-- ==================================================================== -->
+<section class="page" data-screen-label="04 Verkaufs-Argumentarium">
+  <div class="confidential">
+    <div>Intern · Vertraulich · Nicht an Kunden weitergeben</div>
+    <span>Standfest Digital</span>
+  </div>
+
+  <div class="frame">
+    <div class="section-head">
+      <div class="section-eyebrow">Seite 4 · Für Marvin</div>
+      <h2 class="section-title">Verkaufs-Argumentarium</h2>
+      <div class="section-sub">Einwände · Vergleiche · Upsell-Pfad · Referenz-Hooks</div>
+    </div>
+
+    <div class="einwand-grid">
+      <div class="einwand">
+        <div class="einwand-q">Das ist mir zu teuer.</div>
+        <div class="einwand-a"><div>Growth kostet über 6 Monate <strong>{{growth_total}}</strong>. Das sind {{growth_monatlich}}/Monat. Bei geschätzt {{verlust_pro_monat}} Verlust/Monat durch verpasste Anfragen amortisiert sich das Paket in <strong>unter 2 Monaten</strong>.</div></div>
+      </div>
+      <div class="einwand">
+        <div class="einwand-q">Ich hab einen Neffen der macht Websites.</div>
+        <div class="einwand-a"><div>Das kenne ich. Ihr Neffe macht sicher gute Arbeit — aber macht er auch Google Business Pflege, SEO, Follow-ups und Wartung <strong>langfristig</strong>? Wir liefern das System, nicht nur die Website.</div></div>
+      </div>
+      <div class="einwand">
+        <div class="einwand-q">Muss mit dem Steuerberater sprechen.</div>
+        <div class="einwand-a"><div>Verständlich. Hier ist das Audit schriftlich — nehmen Sie das mit. Wenn Sie innerhalb <strong>14 Tagen</strong> entscheiden, gilt der heutige Preis und die Audit-Gebühr wird angerechnet.</div></div>
+      </div>
+      <div class="einwand">
+        <div class="einwand-q">Machen Sie das auch für Handwerker wie uns?</div>
+        <div class="einwand-a"><div>Standfest ist genau dafür da. Zielgruppe sind KMU mit 1–30 Mitarbeitern in Wien &amp; NÖ, Schwerpunkt Handwerk und Gastro. Sie sind <strong>nicht die Ausnahme</strong>, sondern unser Standardkunde.</div></div>
+      </div>
+      <div class="einwand full">
+        <div class="einwand-q">Was wenn ich nach 3 Monaten nicht zufrieden bin?</div>
+        <div class="einwand-a"><div>Nach Mindestlaufzeit monatlich kündbar. Aber: Bisher haben <strong>alle</strong> unsere Kunden nach den ersten 3 Monaten verlängert, weil die Anfragen messbar steigen — das ist der Zeitpunkt an dem die Wirkung sichtbar wird.</div></div>
+      </div>
+    </div>
+
+    <!-- pricing compare -->
+    <div class="compare">
+      <div class="compare-head">Pricing-Vergleich · 6 Monate TCO</div>
+      <div class="compare-caption">Total Cost of Ownership inkl. Eigenarbeit (50 €/h intern angesetzt)</div>
+
+      <div class="compare-row">
+        <div class="compare-label">DIY Baukasten <span class="note">380 € + 40 h Eigenarbeit</span></div>
+        <div class="compare-bar"><div class="compare-bar-fill" style="width: 16%;"></div></div>
+        <div class="compare-val">2.380 €</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">Freelancer Generalist <span class="note">ohne Wartung</span></div>
+        <div class="compare-bar"><div class="compare-bar-fill" style="width: 17%;"></div></div>
+        <div class="compare-val">2.500 €</div>
+      </div>
+      <div class="compare-row us">
+        <div class="compare-label us">Standfest Growth <span class="note">Paket + 6 × 490 €</span></div>
+        <div class="compare-bar"><div class="compare-bar-fill" style="width: 36%;"></div></div>
+        <div class="compare-val">5.430 €</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">Kleine Agentur</div>
+        <div class="compare-bar"><div class="compare-bar-fill" style="width: 49%;"></div></div>
+        <div class="compare-val">7.400 €</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">Große Agentur</div>
+        <div class="compare-bar"><div class="compare-bar-fill" style="width: 100%;"></div></div>
+        <div class="compare-val">~15.000 €</div>
+      </div>
+    </div>
+
+    <!-- upsell -->
+    <div class="upsell">
+      <div class="upsell-head">Upsell-Potenzial · Zeitstrahl</div>
+      <div class="timeline">
+        <div class="t-step now">
+          <div class="when">Monat 1–6</div>
+          <div class="what">Growth-Paket</div>
+          <div class="sub">Website + GBP + Anfragen-System</div>
+        </div>
+        <div class="t-step">
+          <div class="when">Monat 7+</div>
+          <div class="what">Content-Pflege Add-on</div>
+          <div class="sub">150 €/Mo · Posts, Fotos, Updates</div>
+        </div>
+        <div class="t-step">
+          <div class="when">Monat 12+</div>
+          <div class="what">Upgrade auf Pro</div>
+          <div class="sub">Automation, Analytics, Reporting</div>
+        </div>
+        <div class="t-step">
+          <div class="when">Monat 18+</div>
+          <div class="what">Referenz-Case</div>
+          <div class="sub">Einsatz für Neukunden-Akquise</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- refs -->
+    <div class="refs">
+      <div class="refs-head">Referenz-Hooks für das Gespräch</div>
+      <div class="refs-grid">
+        <div class="ref">
+          <div class="ref-name">Tischlerei Lindner</div>
+          <div class="ref-result">Handwerk, 6 MA, ländlich. Growth-Paket über 6 Monate, danach Pro.</div>
+          <div class="ref-kpi">
+            <div>Score <strong>48 → 85</strong></div>
+            <div>Anfragen <strong>+240 %</strong></div>
+          </div>
+        </div>
+        <div class="ref todo">
+          <div class="ref-name">TODO · Handwerks-Referenz NÖ</div>
+          <div class="ref-result">Noch zu befüllen sobald erste Fälle 6-Monats-Marke erreichen.</div>
+          <div class="ref-kpi">
+            <div>Score <strong>— / —</strong></div>
+            <div>Anfragen <strong>—</strong></div>
+          </div>
+        </div>
+        <div class="ref todo">
+          <div class="ref-name">TODO · Gastro/Tischler-Nachbar</div>
+          <div class="ref-result">Noch zu befüllen — möglicher Case: Gastwirt Korneuburg.</div>
+          <div class="ref-kpi">
+            <div>Score <strong>— / —</strong></div>
+            <div>Anfragen <strong>—</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><strong>{{firma_name}}</strong> · Audit {{audit_datum}} · Dossier intern</div>
+    <div>Seite <strong>4</strong> / 5</div>
+  </div>
+</section>
+
+
+<!-- ==================================================================== -->
+<!-- PAGE 5 — TECHNISCHE NOTIZEN                                           -->
+<!-- ==================================================================== -->
+<section class="page" data-screen-label="05 Technische Notizen">
+  <div class="confidential">
+    <div>Intern · Vertraulich · Nicht an Kunden weitergeben</div>
+    <span>Standfest Digital</span>
+  </div>
+
+  <div class="frame">
+    <div class="section-head">
+      <div class="section-eyebrow">Seite 5 · Für Stefan &amp; Lea</div>
+      <h2 class="section-title">Technische Notizen</h2>
+      <div class="section-sub">Bestehende Infrastruktur · Risiken · Onboarding-Reihenfolge · Rollenverteilung</div>
+    </div>
+
+    <table class="infra-table">
+      <thead>
+        <tr>
+          <th style="width: 32mm;">Bereich</th>
+          <th style="width: 58mm;">Status</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="bereich-cell">Domain</td>
+          <td><span class="infra-status warn">tischlerei-fally.at · World4You</span></td>
+          <td class="details-cell">Zugriff muss beantragt werden. Inhaber hat Login, nicht dokumentiert.</td>
+        </tr>
+        <tr>
+          <td class="bereich-cell">Website-CMS</td>
+          <td><span class="infra-status err">WordPress 5.8 · veraltet</span></td>
+          <td class="details-cell">Letztes Update 2022, kein Wartungsvertrag, Plugins unbekannter Zustand.</td>
+        </tr>
+        <tr>
+          <td class="bereich-cell">Hosting</td>
+          <td><span class="infra-status ok">World4You Shared · 49 €/Jahr</span></td>
+          <td class="details-cell">Für aktuelle Größe ausreichend. Kein Migrations-Bedarf.</td>
+        </tr>
+        <tr>
+          <td class="bereich-cell">E-Mail</td>
+          <td><span class="infra-status ok">World4You IMAP</span></td>
+          <td class="details-cell">info@ und verwaltung@ aktiv. Kein Catch-all.</td>
+        </tr>
+        <tr>
+          <td class="bereich-cell">Google Business</td>
+          <td><span class="infra-status err">nicht beansprucht</span></td>
+          <td class="details-cell">Claim nötig, 5–7 Tage Warten auf Postkarte an Geschäftsadresse.</td>
+        </tr>
+        <tr>
+          <td class="bereich-cell">Social Media</td>
+          <td><span class="infra-status warn">Instagram aktiv · Facebook verwaist</span></td>
+          <td class="details-cell">Passwörter unklar. Instagram-Konto-Inhaber muss bestätigt werden.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- risks -->
+    <div class="risks">
+      <div class="risks-head">Risiken &amp; Flags</div>
+      <div class="risk">
+        <div class="risk-flag">🔴</div>
+        <div class="risk-text"><strong>WordPress 5.8 — Sicherheitslücken.</strong> <em>Update dringend nötig, ABER Backup zuerst ziehen. Risiko: Plugin-Inkompatibilität bei Sprung auf 6.x.</em></div>
+      </div>
+      <div class="risk">
+        <div class="risk-flag">🔴</div>
+        <div class="risk-text"><strong>Kein Wartungsvertrag vorhanden.</strong> <em>Plugins vermutlich veraltet, Abhängigkeiten unklar. Audit-Crawler zeigt 8 Plugins, 3 davon seit &gt; 2 Jahren nicht gepflegt.</em></div>
+      </div>
+      <div class="risk">
+        <div class="risk-flag">🟠</div>
+        <div class="risk-text"><strong>Domain bei World4You.</strong> <em>OK für aktuellen Zustand, aber DNS-Änderungen umständlich. Für Terminbuchung &amp; Analytics ggf. CNAME-Einträge nötig.</em></div>
+      </div>
+      <div class="risk">
+        <div class="risk-flag">🟠</div>
+        <div class="risk-text"><strong>Facebook-Account ohne Zugriff.</strong> <em>Eventuell löschen statt reaktivieren — spart Verwaltungs-Overhead bei unklarem Nutzen.</em></div>
+      </div>
+      <div class="risk">
+        <div class="risk-flag">🟡</div>
+        <div class="risk-text"><strong>Instagram-Zugang prüfen.</strong> <em>Unklar wem das Konto formal gehört (Inhaber oder Mitarbeiterin?). Vor jeder Änderung klären.</em></div>
+      </div>
+    </div>
+
+    <!-- onboarding -->
+    <div class="onboard">
+      <div class="onboard-head">Onboarding-Reihenfolge</div>
+      <ol class="onboard-list">
+        <li><span>Zugriffs-Request an Fally senden <em>Domain · WordPress · Hosting · E-Mail</em></span></li>
+        <li><span>Backup der aktuellen Website ziehen <em>zwingend vor allen weiteren Schritten</em></span></li>
+        <li><span>WordPress-Update + Plugin-Check <em>ca. 1–2 h · Testing-Umgebung</em></span></li>
+        <li><span>GBP-Claim starten <em>Postkarte bestellen · 5–7 Tage Wartezeit</em></span></li>
+        <li><span>Kontaktformular implementieren <em>V1-Pipeline · n8n-Webhook</em></span></li>
+        <li><span>Sticky-Notfall-Button + Mobile-Fixes <em>parallel zu Formular</em></span></li>
+        <li><span>GBP komplett füllen nach Postkarten-Ankunft <em>Kategorien · Fotos · Zeiten</em></span></li>
+        <li><span>Website-Texte überarbeiten <em>Phase 2 · SEO-orientiert</em></span></li>
+        <li><span>Analytics einrichten <em>letzter Schritt · braucht finale Seiten-Struktur</em></span></li>
+      </ol>
+    </div>
+
+    <!-- tasks split -->
+    <div class="tasks-split">
+      <div class="task-col">
+        <div class="tc-head">Autonom</div>
+        <div class="tc-who">Lea · IT-Support</div>
+        <ul>
+          <li>GBP-Postings erstellen und einplanen</li>
+          <li>WhatsApp-Business einrichten</li>
+          <li>Instagram-Bio-Link setzen</li>
+          <li>Einfache Content-Pflege</li>
+        </ul>
+      </div>
+      <div class="task-col stefan">
+        <div class="tc-head">Kritisch</div>
+        <div class="tc-who">Stefan · Technik</div>
+        <ul>
+          <li>WordPress-Update + Backup</li>
+          <li>DNS-Änderungen bei World4You</li>
+          <li>n8n-Workflow-Anpassungen</li>
+          <li>Analytics-Setup &amp; GA4-Konfiguration</li>
+        </ul>
+      </div>
+      <div class="task-col extern">
+        <div class="tc-head">Extern</div>
+        <div class="tc-who">Abhängigkeiten</div>
+        <ul>
+          <li>World4You Support · Domain-Transfer</li>
+          <li>Google · GBP-Verifizierung (5–7 T)</li>
+          <li>Steuerberater d. Kunden · Rechnungs-Freigabe</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><strong>{{firma_name}}</strong> · Audit {{audit_datum}} · Dossier intern</div>
+    <div>Seite <strong>5</strong> / 5</div>
+  </div>
+</section>
+
+</body>
+</html>

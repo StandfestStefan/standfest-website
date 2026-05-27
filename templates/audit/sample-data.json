@@ -1,0 +1,62 @@
+{
+  "firma_name": "Tischlerei Fally",
+  "branche": "Tischlerei",
+  "ort": "Korneuburg",
+  "bundesland": "Niederösterreich",
+  "firma_gruendung": 1987,
+  "mitarbeiter": 4,
+  "umsatz": "~350 k€",
+
+  "audit_datum": "20.04.2026",
+  "auditor_name": "Stefan Maurer",
+  "auditor_email": "stefan@standfestdigital.at",
+  "auditor_telefon": "",
+  "lead_status": "qualifiziert",
+
+  "score_website": 62,
+  "score_gbp": 40,
+  "score_anfragen": 35,
+  "score_social": 78,
+  "score_gesamt": 54,
+
+  "theme_website": "t-warn",
+  "theme_gbp": "t-red",
+  "theme_anfragen": "t-red",
+  "theme_social": "t-green",
+
+  "massnahmen": [
+    {"prio_key": "p1", "prio": "P1 · Kritisch", "titel": "Kein Kontaktformular auf der Website", "beschreibung": "Kunden, die nicht anrufen wollen, springen ab. Schätzung: 40 % verlorene Anfragen. Fix: modernes Formular mit 3 Feldern.", "aufwand": "1 Tag"},
+    {"prio_key": "p1", "prio": "P1 · Kritisch", "titel": "Google Business Profil unvollständig", "beschreibung": "Öffnungszeiten fehlen, keine Fotos, nur 3 Bewertungen. Frisst Sichtbarkeit bei lokaler Suche. Fix: Profil komplett einrichten.", "aufwand": "1 Tag"},
+    {"prio_key": "p2", "prio": "P2 · Wichtig", "titel": "Mobile Navigation holprig", "beschreibung": "Menü auf Handy öffnet langsam, Schriftgröße zu klein. 68 % der Besucher sind mobil. Fix: Menü-Umbau.", "aufwand": "2 Tage"},
+    {"prio_key": "p2", "prio": "P2 · Wichtig", "titel": "Keine Notfall-Telefonnummer sichtbar", "beschreibung": "Für Handwerk kritisch. Kunden brauchen direkt die Nummer, kein Klick-Suchspiel. Fix: Sticky-Button oben rechts.", "aufwand": "0,5 Tage"},
+    {"prio_key": "p3", "prio": "P3 · Optimierung", "titel": "Kein Follow-up-System für Anfragen", "beschreibung": "Interessenten melden sich einmal. Ohne zweite Berührung gehen 60 % verloren. Fix: E-Mail-Automation nach 3 Tagen.", "aufwand": "1 Tag"}
+  ],
+
+  "audit_gebuehr": "89 €",
+
+  "pitch": "Fally ist handwerklich top, online aber unsichtbar. Größter Hebel: 40 % aller Webseiten-Besucher springen ab, weil es kein Kontaktformular gibt. Wer sein Google-Profil aktiv pflegt, überholt Fally in der lokalen Suche innerhalb von 3 Monaten.",
+
+  "detail_website_summary": "Solides Fundament, aber verpasst Kontakt-Chancen. Schnellstmöglicher Fix: Formular + Notfallnummer.",
+  "detail_website_ok": "Design sauber und markentreu · Mobile akzeptabel · Ladezeit < 2 s · HTTPS korrekt",
+  "detail_website_miss": "Kein Kontaktformular · keine Sitemap.xml · Impressum auf Stand 2022 · keine prominente Notfall-Nummer · Meta-Descriptions auf 3 von 7 Seiten leer",
+  "detail_website_quellen": "Lighthouse-Report 20.04.2026 · manueller UX-Check (Stefan, 40 min) · Screaming Frog Crawl",
+
+  "detail_gbp_summary": "Größter Hebel der gesamten Analyse. Konkurrenz fährt hier bereits messbar voraus.",
+  "detail_gbp_ok": "Profil existiert · Adresse und Telefon korrekt",
+  "detail_gbp_miss": "Nur 3 Bewertungen (Wettbewerb 12-30) · keine Fotos · Öffnungszeiten unvollständig · keine Beiträge seit 18 Monaten · Inhaber hat Profil nie beansprucht",
+  "detail_gbp_benchmark": "Tischlerei Huber (Korneuburg): 28 Bewertungen · 45 Fotos · aktive Beiträge · Ranking vor Fally bei Tischler Korneuburg",
+
+  "detail_anfragen_summary": "Conversion-Pfad defekt. Interesse wird erzeugt aber nicht eingesammelt.",
+  "detail_anfragen_ok": "Telefonnummer auf jeder Seite sichtbar",
+  "detail_anfragen_miss": "Kein Formular · kein WhatsApp-Button · keine Online-Terminanfrage · E-Mail nur im Impressum versteckt · kein Follow-up-Prozess",
+  "detail_anfragen_conversion": "Besucher findet Seite → interessiert → will nicht anrufen → verlässt Seite → nie wieder.",
+
+  "detail_social_summary": "Stärkster Bereich — hier Anschluss an Website und Anfragen herstellen.",
+  "detail_social_ok": "Instagram mit 340 Followern · regelmäßige Posts reeller Projekte · hohe Foto-Qualität · organische Reichweite überdurchschnittlich",
+  "detail_social_miss": "Kein Link zur Website in Bio · keine Call-to-Action in Posts · Facebook-Konto verwaist",
+  "detail_social_potenzial": "Bereits vorhandener Traffic → Bio-Link → Website → Formular = unmittelbar messbarer Conversion-Gewinn.",
+
+  "growth_total": "5.430 €",
+  "growth_monatlich": "905 €",
+  "verlust_pro_monat": "2.800 €"
+}

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>48h-Online-Audit · Tischlerei Fally · Standfest Digital</title>
+<style>
+  @font-face {
+    font-family: 'DM Sans';
+    src: url('fonts/dm-sans-latin-400-normal.woff2') format('woff2');
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'DM Sans';
+    src: url('fonts/dm-sans-latin-500-normal.woff2') format('woff2');
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+
+  :root {
+    --bg: #ffffff;
+    --ink: #1e2119;
+    --muted: #5a584f;
+    --accent: #4a7c59;
+    --warn: #c4963a;
+    --error: #b54a4a;
+    --surface: #f8f8f5;
+    --hairline: #e5e3dc;
+    --radius: 12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #ececea;
+    color: var(--ink);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    padding: 24px 16px;
+  }
+
+  /* A4 = 210 x 297 mm */
+  .page {
+    width: 210mm;
+    height: 297mm;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 20mm;
+    position: relative;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 12px 40px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  @media print {
+    @page { size: A4; margin: 0; }
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; }
+  }
+
+  /* ---------- HEADER ---------- */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .brand {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .brand-mark {
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .brand-mark span { color: var(--ink); }
+
+  .brand-sub {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+  }
+
+  .meta {
+    text-align: right;
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .meta strong { color: var(--ink); font-weight: 500; }
+
+  .title-block {
+    margin-top: 8mm;
+    padding-bottom: 6mm;
+  }
+
+  .title-eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .title {
+    font-size: 34px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  .client-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .client-name {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.2px;
+  }
+
+  .client-sub {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+  }
+
+  /* ---------- SCORE CARDS ---------- */
+  .scores {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4mm;
+    margin-top: 2mm;
+  }
+
+  .score-card {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 14px 14px 14px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(30, 33, 25, 0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .score-label {
+    font-size: 9.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .score-value {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .score-num {
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -1px;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .score-max {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .score-dot {
+    margin-left: auto;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    align-self: center;
+    position: relative;
+  }
+  .score-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    opacity: 0.3;
+  }
+
+  .score-bar {
+    height: 4mm;
+    background: #eeece4;
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+  .score-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.3s;
+  }
+
+  /* traffic light colors */
+  .t-red   { color: var(--error); }
+  .t-warn  { color: var(--warn); }
+  .t-green { color: var(--accent); }
+
+  .t-red   .score-dot   { background: var(--error); }
+  .t-warn  .score-dot   { background: var(--warn); }
+  .t-green .score-dot   { background: var(--accent); }
+
+  .t-red   .score-fill  { background: var(--error); }
+  .t-warn  .score-fill  { background: var(--warn); }
+  .t-green .score-fill  { background: var(--accent); }
+
+  /* ---------- GESAMT ---------- */
+  .total {
+    margin-top: 4mm;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border-left: 3px solid var(--warn);
+  }
+  .total-label {
+    font-size: 11px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .total-bar {
+    width: 140px;
+    height: 4mm;
+    background: #eeece4;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .total-bar-fill {
+    width: 54%;
+    height: 100%;
+    background: var(--warn);
+    border-radius: 999px;
+  }
+  .total-num {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    color: var(--warn);
+    line-height: 1;
+  }
+  .total-num span {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* ---------- MASSNAHMEN ---------- */
+  .actions {
+    margin-top: 5mm;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .actions-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 3mm;
+  }
+
+  .actions-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.2px;
+  }
+
+  .actions-caption {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+  }
+
+  .action {
+    display: grid;
+    grid-template-columns: 28mm 1fr 22mm;
+    gap: 6mm;
+    align-items: start;
+    padding: 2.8mm 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .action:last-child { border-bottom: 1px solid var(--hairline); }
+
+  .prio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    width: max-content;
+  }
+  .prio-p1 { background: #f3dada; color: #8a3434; }
+  .prio-p2 { background: #f2e4c3; color: #7a5d1f; }
+  .prio-p3 { background: #dde8e0; color: #2e5a3d; }
+
+  .action-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .action-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.1px;
+  }
+
+  .action-desc {
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: 95mm;
+  }
+
+  .effort {
+    text-align: right;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.2px;
+    padding-top: 2px;
+  }
+  .effort-label {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.75;
+    margin-bottom: 2px;
+  }
+  .effort-val {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* ---------- FOOTER CTA ---------- */
+  .cta-box {
+    margin-top: 5mm;
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 5mm 7mm;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8mm;
+  }
+
+  .cta-copy {
+    font-size: 12.5px;
+    color: var(--ink);
+    line-height: 1.55;
+    max-width: 90mm;
+  }
+  .cta-copy strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .cta-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: #fff;
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: none;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .cta-contact {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.2px;
+  }
+
+  /* ---------- BOTTOM STRIP ---------- */
+  .foot {
+    margin-top: auto;
+    padding-top: 4mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8.5px;
+    color: var(--muted);
+    letter-spacing: 0.4px;
+    border-top: 1px solid var(--hairline);
+  }
+
+</style>
+</head>
+<body>
+
+<div class="page" role="document">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="brand">
+      <div class="brand-mark">Standfest<span>Digital</span></div>
+      <div class="brand-sub">Digitalagentur Wien &amp; NÖ</div>
+    </div>
+    <div class="meta">
+      <div><strong>Audit-Datum</strong> &nbsp; 20.04.2026</div>
+      <div><strong>Auditor</strong> &nbsp; Standfest Digital</div>
+    </div>
+  </header>
+
+  <div class="title-block">
+    <div class="title-eyebrow">Quick-Audit · vertraulich</div>
+    <h1 class="title">48h-Online-Audit</h1>
+    <div class="client-row">
+      <div class="client-name">Tischlerei Fally</div>
+      <div class="client-sub">Korneuburg · Tischlerei · seit 1987</div>
+    </div>
+  </div>
+
+  <!-- SCORE CARDS -->
+  <section class="scores" aria-label="Scores">
+
+    <div class="score-card t-warn">
+      <div class="score-label">Website</div>
+      <div class="score-value">
+        <span class="score-num">62</span>
+        <span class="score-max">/100</span>
+        <span class="score-dot" aria-hidden="true"></span>
+      </div>
+      <div class="score-bar"><div class="score-fill" style="width: 62%;"></div></div>
+    </div>
+
+    <div class="score-card t-red">
+      <div class="score-label">Google Business</div>
+      <div class="score-value">
+        <span class="score-num">40</span>
+        <span class="score-max">/100</span>
+        <span class="score-dot" aria-hidden="true"></span>
+      </div>
+      <div class="score-bar"><div class="score-fill" style="width: 40%;"></div></div>
+    </div>
+
+    <div class="score-card t-red">
+      <div class="score-label">Anfragen</div>
+      <div class="score-value">
+        <span class="score-num">35</span>
+        <span class="score-max">/100</span>
+        <span class="score-dot" aria-hidden="true"></span>
+      </div>
+      <div class="score-bar"><div class="score-fill" style="width: 35%;"></div></div>
+    </div>
+
+    <div class="score-card t-green">
+      <div class="score-label">Social Media</div>
+      <div class="score-value">
+        <span class="score-num">78</span>
+        <span class="score-max">/100</span>
+        <span class="score-dot" aria-hidden="true"></span>
+      </div>
+      <div class="score-bar"><div class="score-fill" style="width: 78%;"></div></div>
+    </div>
+
+  </section>
+
+  <!-- GESAMT -->
+  <div class="total">
+    <div class="total-label">Gesamtbewertung</div>
+    <div class="total-bar"><div class="total-bar-fill"></div></div>
+    <div class="total-num">54<span>/100</span></div>
+  </div>
+
+  <!-- MASSNAHMEN -->
+  <section class="actions">
+    <div class="actions-head">
+      <h2 class="actions-title">Wichtigste Maßnahmen</h2>
+      <div class="actions-caption">Priorität · Befund · Aufwand</div>
+    </div>
+
+    <div class="action">
+      <div><span class="prio prio-p1">P1 · Kritisch</span></div>
+      <div class="action-body">
+        <div class="action-title">Kein Kontaktformular auf der Website</div>
+        <div class="action-desc">Kunden, die nicht anrufen wollen, springen ab. Schätzung: 40 % verlorene Anfragen. Fix: modernes Formular mit 3 Feldern.</div>
+      </div>
+      <div class="effort">
+        <span class="effort-label">Aufwand</span>
+        <span class="effort-val">1 Tag</span>
+      </div>
+    </div>
+
+    <div class="action">
+      <div><span class="prio prio-p1">P1 · Kritisch</span></div>
+      <div class="action-body">
+        <div class="action-title">Google Business Profil unvollständig</div>
+        <div class="action-desc">Öffnungszeiten fehlen, keine Fotos, nur 3 Bewertungen. Frisst Sichtbarkeit bei lokaler Suche. Fix: Profil komplett einrichten.</div>
+      </div>
+      <div class="effort">
+        <span class="effort-label">Aufwand</span>
+        <span class="effort-val">1 Tag</span>
+      </div>
+    </div>
+
+    <div class="action">
+      <div><span class="prio prio-p2">P2 · Wichtig</span></div>
+      <div class="action-body">
+        <div class="action-title">Mobile Navigation holprig</div>
+        <div class="action-desc">Menü auf Handy öffnet langsam, Schriftgröße zu klein. 68 % der Besucher sind mobil. Fix: Menü-Umbau.</div>
+      </div>
+      <div class="effort">
+        <span class="effort-label">Aufwand</span>
+        <span class="effort-val">2 Tage</span>
+      </div>
+    </div>
+
+    <div class="action">
+      <div><span class="prio prio-p2">P2 · Wichtig</span></div>
+      <div class="action-body">
+        <div class="action-title">Keine Notfall-Telefonnummer sichtbar</div>
+        <div class="action-desc">Für Handwerk kritisch. Kunden brauchen direkt die Nummer, kein Klick-Suchspiel. Fix: Sticky-Button oben rechts.</div>
+      </div>
+      <div class="effort">
+        <span class="effort-label">Aufwand</span>
+        <span class="effort-val">0,5 Tage</span>
+      </div>
+    </div>
+
+    <div class="action">
+      <div><span class="prio prio-p3">P3 · Optimierung</span></div>
+      <div class="action-body">
+        <div class="action-title">Kein Follow-up-System für Anfragen</div>
+        <div class="action-desc">Interessenten melden sich einmal. Ohne zweite Berührung gehen 60 % verloren. Fix: E-Mail-Automation nach 3 Tagen.</div>
+      </div>
+      <div class="effort">
+        <span class="effort-label">Aufwand</span>
+        <span class="effort-val">1 Tag</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div class="cta-copy">
+      <strong>Gemeinsam fixen?</strong><br>
+      Die Audit-Gebühr (89 €) wird vollständig auf die Pakete <strong>Growth</strong> und <strong>Pro</strong> angerechnet.
+    </div>
+    <div class="cta-side">
+      <a href="#" class="cta-btn">Angebot anfordern</a>
+      <div class="cta-contact">stefan@standfestdigital.at · +43 660 1234567</div>
+    </div>
+  </div>
+
+  <!-- BOTTOM STRIP -->
+  <div class="foot">
+    <div>Standfest Digital · 48h-Audit · Vertraulich für Tischlerei Fally</div>
+    <div>20.04.2026</div>
+  </div>
+
+</div>
+
+</body>
+</html>
