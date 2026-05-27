@@ -67,26 +67,32 @@
     .hero-grid {
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-image: radial-gradient(rgba(30,33,25,0.035) 1px, transparent 1px);
       background-size: 32px 32px;
       -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 20%, transparent 70%);
       mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 20%, transparent 70%);
       z-index: 0;
     }
 
+    /* Spotlight: schlanke CSS-Loesung statt schwerem SVG-Blur (P-Premium-3) */
     .hero-spotlight {
       position: absolute;
       top: -40%;
       left: 0;
       width: 138%;
+      aspect-ratio: 4 / 3;
       pointer-events: none;
       z-index: 1;
       opacity: 0;
-      animation: spotlightIn 2s ease-out 0.1s forwards;
+      background: radial-gradient(ellipse 50% 50% at 50% 50%,
+                  rgba(74,124,89,0.20) 0%,
+                  rgba(74,124,89,0.08) 40%,
+                  transparent 72%);
+      animation: spotlightIn 2s var(--ease-out) 0.1s forwards;
     }
     @keyframes spotlightIn {
-      from { opacity: 0; transform: translateX(-50%) translateY(-50%); }
-      to { opacity: 1; transform: translateX(0) translateY(0); }
+      from { opacity: 0; transform: translateY(-6%) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
     @media (min-width: 1024px) {
       .hero-spotlight { top: -20%; left: 60%; width: 84%; }
@@ -248,6 +254,60 @@
       100% { opacity: 0; transform: scaleY(0); transform-origin: bottom; }
     }
     @media (max-width: 768px) { .hero-scroll { display: none; } }
+
+    /* --- Hero-Visual: gestaltete Papier-Karten (P-Premium-3) --- */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-craft {
+      position: relative;
+      width: 264px;
+      max-width: 100%;
+    }
+    .hero-craft-card {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      background: var(--paper-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.9rem 1.1rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 0.85rem;
+    }
+    .hero-craft-card:nth-child(1) { transform: rotate(-1.5deg); }
+    .hero-craft-card:nth-child(2) { transform: rotate(0.8deg) translateX(16px); box-shadow: var(--shadow-md); z-index: 2; }
+    .hero-craft-card:nth-child(3) { transform: rotate(-0.7deg) translateX(4px); }
+    .hero-craft-icon {
+      flex: none;
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      background: var(--accent-subtle);
+      color: var(--accent-strong);
+      display: grid;
+      place-items: center;
+    }
+    .hero-craft-icon svg {
+      width: 16px; height: 16px;
+      fill: none; stroke: currentColor; stroke-width: 2.5;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .hero-craft-label {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .hero-craft-underline {
+      display: block;
+      width: 140px;
+      margin: 0.5rem 0 0 26px;
+      opacity: 0.85;
+    }
+    @media (max-width: 767px) { .hero-visual { display: none; } }
 
 
     /* --- S2: Vertrauensleiste --- */
@@ -1265,21 +1325,7 @@
       <div class="hero-grid" aria-hidden="true"></div>
       <div class="hero-ambient" aria-hidden="true"></div>
 
-      <svg class="hero-spotlight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3787 2842" fill="none" aria-hidden="true">
-        <g filter="url(#sf)">
-          <ellipse cx="1924.71" cy="273.501" rx="1924.71" ry="273.501"
-            transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
-            fill="#4a7c59" fill-opacity="0.21" />
-        </g>
-        <defs>
-          <filter id="sf" x="0.86" y="0.84" width="3785.16" height="2840.26"
-            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="bg" />
-            <feBlend mode="normal" in="SourceGraphic" in2="bg" result="shape" />
-            <feGaussianBlur stdDeviation="151" result="blur" />
-          </filter>
-        </defs>
-      </svg>
+      <div class="hero-spotlight" aria-hidden="true"></div>
 
       <div class="hero-content">
         <div class="hero-text">
@@ -1305,17 +1351,24 @@
         </div>
 
         <div class="hero-visual" aria-hidden="true">
-          <!-- TODO: Ersetzen mit Midjourney-Hero-Atmosphaerenbild (siehe .briefing/04-patch-roadmap.md P-W08) -->
-          <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="hero-visual-placeholder" aria-hidden="true">
-            <defs>
-              <radialGradient id="placeholderGrad" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="var(--accent, #4a7c59)" stop-opacity="0.18"/>
-                <stop offset="60%" stop-color="var(--accent, #4a7c59)" stop-opacity="0.08"/>
-                <stop offset="100%" stop-color="var(--accent, #4a7c59)" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-            <circle cx="200" cy="200" r="190" fill="url(#placeholderGrad)" />
-          </svg>
+          <!-- Gestaltete Marken-Komposition statt Stock/KI-Bild: die drei Leistungen
+               als leicht versetzte Papier-Karten (Wabi-Sabi-Asymmetrie) mit
+               hand-drawn Signatur. Slot fuer echtes Team-Foto bleibt P-W08. -->
+          <div class="hero-craft">
+            <div class="hero-craft-card">
+              <span class="hero-craft-icon"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="hero-craft-label">Website</span>
+            </div>
+            <div class="hero-craft-card">
+              <span class="hero-craft-icon"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="hero-craft-label">Social Media</span>
+            </div>
+            <div class="hero-craft-card">
+              <span class="hero-craft-icon"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="hero-craft-label">Kontaktwege</span>
+            </div>
+            <img class="hero-craft-underline" src="/img/svg/handdrawn-underline.svg" alt="" aria-hidden="true">
+          </div>
         </div>
       </div>
 
