@@ -1145,12 +1145,20 @@ section {
 .reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
 }
 
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ---------- Sanfte Seitenuebergaenge (progressive enhancement) ----------
+   Cross-Document View Transitions: nur Browser die es koennen zeigen einen
+   dezenten Fade beim Navigieren; alle anderen laden normal. style.css ist auf
+   allen Seiten eingebunden -> Quelle und Ziel opten gemeinsam ein. */
+@view-transition {
+  navigation: auto;
 }
 
 @keyframes fadeUp {
@@ -1690,5 +1698,11 @@ section {
   }
   .nav--hidden {
     transform: none !important;
+  }
+  /* View-Transition-Fade bei "Bewegung reduzieren" unterdruecken */
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }
